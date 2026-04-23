@@ -3,31 +3,40 @@ using LSW._02._Code.Player;
 using LSW._02._Code.System___Manager.StateMachine;
 using UnityEngine;
 
-
 public class PlayerIdleState : State
 {
     private Player _player;
     private Rigidbody2D _rigidbody;
     private Vector2 _moveInput;
 
-    public PlayerIdleState(Entity owner, EntityStat info, StateMachineCompo stateMachine) : base(owner, info, stateMachine) { }
+    public PlayerIdleState(Entity owner, EntityStat info, StateMachineCompo stateMachine) : base(owner, info,
+        stateMachine)
+    {
+        _player = owner as Player;
+        _rigidbody = owner.GetComponent<Rigidbody2D>();
+    }
 
     public override void Enter()
     {
         base.Enter();
         Animator.PlayClip(UnityEngine.Animator.StringToHash("IDLE"));
-
-        _player ??= Owner as Player;
-        _rigidbody ??= Owner.GetComponent<Rigidbody2D>();
-        if (_player != null && _player.inputCompo != null)
-            _moveInput = _player.inputCompo.CurrentMoveInput;
+        
+        if (_player != null && _player.InputCompo != null)
+            _moveInput = _player.InputCompo.CurrentMoveInput;
         else
             _moveInput = Vector2.zero;
 
-        if (_player != null && _player.inputCompo != null)
+        if (_player != null && _player.InputCompo != null)
         {
-            _player.inputCompo.OnMovementAction += HandleMoveInput;
-            _player.inputCompo.OnJumpingAction += HandleJumpInput;
+            _player.InputCompo.OnMovementAction += HandleMoveInput;
+            _player.InputCompo.OnJumpingAction += HandleJumpInput;
+        }
+        else
+        {
+            if(_player == null)
+                Debug.LogError("_player is Null");
+            else if(_player.InputCompo == null)
+                Debug.LogError("_player.InputCompo is null");
         }
     }
 
@@ -35,10 +44,10 @@ public class PlayerIdleState : State
     {
         base.Exit();
 
-        if (_player != null && _player.inputCompo != null)
+        if (_player != null && _player.InputCompo != null)
         {
-            _player.inputCompo.OnMovementAction -= HandleMoveInput;
-            _player.inputCompo.OnJumpingAction -= HandleJumpInput;
+            _player.InputCompo.OnMovementAction -= HandleMoveInput;
+            _player.InputCompo.OnJumpingAction -= HandleJumpInput;
         }
     }
     

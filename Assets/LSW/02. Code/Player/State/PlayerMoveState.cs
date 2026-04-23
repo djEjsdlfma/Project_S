@@ -9,22 +9,26 @@ public class PlayerMoveState : State
     private Rigidbody2D _rigidbody;
     private Vector2 _moveInput;
 
-    public PlayerMoveState(Entity owner, EntityStat info, StateMachineCompo stateMachine) : base(owner, info, stateMachine) { }
+    public PlayerMoveState(Entity owner, EntityStat info, StateMachineCompo stateMachine) : base(owner, info,
+        stateMachine)
+    {
+        _player = Owner as Player;
+        _rigidbody = Owner.GetComponent<Rigidbody2D>();
+    }
 
     public override void Enter()
     {
         base.Enter();
+        
         Animator.PlayClip(UnityEngine.Animator.StringToHash("MOVE"));
         
-        _player ??= Owner as Player;
-        _rigidbody ??= Owner.GetComponent<Rigidbody2D>();
-        if (_player != null && _player.inputCompo != null)
-            _moveInput = _player.inputCompo.CurrentMoveInput;
+        if (_player != null && _player.InputCompo != null)
+            _moveInput = _player.InputCompo.CurrentMoveInput;
 
-        if (_player != null && _player.inputCompo != null)
+        if (_player != null && _player.InputCompo != null)
         {
-            _player.inputCompo.OnMovementAction += HandleMoveInput;
-            _player.inputCompo.OnJumpingAction += HandleJumpInput;
+            _player.InputCompo.OnMovementAction += HandleMoveInput;
+            _player.InputCompo.OnJumpingAction += HandleJumpInput;
         }
     }
 
@@ -32,10 +36,10 @@ public class PlayerMoveState : State
     {
         base.Exit();
         
-        if (_player != null && _player.inputCompo != null)
+        if (_player != null && _player.InputCompo != null)
         {
-            _player.inputCompo.OnMovementAction -= HandleMoveInput;
-            _player.inputCompo.OnJumpingAction -= HandleJumpInput;
+            _player.InputCompo.OnMovementAction -= HandleMoveInput;
+            _player.InputCompo.OnJumpingAction -= HandleJumpInput;
         }
     }
 

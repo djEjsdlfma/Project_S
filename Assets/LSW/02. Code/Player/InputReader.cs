@@ -7,10 +7,8 @@ namespace LSW._02._Code.Player
     [CreateAssetMenu(fileName = "InputReader", menuName = "SO/InputReader", order = 0)]
     public class InputReader : ScriptableObject, Inputs.IPlayerActions
     {
-        public event Action<Vector2> OnMovementAction;
-        public event Action OnJumpingAction;
-        
-        public Vector2 CurrentMoveInput { get; private set; }
+        public event Action<Vector2> OnMovementInput;
+        public event Action OnJumpingInput;
 
         private Inputs _input;
         
@@ -19,14 +17,13 @@ namespace LSW._02._Code.Player
             if (_input == null)
             {
                 _input = new Inputs();
-                EnableInput(true);
+                _input.Player.SetCallbacks(this);
             }
-            _input.Player.SetCallbacks(this);
+            EnableInput(true);
         }
 
         private void OnDisable()
         {
-            CurrentMoveInput = Vector2.zero;
             EnableInput(false);
         }
 
@@ -47,14 +44,13 @@ namespace LSW._02._Code.Player
         public void OnMove(InputAction.CallbackContext context)
         {
             Vector2 move = context.ReadValue<Vector2>();
-            CurrentMoveInput = move;
-            OnMovementAction?.Invoke(move);
+            OnMovementInput?.Invoke(move);
         }
 
         public void OnJump(InputAction.CallbackContext context)
         {
             if (context.performed)
-                OnJumpingAction?.Invoke();
+                OnJumpingInput?.Invoke();
         }
     }
 }

@@ -1,22 +1,22 @@
 
-using System.Collections.Generic;
 using LSW._02._Code.Entity;
 using LSW._02._Code.System___Manager.Combat;
+using LSW._02._Code.System___Manager.PlayerSystem;
 using UnityEngine;
 
 namespace LSW._02._Code.Player
 {
     public class Player : Entities.Entity ,IDamageable
     { 
-        [field: SerializeField] public InputReader inputCompo;
+        [field:SerializeField] public InputCompo InputCompo { get; private set; }
         
-        private readonly float walkSoundTime = 0.5f;
-        private readonly float runSoundTime = 0.35f;
-        private float timer = 100;
+        // private readonly float walkSoundTime = 0.5f;
+        // private readonly float runSoundTime = 0.35f;
+        // private float timer = 100;
 
-        private readonly float waitingTime = 0.35f;
+        // private readonly float waitingTime = 0.35f;
 
-        private float waitTiemer = 0;
+        // private float waitTiemer = 0;
         
         private bool _isSprinting;
         private float _speedModifier;

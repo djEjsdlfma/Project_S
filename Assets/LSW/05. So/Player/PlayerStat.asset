@@ -14,6 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LSW._02._Code.Player.PlayerStat
   maxHealth: 100
   moveSpeed: 5
-  jumpPower: 3
-  useGravity: 1
-  gravityScale: -2
+  jumpPower: 5
