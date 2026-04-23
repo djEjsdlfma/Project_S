@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -119,12 +120,12 @@ public class CameraScript : MonoBehaviour
 
     private void CopyObj(Vector2 pos)
     {
-        Collider2D[] items = Physics2D.OverlapBoxAll(checkPos.position, (myPosition.sizeDelta / 110), 0, coloredObject);
+        Collider2D[] items = Physics2D.OverlapBoxAll(checkPos.position, (myPosition.sizeDelta * 0.009f ), 0, coloredObject);
 
         if (items == null) return;
 
-        Vector2 checkMin = (Vector2)checkPos.position - myPosition.sizeDelta / 110 / 2;
-        Vector2 checkMax = (Vector2)checkPos.position + myPosition.sizeDelta / 110 / 2;
+        Vector2 checkMin = (Vector2)checkPos.position - myPosition.sizeDelta * (0.009f * 0.5f);
+        Vector2 checkMax = (Vector2)checkPos.position + myPosition.sizeDelta * (0.009f * 0.5f);
 
         foreach (var item in items)
         {
@@ -170,7 +171,7 @@ public class CameraScript : MonoBehaviour
                 newSr.sprite = clippedSprite;
                 newSr.sortingOrder = sr.sortingOrder + 1;
 
-                realCenter = (clippedMin + clippedMax) / 2f;
+                realCenter = (clippedMin + clippedMax) * 0.5f;
                 obj.transform.position = realCenter;
 
                 ReplaceClippedCollider(obj, clippedMin, clippedMax);
@@ -262,11 +263,20 @@ public class CameraScript : MonoBehaviour
 
     private void CheckObj()
     {
-        Collider2D item = Physics2D.OverlapBox(checkPos.position, (myPosition.sizeDelta / 110), 0, coloredObject);
+        Collider2D item = Physics2D.OverlapBox(checkPos.position, (myPosition.sizeDelta * 0.009f), 0, coloredObject);
 
         if (item != null && item.gameObject.TryGetComponent(out ColoredObject colorObj))
         {
             _nowColor = colorObj.color;
+        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (myPosition != null && checkPos != null)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireCube(checkPos.position, myPosition.sizeDelta * 0.009f);
         }
     }
 }
