@@ -193,7 +193,7 @@ namespace Moon._01.Script.Datas
 #endregion
     }
 
-    public class DictionaryJsonConvert
+    public static class DictionaryJsonConvert
     {
         public static string ToJson<TKey, TValue>(Dictionary<TKey, TValue> jsonDicData, bool pretty = false)
         {
