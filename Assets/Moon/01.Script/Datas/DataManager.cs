@@ -18,11 +18,11 @@ namespace Moon._01.Script.Datas
         
         private Dictionary<string, int> _autoSaved = new Dictionary<string, int>();
 
-        private List<Dictionary<string, int>> allData = new List<Dictionary<string, int>>();
+        private List<Dictionary<string, int>> _allData = new List<Dictionary<string, int>>();
         
         private List<bool> _slotDataExist = new List<bool>();
 
-        private bool autoDataExist;
+        private bool _autoDataExist;
         
         private string _path;
         
@@ -63,13 +63,13 @@ namespace Moon._01.Script.Datas
                     {
                         string jsonData = File.ReadAllText(filePath);
                         Dictionary<string, int> data = DictionaryJsonConvert.FromJson<string, int>(jsonData);
-                        allData.Add(data);
+                        _allData.Add(data);
                         _slotDataExist.Add(true);
                     }
                     else
                     {
                         _slotDataExist.Add(false);
-                        allData.Add(new Dictionary<string, int>());
+                        _allData.Add(new Dictionary<string, int>());
                     }
                 }
 
@@ -78,11 +78,11 @@ namespace Moon._01.Script.Datas
                 {
                     string jsonData = File.ReadAllText(autoFilePath);
                     _autoSaved = DictionaryJsonConvert.FromJson<string, int>(jsonData);
-                    autoDataExist = true;
+                    _autoDataExist = true;
                 }
                 else
                 {
-                    autoDataExist = false;
+                    _autoDataExist = false;
                 }
             }
             catch (Exception e)
@@ -107,7 +107,7 @@ namespace Moon._01.Script.Datas
         
         public bool AutoDataExist()
         {
-            return autoDataExist;
+            return _autoDataExist;
         }
 
 #endregion
@@ -130,7 +130,7 @@ namespace Moon._01.Script.Datas
             {
                 string jsonData = DictionaryJsonConvert.ToJson(_currentData, true);
                 await File.WriteAllTextAsync($"{_path}/save_{slot}.json", jsonData);
-                allData[slot] = new Dictionary<string, int>(_currentData);
+                _allData[slot] = new Dictionary<string, int>(_currentData);
                 _slotDataExist[slot] = true;
             }
             catch (Exception e)
@@ -146,7 +146,7 @@ namespace Moon._01.Script.Datas
                 _autoSaved = new Dictionary<string, int>(_currentData);
                 string jsonData = DictionaryJsonConvert.ToJson(_autoSaved, true);
                 await File.WriteAllTextAsync($"{_path}/save_auto.json", jsonData);
-                autoDataExist = true;
+                _autoDataExist = true;
             }
             catch (Exception e)
             {
@@ -170,8 +170,8 @@ namespace Moon._01.Script.Datas
                 DevLog.LogError("invalid save slot");
                 return null;
             }
-            _currentData = new Dictionary<string, int>(allData[slot]);
-            return new Dictionary<string, int>(allData[slot]);
+            _currentData = new Dictionary<string, int>(_allData[slot]);
+            return new Dictionary<string, int>(_allData[slot]);
         }
         
         public Dictionary<string, int> LoadAutoSave()
@@ -183,7 +183,7 @@ namespace Moon._01.Script.Datas
         public List<Dictionary<string, int>> GetAllData()
         {
             var list = new List<Dictionary<string, int>>();
-            foreach (var data in allData)
+            foreach (var data in _allData)
             {
                 list.Add(new Dictionary<string, int>(data));
             }
@@ -193,7 +193,7 @@ namespace Moon._01.Script.Datas
 #endregion
     }
 
-    public class DictionaryJsonConvert
+    public static class DictionaryJsonConvert
     {
         public static string ToJson<TKey, TValue>(Dictionary<TKey, TValue> jsonDicData, bool pretty = false)
         {
