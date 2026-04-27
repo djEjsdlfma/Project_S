@@ -22,7 +22,7 @@ namespace Moon._01.Script.Datas
         
         private List<bool> _slotDataExist = new List<bool>();
 
-        private bool autoDataExist;
+        private bool _autoDataExist;
         
         private string _path;
         
@@ -78,11 +78,11 @@ namespace Moon._01.Script.Datas
                 {
                     string jsonData = File.ReadAllText(autoFilePath);
                     _autoSaved = DictionaryJsonConvert.FromJson<string, int>(jsonData);
-                    autoDataExist = true;
+                    _autoDataExist = true;
                 }
                 else
                 {
-                    autoDataExist = false;
+                    _autoDataExist = false;
                 }
             }
             catch (Exception e)
@@ -107,7 +107,7 @@ namespace Moon._01.Script.Datas
         
         public bool AutoDataExist()
         {
-            return autoDataExist;
+            return _autoDataExist;
         }
 
 #endregion
@@ -146,7 +146,7 @@ namespace Moon._01.Script.Datas
                 _autoSaved = new Dictionary<string, int>(_currentData);
                 string jsonData = DictionaryJsonConvert.ToJson(_autoSaved, true);
                 await File.WriteAllTextAsync($"{_path}/save_auto.json", jsonData);
-                autoDataExist = true;
+                _autoDataExist = true;
             }
             catch (Exception e)
             {
