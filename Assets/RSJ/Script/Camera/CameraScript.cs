@@ -189,12 +189,11 @@ public class CameraScript : MonoBehaviour
 
     private void ReplaceClippedCollider(GameObject obj, Vector2 worldMin, Vector2 worldMax)
     {
-        foreach (var col in obj.GetComponents<Collider2D>())
-            DestroyImmediate(col);
+        Destroy(obj.GetComponent<Collider2D>());
 
         BoxCollider2D newCol = obj.AddComponent<BoxCollider2D>();
         newCol.size = obj.transform.InverseTransformVector(worldMax - worldMin);
-        newCol.offset = Vector2.zero;
+        newCol.offset = Vector2.zero;   
     }
 
     private Sprite ClipSprite(SpriteRenderer sr, Vector2 worldMin, Vector2 worldMax)
