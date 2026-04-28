@@ -311,6 +311,11 @@ public class CameraScript : MonoBehaviour
             polyCol.SetPath(pathIndex, localPath);
             pathIndex++;
         }
+
+        if (polyCol != null)
+        {
+            polyCol.enabled = false;
+        }
     }
 
     /// <summary>
