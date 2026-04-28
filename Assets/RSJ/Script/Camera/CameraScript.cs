@@ -43,11 +43,13 @@ public class CameraScript : MonoBehaviour
 
     // 원본 오브젝트 -> 복사된 오브젝트 정보
     private readonly Dictionary<GameObject, CopiedObj> _copyObjs = new();
+    private Camera _camera;
 
     private const float CHECK_BOX_SCALE = 0.009f;
 
     private void Awake()
     {
+        _camera = Camera.main;
         myPosition = GetComponent<RectTransform>();
         _nowColor = MyColor.None;
     }
@@ -174,7 +176,7 @@ public class CameraScript : MonoBehaviour
     {
         Collider2D[] items = Physics2D.OverlapBoxAll(
             checkPos.position,
-            myPosition.sizeDelta * CHECK_BOX_SCALE,
+            myPosition.sizeDelta * (CHECK_BOX_SCALE * (_camera.orthographicSize * 0.2f)),
             0,
             coloredObject
         );
@@ -182,8 +184,8 @@ public class CameraScript : MonoBehaviour
         if (items == null || items.Length == 0)
             return;
 
-        Vector2 checkMin = (Vector2)checkPos.position - myPosition.sizeDelta * (CHECK_BOX_SCALE * 0.5f);
-        Vector2 checkMax = (Vector2)checkPos.position + myPosition.sizeDelta * (CHECK_BOX_SCALE * 0.5f);
+        Vector2 checkMin = (Vector2)checkPos.position - myPosition.sizeDelta * (CHECK_BOX_SCALE * (_camera.orthographicSize * 0.2f) * 0.5f);
+        Vector2 checkMax = (Vector2)checkPos.position + myPosition.sizeDelta * (CHECK_BOX_SCALE * (_camera.orthographicSize * 0.2f) * 0.5f);
 
         foreach (var item in items)
         {
@@ -596,7 +598,7 @@ public class CameraScript : MonoBehaviour
     {
         Collider2D item = Physics2D.OverlapBox(
             checkPos.position,
-            myPosition.sizeDelta * CHECK_BOX_SCALE,
+            myPosition.sizeDelta * (CHECK_BOX_SCALE * (_camera.orthographicSize * 0.2f)),
             0,
             coloredObject
         );
