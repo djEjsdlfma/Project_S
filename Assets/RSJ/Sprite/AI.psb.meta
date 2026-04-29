@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: dd969377126a5f749a2ccfbfb04fa246
+guid: 8c9be6719ed45c44bbfe9309f1fadb67
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -11,7 +11,7 @@ ScriptedImporter:
   textureImporterSettings:
     alphaSource: 1
     mipMapMode: 0
-    enableMipMap: 0
+    enableMipMap: 1
     fadeOut: 0
     borderMipMap: 0
     mipMapsPreserveCoverage: 0
@@ -30,12 +30,12 @@ ScriptedImporter:
     ignoreMipmapLimit: 0
     nPOTScale: 1
     sRGBTexture: 1
-    spriteMode: 1
-    spriteExtrude: 0
+    spriteMode: 2
+    spriteExtrude: 1
     spriteMeshType: 1
     alignment: 0
     spritePivot: {x: 0.5, y: 0.5}
-    spritePixelsToUnits: 64
+    spritePixelsToUnits: 100
     spriteBorder: {x: 0, y: 0, z: 0, w: 0}
     spriteGenerateFallbackPhysicsShape: 0
     generateCubemap: 6
@@ -50,7 +50,7 @@ ScriptedImporter:
     flipbookColumns: 0
     ignorePngGamma: 0
     cookieMode: 0
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 0
@@ -83,7 +83,7 @@ ScriptedImporter:
       y: 0
       width: 0
       height: 0
-    spriteID: f8c9c81ecd60e404bb8ef6386541b0d8
+    spriteID: 853161d698c152b4ca7cb99b54a72af7
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -95,7 +95,7 @@ ScriptedImporter:
     spritePosition: {x: 0, y: 0}
   multiSpriteImportData: []
   layeredSpriteImportData:
-  - name: Layer 1
+  - name: Layer 2
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -105,9 +105,9 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 5210
-      height: 2896
-    spriteID: a85880266b51ad844875672ae7b924f2
+      width: 5251
+      height: 2100
+    spriteID: 4991985108a76ee45b90796286c8f7b2
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -116,7 +116,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
-    spritePosition: {x: 16, y: 16}
+    spritePosition: {x: 8, y: 8}
   spriteImportData: []
   rigSpriteImportData: []
   sharedRigSpriteImportData: []
@@ -135,31 +135,7 @@ ScriptedImporter:
     characterGroups: []
     pivot: {x: 0, y: 0}
     boneReadOnly: 0
-  platformSettings:
-  - name: DefaultTexturePlatform
-    overridden: 0
-    ignorePlatformSupport: 0
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    androidETC2FallbackOverride: 0
-  - name: Standalone
-    overridden: 0
-    ignorePlatformSupport: 0
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    androidETC2FallbackOverride: 0
+  platformSettings: []
   mosaicLayers: 1
   characterMode: 1
   documentPivot: {x: 0, y: 0}
@@ -188,12 +164,12 @@ ScriptedImporter:
   resliceFromLayer: 0
   pSDLayerImportSetting: []
   psdLayers:
-  - name: Layer 1
-    spriteName: Layer 1
+  - name: Layer 2
+    spriteName: Layer 2
     isGroup: 0
     parentIndex: -1
-    spriteID: a85880266b51ad844875672ae7b924f2
-    layerID: 2
+    spriteID: 4991985108a76ee45b90796286c8f7b2
+    layerID: 3
     mosaicPosition: {x: 4, y: 4}
     flatten: 0
     isImported: 1
@@ -202,7 +178,7 @@ ScriptedImporter:
   rigPSDLayers: []
   sharedRigPSDLayers: []
   importFileNodeState: 1
-  platformSettingsDirtyTick: 639130003596988849
+  platformSettingsDirtyTick: 0
   spriteSizeExpandChanged: 0
   generateGOHierarchy: 0
   textureAssetName: 

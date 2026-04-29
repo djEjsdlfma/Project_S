@@ -27,6 +27,11 @@ public class ScreenOpenNClose : MonoBehaviour
             .OnComplete(() => StartCoroutine(ShowApplication()));
     }
 
+    public void OffApp(GameObject App)
+    {
+        App.SetActive(false);
+    }
+
     public void SetMyApp(GameObject App)
     {
         TurnOnApp = App;
