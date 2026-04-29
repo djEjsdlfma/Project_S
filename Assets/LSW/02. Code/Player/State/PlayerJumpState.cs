@@ -54,7 +54,7 @@ public class PlayerJumpState : State
         if (!_hasLeftGround && (Owner.GetVerticalVelocity() > 0.01f || !Owner.IsGround))
             _hasLeftGround = true;
 
-        if (_hasLeftGround && !Owner.IsGround && Owner.GetVerticalVelocity() < -0.01f)
+        if (_hasLeftGround && !Owner.IsGround && Owner.GetVerticalVelocity() < -0.001f)
         {
             StateMachine.TransitionState("PlayerFallingState");
             return;
@@ -84,6 +84,11 @@ public class PlayerJumpState : State
     private void HandleMoveInput(Vector2 moveInput)
     {
         _moveInput = moveInput;
+        
+        if (Mathf.Abs(_moveInput.x) > 0.01f)
+        {
+            Owner.SetFlip(_moveInput.x < 0);
+        }
     }
 
     public override void Exit()

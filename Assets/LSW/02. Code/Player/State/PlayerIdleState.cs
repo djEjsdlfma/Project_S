@@ -55,6 +55,12 @@ public class PlayerIdleState : State
     {
         base.UpdateState();
 
+        if (!Owner.IsGround && _rigidbody.linearVelocity.y < -0.001f)
+        {
+            StateMachine.TransitionState("PlayerFallingState");
+            return;
+        }
+
         if (Mathf.Abs(_moveInput.x) > 0.01f)
             StateMachine.TransitionState("PlayerMoveState");
     }
@@ -77,8 +83,6 @@ public class PlayerIdleState : State
         {
             Owner.SetFlip(_moveInput.x < 0);
         }
-        
-        Debug.Log($"{Mathf.Abs(_moveInput.x) > 0.01f}, {_moveInput.x < 0}");
     }
     
     private void HandleJumpInput()
