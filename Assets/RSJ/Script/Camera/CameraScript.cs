@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using DG.Tweening;
+using Moon._01.Script.Cameras;
 using MoonLib.ScriptFinder_Pro.RunTime.DevLogs;
 
 /// <summary>
@@ -34,6 +35,8 @@ public class CameraScript : MonoBehaviour
     [SerializeField] private Transform checkPos;          // 복사 판정을 할 기준 위치
     [SerializeField] private LayerMask coloredObject;     // 복사 대상 레이어
     [SerializeField] private Image _img;                  // UI 이미지 페이드 연출용
+
+    [SerializeField] private CameraCapture cameraCapture;
 
     private RectTransform myPosition;
     private Vector3 _position;
@@ -649,17 +652,7 @@ public class CameraScript : MonoBehaviour
     /// </summary>
     private void CheckObj()
     {
-        Collider2D item = Physics2D.OverlapBox(
-            checkPos.position,
-            myPosition.sizeDelta * (CHECK_BOX_SCALE * (_camera.orthographicSize * 0.2f)),
-            0,
-            coloredObject
-        );
-
-        if (item != null && item.gameObject.TryGetComponent(out ColoredObject colorObj))
-        {
-            _nowColor = colorObj.color;
-        }
+        cameraCapture.TakePhoto();
     }
 
     private void OnDrawGizmosSelected()
