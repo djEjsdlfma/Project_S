@@ -150,5 +150,15 @@ namespace LSW._02._Code.Entities
                 }
             }
         }
+
+        public void SetFlip(bool flip)
+        {
+            Vector3 scale = transform.localScale;
+
+            float baseScaleX = Mathf.Abs(scale.x);
+
+            scale.x = flip ? -baseScaleX : baseScaleX;
+            transform.localScale = scale;
+        }
     }
 }

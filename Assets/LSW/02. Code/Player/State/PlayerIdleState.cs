@@ -72,6 +72,13 @@ public class PlayerIdleState : State
     private void HandleMoveInput(Vector2 moveInput)
     {
         _moveInput = moveInput;
+        
+        if (Mathf.Abs(_moveInput.x) > 0.01f)
+        {
+            Owner.SetFlip(_moveInput.x < 0);
+        }
+        
+        Debug.Log($"{Mathf.Abs(_moveInput.x) > 0.01f}, {_moveInput.x < 0}");
     }
     
     private void HandleJumpInput()
