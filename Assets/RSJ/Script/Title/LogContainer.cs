@@ -27,8 +27,9 @@ public class LogContainer : MonoBehaviour
     {
         for (int i = 0; i < List11to20.Length; i++)
         {
-    /*        List11to20[i].gameObject.GetComponent<Button>().onClick
-                .AddListener(_data.SlotSave(i));*/
+            int index = i; // 클로저 문제 방지
+            List11to20[i].gameObject.GetComponent<Button>().onClick
+                .AddListener(() => _data.SlotSave(index));
         }
         for (int i = 0; i < List1to10.Length; i++)
         {

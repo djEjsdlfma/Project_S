@@ -119,7 +119,7 @@ namespace Moon._01.Script.Datas
             _currentData[key] = value;
         }
                 
-        public async Task SlotSave(int slot)
+        public void SlotSave(int slot)
         {
             if (slot < 0 || slot >= MaxSaveSlot)
             {
@@ -129,7 +129,7 @@ namespace Moon._01.Script.Datas
             try
             {
                 string jsonData = DictionaryJsonConvert.ToJson(_currentData, true);
-                await File.WriteAllTextAsync($"{_path}/save_{slot}.json", jsonData);
+                File.WriteAllTextAsync($"{_path}/save_{slot}.json", jsonData);
                 _allData[slot] = new Dictionary<string, int>(_currentData);
                 _slotDataExist[slot] = true;
             }
@@ -139,13 +139,13 @@ namespace Moon._01.Script.Datas
             }
         }
 
-        public async Task AutoSave()
+        public void AutoSave()
         {
             try
             {
                 _autoSaved = new Dictionary<string, int>(_currentData);
                 string jsonData = DictionaryJsonConvert.ToJson(_autoSaved, true);
-                await File.WriteAllTextAsync($"{_path}/save_auto.json", jsonData);
+                File.WriteAllTextAsync($"{_path}/save_auto.json", jsonData);
                 _autoDataExist = true;
             }
             catch (Exception e)
