@@ -194,20 +194,10 @@ public class CameraScript : MonoBehaviour
             Vector2 itemMin = item.bounds.min;
             Vector2 itemMax = item.bounds.max;
 
-            // 체크 박스와 겹치지 않으면 제외
+            // 월드 Bounds 기준 체크 (완전히 벗어났는지 1차 필터링)
             if (itemMax.x < checkMin.x || itemMin.x > checkMax.x ||
                 itemMax.y < checkMin.y || itemMin.y > checkMax.y)
                 continue;
-
-            Vector2 clippedMin = new Vector2(
-                Mathf.Max(itemMin.x, checkMin.x),
-                Mathf.Max(itemMin.y, checkMin.y)
-            );
-
-            Vector2 clippedMax = new Vector2(
-                Mathf.Min(itemMax.x, checkMax.x),
-                Mathf.Min(itemMax.y, checkMax.y)
-            );
 
             SpriteRenderer sr = item.GetComponent<SpriteRenderer>();
             if (sr == null || sr.sprite == null)
@@ -231,8 +221,8 @@ public class CameraScript : MonoBehaviour
             }
             else
             {
-                // 일부만 들어오면 스프라이트를 잘라서 복사
-                Sprite clippedSprite = ClipSprite(sr, clippedMin, clippedMax);
+                // 일부만 들어오면 스프라이트의 픽셀 단위 마스킹을 진행하여 복사
+                Sprite clippedSprite = ClipSprite(sr, checkMin, checkMax);
                 if (clippedSprite == null)
                     continue;
 
@@ -241,20 +231,19 @@ public class CameraScript : MonoBehaviour
                 newSr.sprite = clippedSprite;
                 newSr.sortingOrder = sr.sortingOrder + 1;
 
-                realCenter = (clippedMin + clippedMax) * 0.5f;
-                obj.transform.position = realCenter;
+                // ⭐ 중요: ClipSprite 내부에서 Pivot을 재조정했으므로, 
+                // 위치(Position)를 임의의 중앙으로 억지로 옮기지 않고 원본 위치를 그대로 사용합니다.
+                realCenter = obj.transform.position;
 
-                // 콜라이더도 잘린 영역에 맞게 재생성
-                ReplaceClippedCollider(item.gameObject, obj, clippedMin, clippedMax);
+                // 콜라이더 재생성 (월드 카메라 판정 기준)
+                ReplaceClippedCollider(item.gameObject, obj, checkMin, checkMax);
             }
 
-            // 복사본은 처음엔 충돌 비활성화
             if (obj.TryGetComponent(out Collider2D col))
             {
                 col.enabled = false;
             }
 
-            // 복사본 위치는 카메라/마우스 위치를 따라가게 저장
             if (!_copyObjs.ContainsKey(item.gameObject))
             {
                 _copyObjs.Add(item.gameObject, new CopiedObj(realCenter - pos, obj));
@@ -518,56 +507,115 @@ public class CameraScript : MonoBehaviour
     /// <summary>
     /// 원본 스프라이트를 월드 좌표 기준으로 잘라 새 스프라이트를 만든다.
     /// </summary>
+    /// <summary>
+    /// 원본 스프라이트를 월드 좌표 카메라 박스(worldMin, worldMax) 기준으로 잘라 새 스프라이트를 만듭니다. (회전/스케일 지원)
+    /// </summary>
     private Sprite ClipSprite(SpriteRenderer sr, Vector2 worldMin, Vector2 worldMax)
     {
         Sprite original = sr.sprite;
+        if (original == null) return null;
+
         Texture2D originalTex = original.texture;
-
         Texture2D readableTex = GetReadableTexture(originalTex);
+
+        Rect rect = original.textureRect;
+        int rx = Mathf.FloorToInt(rect.x);
+        int ry = Mathf.FloorToInt(rect.y);
+        int rw = Mathf.CeilToInt(rect.width);
+        int rh = Mathf.CeilToInt(rect.height);
+
+        // 아틀라스/텍스처 범위 초과 방지
+        rx = Mathf.Clamp(rx, 0, readableTex.width - 1);
+        ry = Mathf.Clamp(ry, 0, readableTex.height - 1);
+        rw = Mathf.Clamp(rw, 1, readableTex.width - rx);
+        rh = Mathf.Clamp(rh, 1, readableTex.height - ry);
+
+        Color[] pixels = readableTex.GetPixels(rx, ry, rw, rh);
+        Destroy(readableTex); // ⭐ 메모리 릭(누수) 방지를 위해 임시 텍스처 즉시 제거
+
+        Transform t = sr.transform;
         float ppu = original.pixelsPerUnit;
+        Vector2 pivot = original.pivot;
 
-        Vector2 objWorldMin = sr.bounds.min;
-        Vector2 objWorldSize = sr.bounds.size;
-        Rect spriteRect = original.textureRect;
+        int minX = rw, minY = rh, maxX = 0, maxY = 0;
+        bool hasVisiblePixels = false;
 
-        // 월드 좌표를 스프라이트 내부 비율(0~1)로 변환
-        float u0 = (worldMin.x - objWorldMin.x) / objWorldSize.x;
-        float v0 = (worldMin.y - objWorldMin.y) / objWorldSize.y;
-        float u1 = (worldMax.x - objWorldMin.x) / objWorldSize.x;
-        float v1 = (worldMax.y - objWorldMin.y) / objWorldSize.y;
+        // 최적화: 이중 for문 안에서 TransformPoint를 매번 호출하지 않도록,
+        // 로컬 픽셀 1칸 이동 시 월드에서 이동하는 방향 벡터(우측/상단)를 미리 계산합니다. (Scale과 Rotation 자동 반영)
+        Vector2 origin = t.TransformPoint(Vector3.zero);
+        Vector2 rightStep = ((Vector2)t.TransformPoint(Vector3.right) - origin) / ppu;
+        Vector2 upStep = ((Vector2)t.TransformPoint(Vector3.up) - origin) / ppu;
 
-        int px = Mathf.RoundToInt(spriteRect.x + u0 * spriteRect.width);
-        int py = Mathf.RoundToInt(spriteRect.y + v0 * spriteRect.height);
-        int pw = Mathf.RoundToInt((u1 - u0) * spriteRect.width);
-        int ph = Mathf.RoundToInt((v1 - v0) * spriteRect.height);
+        for (int y = 0; y < rh; y++)
+        {
+            for (int x = 0; x < rw; x++)
+            {
+                int index = y * rw + x;
+                // 이미 투명한 픽셀은 연산 건너뛰기
+                if (pixels[index].a <= 0.01f) continue;
 
-        if (pw <= 0 || ph <= 0)
-            return null;
+                // 텍스처 피벗 기준 로컬 픽셀 위치
+                float localX = x - pivot.x;
+                float localY = y - pivot.y;
 
-        px = Mathf.Clamp(px, 0, readableTex.width - 1);
-        py = Mathf.Clamp(py, 0, readableTex.height - 1);
-        pw = Mathf.Clamp(pw, 1, readableTex.width - px);
-        ph = Mathf.Clamp(ph, 1, readableTex.height - py);
+                // 행렬 연산 없이 벡터 덧셈으로 즉각적인 픽셀의 월드 좌표 도출
+                Vector2 worldPos = origin + rightStep * localX + upStep * localY;
 
-        Color[] pixels = readableTex.GetPixels(px, py, pw, ph);
-        Texture2D newTex = new Texture2D(pw, ph, TextureFormat.RGBA32, false);
+                // 카메라 판정 박스 밖이라면 투명 처리
+                if (worldPos.x < worldMin.x || worldPos.x > worldMax.x ||
+                    worldPos.y < worldMin.y || worldPos.y > worldMax.y)
+                {
+                    pixels[index] = Color.clear;
+                }
+                else
+                {
+                    // 보이는 픽셀의 로컬 바운딩 박스 갱신 (메모리 절약을 위해 불필요한 투명 여백을 잘라내기 위함)
+                    if (x < minX) minX = x;
+                    if (x > maxX) maxX = x;
+                    if (y < minY) minY = y;
+                    if (y > maxY) maxY = y;
+                    hasVisiblePixels = true;
+                }
+            }
+        }
 
+        // 박스 안에 들어온 픽셀이 하나도 없으면 복사 취소
+        if (!hasVisiblePixels) return null;
+
+        // 잘려진 영역(보이는 픽셀 영역)만큼만 새 텍스처로 추출
+        int newW = maxX - minX + 1;
+        int newH = maxY - minY + 1;
+        Color[] croppedPixels = new Color[newW * newH];
+
+        for (int y = 0; y < newH; y++)
+        {
+            for (int x = 0; x < newW; x++)
+            {
+                croppedPixels[y * newW + x] = pixels[(minY + y) * rw + (minX + x)];
+            }
+        }
+
+        Texture2D newTex = new Texture2D(newW, newH, TextureFormat.RGBA32, false);
         newTex.filterMode = originalTex.filterMode;
         newTex.wrapMode = TextureWrapMode.Clamp;
-
-        newTex.SetPixels(pixels);
+        newTex.SetPixels(croppedPixels);
         newTex.Apply();
+
+        // ⭐ 핵심: 텍스처를 잘라내면서 변경된 해상도만큼 피벗(Pivot)을 반대 방향으로 옮겨줍니다.
+        // 이렇게 하면 하이라키 상의 오브젝트 Transform을 건드리지 않아도 시각적 위치와 콜라이더가 완벽히 일치합니다.
+        Vector2 newPivot = new Vector2(pivot.x - minX, pivot.y - minY);
+        Vector2 normalizedPivot = new Vector2(newPivot.x / newW, newPivot.y / newH);
 
         return Sprite.Create(
             newTex,
-            new Rect(0, 0, pw, ph),
-            new Vector2(0.5f, 0.5f),
+            new Rect(0, 0, newW, newH),
+            normalizedPivot,
             ppu,
             0,
             SpriteMeshType.FullRect
         );
     }
-
+    
     /// <summary>
     /// 비읽기 텍스처를 읽을 수 있는 Texture2D로 복제한다.
     /// </summary>
