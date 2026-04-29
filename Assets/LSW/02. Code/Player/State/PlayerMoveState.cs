@@ -47,6 +47,12 @@ public class PlayerMoveState : State
     {
         base.UpdateState();
 
+        if (!Owner.IsGround && _rigidbody.linearVelocity.y < -0.001f)
+        {
+            StateMachine.TransitionState("PlayerFallingState");
+            return;
+        }
+
         if (Mathf.Abs(_moveInput.x) <= 0.01f)
             StateMachine.TransitionState("PlayerIdleState");
     }
@@ -64,6 +70,11 @@ public class PlayerMoveState : State
     private void HandleMoveInput(Vector2 moveInput)
     {
         _moveInput = moveInput;
+        
+        if (Mathf.Abs(_moveInput.x) > 0.01f)
+        {
+            Owner.SetFlip(_moveInput.x < 0);
+        }
     }
     
     private void HandleJumpInput()

@@ -20,7 +20,8 @@ public class PlayerFallingState : State
     {
         base.Enter();
 
-        Animator.PlayClip(UnityEngine.Animator.StringToHash("JUMP"));
+        Debug.Log("Entered PlayerFallingState");
+        Animator.PlayClip(UnityEngine.Animator.StringToHash("FALL"));
 
         if (_player != null && _player.InputCompo != null)
             _moveInput = _player.InputCompo.CurrentMoveInput;
@@ -61,6 +62,11 @@ public class PlayerFallingState : State
     private void HandleMoveInput(Vector2 moveInput)
     {
         _moveInput = moveInput;
+        
+        if (Mathf.Abs(_moveInput.x) > 0.01f)
+        {
+            Owner.SetFlip(_moveInput.x < 0);
+        }
     }
 
     public override void Exit()
