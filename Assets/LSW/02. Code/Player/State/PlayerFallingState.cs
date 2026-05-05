@@ -19,8 +19,7 @@ public class PlayerFallingState : State
     public override void Enter()
     {
         base.Enter();
-
-        Debug.Log("Entered PlayerFallingState");
+        
         Animator.PlayClip(UnityEngine.Animator.StringToHash("FALL"));
 
         if (_player != null && _player.InputCompo != null)
