@@ -22,7 +22,7 @@ namespace LSW._02._Code.Environment.InteractableObject
         public GameObject resultPrefab;
 
         [Header("Snap Tolerance")]
-        public float posTolerance = 0.05f;
+        public float posTolerance = 0.1f;
         public float rotTolerance = 15f;
     }
     
@@ -62,22 +62,6 @@ namespace LSW._02._Code.Environment.InteractableObject
             
             foundPiece = default;
             return false;
-        }
-
-        public void CheckCompletion(Transform groupTransform)
-        {
-            foreach (var bp in blueprints)
-            {
-                if (groupTransform.childCount == bp.pieceData.Count)
-                {
-                    if (bp.resultPrefab != null)
-                    {
-                        Instantiate(bp.resultPrefab, groupTransform.position, groupTransform.rotation);
-                        Destroy(groupTransform.gameObject);
-                        break;
-                    }
-                }
-            }
         }
 
         public void Reset() { }
