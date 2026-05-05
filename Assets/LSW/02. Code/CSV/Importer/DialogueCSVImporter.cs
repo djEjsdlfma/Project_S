@@ -57,11 +57,11 @@ namespace LSW._02._Code.CSV.Importer
 
                     DialogueData dialogueData = new DialogueData
                     {
-                        Expression = values[1].Trim(),
-                        Condition = values[2].Trim(),
-                        Dialogue = values[3].Trim(),
-                        ActionEvent = values[4].Trim(),
-                        NextKey = values[5].Trim()
+                        expression = values[1].Trim(),
+                        condition = values[2].Trim(),
+                        dialogue = values[3].Trim(),
+                        actionEvent = values[4].Trim(),
+                        nextKey = values[5].Trim()
                     };
                     
                     
