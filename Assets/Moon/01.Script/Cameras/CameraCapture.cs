@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using MoonLib.ScriptFinder_Pro.RunTime.Finder.ListFinder;
 using UnityEngine;
 
 namespace Moon._01.Script.Cameras
@@ -7,6 +8,7 @@ namespace Moon._01.Script.Cameras
     {
         [SerializeField] private Camera photoCamera; // 마우스를 따라다니는 서브 카메라
         [SerializeField] private RenderTexture renderTexture; // 카메라에 연결된 렌더 텍스처
+        [SerializeField] private ScriptListFinderSO camerasFinder;
 
         [SerializeField] private LayerMask photoObjectLayer;
 
@@ -23,16 +25,20 @@ namespace Moon._01.Script.Cameras
             photoCamera.Render();
 
             // 4. 새로운 비어있는 Texture2D 생성 (RenderTexture와 동일한 해상도)
-            Texture2D photo = new Texture2D(renderTexture.width, renderTexture.height, TextureFormat.RGB24, false);
+            Texture2D capture = new Texture2D(renderTexture.width, renderTexture.height, TextureFormat.RGB24, false, true);
 
             // 5. 화면의 픽셀을 읽어와서 Texture2D에 기록
-            photo.ReadPixels(new Rect(0, 0, renderTexture.width, renderTexture.height), 0, 0);
-            photo.Apply(); // 변경사항 적용
+            capture.ReadPixels(new Rect(0, 0, renderTexture.width, renderTexture.height), 0, 0);
+            capture.Apply(); // 변경사항 적용
 
             // 6. 원래 렌더 텍스처로 복구
             RenderTexture.active = currentRT;
+
+            List<CamObject> objs = AnalyzePhoto();
+
+            Photo photo = new Photo(capture, objs);
             
-            
+            camerasFinder.GetTarget<PhotoStorage>().AddPhoto(photo);
         }
         
         private List<CamObject> AnalyzePhoto()
