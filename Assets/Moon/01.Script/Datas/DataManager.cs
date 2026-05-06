@@ -44,7 +44,9 @@ namespace Moon._01.Script.Datas
 
         private void Init()
         {
-            _path = Application.persistentDataPath + "/Data";
+            string rootPath = Directory.GetParent(Application.dataPath)?.FullName;
+            _path = rootPath != null ? Path.Combine(rootPath, "SaveDatas") : Application.dataPath;
+            
             if (!Directory.Exists(_path))
             {
                 Directory.CreateDirectory(_path);
