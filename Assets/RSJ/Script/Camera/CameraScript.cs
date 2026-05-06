@@ -3,8 +3,10 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using DG.Tweening;
+using LSW._02._Code.Environment.InteractableObject;
 using Moon._01.Script.Cameras;
 using MoonLib.ScriptFinder_Pro.RunTime.DevLogs;
+using MoonLib.ScriptFinder_Pro.RunTime.Finder.ListFinder;
 
 /// <summary>
 /// 화면에 복사된 오브젝트를 원본 기준 오프셋으로 따라다니게 하는 정보 구조체.
@@ -36,7 +38,7 @@ public class CameraScript : MonoBehaviour
     [SerializeField] private LayerMask coloredObject;     // 복사 대상 레이어
     [SerializeField] private Image _img;                  // UI 이미지 페이드 연출용
 
-    [SerializeField] private CameraCapture cameraCapture;
+    [SerializeField] private ScriptListFinderSO camerasFinder;
 
     private RectTransform myPosition;
     private Vector3 _position;
@@ -73,7 +75,24 @@ public class CameraScript : MonoBehaviour
         }
 
         HandleCopyInput(worldMousePos);
-        HandleTestInput();
+        HandlePhotoInput();
+    }
+    
+    private void HandlePhotoInput()
+    {
+        if (!Keyboard.current.fKey.wasPressedThisFrame || !camerasFinder.GetTarget<PhotoStorage>().CanPhoto())
+            return;
+
+        StopCopy();
+        _img.color = new Color(1, 1, 1, 1);
+        CheckObj();
+        _img.DOFade(0f, 0.2f);
+        DevLog.Log("찰칵");
+    }
+
+    private void CheckObj()
+    {
+        camerasFinder.GetTarget<CameraCapture>().TakePhoto();
     }
 
     /// <summary>
@@ -113,22 +132,7 @@ public class CameraScript : MonoBehaviour
             DevLog.Log("Copy");
         }
     }
-
-    /// <summary>
-    /// F 키 입력: 테스트용으로 현재 위치 검사
-    /// </summary>
-    private void HandleTestInput()
-    {
-        if (!Keyboard.current.fKey.wasPressedThisFrame)
-            return;
-
-        StopCopy();
-        _img.color = new Color(1, 1, 1, 1);
-        CheckObj();
-        _img.DOFade(0f, 0.2f);
-        Debug.Log("찰칵");
-    }
-
+    
     /// <summary>
     /// 복사본을 확정하는 동작.
     /// </summary>
@@ -165,6 +169,8 @@ public class CameraScript : MonoBehaviour
                 if (camObj.Value.copyObj && camObj.Value.copyObj.TryGetComponent(out Collider2D col))
                 {
                     col.enabled = true;
+                    if(camObj.Key.TryGetComponent(out ICopyable copyable))
+                        copyable.Paste();
                 }
             }
         }
@@ -192,12 +198,12 @@ public class CameraScript : MonoBehaviour
 
         foreach (var item in items)
         {
-            if (item == null) continue;
-
+            if (item == null)
+                continue;
+            
             Vector2 itemMin = item.bounds.min;
             Vector2 itemMax = item.bounds.max;
-
-            // 월드 Bounds 기준 체크 (완전히 벗어났는지 1차 필터링)
+            
             if (itemMax.x < checkMin.x || itemMin.x > checkMax.x ||
                 itemMax.y < checkMin.y || itemMin.y > checkMax.y)
                 continue;
@@ -224,8 +230,7 @@ public class CameraScript : MonoBehaviour
             }
             else
             {
-                // 일부만 들어오면 스프라이트의 픽셀 단위 마스킹을 진행하여 복사
-                Sprite clippedSprite = ClipSprite(sr, checkMin, checkMax);
+                Sprite clippedSprite = ClipSprite(sr, checkMin, checkMax, out float preservedRatio);
                 if (clippedSprite == null)
                     continue;
 
@@ -234,18 +239,26 @@ public class CameraScript : MonoBehaviour
                 newSr.sprite = clippedSprite;
                 newSr.sortingOrder = sr.sortingOrder + 1;
 
-                // ⭐ 중요: ClipSprite 내부에서 Pivot을 재조정했으므로, 
-                // 위치(Position)를 임의의 중앙으로 억지로 옮기지 않고 원본 위치를 그대로 사용합니다.
                 realCenter = obj.transform.position;
-
-                // 콜라이더 재생성 (월드 카메라 판정 기준)
+                
                 ReplaceClippedCollider(item.gameObject, obj, checkMin, checkMax);
+                
+                if (preservedRatio < 0.5f)
+                {
+                    if (obj.TryGetComponent(out Piece piece))
+                    {
+                        Destroy(piece);
+                    }
+                }
             }
 
             if (obj.TryGetComponent(out Collider2D col))
             {
                 col.enabled = false;
             }
+            
+            if(obj.TryGetComponent(out ICopyable copyable))
+                copyable.Copy();
 
             if (!_copyObjs.ContainsKey(item.gameObject))
             {
@@ -513,8 +526,9 @@ public class CameraScript : MonoBehaviour
     /// <summary>
     /// 원본 스프라이트를 월드 좌표 카메라 박스(worldMin, worldMax) 기준으로 잘라 새 스프라이트를 만듭니다. (회전/스케일 지원)
     /// </summary>
-    private Sprite ClipSprite(SpriteRenderer sr, Vector2 worldMin, Vector2 worldMax)
+    private Sprite ClipSprite(SpriteRenderer sr, Vector2 worldMin, Vector2 worldMax, out float preservedRatio)
     {
+        preservedRatio = 0f; // 초기화
         Sprite original = sr.sprite;
         if (original == null) return null;
 
@@ -526,15 +540,14 @@ public class CameraScript : MonoBehaviour
         int ry = Mathf.FloorToInt(rect.y);
         int rw = Mathf.CeilToInt(rect.width);
         int rh = Mathf.CeilToInt(rect.height);
-
-        // 아틀라스/텍스처 범위 초과 방지
+        
         rx = Mathf.Clamp(rx, 0, readableTex.width - 1);
         ry = Mathf.Clamp(ry, 0, readableTex.height - 1);
         rw = Mathf.Clamp(rw, 1, readableTex.width - rx);
         rh = Mathf.Clamp(rh, 1, readableTex.height - ry);
 
         Color[] pixels = readableTex.GetPixels(rx, ry, rw, rh);
-        Destroy(readableTex); // ⭐ 메모리 릭(누수) 방지를 위해 임시 텍스처 즉시 제거
+        Destroy(readableTex);
 
         Transform t = sr.transform;
         float ppu = original.pixelsPerUnit;
@@ -543,28 +556,27 @@ public class CameraScript : MonoBehaviour
         int minX = rw, minY = rh, maxX = 0, maxY = 0;
         bool hasVisiblePixels = false;
 
-        // 최적화: 이중 for문 안에서 TransformPoint를 매번 호출하지 않도록,
-        // 로컬 픽셀 1칸 이동 시 월드에서 이동하는 방향 벡터(우측/상단)를 미리 계산합니다. (Scale과 Rotation 자동 반영)
         Vector2 origin = t.TransformPoint(Vector3.zero);
         Vector2 rightStep = ((Vector2)t.TransformPoint(Vector3.right) - origin) / ppu;
         Vector2 upStep = ((Vector2)t.TransformPoint(Vector3.up) - origin) / ppu;
+        
+        int totalValidPixels = 0;
+        int keptPixels = 0;
 
         for (int y = 0; y < rh; y++)
         {
             for (int x = 0; x < rw; x++)
             {
                 int index = y * rw + x;
-                // 이미 투명한 픽셀은 연산 건너뛰기
                 if (pixels[index].a <= 0.01f) continue;
-
-                // 텍스처 피벗 기준 로컬 픽셀 위치
+                
+                totalValidPixels++;
+                
                 float localX = x - pivot.x;
                 float localY = y - pivot.y;
-
-                // 행렬 연산 없이 벡터 덧셈으로 즉각적인 픽셀의 월드 좌표 도출
+                
                 Vector2 worldPos = origin + rightStep * localX + upStep * localY;
-
-                // 카메라 판정 박스 밖이라면 투명 처리
+                
                 if (worldPos.x < worldMin.x || worldPos.x > worldMax.x ||
                     worldPos.y < worldMin.y || worldPos.y > worldMax.y)
                 {
@@ -572,7 +584,8 @@ public class CameraScript : MonoBehaviour
                 }
                 else
                 {
-                    // 보이는 픽셀의 로컬 바운딩 박스 갱신 (메모리 절약을 위해 불필요한 투명 여백을 잘라내기 위함)
+                    keptPixels++;
+
                     if (x < minX) minX = x;
                     if (x > maxX) maxX = x;
                     if (y < minY) minY = y;
@@ -582,10 +595,14 @@ public class CameraScript : MonoBehaviour
             }
         }
 
-        // 박스 안에 들어온 픽셀이 하나도 없으면 복사 취소
-        if (!hasVisiblePixels) return null;
-
-        // 잘려진 영역(보이는 픽셀 영역)만큼만 새 텍스처로 추출
+        if (!hasVisiblePixels) 
+            return null;
+        
+        if (totalValidPixels > 0)
+        {
+            preservedRatio = (float)keptPixels / totalValidPixels;
+        }
+        
         int newW = maxX - minX + 1;
         int newH = maxY - minY + 1;
         Color[] croppedPixels = new Color[newW * newH];
@@ -603,9 +620,7 @@ public class CameraScript : MonoBehaviour
         newTex.wrapMode = TextureWrapMode.Clamp;
         newTex.SetPixels(croppedPixels);
         newTex.Apply();
-
-        // ⭐ 핵심: 텍스처를 잘라내면서 변경된 해상도만큼 피벗(Pivot)을 반대 방향으로 옮겨줍니다.
-        // 이렇게 하면 하이라키 상의 오브젝트 Transform을 건드리지 않아도 시각적 위치와 콜라이더가 완벽히 일치합니다.
+        
         Vector2 newPivot = new Vector2(pivot.x - minX, pivot.y - minY);
         Vector2 normalizedPivot = new Vector2(newPivot.x / newW, newPivot.y / newH);
 
@@ -646,21 +661,13 @@ public class CameraScript : MonoBehaviour
 
         return readable;
     }
-
-    /// <summary>
-    /// checkPos 위치에 있는 오브젝트의 색 정보를 가져온다.
-    /// </summary>
-    private void CheckObj()
-    {
-        cameraCapture.TakePhoto();
-    }
-
+    
     private void OnDrawGizmosSelected()
     {
         if (myPosition != null && checkPos != null)
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawWireCube(checkPos.position, myPosition.sizeDelta * CHECK_BOX_SCALE);
+            Gizmos.DrawWireCube(checkPos.position, myPosition.sizeDelta * (CHECK_BOX_SCALE * (_camera.orthographicSize * 0.2f)));
         }
     }
 }

@@ -63,7 +63,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 148
+  spritePixelsToUnits: 515
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -115,10 +115,10 @@ TextureImporter:
       name: Player_Idle_0
       rect:
         serializedVersion: 2
-        x: 25
-        y: 21
-        width: 128
-        height: 297
+        x: 68
+        y: 75
+        width: 471
+        height: 1038
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,10 +137,10 @@ TextureImporter:
       name: Player_Idle_1
       rect:
         serializedVersion: 2
-        x: 232
-        y: 21
-        width: 134
-        height: 297
+        x: 825
+        y: 75
+        width: 471
+        height: 1038
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -159,10 +159,10 @@ TextureImporter:
       name: Player_Idle_2
       rect:
         serializedVersion: 2
-        x: 446
-        y: 21
-        width: 134
-        height: 297
+        x: 1581
+        y: 75
+        width: 471
+        height: 1038
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -181,10 +181,10 @@ TextureImporter:
       name: Player_Idle_3
       rect:
         serializedVersion: 2
-        x: 660
-        y: 21
-        width: 134
-        height: 297
+        x: 2316
+        y: 75
+        width: 479
+        height: 1038
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -203,10 +203,10 @@ TextureImporter:
       name: Player_Idle_4
       rect:
         serializedVersion: 2
-        x: 875
-        y: 21
-        width: 134
-        height: 297
+        x: 3096
+        y: 75
+        width: 471
+        height: 1038
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
