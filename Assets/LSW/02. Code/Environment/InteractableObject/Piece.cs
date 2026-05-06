@@ -19,8 +19,9 @@ namespace LSW._02._Code.Environment.InteractableObject
         private void Start()
         {
             _puzzleManager = SystemManager.Instance.GetSystemManager<PuzzleManager>();
+            _puzzleManager.RegisterPiece(this);
         }
-
+        
         private void Update()
         {
             CheckOverlapStatus();
@@ -64,12 +65,12 @@ namespace LSW._02._Code.Environment.InteractableObject
             IsInCorrectPlace = foundMatch;
         }
         
-        private bool GetVirtualCenter(out Vector2 centerPos, out float centerRot)
+        public bool GetVirtualCenter(out Vector2 centerPos, out float centerRot)
         {
             if (_puzzleManager.GetPiece(pieceId, out var data))
             {
                 centerRot = Mathf.DeltaAngle(data.localRotationZ, transform.eulerAngles.z);
-                Vector2 rotatedOffset = Quaternion.Euler(0, 0, centerRot) * (Vector3)data.localPosition;
+                Vector2 rotatedOffset = Quaternion.Euler(0, 0, centerRot) * data.localPosition;
                 centerPos = (Vector2)transform.position - rotatedOffset;
                 return true;
             }
@@ -77,8 +78,29 @@ namespace LSW._02._Code.Environment.InteractableObject
             centerRot = 0f;
             return false;
         }
+        
+        public void FinalizePosition()
+        {
+            CheckOverlapStatus();
+        
+            if (IsInCorrectPlace)
+            {
+                _puzzleManager.CheckPuzzleCompletion(pieceId);
+            }
+        }
 
         public void Copy() => IsCopying = true;
-        public void Paste() => IsCopying = false;
+
+        public void Paste()
+        {
+            IsCopying = false;
+            FinalizePosition();
+        }
+        
+        private void OnDestroy()
+        {
+            if (_puzzleManager != null)
+                _puzzleManager.UnregisterPiece(this);
+        }
     }
 }

@@ -169,8 +169,10 @@ public class CameraScript : MonoBehaviour
                 if (camObj.Value.copyObj && camObj.Value.copyObj.TryGetComponent(out Collider2D col))
                 {
                     col.enabled = true;
-                    if(camObj.Key.TryGetComponent(out ICopyable copyable))
+                    if (camObj.Value.copyObj.TryGetComponent(out ICopyable copyable))
+                    {
                         copyable.Paste();
+                    }
                 }
             }
         }

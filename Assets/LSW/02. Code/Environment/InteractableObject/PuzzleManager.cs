@@ -30,6 +30,47 @@ namespace LSW._02._Code.Environment.InteractableObject
     {
         [SerializeField] private List<PieceBlueprint> blueprints = new List<PieceBlueprint>();
         
+        private List<Piece> _activePieces = new List<Piece>();
+
+        public void RegisterPiece(Piece piece) => _activePieces.Add(piece);
+        public void UnregisterPiece(Piece piece) => _activePieces.Remove(piece);
+        
+        public void CheckPuzzleCompletion(string pieceId)
+        {
+            if (!GetBlueprint(pieceId, out var blueprint)) 
+                return;
+            
+            var requiredIds = blueprint.pieceData.Select(d => d.pieceId).ToList();
+
+            var matchingPieces = _activePieces
+                .Where(p => requiredIds.Contains(p.PieceId) && p.IsInCorrectPlace)
+                .ToList();
+
+            if (matchingPieces.Count == requiredIds.Count)
+            {
+                AssemblePuzzle(blueprint, matchingPieces);
+            }
+        }
+
+        private void AssemblePuzzle(PieceBlueprint blueprint, List<Piece> pieces)
+        {
+            if (pieces[0].GetVirtualCenter(out Vector2 centerPos, out float centerRot))
+            {
+                if (blueprint.resultPrefab != null)
+                {
+                    Instantiate(blueprint.resultPrefab, centerPos, Quaternion.Euler(0, 0, centerRot));
+                }
+                
+                foreach (var p in pieces)
+                {
+                    UnregisterPiece(p);
+                    Destroy(p.gameObject);
+                }
+                
+                Debug.Log("퍼즐 완성! 조각 삭제 및 결과물 생성 완료.");
+            }
+        }
+        
         public void Initialize(SystemManager systemManager) { }
         public void LoadScene(SceneType sceneType) { }
 
