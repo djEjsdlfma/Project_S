@@ -7,7 +7,7 @@ namespace LSW._02._Code.Core.Cores
     {
         [SerializeField] private int maxDay;
         
-        public int CurrentDay { get; private set; } = 2;
+        public int CurrentDay { get; private set; } = 1;
         
         public event Action<int> OnDayChanged;
         
