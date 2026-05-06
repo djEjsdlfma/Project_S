@@ -25,13 +25,14 @@ public class BubbleManager : MonoBehaviour, ITabletUI
 
     [SerializeField] private RectTransform _contaner;
     [SerializeField] private ScrollRect scrollRect;
-
-    public string currentKey = "DAY1_NPC_NORM_001_1";
+    
     public string sheetName = "Sheet1";
     
     private WaitForSecondsRealtime _interactDelayCoroutine;
-    
+
+    private string _currentKey;
     private DialogueDataCore _dialogueDataCore;
+    private PlayerStatCore _playerStatCore;
     private bool wasChatNpc;
     private GameObject nowBubble;
     private string choiceText2;
@@ -46,7 +47,17 @@ public class BubbleManager : MonoBehaviour, ITabletUI
     private void Awake()
     {
         _interactDelayCoroutine = new WaitForSecondsRealtime(1.25f);
+        
         _dialogueDataCore = CoreHandler.Instance.GetCore<DialogueDataCore>();
+        _playerStatCore = CoreHandler.Instance.GetCore<PlayerStatCore>();
+
+        if (!_dialogueDataCore.GetFirstDialogueByDay(sheetName, _playerStatCore.CurrentDay, out string foundKey, out _))
+        {
+            Debug.Log($"No Day Dialogue in Sheet, Day : {_playerStatCore.CurrentDay}, Sheet : {sheetName}");
+            return;
+        }
+
+        _currentKey = foundKey;
     }
 
     private void Update()
@@ -71,7 +82,7 @@ public class BubbleManager : MonoBehaviour, ITabletUI
         if(wasEndChat)
             return;
         
-        if (!_dialogueDataCore.GetDialogueDataByKey(sheetName, currentKey, out DialogueData data)) 
+        if (!_dialogueDataCore.GetDialogueDataByKey(sheetName, _currentKey, out DialogueData data)) 
             return;
         
         DisableInteract();
@@ -81,7 +92,7 @@ public class BubbleManager : MonoBehaviour, ITabletUI
             {
                 StartCoroutine(DelayInteract());
                 ShowNPCText(data.Content, wasChatNpc, data.Speaker.ToString());
-                currentKey = data.NextKey;
+                _currentKey = data.NextKey;
             }
             else if (data.Type == DialogueType.Select)
             {
@@ -101,11 +112,11 @@ public class BubbleManager : MonoBehaviour, ITabletUI
             }
             else if (data.NextKey != "-")
             {
-                currentKey = data.NextKey;
+                _currentKey = data.NextKey;
             }
             else if(_dialogueDataCore.GetDialogueKeyByIndex(_dialogueCount, out string key))
             {
-                currentKey = key;
+                _currentKey = key;
             }
         }
         
@@ -180,7 +191,9 @@ public class BubbleManager : MonoBehaviour, ITabletUI
 
     private void FindChoice(int seqNum, ChoiceBubble choice)
     {
-        _dialogueDataCore.GetAllDialogueData(sheetName, out var allData);
+        if(!_dialogueDataCore.GetAllDialogueData(sheetName, out var allData))
+            return;
+        
         var choices = allData.Values
             .Where(x => x.Seq == seqNum && x.Type == DialogueType.Select)
             .OrderBy(x => x.ID)
@@ -201,7 +214,7 @@ public class BubbleManager : MonoBehaviour, ITabletUI
     {
         ShowPlayerText(choiceText1, wasChatNpc);
 
-        currentKey = nextKey1;
+        _currentKey = nextKey1;
 
         Destroy(target);
         StartCoroutine(NextStepAfterChoice());
@@ -211,7 +224,7 @@ public class BubbleManager : MonoBehaviour, ITabletUI
     {
         ShowPlayerText(choiceText2, wasChatNpc);
 
-        currentKey = nextKey2;
+        _currentKey = nextKey2;
 
         Destroy(target);
         StartCoroutine(NextStepAfterChoice());
