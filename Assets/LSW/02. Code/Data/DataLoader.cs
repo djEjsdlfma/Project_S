@@ -1,23 +1,37 @@
 using System.Collections.Generic;
-using LSW._02._Code.System___Manager;
+using DG.Tweening;
+using LSW._02._Code.Core;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace LSW._02._Code.Data
 {
     public class DataLoader : MonoBehaviour
     {
+        [Header("Load UI")]
         [SerializeField] private Slider loadingSlider;
-        [SerializeField] private float lerpSpeed = 5f;
+        [SerializeField] private float duration = 0.5f;
+        
+        [Header("Scene")]
+        [SerializeField] private SceneType loadSceneType;
         
         private List<IDataLoadManager> _managers;
         private bool _isLoadStarted = false;
-        
+        private Tweener _sliderTween;
+        private float _lastTargetProgress = -1f;
+
         private void Start()
         {
-            _managers = SystemManager.Instance.GetDataLoadManagers();
+            _managers = CoreHandler.Instance.GetDataLoadManagers();
         
-            if (_managers == null || _managers.Count == 0) return;
+            if (_managers == null || _managers.Count == 0)
+            {
+                CompleteLoading();
+                return;
+            }
+
+            loadingSlider.value = 0f;
 
             foreach (var manager in _managers)
             {
@@ -29,7 +43,8 @@ namespace LSW._02._Code.Data
 
         private void Update()
         {
-            if (!_isLoadStarted || _managers == null) return;
+            if (!_isLoadStarted || _managers == null) 
+                return;
 
             float totalProgress = 0f;
             foreach (var manager in _managers)
@@ -37,17 +52,28 @@ namespace LSW._02._Code.Data
                 totalProgress += manager.Progress;
             }
             
-            float averageProgress = totalProgress / _managers.Count;
-            
-            loadingSlider.value = Mathf.Lerp(loadingSlider.value, averageProgress, Time.deltaTime * lerpSpeed);
-            
-            if (averageProgress >= 1f && loadingSlider.value >= 0.995f)
+            float targetProgress = totalProgress / _managers.Count;
+            if (!Mathf.Approximately(_lastTargetProgress, targetProgress))
             {
-                loadingSlider.value = 1f;
+                _lastTargetProgress = targetProgress;
+                
+                if (_sliderTween != null && _sliderTween.IsActive())
+                    _sliderTween.Kill();
+                
+                if (loadingSlider != null)
+                {
+                    _sliderTween = loadingSlider.DOValue(targetProgress, duration)
+                        .SetEase(Ease.OutQuad);
+                }
+            }
+
+            if (targetProgress >= 1f && _isLoadStarted)
+            {
+                _isLoadStarted = false;
                 CompleteLoading();
             }
         }
-        
+
         private void HandleLoadError(string errorMsg)
         {
             Debug.LogError($"[DataLoad Error] {errorMsg}");
@@ -55,16 +81,19 @@ namespace LSW._02._Code.Data
 
         private void CompleteLoading()
         {
-            _isLoadStarted = false;
-            
-            foreach (var manager in _managers)
+            _sliderTween?.Kill();
+
+            DOVirtual.DelayedCall(0.2f, () =>
             {
-                manager.OnLoadError -= HandleLoadError;
-            }
+                SceneManager.LoadScene((int)loadSceneType); 
+            }).SetUpdate(true);
         }
 
         private void OnDestroy()
         {
+            _sliderTween?.Kill();
+            DOTween.Kill(loadingSlider);
+
             if (_managers != null)
             {
                 foreach (var manager in _managers)

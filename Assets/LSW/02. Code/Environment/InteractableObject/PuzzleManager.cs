@@ -72,7 +72,6 @@ namespace LSW._02._Code.Environment.InteractableObject
         }
         
         public void Initialize(SystemManager systemManager) { }
-        public void LoadScene(SceneType sceneType) { }
 
         public bool GetBlueprint(string id, out PieceBlueprint foundBlueprint)
         {

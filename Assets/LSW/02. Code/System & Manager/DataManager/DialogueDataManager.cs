@@ -2,13 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using LSW._02._Code.Core;
 using LSW._02._Code.Data;
 using UnityEngine;
 using UnityEngine.Networking;
 
 namespace LSW._02._Code.System___Manager.DataManager
 {
-    public class DialogueDataManager : MonoBehaviour, ISystemManager, IDataLoadManager
+    public class DialogueDataManager : MonoBehaviour, ICore, IDataLoadManager
     {
         public List<SheetData> sheetData;
         
@@ -19,30 +20,18 @@ namespace LSW._02._Code.System___Manager.DataManager
         public float Progress => _progress;
         
         private bool _isInitialized = false;
-        private bool _isLoadError = false;
         public bool IsDone => _isInitialized;
-
+        
         public event Action<string> OnLoadError;
         
-        public void Initialize(SystemManager systemManager)
-        {
-            // DontDestroyOnLoad(gameObject);
-        }
+        public void Initialize(CoreHandler coreHandler) { }
         
         public void LoadData()
         {
             StartCoroutine(InitializeAllSheets());
         }
 
-
-        public void LoadScene(SceneType sceneType)
-        {
-            // Transform systemManagerTrm = FindAnyObjectByType<SystemManager>().transform;
-            // if (systemManagerTrm != null)
-            // {
-            //     transform.SetParent(systemManagerTrm);
-            // }
-        }
+        public void LoadScene(SceneType sceneType) { }
 
         private IEnumerator InitializeAllSheets()
         {
@@ -76,7 +65,6 @@ namespace LSW._02._Code.System___Manager.DataManager
             }
             else
             {
-                _isLoadError = true;
                 OnLoadError?.Invoke($"Load Failed. ({sheet.sheetName}): {webRequest.error}");
             }
         }
@@ -92,22 +80,26 @@ namespace LSW._02._Code.System___Manager.DataManager
             {
                 string[] values = csvParser.Split(lines[i]);
 
-                if (values.Length < 6)
+                if (values.Length < 9)
                     continue;
 
-                string key = values[0].Trim();
+                string key = values[1].Trim();
                 if (string.IsNullOrEmpty(key))
                     continue;
 
                 DialogueData dialogueData = new DialogueData
                 {
-                    expression = values[1].Trim(),
-                    condition = values[2].Trim(),
-                    dialogue = values[3].Trim(),
-                    actionEvent = values[4].Trim(),
-                    nextKey = values[5].Trim()
+                    ID = int.Parse(values[0].Replace("\'", "").Trim()),
+                    Day = int.Parse(values[2].Replace("\'", "").Trim()),
+                    Seq = int.Parse(values[3].Replace("\'", "").Trim()),
+                    Speaker = ParseFlags<SpeakerType>(values[4].Trim()),
+                    Type = ParseFlags<DialogueType>(values[5].Trim()),
+                    Branch = values[6].Trim(),
+                    NextKey = values[7].Trim(),
+                    Content = values[8].Trim()
                 };
-
+                
+                VLog.LogStruct($"Dialogue Data of Key :{key}", dialogueData);
                 currentSheetData.TryAdd(key, dialogueData);
             }
 
@@ -149,25 +141,26 @@ namespace LSW._02._Code.System___Manager.DataManager
             return false;
         }
 
-        // private T ParseFlags<T>(string rawData) where T : struct, Enum
-        // {
-        //     string cleanData = rawData.Replace("\"", "").Trim();
-        //     if (string.IsNullOrEmpty(cleanData) || cleanData == "-") return default;
-        //
-        //     T result = default;
-        //     string[] splitData = cleanData.Contains(",") ? cleanData.Split(',') : cleanData.Split('/');
-        //
-        //     foreach (var s in splitData)
-        //     {
-        //         if (Enum.TryParse(s.Trim(), out T val))
-        //         {
-        //             int intVal = Convert.ToInt32(val);
-        //             int intResult = Convert.ToInt32(result);
-        //             result = (T)(object)(intResult | intVal);
-        //         }
-        //     }
-        //     return result;
-        // }
+        // string -> enum 변환용
+        private T ParseFlags<T>(string rawData) where T : struct, Enum
+        {
+            string cleanData = rawData.Replace("\"", "").Trim();
+            if (string.IsNullOrEmpty(cleanData) || cleanData == "-") return default;
+        
+            T result = default;
+            string[] splitData = cleanData.Contains(",") ? cleanData.Split(',') : cleanData.Split('/');
+        
+            foreach (var s in splitData)
+            {
+                if (Enum.TryParse(s.Trim(), out T val))
+                {
+                    int intVal = Convert.ToInt32(val);
+                    int intResult = Convert.ToInt32(result);
+                    result = (T)(object)(intResult | intVal);
+                }
+            }
+            return result;
+        }
 
         public void Reset() { }
     }
@@ -181,10 +174,30 @@ namespace LSW._02._Code.System___Manager.DataManager
 
     public struct DialogueData
     {
-        public string expression;
-        public string condition;
-        public string dialogue;
-        public string actionEvent;
-        public string nextKey;
+        public int ID;
+        public int Day;
+        public int Seq;
+        public SpeakerType Speaker;
+        public DialogueType Type;
+        public string Branch;
+        public string NextKey;
+        public string Content;
+    }
+
+    [Serializable]
+    public enum SpeakerType
+    {
+        None = -1,
+        Npc = 0,
+        Player = 1
+    }
+
+    [Serializable]
+    public enum DialogueType
+    {
+        None = -1,
+        Normal = 0,
+        Choice = 1,
+        Reaction = 2
     }
 }

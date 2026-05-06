@@ -39,9 +39,6 @@ namespace LSW._02._Code.Environment.InteractableObject
                 return;
             
             Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, blueprint.posTolerance * 2f, pieceLayer);
-            if(colliders.Length <= 1) {
-                Debug.Log($"{gameObject.name}: 주변에 아무도 없다고 생각함. 감지된 수: {colliders.Length}");
-            }
             
             bool foundMatch = false;
             foreach (var hit in colliders)
