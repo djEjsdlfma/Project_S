@@ -1,92 +1,131 @@
+
 using System.Collections;
-using Unity.VisualScripting;
+using System.Linq;
+using LSW._02._Code.Core;
+using LSW._02._Code.Core.Cores;
+using LSW._02._Code.UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class BubbleManager : MonoBehaviour
+public class BubbleManager : MonoBehaviour, ITabletUI
 {
-    //처음
+    //처??
     [SerializeField] private BubbleText NPCFirstText;
     [SerializeField] private BubbleText PlayerFirstText;
 
-    //이어감
+    //???
     [SerializeField] private BubbleText NPCText;
     [SerializeField] private BubbleText PlayerText;
     
     [SerializeField] private ChoiceBubble PlayerChoice;
 
-    //텍스트 치는 중
+    //???? ??? ??
     [SerializeField] private GameObject NPCChatting;
 
-    [SerializeField] private ScriptSO nowScript;
-
-    [SerializeField] private Transform _contaner;
+    [SerializeField] private RectTransform _contaner;
     [SerializeField] private ScrollRect scrollRect;
 
-    private int scriptNum;
+    public string currentKey = "DAY1_NPC_NORM_001_1";
+    public string sheetName = "Sheet1";
+    
+    private WaitForSecondsRealtime _interactDelayCoroutine;
+    
+    private DialogueDataCore _dialogueDataCore;
     private bool wasChatNpc;
     private GameObject nowBubble;
-    private int ReactNum1;
-    private int ReactNum2;
+    private string choiceText2;
+    private string nextKey1;
+    private string choiceText1;
+    private string nextKey2;
+    private bool wasEndChat = false;
+
+    private int _dialogueCount = 0;
+    public bool CanInteract { get; private set; }
+
+    private void Awake()
+    {
+        _interactDelayCoroutine = new WaitForSecondsRealtime(1.25f);
+        _dialogueDataCore = CoreHandler.Instance.GetCore<DialogueDataCore>();
+    }
 
     private void Update()
     {
+        if(!CanInteract)
+            return;
+        
         if(Keyboard.current.dKey.wasPressedThisFrame)
         {
             SpawnMessage();
         }
     }
 
+    private IEnumerator DelayInteract()
+    {
+        yield return _interactDelayCoroutine;
+        EnableInteract();
+    }
+
     public void SpawnMessage()
     {
-        if(nowScript.scripts[scriptNum].isNPC)
+        if(wasEndChat)
+            return;
+        
+        if (!_dialogueDataCore.GetDialogueDataByKey(sheetName, currentKey, out DialogueData data)) 
+            return;
+        
+        DisableInteract();
+        if(data.Speaker == SpeakerType.Npc)
         {
-            int eventNum = nowScript.scripts[scriptNum].ChoiceNum;
-
-            if(nowScript.scripts[scriptNum]._event == ScriptEvent.Normal)
+            if(data.Type == DialogueType.Normal || data.Type == DialogueType.Reaction)
             {
-                ShowNPCText(nowScript.scripts[scriptNum].text, wasChatNpc);
+                StartCoroutine(DelayInteract());
+                ShowNPCText(data.Content, wasChatNpc, data.Speaker.ToString());
+                currentKey = data.NextKey;
             }
-            else if (nowScript.scripts[scriptNum]._event == ScriptEvent.Choice)
+            else if (data.Type == DialogueType.Select)
             {
                 ChoiceBubble choice = Instantiate(PlayerChoice, _contaner);
-                FindChoice(eventNum, choice);
+                StartCoroutine(RefreshLayout(_contaner));
+                FindChoice(data.Seq, choice);
                 choice.AddEvent(ChoseOne, ChoseTwo);
             }
         }
         else
         {
-            ShowPlayerText(nowScript.scripts[scriptNum].text, wasChatNpc);
+            StartCoroutine(DelayInteract());
+            ShowPlayerText(data.Content, wasChatNpc);
+            if (data.NextKey == "END")
+            {
+                wasEndChat = true;
+            }
+            else if (data.NextKey != "-")
+            {
+                currentKey = data.NextKey;
+            }
+            else if(_dialogueDataCore.GetDialogueKeyByIndex(_dialogueCount, out string key))
+            {
+                currentKey = key;
+            }
         }
-
-        scriptNum++;
-        // 3. 스크롤 최하단 이동
+        
+        _dialogueCount++;
         StartCoroutine(ScrollToBottom());
     }
-
-    private void FindChoice(int eventNum, ChoiceBubble choice)
+    
+    IEnumerator RefreshLayout(RectTransform rect)
     {
-        int index = -1;
-        foreach (ChoiceScript item in nowScript.cScript)
-        {
-            index++;
-            if (item.ChoiceId != eventNum)
-                continue;
-
-            ReactNum1 = nowScript.cScript[index].ReactNum1;
-            ReactNum2 = nowScript.cScript[index].ReactNum2;
-            choice.ChoiceInit(nowScript.cScript[index].choice1, nowScript.cScript[index].choice2);
-        }
+        yield return new WaitForEndOfFrame();
+        LayoutRebuilder.ForceRebuildLayoutImmediate(rect);
     }
 
-    private void ShowNPCText(string log, bool wasNPC = false)
+    private void ShowNPCText(string log, bool wasNPC, string speakerName = "NPC")
     {
         if (wasNPC == false)
         {
             wasChatNpc = true;
             BubbleText text = Instantiate(NPCFirstText, _contaner);
-            text.InitBubble(log, 1f, nowScript.scripts[scriptNum]._name);
+            text.InitBubble(log, 1f, speakerName);
             nowBubble = text.gameObject;
         }
         else
@@ -95,6 +134,8 @@ public class BubbleManager : MonoBehaviour
             text.InitBubble(log, 1f);
             nowBubble = text.gameObject;
         }
+
+        StartCoroutine(ScrollToBottom());
         ShowBubbleDelay();
     }
 
@@ -104,13 +145,15 @@ public class BubbleManager : MonoBehaviour
         {
             wasChatNpc = false;
             BubbleText text = Instantiate(PlayerFirstText, _contaner);
-            text.InitBubble(log, 1f, nowScript.scripts[scriptNum]._name);
+            text.InitBubble(log, 1f, "Player");
         }
         else
         {
             BubbleText text = Instantiate(PlayerText, _contaner);
             text.InitBubble(log, 1f);
         }
+
+        StartCoroutine(ScrollToBottom());
     }
 
     private IEnumerator ScrollToBottom()
@@ -122,46 +165,71 @@ public class BubbleManager : MonoBehaviour
     public void ShowBubbleDelay()
     {
         nowBubble.SetActive(false);
-        Instantiate(NPCChatting, _contaner);
-        StartCoroutine(DelayChat());
+        GameObject loading = Instantiate(NPCChatting, _contaner);
+        StartCoroutine(DelayChat(loading));
     }
 
-    private IEnumerator DelayChat()
+    private IEnumerator DelayChat(GameObject loadingObject)
     {
         yield return new WaitForSeconds(1f);
-
+        if(loadingObject != null) 
+            Destroy(loadingObject);
         nowBubble.SetActive(true);
+        StartCoroutine(ScrollToBottom());
     }
 
-    private IEnumerator PlayerDelay(bool isOne)
+    private void FindChoice(int seqNum, ChoiceBubble choice)
     {
-        yield return new WaitForSeconds(0.5f);
+        _dialogueDataCore.GetAllDialogueData(sheetName, out var allData);
+        var choices = allData.Values
+            .Where(x => x.Seq == seqNum && x.Type == DialogueType.Select)
+            .OrderBy(x => x.ID)
+            .ToList();
 
-        if(isOne)
+        if (choices.Count >= 2)
         {
-            ShowNPCText(nowScript.reactScript[ReactNum1].text);
-        }
-        else
-        {
-            ShowNPCText(nowScript.reactScript[ReactNum2].text);
+            choiceText1 = choices[0].Content;
+            choiceText2 = choices[1].Content;
+        
+            nextKey1 = choices[0].NextKey;
+            nextKey2 = choices[1].NextKey;
+            choice.ChoiceInit(choices[0].Content, choices[1].Content);
         }
     }
 
     private void ChoseOne(GameObject target)
     {
-        ShowPlayerText(nowScript.
-            cScript[nowScript.scripts[scriptNum - 1].ChoiceNum].choice1);
+        ShowPlayerText(choiceText1, wasChatNpc);
 
-        StartCoroutine(PlayerDelay(true));
+        currentKey = nextKey1;
+
         Destroy(target);
+        StartCoroutine(NextStepAfterChoice());
     }
 
     private void ChoseTwo(GameObject target)
     {
-        ShowPlayerText(nowScript.
-            cScript[nowScript.scripts[scriptNum - 1].ChoiceNum].choice2);
+        ShowPlayerText(choiceText2, wasChatNpc);
 
-        StartCoroutine(PlayerDelay(false));
+        currentKey = nextKey2;
+
         Destroy(target);
+        StartCoroutine(NextStepAfterChoice());
+    }
+
+    private IEnumerator NextStepAfterChoice()
+    {
+        yield return new WaitForSeconds(0.5f);
+        SpawnMessage();
+    }
+
+    public void EnableInteract()
+    {
+        CanInteract = true;
+    }
+
+    public void DisableInteract()
+    {
+        CanInteract = false;
     }
 }

@@ -176,11 +176,17 @@ public class LogContainer : MonoBehaviour
     {
         for (int i = 0; i < List11to20.Length; i++)
         {
+            if(List11to20[i] == null)
+                continue;
+            
             List11to20[i].gameObject.GetComponent<Button>().onClick
                 .RemoveAllListeners();
         }
         for (int i = 0; i < List1to10.Length; i++)
         {
+            if(List1to10[i] == null)
+                continue;
+            
             List1to10[i].gameObject.GetComponent<Button>().onClick
                 .RemoveAllListeners();
         }

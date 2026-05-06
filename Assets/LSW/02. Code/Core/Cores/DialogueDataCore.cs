@@ -2,20 +2,22 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using LSW._02._Code.Core;
 using LSW._02._Code.Data;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace LSW._02._Code.System___Manager.DataManager
+namespace LSW._02._Code.Core.Cores
 {
-    public class DialogueDataManager : MonoBehaviour, ICore, IDataLoadManager
+    public class DialogueDataCore : MonoBehaviour, ICore, IDataLoadManager
     {
         public List<SheetData> sheetData;
         
         private readonly Dictionary<string, Dictionary<string, DialogueData>> _allDialogues
             = new Dictionary<string, Dictionary<string, DialogueData>>();
 
+        private List<string> _dialogueKeyList = new List<string>();
+        private List<DialogueData> _dialogueDataList = new List<DialogueData>();
+        
         private float _progress = 0f;
         public float Progress => _progress;
         
@@ -101,12 +103,15 @@ namespace LSW._02._Code.System___Manager.DataManager
                 
                 VLog.LogStruct($"Dialogue Data of Key :{key}", dialogueData);
                 currentSheetData.TryAdd(key, dialogueData);
+                
+                _dialogueKeyList.Add(key);
+                _dialogueDataList.Add(dialogueData);
             }
 
             _allDialogues.TryAdd(sheetName, currentSheetData);
         }
 
-        public bool GetDialogueData(string sheetName, string key, out DialogueData data)
+        public bool GetDialogueDataByKey(string sheetName, string key, out DialogueData data)
         {
             if (!_isInitialized)
             {
@@ -138,6 +143,44 @@ namespace LSW._02._Code.System___Manager.DataManager
             }
 
             data = null;
+            return false;
+        }
+
+        public bool GetDialogueKeyByIndex(int index, out string key)
+        {
+            if (!_isInitialized)
+            {
+                key = string.Empty;
+                return false;
+            }
+
+            if (_dialogueKeyList.Count > index)
+            {
+                bool isNull = _dialogueKeyList[index] != null;
+                key = isNull ?  string.Empty : _dialogueKeyList[index];
+                return !isNull;
+            }
+
+            key = string.Empty;
+            return false;
+        }
+        
+        public bool GetDialogueDataByIndex(int index, out DialogueData data)
+        {
+            if (!_isInitialized)
+            {
+                data = default;
+                return false;
+            }
+
+            if (_dialogueDataList.Count > index)
+            {
+                bool isNull = _dialogueDataList[index].Equals(null);
+                data = isNull ?  default : _dialogueDataList[index];
+                return !isNull;
+            }
+
+            data = default;
             return false;
         }
 
@@ -197,7 +240,7 @@ namespace LSW._02._Code.System___Manager.DataManager
     {
         None = -1,
         Normal = 0,
-        Choice = 1,
+        Select = 1,
         Reaction = 2
     }
 }

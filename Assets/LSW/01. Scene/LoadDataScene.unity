@@ -230,7 +230,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -364,7 +364,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LSW._02._Code.CSV.Importer.DialogueCSVImporter
   sheetData:
-  - sheetName: Test
+  - sheetName: Sheet1
     sheetUrl: https://docs.google.com/spreadsheets/d/e/2PACX-1vSVCmLGiKR9IbDKjMrRwxk7GhZTY4UPNeD4kgHQ1r0hdsKIBKh8X7uQ0X--k33W0sohwsgLQTPERFul/pub?gid=2135690651&single=true&output=csv
 --- !u!4 &1094113703
 Transform:
