@@ -24,7 +24,7 @@ namespace Moon._01.Script.Cameras
         [SerializeField] private List<Answer> answers;
         private List<Photo> _photos = new List<Photo>();
 
-        private List<bool> _answerIsScored;
+        private List<bool> _answerIsScored = new List<bool>();
         
         private Dictionary<Photo, bool> _photoSelection = new Dictionary<Photo, bool>();
 
@@ -40,10 +40,12 @@ namespace Moon._01.Script.Cameras
             
             if(_photos.Count < AnswerCount)
                 return;
+            
+            _answerIsScored.Clear();
 
             for (int j = 0; j < answers.Count; j++)
             {
-                _answerIsScored[j] = false;
+                _answerIsScored.Add(false);
             }
             
             _photoSelection.Clear();
@@ -108,7 +110,7 @@ namespace Moon._01.Script.Cameras
                 var answer = answers[i];
 
                 // 선택된 사진 객체 중 정답과 이름이 일치하는 것이 하나라도 있는지 검사
-                bool isAnswerFound = selectedObjects.Any(obj => obj.Name == answer.names);
+                bool isAnswerFound = selectedObjects.Any(obj => obj == answer.names);
 
                 if (isAnswerFound)
                 {

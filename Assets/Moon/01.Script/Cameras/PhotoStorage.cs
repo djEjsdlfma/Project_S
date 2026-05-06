@@ -5,12 +5,13 @@ using UnityEngine;
 
 namespace Moon._01.Script.Cameras
 {
+    [Serializable]
     public struct Photo : IEquatable<Photo>
     {
         public Texture2D Image;
-        public List<CamObject> CamObjs;
+        public List<string> CamObjs;
 
-        public Photo(Texture2D image, List<CamObject> camObjs)
+        public Photo(Texture2D image, List<string> camObjs)
         {
             Image = image;
             CamObjs = camObjs;

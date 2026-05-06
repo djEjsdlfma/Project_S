@@ -82,12 +82,12 @@ public class CameraScript : MonoBehaviour
     {
         if (!Keyboard.current.fKey.wasPressedThisFrame || !camerasFinder.GetTarget<PhotoStorage>().CanPhoto())
             return;
-
         StopCopy();
+
         _img.color = new Color(1, 1, 1, 1);
-        CheckObj();
         _img.DOFade(0f, 0.2f);
         DevLog.Log("찰칵");
+        CheckObj();
     }
 
     private void CheckObj()
@@ -157,7 +157,7 @@ public class CameraScript : MonoBehaviour
             {
                 if (camObj.Value.copyObj)
                 {
-                    Destroy(camObj.Value.copyObj);
+                    DestroyImmediate(camObj.Value.copyObj);
                 }
             }
         }
