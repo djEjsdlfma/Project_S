@@ -1,9 +1,8 @@
+
 using UnityEngine;
 
 public class TextManager : MonoBehaviour
 {
-    [SerializeField] private ScriptSO _container1;
-
     private float TextSpeed;
     private float waitingTime;
 

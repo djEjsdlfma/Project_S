@@ -1,21 +1,24 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
-using LSW._02._Code.Core;
 using LSW._02._Code.Data;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace LSW._02._Code.System___Manager.DataManager
+namespace LSW._02._Code.Core.Cores
 {
-    public class DialogueDataManager : MonoBehaviour, ICore, IDataLoadManager
+    public class DialogueDataCore : MonoBehaviour, ICore, IDataLoadManager
     {
         public List<SheetData> sheetData;
         
         private readonly Dictionary<string, Dictionary<string, DialogueData>> _allDialogues
             = new Dictionary<string, Dictionary<string, DialogueData>>();
 
+        private List<string> _dialogueKeyList = new List<string>();
+        private List<DialogueData> _dialogueDataList = new List<DialogueData>();
+        
         private float _progress = 0f;
         public float Progress => _progress;
         
@@ -73,9 +76,9 @@ namespace LSW._02._Code.System___Manager.DataManager
         {
             string[] lines = data.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries);
             Regex csvParser = new Regex(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
-
+            
             Dictionary<string, DialogueData> currentSheetData = new Dictionary<string, DialogueData>();
-
+            
             for (int i = 2; i < lines.Length; i++)
             {
                 string[] values = csvParser.Split(lines[i]);
@@ -101,16 +104,20 @@ namespace LSW._02._Code.System___Manager.DataManager
                 
                 VLog.LogStruct($"Dialogue Data of Key :{key}", dialogueData);
                 currentSheetData.TryAdd(key, dialogueData);
+                
+                _dialogueKeyList.Add(key);
+                _dialogueDataList.Add(dialogueData);
             }
 
             _allDialogues.TryAdd(sheetName, currentSheetData);
         }
 
-        public bool GetDialogueData(string sheetName, string key, out DialogueData data)
+        public bool GetDialogueDataByKey(string sheetName, string key, out DialogueData data)
         {
+            data = default;
+            
             if (!_isInitialized)
             {
-                data = default;
                 return false;
             }
 
@@ -118,16 +125,33 @@ namespace LSW._02._Code.System___Manager.DataManager
             {
                 return sheet.TryGetValue(key, out data);
             }
+            
+            return false;
+        }
+        
+        public bool GetKeyByDialogueData(string sheetName, DialogueData data, out string key)
+        {
+            key = string.Empty;
+            if (!_isInitialized)
+            {
+                return false;
+            }
 
-            data = default;
+            if (_allDialogues.TryGetValue(sheetName, out var sheet))
+            {
+                string foundKey = sheet.FirstOrDefault(d => d.Value.Equals(data)).Key;
+                key = foundKey;
+                return foundKey != string.Empty;
+            }
+            
             return false;
         }
 
         public bool GetAllDialogueData(string sheetName, out Dictionary<string, DialogueData> data)
         {
+            data = null;
             if (!_isInitialized)
             {
-                data = null;
                 return false;
             }
 
@@ -136,9 +160,57 @@ namespace LSW._02._Code.System___Manager.DataManager
                 data = sheet;
                 return true;
             }
-
-            data = null;
+            
             return false;
+        }
+
+        public bool GetDialogueKeyByIndex(int index, out string key)
+        {
+            key = string.Empty;
+            
+            if (!_isInitialized)
+            {
+                return false;
+            }
+
+            if (_dialogueKeyList.Count > index)
+            {
+                bool isNull = _dialogueKeyList[index] != null;
+                key = isNull ?  string.Empty : _dialogueKeyList[index];
+                return !isNull;
+            }
+            
+            return false;
+        }
+
+        public bool GetFirstDialogueByDay(string sheetName, int day, out string key, out DialogueData data)
+        {
+            key = string.Empty;
+            data = default;
+            
+            if (!_isInitialized || !_allDialogues.ContainsKey(sheetName))
+            {
+                return false;
+            }
+            
+            var firstDialogueEntry = _allDialogues[sheetName]
+                .Where(pair => pair.Value.Day == day)
+                .OrderBy(pair => pair.Value.Seq)
+                .FirstOrDefault();
+            
+            if (firstDialogueEntry.Value.Equals(default))
+            {
+                return false;
+            }
+            
+            if (!GetKeyByDialogueData(sheetName, firstDialogueEntry.Value, out string foundKey))
+            {
+                return false;
+            }
+
+            key = foundKey;
+            data = firstDialogueEntry.Value;
+            return true;
         }
 
         // string -> enum 변환용
@@ -172,7 +244,7 @@ namespace LSW._02._Code.System___Manager.DataManager
         public string sheetUrl;
     }
 
-    public struct DialogueData
+    public struct DialogueData : IEquatable<DialogueData>
     {
         public int ID;
         public int Day;
@@ -182,6 +254,24 @@ namespace LSW._02._Code.System___Manager.DataManager
         public string Branch;
         public string NextKey;
         public string Content;
+
+        public bool Equals(DialogueData other)
+        {
+            return ID == other.ID && Day == other.Day && 
+                   Seq == other.Seq && Speaker == other.Speaker && 
+                   Type == other.Type && Branch == other.Branch && 
+                   NextKey == other.NextKey && Content == other.Content;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is DialogueData other && Equals(other);
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(ID, Day, Seq, (int)Speaker, (int)Type, Branch, NextKey, Content);
+        }
     }
 
     [Serializable]
@@ -197,7 +287,7 @@ namespace LSW._02._Code.System___Manager.DataManager
     {
         None = -1,
         Normal = 0,
-        Choice = 1,
+        Select = 1,
         Reaction = 2
     }
 }

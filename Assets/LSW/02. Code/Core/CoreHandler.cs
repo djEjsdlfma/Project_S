@@ -1,10 +1,12 @@
 using System.Collections.Generic;
 using LSW._02._Code.Data;
 using LSW._02._Code.System___Manager;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace LSW._02._Code.Core
 {
+    [DefaultExecutionOrder(-102)]
     public class CoreHandler : MonoSingleton<CoreHandler>
     {
         private readonly List<ICore> _coreList = new List<ICore>();
@@ -41,6 +43,11 @@ namespace LSW._02._Code.Core
             }
         }
 
+        public T GetCore<T>() where T : class, ICore
+        {
+            return _coreList.Find(x => x is T) as T;
+        }
+        
         public List<IDataLoadManager> GetDataLoadManagers()
         {
             List<IDataLoadManager> dataLoadManagers = new List<IDataLoadManager>();
@@ -65,8 +72,7 @@ namespace LSW._02._Code.Core
     public enum SceneType
     {
         None = -1,
-        StartScene = 0,
-        MainTabletScene = 1,
-        PlatformerScene = 2,
+        DataLoadScene = 0,
+        MainTabletScene = 1
     }
 }

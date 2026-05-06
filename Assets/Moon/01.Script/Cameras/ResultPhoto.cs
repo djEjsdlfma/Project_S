@@ -30,23 +30,29 @@ namespace Moon._01.Script.Cameras
             _currentGuestManager = guestScriptFinder.GetTarget<CurrentGuestManager>();
             _likeAbility = guestScriptFinder.GetTarget<LikeAbility>();
             
-            if(String.IsNullOrEmpty(_currentGuestManager.CurrentGuest))
-                return;
+            _currentGuestManager.SetCurrentGuest(_currentGuestManager.C1);
+            
+            /*if(String.IsNullOrEmpty(_currentGuestManager.CurrentGuest))
+                return;*/
             
             if (score >= goodScore)
             {
+                Debug.Log("Good");
                 Good();
             }
             else if (score >= normalScore)
             {
+                Debug.Log("Normal");
                 Normal();
             }
             else if (score >= badScore)
             {
+                Debug.Log("Bad");
                 Bad();
             }
             else
             {
+                Debug.Log("What");
                 What();
             }
         }

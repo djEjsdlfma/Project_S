@@ -27,6 +27,7 @@ namespace LSW._02._Code.Data
         
             if (_managers == null || _managers.Count == 0)
             {
+                loadingSlider.value = 1f;
                 CompleteLoading();
                 return;
             }
@@ -53,6 +54,7 @@ namespace LSW._02._Code.Data
             }
             
             float targetProgress = totalProgress / _managers.Count;
+            
             if (!Mathf.Approximately(_lastTargetProgress, targetProgress))
             {
                 _lastTargetProgress = targetProgress;
@@ -67,10 +69,18 @@ namespace LSW._02._Code.Data
                 }
             }
 
-            if (targetProgress >= 1f && _isLoadStarted)
+            if (targetProgress >= 0.999f && _isLoadStarted)
             {
                 _isLoadStarted = false;
-                CompleteLoading();
+
+                if (_sliderTween != null && _sliderTween.IsActive())
+                {
+                    _sliderTween.OnComplete(() => DelayedSceneLoad());
+                }
+                else
+                {
+                    DelayedSceneLoad();
+                }
             }
         }
 
@@ -82,8 +92,12 @@ namespace LSW._02._Code.Data
         private void CompleteLoading()
         {
             _sliderTween?.Kill();
+            DelayedSceneLoad();
+        }
 
-            DOVirtual.DelayedCall(0.2f, () =>
+        private void DelayedSceneLoad()
+        {
+            DOVirtual.DelayedCall(0.1f, () =>
             {
                 SceneManager.LoadScene((int)loadSceneType); 
             }).SetUpdate(true);
