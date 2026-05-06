@@ -72,6 +72,7 @@ namespace LSW._02._Code.Core
     public enum SceneType
     {
         None = -1,
-        MainTabletScene = 0
+        DataLoadScene = 0,
+        MainTabletScene = 1
     }
 }
