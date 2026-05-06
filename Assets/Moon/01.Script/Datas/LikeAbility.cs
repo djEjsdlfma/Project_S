@@ -15,11 +15,11 @@ namespace Moon._01.Script.Datas
     
     public class LikeAbility : MonoBehaviour
     {
-        [field:SerializeField, SerializedDictionary("Ending", "LikeAbility")] private SerializedDictionary<Endings, int> endingLikeAbilityDict;
+        [field:SerializeField, SerializedDictionary("Ending", "LikeAbility")] private SerializedDictionary<Endings, float> endingLikeAbilityDict;
         
         [SerializeField] private ScriptListFinderSO guestScriptFinder;
         
-        private Dictionary<string, int> _likeAbilityDict = new Dictionary<string, int>();
+        private Dictionary<string, float> _likeAbilityDict = new Dictionary<string, float>();
         
         private void Awake()
         {
@@ -27,7 +27,7 @@ namespace Moon._01.Script.Datas
             string C2 = guestScriptFinder.GetTarget<CurrentGuestManager>().C2;
             string C3 = guestScriptFinder.GetTarget<CurrentGuestManager>().C3;
             
-            if(DataManager.Instance.TryGetValue(C1, out int value))
+            if(DataManager.Instance.TryGetValue(C1, out float value))
             {
                 _likeAbilityDict.Add(C1, value);
             }
@@ -58,7 +58,7 @@ namespace Moon._01.Script.Datas
         private string MostLikeCharacter()
         {
             string character = string.Empty;
-            int maxLikeAbility = int.MinValue;
+            float maxLikeAbility = float.MinValue;
 
             foreach (var kvp in _likeAbilityDict)
             {
@@ -77,15 +77,15 @@ namespace Moon._01.Script.Datas
             string character = MostLikeCharacter();
             Endings ending = Endings.A;
 
-            if (endingLikeAbilityDict.TryGetValue(Endings.A, out int likeAbilityA) && likeAbilityA <= _likeAbilityDict[character])
+            if (endingLikeAbilityDict.TryGetValue(Endings.A, out float likeAbilityA) && likeAbilityA <= _likeAbilityDict[character])
             {
                 ending = Endings.A;
             }
-            else if (endingLikeAbilityDict.TryGetValue(Endings.B, out int likeAbilityB) && likeAbilityB <= _likeAbilityDict[character])
+            else if (endingLikeAbilityDict.TryGetValue(Endings.B, out float likeAbilityB) && likeAbilityB <= _likeAbilityDict[character])
             {
                 ending = Endings.B;
             }
-            else if (endingLikeAbilityDict.TryGetValue(Endings.C, out int likeAbilityC) && likeAbilityC <= _likeAbilityDict[character])
+            else if (endingLikeAbilityDict.TryGetValue(Endings.C, out float likeAbilityC) && likeAbilityC <= _likeAbilityDict[character])
             {
                 ending = Endings.C;
             }
