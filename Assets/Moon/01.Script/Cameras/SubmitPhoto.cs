@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using MoonLib.ScriptFinder_Pro.RunTime.Finder.ListFinder;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 namespace Moon._01.Script.Cameras
@@ -66,6 +67,14 @@ namespace Moon._01.Script.Cameras
 
         }
 
+        private void Update()
+        {
+            if (Keyboard.current.qKey.wasPressedThisFrame && !submitPanel.activeSelf)
+            {
+                StartSubmit();
+            }
+        }
+
         public void Cancel()
         {
             _selectCount = 0;
@@ -74,6 +83,7 @@ namespace Moon._01.Script.Cameras
             {
                 polaroid.Init();
             }
+            submitPanel.SetActive(false);
         }
         
         public void EndSubmit()
