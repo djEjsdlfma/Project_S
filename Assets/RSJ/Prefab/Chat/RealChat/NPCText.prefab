@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2352610081881958964}
   - component: {fileID: 1984589705113312405}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -346,6 +346,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5145691940378506335}
+  - component: {fileID: 6284432282524111469}
   m_Layer: 5
   m_Name: NPCText
   m_TagString: Untagged
@@ -376,6 +377,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &6284432282524111469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8828294354088570858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eafaa9d1c56fc754b81cf63884da3999, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BubbleText
+  _text: {fileID: 2049643001407484084}
+  _name: {fileID: 1984589705113312405}
 --- !u!1001 &5352537847984764554
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -497,6 +512,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9bc90f267caa6ea439d0c0059868c5d7, type: 3}
+--- !u!114 &2049643001407484084 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6213212266128803390, guid: 9bc90f267caa6ea439d0c0059868c5d7, type: 3}
+  m_PrefabInstance: {fileID: 5352537847984764554}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!224 &6834431975802066601 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1481912407758987299, guid: 9bc90f267caa6ea439d0c0059868c5d7, type: 3}

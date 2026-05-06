@@ -81,6 +81,7 @@ public class LogContainer : MonoBehaviour
 
             BtnSave.interactable = true;
             BtnRoad.interactable = false;
+            List1to10[0].gameObject.GetComponent<Button>().interactable = true;
         }
         else
         {
@@ -88,6 +89,7 @@ public class LogContainer : MonoBehaviour
 
             BtnSave.interactable = false;
             BtnRoad.interactable = true;
+            List1to10[0].gameObject.GetComponent<Button>().interactable = false;
         }
     }
 
@@ -99,19 +101,32 @@ public class LogContainer : MonoBehaviour
             List11to20[i].gameObject.GetComponent<Button>().onClick
                 .AddListener(() =>
                 {
-                if (_data.SlotDataExist(index))
-                    _data.LoadSlot(index);
+                if (_data.SlotDataExist(index + 11))
+                    _data.LoadSlot(index + 11);  
                 });
         }
         for (int i = 0; i < List1to10.Length; i++)
         {
             int index = i; // 클로저 문제 방지
-            List1to10[i].gameObject.GetComponent<Button>().onClick
-                .AddListener(() =>
-                {
-                    if (_data.SlotDataExist(index))
-                        _data.LoadSlot(index);
-                });
+            if(i == 0)
+            {
+                List1to10[i].gameObject.GetComponent<Button>().onClick
+                    .AddListener(() =>
+                    {
+                            if (_data.SlotDataExist(index))
+                                _data.LoadSlot(index);
+                    });
+            }
+            else
+            {
+                List1to10[0].gameObject.GetComponent<Button>().onClick
+                    .AddListener(() =>
+                    {
+                            if (_data.AutoDataExist())
+                                _data.LoadAutoSave();
+                    });
+            }
+            
         }
     }
 
@@ -123,29 +138,37 @@ public class LogContainer : MonoBehaviour
             List11to20[i].gameObject.GetComponent<Button>().onClick
                 .AddListener(() =>
                 {
-                    _data.SlotSave(index);
+                    _data.SlotSave(index + 11);
 
                     List11to20[index].gameObject.GetComponent<LogUI>()
-                        .CheckData(_data.SlotDataExist(index));
+                        .CheckData(_data.SlotDataExist(index + 11));
                 });
 
             List11to20[index].gameObject.GetComponent<LogUI>()
-                .CheckData(_data.SlotDataExist(index));
+                .CheckData(_data.SlotDataExist(index + 11));
         }
         for (int i = 0; i < List1to10.Length; i++)
         {
             int index = i; // 클로저 문제 방지
-            List1to10[i].gameObject.GetComponent<Button>().onClick
-                .AddListener(() =>
-                {
-                    _data.SlotSave(index);
+            if(i != 0)
+            {
+                List1to10[i].gameObject.GetComponent<Button>().onClick
+                    .AddListener(() =>
+                    {
+                        _data.SlotSave(index);
+            
+                        List1to10[index].gameObject.GetComponent<LogUI>()
+                            .CheckData(_data.SlotDataExist(index));
+                    });
 
-                    List1to10[index].gameObject.GetComponent<LogUI>()
-                        .CheckData(_data.SlotDataExist(index));
-                });
-
-            List1to10[index].gameObject.GetComponent<LogUI>()
-                .CheckData(_data.SlotDataExist(index));
+                List1to10[index].gameObject.GetComponent<LogUI>()
+                    .CheckData(_data.SlotDataExist(index));
+            }
+            else
+            {
+                List1to10[0].gameObject.GetComponent<LogUI>()
+                    .CheckData(_data.AutoDataExist());
+            }
         }
     }
 
@@ -161,6 +184,11 @@ public class LogContainer : MonoBehaviour
             List1to10[i].gameObject.GetComponent<Button>().onClick
                 .RemoveAllListeners();
         }
+    }
+
+    public void DoAutoSave()
+    {
+        _data.AutoSave();
     }
 }
 
