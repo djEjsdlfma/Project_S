@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Security.Cryptography;
+using System.Text;
+using System.Threading.Tasks;
 using MoonLib.ScriptFinder_Pro.RunTime.DevLogs;
 using UnityEngine;
 
@@ -63,7 +66,8 @@ namespace Moon._01.Script.Datas
                     if (File.Exists(filePath))
                     {
                         string jsonData = File.ReadAllText(filePath);
-                        Dictionary<string, int> data = DictionaryJsonConvert.FromJson<string, int>(jsonData);
+                        string realData = Decrypt(jsonData, RealKey.GetKey());
+                        Dictionary<string, int> data = DictionaryJsonConvert.FromJson<string, int>(realData);
                         _allData.Add(data);
                         _slotDataExist.Add(true);
                     }
@@ -130,7 +134,8 @@ namespace Moon._01.Script.Datas
             try
             {
                 string jsonData = DictionaryJsonConvert.ToJson(_currentData, true);
-                File.WriteAllTextAsync($"{_path}/save_{slot}.json", jsonData);
+                string realData = Encrypt(jsonData, RealKey.GetKey());
+                File.WriteAllTextAsync($"{_path}/save_{slot}.json", realData);
                 _allData[slot] = new Dictionary<string, int>(_currentData);
                 _slotDataExist[slot] = true;
             }
@@ -146,7 +151,8 @@ namespace Moon._01.Script.Datas
             {
                 _autoSaved = new Dictionary<string, int>(_currentData);
                 string jsonData = DictionaryJsonConvert.ToJson(_autoSaved, true);
-                File.WriteAllTextAsync($"{_path}/save_auto.json", jsonData);
+                string realData = Encrypt(jsonData, RealKey.GetKey());
+                File.WriteAllTextAsync($"{_path}/save_auto.json", realData);
                 _autoDataExist = true;
             }
             catch (Exception e)
@@ -192,6 +198,53 @@ namespace Moon._01.Script.Datas
         }
 
 #endregion
+
+#region Encryption
+
+        private string Encrypt(string text, byte[] key)
+        {
+            using (Aes aes = Aes.Create())
+            {
+                aes.Key = key;
+                
+                ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
+                byte[] textBytes = Encoding.UTF8.GetBytes(text);
+                byte[] encryptedBytes = encryptor.TransformFinalBlock(textBytes, 0, textBytes.Length);
+
+                byte[] resultBytes = new byte[aes.IV.Length + encryptedBytes.Length];
+                
+                Buffer.BlockCopy(aes.IV, 0, resultBytes, 0, aes.IV.Length);
+                Buffer.BlockCopy(encryptedBytes, 0, resultBytes, aes.IV.Length, encryptedBytes.Length);
+
+                return Convert.ToBase64String(resultBytes);
+            }
+        }
+
+        private string Decrypt(string encryptedText,  byte[] key)
+        {
+            byte[] fullCipher = Convert.FromBase64String(encryptedText);
+
+            if (fullCipher.Length < 16)
+                throw new ArgumentException("유효하지 않은 암호문입니다.");
+
+            byte[] iv = new byte[16];
+            byte[] cipherText = new byte[fullCipher.Length - 16];
+
+            Buffer.BlockCopy(fullCipher, 0, iv, 0, iv.Length);
+            Buffer.BlockCopy(fullCipher, 16, cipherText, 0, cipherText.Length);
+
+            using (Aes aes = Aes.Create())
+            {
+                aes.Key = key;
+                aes.IV = iv;
+
+                ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
+                byte[] decryptedBytes = decryptor.TransformFinalBlock(cipherText, 0, cipherText.Length);
+
+                return Encoding.UTF8.GetString(decryptedBytes);
+            }
+        }
+#endregion
     }
 
     public static class DictionaryJsonConvert
@@ -226,6 +279,29 @@ namespace Moon._01.Script.Datas
             
             return returnDictionary;
         }
+    }
+
+    public static class RealKey
+    {
+        private const string DummyKey = "b2WshK2D3d25oAE45n9sQ==";
+
+        private static readonly byte[] Key = 
+        {
+            20, 118, 52, 32, 90, 127, 11, 43, 99, 21, 106, 4, 61, 113, 120, 9
+        };
+
+        public static byte[] GetKey()
+        {
+            byte[] dummyBytes = Encoding.UTF8.GetBytes(DummyKey);
+            byte[] realKey = new byte[Key.Length];
+
+            for (int i = 0; i < Key.Length; i++)
+            {
+                realKey[i] = (byte)(Key[i] ^ dummyBytes[i % dummyBytes.Length]);
+            }
+
+            return realKey;
+        } 
     }
     
     [Serializable]

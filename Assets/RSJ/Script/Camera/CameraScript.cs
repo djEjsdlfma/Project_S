@@ -275,10 +275,12 @@ public class CameraScript : MonoBehaviour
     }
 
     /// <summary>
-    /// 잘린 스프라이트 복사본에 맞게 콜라이더를 새로 생성한다.
+    /// 잘린 스프라이트 복사본에 맞게 콜라이더를 새로 생성하고, 남은 면적 비율을 반환한다.
     /// </summary>
     private void ReplaceClippedCollider(GameObject originalItem, GameObject copiedObj, Vector2 checkMin, Vector2 checkMax)
     {
+        float preservedRatio = 0f;
+
         // 복사본에 붙은 기존 콜라이더 제거
         foreach (var col in copiedObj.GetComponents<Collider2D>())
         {
@@ -292,13 +294,22 @@ public class CameraScript : MonoBehaviour
         // 원본 콜라이더를 월드 좌표 기준 다각형으로 변환
         List<List<Vector2>> originalPaths = GetWorldPathsFromCollider(originalCol);
 
+        float originalTotalArea = 0f;
+        float clippedTotalArea = 0f;
+
         PolygonCollider2D polyCol = null;
         int pathIndex = 0;
 
         foreach (var path in originalPaths)
         {
+            // 1. 원본 다각형의 넓이 누적
+            originalTotalArea += CalculatePolygonArea(path);
+
             // 카메라 영역으로 다각형 자르기
             List<Vector2> clippedWorldPath = ClipPolygonAgainstAABB(path, checkMin, checkMax);
+
+            // 2. 잘려나간 후 남은 다각형의 넓이 누적
+            clippedTotalArea += CalculatePolygonArea(clippedWorldPath);
 
             if (clippedWorldPath.Count <= 2)
                 continue;
@@ -322,6 +333,19 @@ public class CameraScript : MonoBehaviour
         if (polyCol != null)
         {
             polyCol.enabled = false;
+        }
+
+        // 3. 최종 비율 계산 (0.0 ~ 1.0)
+        if (originalTotalArea > 0f)
+        {
+            preservedRatio = clippedTotalArea / originalTotalArea;
+        }
+        
+        CamObject camObj = copiedObj.GetComponent<CamObject>();
+        
+        if (camObj)
+        {
+            camObj.Ratio = preservedRatio;
         }
     }
 
@@ -520,6 +544,28 @@ public class CameraScript : MonoBehaviour
         }
 
         return points;
+    }
+    
+    /// <summary>
+    /// 신발끈 공식을 사용하여 다각형의 기하학적 넓이를 계산합니다.
+    /// </summary>
+    private float CalculatePolygonArea(List<Vector2> points)
+    {
+        // 점이 3개 미만이면 선이나 점이므로 넓이는 0
+        if (points.Count < 3) 
+            return 0f;
+
+        float area = 0f;
+        for (int i = 0; i < points.Count; i++)
+        {
+            // 다음 인덱스 (마지막 점의 다음은 첫 번째 점)
+            int j = (i + 1) % points.Count; 
+        
+            area += points[i].x * points[j].y;
+            area -= points[j].x * points[i].y;
+        }
+
+        return Mathf.Abs(area) * 0.5f;
     }
 
     /// <summary>
