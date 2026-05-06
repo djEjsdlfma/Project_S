@@ -16,18 +16,18 @@ namespace Moon._01.Script.Datas
 
         [field: SerializeField] public int MaxSaveSlot { get; private set; } = 3;
         
-        private Dictionary<string, int> _currentData = new Dictionary<string, int>();
+        public DynamicSaveData CurrentData { get; private set; } = new DynamicSaveData();
         
-        private Dictionary<string, int> _autoSaved = new Dictionary<string, int>();
+        private DynamicSaveData _autoSaved = new DynamicSaveData();
 
-        private List<Dictionary<string, int>> _allData = new List<Dictionary<string, int>>();
+        private List<DynamicSaveData> _allData = new List<DynamicSaveData>();
         
         private List<bool> _slotDataExist = new List<bool>();
 
         private bool _autoDataExist;
         
         private string _path;
-        
+
 #region Init
 
         private void Awake()
@@ -67,14 +67,14 @@ namespace Moon._01.Script.Datas
                     {
                         string jsonData = File.ReadAllText(filePath);
                         string realData = Decrypt(jsonData, RealKey.GetKey());
-                        Dictionary<string, int> data = DictionaryJsonConvert.FromJson<string, int>(realData);
+                        DynamicSaveData data = JsonUtility.FromJson<DynamicSaveData>(realData);
                         _allData.Add(data);
                         _slotDataExist.Add(true);
                     }
                     else
                     {
                         _slotDataExist.Add(false);
-                        _allData.Add(new Dictionary<string, int>());
+                        _allData.Add(new DynamicSaveData());
                     }
                 }
 
@@ -82,7 +82,8 @@ namespace Moon._01.Script.Datas
                 if (File.Exists(autoFilePath))
                 {
                     string jsonData = File.ReadAllText(autoFilePath);
-                    _autoSaved = DictionaryJsonConvert.FromJson<string, int>(jsonData);
+                    string realData = Decrypt(jsonData, RealKey.GetKey());
+                    _autoSaved = JsonUtility.FromJson<DynamicSaveData>(realData);
                     _autoDataExist = true;
                 }
                 else
@@ -95,7 +96,7 @@ namespace Moon._01.Script.Datas
                 DevLog.LogError($"init load failed : {e.Message}");
             }
         }
-
+        
 #endregion
 
 #region Exist
@@ -109,7 +110,7 @@ namespace Moon._01.Script.Datas
             }
             return _slotDataExist[slot];
         }
-        
+                
         public bool AutoDataExist()
         {
             return _autoDataExist;
@@ -118,12 +119,6 @@ namespace Moon._01.Script.Datas
 #endregion
 
 #region Save
-
-        public void SaveData(string key, int value)
-        {
-            _currentData[key] = value;
-        }
-                
         public void SlotSave(int slot)
         {
             if (slot < 0 || slot >= MaxSaveSlot)
@@ -133,10 +128,11 @@ namespace Moon._01.Script.Datas
             
             try
             {
-                string jsonData = DictionaryJsonConvert.ToJson(_currentData, true);
+                string jsonData = JsonUtility.ToJson(CurrentData, true);
                 string realData = Encrypt(jsonData, RealKey.GetKey());
-                File.WriteAllTextAsync($"{_path}/save_{slot}.json", realData);
-                _allData[slot] = new Dictionary<string, int>(_currentData);
+                File.WriteAllText($"{_path}/save_{slot}.json", realData);
+                        
+                _allData[slot] = JsonUtility.FromJson<DynamicSaveData>(jsonData);
                 _slotDataExist[slot] = true;
             }
             catch (Exception e)
@@ -149,10 +145,11 @@ namespace Moon._01.Script.Datas
         {
             try
             {
-                _autoSaved = new Dictionary<string, int>(_currentData);
-                string jsonData = DictionaryJsonConvert.ToJson(_autoSaved, true);
+                string jsonData = JsonUtility.ToJson(CurrentData, true);
                 string realData = Encrypt(jsonData, RealKey.GetKey());
-                File.WriteAllTextAsync($"{_path}/save_auto.json", realData);
+                File.WriteAllText($"{_path}/save_auto.json", realData);
+                        
+                _autoSaved = JsonUtility.FromJson<DynamicSaveData>(jsonData);
                 _autoDataExist = true;
             }
             catch (Exception e)
@@ -165,36 +162,35 @@ namespace Moon._01.Script.Datas
 
 #region Load
 
-        public bool TryGetValue(string key, out int value)
-        {
-            return _currentData.TryGetValue(key, out value);
-        }
-
-        public Dictionary<string, int> LoadSlot(int slot)
+        public DynamicSaveData LoadSlot(int slot)
         {
             if(slot < 0 || slot >= MaxSaveSlot)
             {
                 DevLog.LogError("invalid save slot");
                 return null;
             }
-            _currentData = new Dictionary<string, int>(_allData[slot]);
-            return new Dictionary<string, int>(_allData[slot]);
+                    
+            string clonedJson = JsonUtility.ToJson(_allData[slot]);
+            CurrentData = JsonUtility.FromJson<DynamicSaveData>(clonedJson);
+            return CurrentData;
         }
-        
-        public Dictionary<string, int> LoadAutoSave()
+                
+        public DynamicSaveData LoadAutoSave()
         {
-            _currentData = new Dictionary<string, int>(_autoSaved);
-            return new Dictionary<string, int>(_autoSaved);
+            string clonedJson = JsonUtility.ToJson(_autoSaved);
+            CurrentData = JsonUtility.FromJson<DynamicSaveData>(clonedJson);
+            return CurrentData;
         }
-        
-        public List<Dictionary<string, int>> GetAllData()
+                
+        public List<DynamicSaveData> GetAllData()
         {
-            var list = new List<Dictionary<string, int>>();
+            List<DynamicSaveData> list = new List<DynamicSaveData>();
             foreach (var data in _allData)
             {
-                list.Add(new Dictionary<string, int>(data));
+                string clonedJson = JsonUtility.ToJson(data);
+                list.Add(JsonUtility.FromJson<DynamicSaveData>(clonedJson));
             }
-            return new (list);
+            return list;
         }
 
 #endregion
@@ -206,13 +202,13 @@ namespace Moon._01.Script.Datas
             using (Aes aes = Aes.Create())
             {
                 aes.Key = key;
-                
+                        
                 ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
                 byte[] textBytes = Encoding.UTF8.GetBytes(text);
                 byte[] encryptedBytes = encryptor.TransformFinalBlock(textBytes, 0, textBytes.Length);
 
                 byte[] resultBytes = new byte[aes.IV.Length + encryptedBytes.Length];
-                
+                        
                 Buffer.BlockCopy(aes.IV, 0, resultBytes, 0, aes.IV.Length);
                 Buffer.BlockCopy(encryptedBytes, 0, resultBytes, aes.IV.Length, encryptedBytes.Length);
 
@@ -220,12 +216,12 @@ namespace Moon._01.Script.Datas
             }
         }
 
-        private string Decrypt(string encryptedText,  byte[] key)
+        private string Decrypt(string encryptedText, byte[] key)
         {
             byte[] fullCipher = Convert.FromBase64String(encryptedText);
 
             if (fullCipher.Length < 16)
-                throw new ArgumentException("유효하지 않은 암호문입니다.");
+                throw new ArgumentException("Invalid cipher text.");
 
             byte[] iv = new byte[16];
             byte[] cipherText = new byte[fullCipher.Length - 16];
@@ -244,41 +240,27 @@ namespace Moon._01.Script.Datas
                 return Encoding.UTF8.GetString(decryptedBytes);
             }
         }
+
 #endregion
-    }
 
-    public static class DictionaryJsonConvert
-    {
-        public static string ToJson<TKey, TValue>(Dictionary<TKey, TValue> jsonDicData, bool pretty = false)
-        {
-            List<DataDictionary<TKey, TValue>> dataList = new List<DataDictionary<TKey, TValue>>();
-            DataDictionary<TKey, TValue> dictionaryData;
-            foreach (TKey key in jsonDicData.Keys)
-            {
-                dictionaryData = new DataDictionary<TKey, TValue>();
-                dictionaryData.Key = key;
-                dictionaryData.Value = jsonDicData[key];
-                dataList.Add(dictionaryData);
-            }
-            JsonDataArray<TKey, TValue> arrayJson = new JsonDataArray<TKey, TValue>();
-            arrayJson.data = dataList;
+#region GetValue
 
-            return JsonUtility.ToJson(arrayJson, pretty);
-        }
-        
-        public static Dictionary<TKey, TValue> FromJson<TKey, TValue>(string jsonData)
-        {
-            JsonDataArray<TKey, TValue> dataList = JsonUtility.FromJson<JsonDataArray<TKey, TValue>>(jsonData);
-            
-            Dictionary<TKey, TValue> returnDictionary = new Dictionary<TKey, TValue>();
-            
-            foreach (var dictionaryData in dataList.data)
-            {
-                returnDictionary[dictionaryData.Key] = dictionaryData.Value;
-            }
-            
-            return returnDictionary;
-        }
+        public bool TryGetValue(string key, out int value) => CurrentData.TryGetValue(key, out value);
+        public bool TryGetValue(string key, out float value) => CurrentData.TryGetValue(key, out value);
+        public bool TryGetValue(string key, out string value) => CurrentData.TryGetValue(key, out value);
+        public bool TryGetValue(string key, out bool value) => CurrentData.TryGetValue(key, out value);
+
+#endregion
+
+#region SaveData
+
+        public void SaveData(string key, int value) => CurrentData.SaveData(key, value);
+        public void SaveData(string key, float value) => CurrentData.SaveData(key, value);
+        public void SaveData(string key, string value) => CurrentData.SaveData(key, value);
+        public void SaveData(string key, bool value) => CurrentData.SaveData(key, value);
+
+#endregion
+
     }
 
     public static class RealKey
@@ -302,18 +284,5 @@ namespace Moon._01.Script.Datas
 
             return realKey;
         } 
-    }
-    
-    [Serializable]
-    public class DataDictionary<TKey,TValue>
-    {
-        public TKey Key;
-        public TValue Value;
-    }
-
-    [Serializable]
-    public class JsonDataArray<TKey, TValue>
-    {
-        public List<DataDictionary<TKey, TValue>> data;
     }
 }
