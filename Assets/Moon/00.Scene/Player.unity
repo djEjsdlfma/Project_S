@@ -327,6 +327,50 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7243350492482158934, guid: bf093e010f5396f45a21ab338a52f02b, type: 3}
   m_PrefabInstance: {fileID: 754996178}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &700832806
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 700832808}
+  - component: {fileID: 700832807}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &700832807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 700832806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f9552f077904e2a8a78e87f52fb5298, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Moon._01.Script.Test.Derty
+--- !u!4 &700832808
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 700832806}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.58402, y: 0.76175, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &740505919
 GameObject:
   m_ObjectHideFlags: 0
@@ -2028,7 +2072,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 540204046966728110, guid: e14385f0b991d94489b8bdcf6562d93d, type: 3}
       propertyPath: answers.Array.data[1].score
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 540204046966728110, guid: e14385f0b991d94489b8bdcf6562d93d, type: 3}
       propertyPath: answers.Array.data[2].names
@@ -2036,43 +2080,39 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 540204046966728110, guid: e14385f0b991d94489b8bdcf6562d93d, type: 3}
       propertyPath: answers.Array.data[2].score
-      value: 2
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 540204046966728110, guid: e14385f0b991d94489b8bdcf6562d93d, type: 3}
+      propertyPath: answers.Array.data[1].isReal
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 540204046966728110, guid: e14385f0b991d94489b8bdcf6562d93d, type: 3}
+      propertyPath: answers.Array.data[1].isCanFakeOrReal
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 540204046966728110, guid: e14385f0b991d94489b8bdcf6562d93d, type: 3}
       propertyPath: answers.Array.data[2].isCanFakeOrReal
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1297387081884683643, guid: e14385f0b991d94489b8bdcf6562d93d, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1516245384981687841, guid: e14385f0b991d94489b8bdcf6562d93d, type: 3}
+      propertyPath: badScore
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1516245384981687841, guid: e14385f0b991d94489b8bdcf6562d93d, type: 3}
+      propertyPath: goodScore
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1516245384981687841, guid: e14385f0b991d94489b8bdcf6562d93d, type: 3}
+      propertyPath: normalScore
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2063045770598395970, guid: e14385f0b991d94489b8bdcf6562d93d, type: 3}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2353638263699026155, guid: e14385f0b991d94489b8bdcf6562d93d, type: 3}
-      propertyPath: endingLikeAbilityDict._serializedList.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2353638263699026155, guid: e14385f0b991d94489b8bdcf6562d93d, type: 3}
-      propertyPath: endingLikeAbilityDict._serializedList.Array.data[1].Key
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2353638263699026155, guid: e14385f0b991d94489b8bdcf6562d93d, type: 3}
-      propertyPath: endingLikeAbilityDict._serializedList.Array.data[2].Key
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2353638263699026155, guid: e14385f0b991d94489b8bdcf6562d93d, type: 3}
-      propertyPath: endingLikeAbilityDict._serializedList.Array.data[0].Value
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2353638263699026155, guid: e14385f0b991d94489b8bdcf6562d93d, type: 3}
-      propertyPath: endingLikeAbilityDict._serializedList.Array.data[1].Value
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2353638263699026155, guid: e14385f0b991d94489b8bdcf6562d93d, type: 3}
-      propertyPath: endingLikeAbilityDict._serializedList.Array.data[2].Value
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5275123922130820938, guid: e14385f0b991d94489b8bdcf6562d93d, type: 3}
       propertyPath: m_Name
@@ -2142,3 +2182,4 @@ SceneRoots:
   - {fileID: 2036996156}
   - {fileID: 5667505596330413819}
   - {fileID: 3315553640538785735}
+  - {fileID: 700832808}
