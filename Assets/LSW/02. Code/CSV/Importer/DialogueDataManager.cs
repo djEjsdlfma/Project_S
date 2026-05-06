@@ -8,7 +8,6 @@ using UnityEngine.Networking;
 
 namespace LSW._02._Code.CSV.Importer
 {
-    [DefaultExecutionOrder(-999)]
     public class DialogueDataManager : MonoBehaviour, ISystemManager
     {
         public List<SheetData> sheetData;
@@ -17,12 +16,20 @@ namespace LSW._02._Code.CSV.Importer
             = new Dictionary<string, Dictionary<string, DialogueData>>();
 
         private bool _isInitialized = false;
-        
-        public void Initialize(SystemManager systemManager) { }
-        
-        void Awake()
+
+        public void Initialize(SystemManager systemManager)
         {
+            // DontDestroyOnLoad(gameObject);
             StartCoroutine(InitializeAllSheets());
+        }
+
+        public void LoadScene(SceneType sceneType)
+        {
+            // Transform systemManagerTrm = FindAnyObjectByType<SystemManager>().transform;
+            // if (systemManagerTrm != null)
+            // {
+            //     transform.SetParent(systemManagerTrm);
+            // }
         }
 
         private IEnumerator InitializeAllSheets()
@@ -154,7 +161,6 @@ namespace LSW._02._Code.CSV.Importer
         public string sheetUrl;
     }
     
-    [Serializable]
     public struct DialogueData
     {
         public string expression;

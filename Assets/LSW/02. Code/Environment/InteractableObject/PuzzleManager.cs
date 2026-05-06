@@ -31,7 +31,8 @@ namespace LSW._02._Code.Environment.InteractableObject
         [SerializeField] private List<PieceBlueprint> blueprints = new List<PieceBlueprint>();
         
         public void Initialize(SystemManager systemManager) { }
-        
+        public void LoadScene(SceneType sceneType) { }
+
         public bool GetBlueprint(string id, out PieceBlueprint foundBlueprint)
         {
             int index = blueprints.FindIndex(b => b.pieceData.Any(data => data.pieceId == id));

@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace LSW._02._Code.System___Manager
 {
-    [DefaultExecutionOrder(-100)]
+    [DefaultExecutionOrder(-101)]
     public class SystemManager : MonoSingleton<SystemManager>
     {
         private readonly List<ISystemManager> _managerList = new List<ISystemManager>();
@@ -12,7 +13,7 @@ namespace LSW._02._Code.System___Manager
         {
             base.Awake();
             Initialize();
-            // SceneManager.sceneUnloaded += LoadScene;
+            SceneManager.sceneUnloaded += LoadScene;
         }
 
         private void Initialize()
@@ -26,7 +27,7 @@ namespace LSW._02._Code.System___Manager
                 _managerList.Add(managers[i]);
                 managers[i].Initialize(this);
             }
-            // LoadScene(SceneManager.GetActiveScene());
+            LoadScene(SceneManager.GetActiveScene());
         }
         
         public T GetSystemManager<T>() where T : class, ISystemManager
@@ -34,15 +35,15 @@ namespace LSW._02._Code.System___Manager
             return _managerList.Find(x => x is T) as T;
         }
         
-        // private void LoadScene(Scene scene)
-        // {
-        //     SceneType sceneType = (SceneType)scene.buildIndex;
-        //         
-        //     for (int i = 0; i < _managerList.Count; i++)
-        //     {
-        //         _managerList[i].LoadScene(sceneType);
-        //     }
-        // }
+        private void LoadScene(Scene scene)
+        {
+            SceneType sceneType = (SceneType)scene.buildIndex;
+                
+            for (int i = 0; i < _managerList.Count; i++)
+            {
+                _managerList[i].LoadScene(sceneType);
+            }
+        }
 
         protected override void OnDestroy()
         {
@@ -51,7 +52,7 @@ namespace LSW._02._Code.System___Manager
             {
                 _managerList[i].Reset();
             }
-            // SceneManager.sceneUnloaded -= LoadScene;
+            SceneManager.sceneUnloaded -= LoadScene;
         }
     }
     
@@ -59,6 +60,7 @@ namespace LSW._02._Code.System___Manager
     {
         None = -1,
         StartScene = 0,
-        MainGame = 1
+        MainTabletScene = 1,
+        PlatformerScene = 2,
     }
 }
