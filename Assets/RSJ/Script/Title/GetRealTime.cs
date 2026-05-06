@@ -18,7 +18,7 @@ public class GetRealTime : MonoBehaviour
         while(true)
         {
             _time.text = DateTime.Now.ToString("HH:mm");
-            _day.text = DateTime.Now.ToString("M월 dd일 dddd");
+            _day.text = DateTime.Now.ToString("M월 d일 dddd");
 
             yield return new WaitForSecondsRealtime(1f);
         }
