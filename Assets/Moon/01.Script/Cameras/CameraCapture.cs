@@ -35,14 +35,14 @@ namespace Moon._01.Script.Cameras
             // 6. 원래 렌더 텍스처로 복구
             RenderTexture.active = currentRT;
 
-            List<CamObject> objs = AnalyzePhoto();
+            List<string> objs = AnalyzePhoto();
 
             Photo photo = new Photo(capture, objs);
 
             camerasFinder.GetTarget<PhotoStorage>().AddPhoto(photo);
         }
 
-        private List<CamObject> AnalyzePhoto()
+        private List<string> AnalyzePhoto()
         {
             Vector2 cameraPos = photoCamera.transform.position;
             float height = photoCamera.orthographicSize * 2f;
@@ -52,7 +52,7 @@ namespace Moon._01.Script.Cameras
             Bounds cameraBounds = new Bounds(cameraPos, boxSize);
             Collider2D[] hits = Physics2D.OverlapBoxAll(cameraPos, boxSize, 0f, photoObjectLayer);
 
-            List<CamObject> camObjs = new List<CamObject>();
+            List<string> camObjs = new List<string>();
 
             foreach (Collider2D hit in hits)
             {
@@ -61,7 +61,7 @@ namespace Moon._01.Script.Cameras
                 {
                     if (IsMoreThanHalfInside(hit, cameraBounds, camObj))
                     {
-                        camObjs.Add(camObj);
+                        camObjs.Add(camObj.Name);
                     }
                 }
             }
