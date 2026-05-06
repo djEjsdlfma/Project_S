@@ -2209,15 +2209,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 244e7cd8b26541818a6b6a954357aa7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LSW._02._Code.CSV.Importer.DialogueCSVImporter
-  sheetData:
-  - sheetName: Tutorial
-    sheetUrl: https://docs.google.com/spreadsheets/d/e/2PACX-1vSVCmLGiKR9IbDKjMrRwxk7GhZTY4UPNeD4kgHQ1r0hdsKIBKh8X7uQ0X--k33W0sohwsgLQTPERFul/pub?gid=0&single=true&output=csv
-  - sheetName: Anna
-    sheetUrl: https://docs.google.com/spreadsheets/d/e/2PACX-1vSVCmLGiKR9IbDKjMrRwxk7GhZTY4UPNeD4kgHQ1r0hdsKIBKh8X7uQ0X--k33W0sohwsgLQTPERFul/pub?gid=1864764450&single=true&output=csv
-  - sheetName: Desiree
-    sheetUrl: https://docs.google.com/spreadsheets/d/e/2PACX-1vSVCmLGiKR9IbDKjMrRwxk7GhZTY4UPNeD4kgHQ1r0hdsKIBKh8X7uQ0X--k33W0sohwsgLQTPERFul/pub?gid=383238783&single=true&output=csv
-  - sheetName: Leah
-    sheetUrl: https://docs.google.com/spreadsheets/d/e/2PACX-1vSVCmLGiKR9IbDKjMrRwxk7GhZTY4UPNeD4kgHQ1r0hdsKIBKh8X7uQ0X--k33W0sohwsgLQTPERFul/pub?gid=1615978382&single=true&output=csv
+  csvUrls:
+  - https://docs.google.com/spreadsheets/d/e/2PACX-1vSVCmLGiKR9IbDKjMrRwxk7GhZTY4UPNeD4kgHQ1r0hdsKIBKh8X7uQ0X--k33W0sohwsgLQTPERFul/pubhtml
 --- !u!1001 &1941732347
 PrefabInstance:
   m_ObjectHideFlags: 0
