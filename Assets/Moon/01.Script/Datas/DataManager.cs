@@ -201,11 +201,11 @@ namespace Moon._01.Script.Datas
 
 #region Encryption
 
-        private string Encrypt(string text, string key)
+        private string Encrypt(string text, byte[] key)
         {
             using (Aes aes = Aes.Create())
             {
-                aes.Key = Encoding.UTF8.GetBytes(key);
+                aes.Key = key;
                 
                 ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
                 byte[] textBytes = Encoding.UTF8.GetBytes(text);
@@ -220,7 +220,7 @@ namespace Moon._01.Script.Datas
             }
         }
 
-        private string Decrypt(string encryptedText, string key)
+        private string Decrypt(string encryptedText,  byte[] key)
         {
             byte[] fullCipher = Convert.FromBase64String(encryptedText);
 
@@ -235,7 +235,7 @@ namespace Moon._01.Script.Datas
 
             using (Aes aes = Aes.Create())
             {
-                aes.Key = Encoding.UTF8.GetBytes(key);
+                aes.Key = key;
                 aes.IV = iv;
 
                 ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
@@ -283,15 +283,24 @@ namespace Moon._01.Script.Datas
 
     public static class RealKey
     {
-        private static readonly string d = "w7Z8R0==";
-        private static readonly string Key = "b2WshK2D3d25oAE45n9sQ==";
-        private static readonly string q = "9oPqX1";
-        private static readonly string a = "vDcS24";
+        private const string DummyKey = "b2WshK2D3d25oAE45n9sQ==";
 
-        public static string GetKey()
+        private static readonly byte[] Key = 
         {
-            string fullKey = a + q + d;
-            return fullKey;
+            20, 118, 52, 32, 90, 127, 11, 43, 99, 21, 106, 4, 61, 113, 120, 9
+        };
+
+        public static byte[] GetKey()
+        {
+            byte[] dummyBytes = Encoding.UTF8.GetBytes(DummyKey);
+            byte[] realKey = new byte[Key.Length];
+
+            for (int i = 0; i < Key.Length; i++)
+            {
+                realKey[i] = (byte)(Key[i] ^ dummyBytes[i % dummyBytes.Length]);
+            }
+
+            return realKey;
         } 
     }
     
