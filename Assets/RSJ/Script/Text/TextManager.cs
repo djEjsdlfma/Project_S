@@ -4,6 +4,8 @@ public class TextManager : MonoBehaviour
 {
     [SerializeField] private ScriptSO _container1;
 
+    [SerializeField]
+
     private float TextSpeed;
     private float waitingTime;
 

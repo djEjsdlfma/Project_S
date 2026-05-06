@@ -1481,29 +1481,9 @@ PrefabInstance:
     m_TransformParent: {fileID: 702422564}
     m_Modifications:
     - target: {fileID: 117384466876602566, guid: baf235b4c5beea644b3243d7b9085a40, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 117384466876602566, guid: baf235b4c5beea644b3243d7b9085a40, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 792622004}
-    - target: {fileID: 117384466876602566, guid: baf235b4c5beea644b3243d7b9085a40, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Purchase
-      objectReference: {fileID: 0}
-    - target: {fileID: 117384466876602566, guid: baf235b4c5beea644b3243d7b9085a40, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: ProductManager, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 117384466876602566, guid: baf235b4c5beea644b3243d7b9085a40, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
-      value: 
-      objectReference: {fileID: 1010541837}
-    - target: {fileID: 117384466876602566, guid: baf235b4c5beea644b3243d7b9085a40, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.UI.Button, UnityEngine.UI
-      objectReference: {fileID: 0}
     - target: {fileID: 523799423406266146, guid: baf235b4c5beea644b3243d7b9085a40, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -10865,7 +10845,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -2289771210910188693, guid: 74d4bb5fd33bd58439fc39ecca16b836, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -11383,17 +11363,6 @@ GameObject:
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 117384466876602566, guid: baf235b4c5beea644b3243d7b9085a40, type: 3}
   m_PrefabInstance: {fileID: 1262679105}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
---- !u!114 &1010541837 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 117384466876602566, guid: baf235b4c5beea644b3243d7b9085a40, type: 3}
-  m_PrefabInstance: {fileID: 169765532}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1

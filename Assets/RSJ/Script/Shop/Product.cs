@@ -23,4 +23,9 @@ public class Product : MonoBehaviour
     }
 
     public void SetInfo(ItemTempSO item) => _myInfo = item;
+
+    public void Turnparched()
+    {
+        _parched.SetActive(true);
+    }
 }
