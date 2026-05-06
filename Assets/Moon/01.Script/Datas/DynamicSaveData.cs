@@ -7,10 +7,10 @@ namespace Moon._01.Script.Datas
     [Serializable]
     public class DynamicSaveData : ISerializationCallbackReceiver
     {
-        public Dictionary<string, int> IntData = new Dictionary<string, int>();
-        public Dictionary<string, float> FloatData = new Dictionary<string, float>();
-        public Dictionary<string, string> StringData = new Dictionary<string, string>();
-        public Dictionary<string, bool> BoolData = new Dictionary<string, bool>();
+        private Dictionary<string, int> _intData = new Dictionary<string, int>();
+        private Dictionary<string, float> _floatData = new Dictionary<string, float>();
+        private Dictionary<string, string> _stringData = new Dictionary<string, string>();
+        private Dictionary<string, bool> _boolData = new Dictionary<string, bool>();
 
         [SerializeField] private List<StringIntPair> _intPairs = new List<StringIntPair>();
         [SerializeField] private List<StringFloatPair> _floatPairs = new List<StringFloatPair>();
@@ -20,25 +20,25 @@ namespace Moon._01.Script.Datas
         public void OnBeforeSerialize()
         {
             _intPairs.Clear();
-            foreach (var kvp in IntData)
+            foreach (var kvp in _intData)
             {
                 _intPairs.Add(new StringIntPair { Key = kvp.Key, Value = kvp.Value });
             }
 
             _floatPairs.Clear();
-            foreach (var kvp in FloatData)
+            foreach (var kvp in _floatData)
             {
                 _floatPairs.Add(new StringFloatPair { Key = kvp.Key, Value = kvp.Value });
             }
 
             _stringPairs.Clear();
-            foreach (var kvp in StringData)
+            foreach (var kvp in _stringData)
             {
                 _stringPairs.Add(new StringStringPair { Key = kvp.Key, Value = kvp.Value });
             }
 
             _boolPairs.Clear();
-            foreach (var kvp in BoolData)
+            foreach (var kvp in _boolData)
             {
                 _boolPairs.Add(new StringBoolPair { Key = kvp.Key, Value = kvp.Value });
             }
@@ -46,28 +46,28 @@ namespace Moon._01.Script.Datas
 
         public void OnAfterDeserialize()
         {
-            IntData.Clear();
+            _intData.Clear();
             foreach (var pair in _intPairs)
             {
-                IntData[pair.Key] = pair.Value;
+                _intData[pair.Key] = pair.Value;
             }
 
-            FloatData.Clear();
+            _floatData.Clear();
             foreach (var pair in _floatPairs)
             {
-                FloatData[pair.Key] = pair.Value;
+                _floatData[pair.Key] = pair.Value;
             }
 
-            StringData.Clear();
+            _stringData.Clear();
             foreach (var pair in _stringPairs)
             {
-                StringData[pair.Key] = pair.Value;
+                _stringData[pair.Key] = pair.Value;
             }
 
-            BoolData.Clear();
+            _boolData.Clear();
             foreach (var pair in _boolPairs)
             {
-                BoolData[pair.Key] = pair.Value;
+                _boolData[pair.Key] = pair.Value;
             }
         }
 
@@ -99,17 +99,14 @@ namespace Moon._01.Script.Datas
             public bool Value;
         }
 
-        public bool TryGetValue(string key, out int value) => IntData.TryGetValue(key, out value);
-        
-        public bool TryGetValue(string key, out float value) => FloatData.TryGetValue(key, out value);
-        
-        public bool TryGetValue(string key, out string value) => StringData.TryGetValue(key, out value);
-        
-        public bool TryGetValue(string key, out bool value) => BoolData.TryGetValue(key, out value);
+        public bool TryGetValue(string key, out int value) => _intData.TryGetValue(key, out value);
+        public bool TryGetValue(string key, out float value) => _floatData.TryGetValue(key, out value);
+        public bool TryGetValue(string key, out string value) => _stringData.TryGetValue(key, out value);
+        public bool TryGetValue(string key, out bool value) => _boolData.TryGetValue(key, out value);
 
-        public void SaveData(string key, int value) => IntData[key] = value;
-        public void SaveData(string key, float value) => FloatData[key] = value;
-        public void SaveData(string key, string value) => StringData[key] = value;
-        public void SaveData(string key, bool value) => BoolData[key] = value;
+        public void SaveData(string key, int value) => _intData[key] = value;
+        public void SaveData(string key, float value) => _floatData[key] = value;
+        public void SaveData(string key, string value) => _stringData[key] = value;
+        public void SaveData(string key, bool value) => _boolData[key] = value;
     }
 }
