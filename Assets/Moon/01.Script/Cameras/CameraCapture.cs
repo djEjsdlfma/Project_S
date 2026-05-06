@@ -25,7 +25,8 @@ namespace Moon._01.Script.Cameras
             photoCamera.Render();
 
             // 4. 새로운 비어있는 Texture2D 생성 (RenderTexture와 동일한 해상도)
-            Texture2D capture = new Texture2D(renderTexture.width, renderTexture.height, TextureFormat.RGB24, false, true);
+            Texture2D capture =
+                new Texture2D(renderTexture.width, renderTexture.height, TextureFormat.RGB24, false, true);
 
             // 5. 화면의 픽셀을 읽어와서 Texture2D에 기록
             capture.ReadPixels(new Rect(0, 0, renderTexture.width, renderTexture.height), 0, 0);
@@ -37,10 +38,10 @@ namespace Moon._01.Script.Cameras
             List<CamObject> objs = AnalyzePhoto();
 
             Photo photo = new Photo(capture, objs);
-            
+
             camerasFinder.GetTarget<PhotoStorage>().AddPhoto(photo);
         }
-        
+
         private List<CamObject> AnalyzePhoto()
         {
             Vector2 cameraPos = photoCamera.transform.position;
@@ -48,16 +49,67 @@ namespace Moon._01.Script.Cameras
             float width = height * photoCamera.aspect;
             Vector2 boxSize = new Vector2(width, height);
 
+            Bounds cameraBounds = new Bounds(cameraPos, boxSize);
             Collider2D[] hits = Physics2D.OverlapBoxAll(cameraPos, boxSize, 0f, photoObjectLayer);
 
             List<CamObject> camObjs = new List<CamObject>();
-            
+
             foreach (Collider2D hit in hits)
             {
-                camObjs.Add(hit.GetComponent<CamObject>());
+                CamObject camObj = hit.GetComponent<CamObject>();
+                if (camObj != null)
+                {
+                    if (IsMoreThanHalfInside(hit, cameraBounds, camObj))
+                    {
+                        camObjs.Add(camObj);
+                    }
+                }
             }
 
             return camObjs;
+        }
+
+        private bool IsMoreThanHalfInside(Collider2D collider, Bounds cameraBounds, CamObject camObj)
+        {
+            Bounds objBounds = collider.bounds;
+
+            // 검사할 해상도 (30x30 = 900개의 점 검사)
+            const int resolution = 30;
+
+            int totalPointsInObject = 0;
+            int pointsInsideCamera = 0;
+
+            float stepX = objBounds.size.x / resolution;
+            float stepY = objBounds.size.y / resolution;
+
+            for (int i = 0; i <= resolution; i++)
+            {
+                for (int j = 0; j <= resolution; j++)
+                {
+                    Vector2 point = new Vector2(
+                        objBounds.min.x + (stepX * i),
+                        objBounds.min.y + (stepY * j)
+                    );
+
+                    if (collider.OverlapPoint(point))
+                    {
+                        totalPointsInObject++;
+
+                        if (cameraBounds.Contains(point))
+                        {
+                            pointsInsideCamera++;
+                        }
+                    }
+                }
+            }
+
+            if (totalPointsInObject == 0 || camObj.Ratio <= 0f) return false;
+
+            float estimatedOriginalPoints = totalPointsInObject / camObj.Ratio;
+
+            float finalRatio = pointsInsideCamera / estimatedOriginalPoints;
+
+            return finalRatio >= 0.5f;
         }
     }
 }
