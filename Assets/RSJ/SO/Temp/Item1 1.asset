@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b558f2ab947a0db49a691659bbc22668, type: 3}
+  m_Name: Item1 1
+  m_EditorClassIdentifier: Assembly-CSharp::ItemTempSO
+  iconImg: {fileID: 983726418923150725, guid: 86751e334886932429fc29769f94f1a3, type: 3}
+  Name: "\u3141\u3134\u3147\u3139"
+  Desc: "\uC54C\uC544\uC11C \uD558\uC148"
+  money: 1234567

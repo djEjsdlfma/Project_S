@@ -1,16 +1,22 @@
+using Moon._01.Script.Datas;
 using UnityEngine;
 
 public class LogUI : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [SerializeField] private GameObject _noneInfo;
+    [SerializeField] private GameObject _existInfo;
 
-    // Update is called once per frame
-    void Update()
+    public void CheckData(bool isExist)
     {
-        
+        if(isExist)
+        {
+            _noneInfo.SetActive(false);
+            _existInfo.SetActive(true);
+        }
+        else
+        {
+            _noneInfo.SetActive(true);
+            _existInfo.SetActive(false);
+        }
     }
 }

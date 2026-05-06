@@ -14,7 +14,7 @@ public class ScreenOpenNClose : MonoBehaviour
 
     public void TurnOnApplication(RectTransform myIconInfo)
     {
-        application.GetComponent<Image>().DOFade(1f, 0f);
+        application.GetComponent<CanvasGroup>().DOFade(1f, 0f);
         application.DOKill();
 
         application.sizeDelta = myIconInfo.sizeDelta;
@@ -41,7 +41,7 @@ public class ScreenOpenNClose : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(0.6f);
 
-        application.GetComponent<Image>().DOFade(0f, 0.3f);
+        application.GetComponent<CanvasGroup>().DOFade(0f, 0.3f);
         TurnOnApp.SetActive(true);
     }
 }

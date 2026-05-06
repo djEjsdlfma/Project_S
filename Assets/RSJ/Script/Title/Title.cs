@@ -11,6 +11,7 @@ public class Title : MonoBehaviour
     [SerializeField] private RectTransform _mainBG;
     [SerializeField] private Image[] _passWord;
     [SerializeField] private RectTransform _padMain;
+    [SerializeField] private GameObject _start;
 
     [SerializeField, Range(0f, 1f)]
     private float moveTime = 1f;
@@ -23,6 +24,8 @@ public class Title : MonoBehaviour
 
     private void Start()
     {
+        _start.SetActive(true);
+
         DOTween.SetTweensCapacity(500, 50);
         if (isStarted) return;
 

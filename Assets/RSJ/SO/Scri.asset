@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ff03e7f17d68e749ab4f421ed4ea7f9, type: 3}
+  m_Name: Scri
+  m_EditorClassIdentifier: Assembly-CSharp::ScriptSO
+  scripts:
+  - _name: "\uD14C\uC2A4\uD2B8"
+    text: "\uD14C\uC2A4\uD2B8 \uC785\uB2C8\uB2E4."
+    isNPC: 1
+    _event: 1
+    ChoiceNum: 0
+  - _name: 
+    text: "\uD55C\uBC88 \uB354 \uD14C\uC2A4\uD2B8 \uD569\uB2C8\uB2E4."
+    isNPC: 1
+    _event: 1
+    ChoiceNum: 0
+  - _name: "\uB098"
+    text: "\uD50C\uB808\uC774\uC5B4 \uD14C\uC2A4\uD2B8\uC785\uB2C8\uB2E4."
+    isNPC: 0
+    _event: 1
+    ChoiceNum: 0
+  - _name: 
+    text: "\uC120\uD0DD\uC9C0 \uD14C\uC2A4\uD2B8\uC785\uB2C8\uB2E4."
+    isNPC: 1
+    _event: 2
+    ChoiceNum: 0
+  - _name: "\uB098"
+    text: "\uB9C8\uC9C0\uB9C9 \uC785\uB2C8\uB2E4."
+    isNPC: 0
+    _event: 1
+    ChoiceNum: 0
+  cScript:
+  - choice1: "\uC120\uD0DD\uC9C0 \uBD80\uBD84 \uC785\uB2C8\uB2E4."
+    choice2: "\uD074\uB9AD\uD574\uC11C \uC9C4\uD589\uD569\uB2C8\uB2E4."
+    ReactNum1: 0
+    ReactNum2: 1
+  reactScript:
+  - _name: "\uD14C\uC2A4\uD2B8"
+    text: "\uC120\uD0DD\uC9C0 \uBC18\uC751 \uC785\uB2C8\uB2E4.\n\uBC18\uC751 \uBC88\uD638\uC5D0
+      \uB530\uB77C \uC5F0\uACB0\uB429\uB2C8\uB2E4. - 1"
+    isNPC: 1
+    ReactNum: 0
+  - _name: "\uD14C\uC2A4\uD2B8"
+    text: "\uC120\uD0DD\uC9C0 \uBC18\uC751 \uC785\uB2C8\uB2E4.\n\uBC18\uC751 \uBC88\uD638\uC5D0
+      \uB530\uB77C \uC5F0\uACB0\uB429\uB2C8\uB2E4. - 2"
+    isNPC: 1
+    ReactNum: 1
