@@ -6,6 +6,7 @@ using DG.Tweening;
 using LSW._02._Code.Environment.InteractableObject;
 using Moon._01.Script.Cameras;
 using MoonLib.ScriptFinder_Pro.RunTime.DevLogs;
+using MoonLib.ScriptFinder_Pro.RunTime.Finder.ListFinder;
 
 /// <summary>
 /// 화면에 복사된 오브젝트를 원본 기준 오프셋으로 따라다니게 하는 정보 구조체.
@@ -37,7 +38,7 @@ public class CameraScript : MonoBehaviour
     [SerializeField] private LayerMask coloredObject;     // 복사 대상 레이어
     [SerializeField] private Image _img;                  // UI 이미지 페이드 연출용
 
-    [SerializeField] private CameraCapture cameraCapture;
+    [SerializeField] private ScriptListFinderSO camerasFinder;
 
     private RectTransform myPosition;
     private Vector3 _position;
@@ -74,6 +75,24 @@ public class CameraScript : MonoBehaviour
         }
 
         HandleCopyInput(worldMousePos);
+        HandlePhotoInput();
+    }
+    
+    private void HandlePhotoInput()
+    {
+        if (!Keyboard.current.fKey.wasPressedThisFrame || !camerasFinder.GetTarget<PhotoStorage>().CanPhoto())
+            return;
+
+        StopCopy();
+        _img.color = new Color(1, 1, 1, 1);
+        CheckObj();
+        _img.DOFade(0f, 0.2f);
+        DevLog.Log("찰칵");
+    }
+
+    private void CheckObj()
+    {
+        camerasFinder.GetTarget<CameraCapture>().TakePhoto();
     }
 
     /// <summary>
@@ -648,7 +667,7 @@ public class CameraScript : MonoBehaviour
         if (myPosition != null && checkPos != null)
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawWireCube(checkPos.position, myPosition.sizeDelta * CHECK_BOX_SCALE);
+            Gizmos.DrawWireCube(checkPos.position, myPosition.sizeDelta * (CHECK_BOX_SCALE * (_camera.orthographicSize * 0.2f)));
         }
     }
 }

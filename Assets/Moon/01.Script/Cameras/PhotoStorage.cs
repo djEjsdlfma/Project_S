@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Moon._01.Script.Datas;
 using UnityEngine;
 
 namespace Moon._01.Script.Cameras
@@ -36,6 +37,20 @@ namespace Moon._01.Script.Cameras
         
         public int PhotoMany => _photos.Count;
 
+        public int MaxPhoto { get; private set; } = 5;
+
+        private void Awake()
+        {
+            Reset();
+            if(DataManager.Instance.TryGetValue("PhotoUpgrade", out int value))
+            {
+                if (value >= 1)
+                {
+                    MaxPhoto = 6;
+                }
+            }
+        }
+
         public void Reset()
         {
             _photos.Clear();
@@ -48,7 +63,7 @@ namespace Moon._01.Script.Cameras
         
         public List<Photo> GetPhotos()
         {
-            return _photos;
+            return new List<Photo>(_photos);
         }
 
         public void Destroyed()
@@ -60,6 +75,11 @@ namespace Moon._01.Script.Cameras
                     Destroy(photo.Image);
                 }
             }
+        }
+
+        public bool CanPhoto()
+        {
+            return _photos.Count < MaxPhoto;
         }
     }
 }
