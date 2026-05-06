@@ -2,26 +2,38 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using LSW._02._Code.System___Manager;
+using LSW._02._Code.Data;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace LSW._02._Code.CSV.Importer
+namespace LSW._02._Code.System___Manager.DataManager
 {
-    public class DialogueDataManager : MonoBehaviour, ISystemManager
+    public class DialogueDataManager : MonoBehaviour, ISystemManager, IDataLoadManager
     {
         public List<SheetData> sheetData;
         
-        private readonly Dictionary<string, Dictionary<string, DialogueData>> _allDialogues 
+        private readonly Dictionary<string, Dictionary<string, DialogueData>> _allDialogues
             = new Dictionary<string, Dictionary<string, DialogueData>>();
 
+        private float _progress = 0f;
+        public float Progress => _progress;
+        
         private bool _isInitialized = false;
+        private bool _isLoadError = false;
+        public bool IsDone => _isInitialized;
 
+        public event Action<string> OnLoadError;
+        
         public void Initialize(SystemManager systemManager)
         {
             // DontDestroyOnLoad(gameObject);
+        }
+        
+        public void LoadData()
+        {
             StartCoroutine(InitializeAllSheets());
         }
+
 
         public void LoadScene(SceneType sceneType)
         {
@@ -35,12 +47,15 @@ namespace LSW._02._Code.CSV.Importer
         private IEnumerator InitializeAllSheets()
         {
             _isInitialized = false;
+            _progress = 0f;
 
-            foreach (SheetData sheet in sheetData)
+            for (int i = 0; i < sheetData.Count; i++)
             {
-                yield return StartCoroutine(DownloadCSV(sheet));
+                yield return StartCoroutine(DownloadCSV(sheetData[i]));
+                
+                _progress = (float)(i + 1) / sheetData.Count;
             }
-            
+
             _isInitialized = true;
         }
 
@@ -53,7 +68,7 @@ namespace LSW._02._Code.CSV.Importer
             {
                 string csvData = webRequest.downloadHandler.text;
                 ParseCSV(sheet.sheetName, csvData);
-                
+
                 if (_allDialogues.TryGetValue(sheet.sheetName, out var currentSheetData))
                 {
                     Debug.Log($"<color=green><b>[{sheet.sheetName}]</b></color> 로드 완료 (데이터: {currentSheetData.Count}개)");
@@ -61,7 +76,8 @@ namespace LSW._02._Code.CSV.Importer
             }
             else
             {
-                Debug.LogError($"Load Failed. ({sheet.sheetName}): {webRequest.error}");
+                _isLoadError = true;
+                OnLoadError?.Invoke($"Load Failed. ({sheet.sheetName}): {webRequest.error}");
             }
         }
 
@@ -69,19 +85,19 @@ namespace LSW._02._Code.CSV.Importer
         {
             string[] lines = data.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries);
             Regex csvParser = new Regex(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
-            
+
             Dictionary<string, DialogueData> currentSheetData = new Dictionary<string, DialogueData>();
-            
+
             for (int i = 2; i < lines.Length; i++)
             {
                 string[] values = csvParser.Split(lines[i]);
-                
-                if (values.Length < 6) 
+
+                if (values.Length < 6)
                     continue;
 
                 string key = values[0].Trim();
-                if (string.IsNullOrEmpty(key)) 
-                    continue; 
+                if (string.IsNullOrEmpty(key))
+                    continue;
 
                 DialogueData dialogueData = new DialogueData
                 {
@@ -97,7 +113,7 @@ namespace LSW._02._Code.CSV.Importer
 
             _allDialogues.TryAdd(sheetName, currentSheetData);
         }
-        
+
         public bool GetDialogueData(string sheetName, string key, out DialogueData data)
         {
             if (!_isInitialized)
@@ -105,11 +121,12 @@ namespace LSW._02._Code.CSV.Importer
                 data = default;
                 return false;
             }
-            
+
             if (_allDialogues.TryGetValue(sheetName, out var sheet))
             {
                 return sheet.TryGetValue(key, out data);
             }
+
             data = default;
             return false;
         }
@@ -121,16 +138,17 @@ namespace LSW._02._Code.CSV.Importer
                 data = null;
                 return false;
             }
-            
+
             if (_allDialogues.TryGetValue(sheetName, out var sheet))
             {
                 data = sheet;
                 return true;
             }
+
             data = null;
             return false;
         }
-        
+
         // private T ParseFlags<T>(string rawData) where T : struct, Enum
         // {
         //     string cleanData = rawData.Replace("\"", "").Trim();
@@ -160,7 +178,7 @@ namespace LSW._02._Code.CSV.Importer
         public string sheetName;
         public string sheetUrl;
     }
-    
+
     public struct DialogueData
     {
         public string expression;

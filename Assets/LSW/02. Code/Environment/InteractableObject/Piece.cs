@@ -7,7 +7,9 @@ namespace LSW._02._Code.Environment.InteractableObject
     public class Piece : MonoBehaviour, ICopyable
     {
         [SerializeField] private string pieceId;
-        public bool IsCoping { get; set; }
+        [SerializeField] private LayerMask pieceLayer;
+        
+        public bool IsCopying { get; set; }
         public string PieceId => pieceId;
         
         public bool IsInCorrectPlace { get; private set; }
@@ -26,7 +28,7 @@ namespace LSW._02._Code.Environment.InteractableObject
 
         private void CheckOverlapStatus()
         {
-            if (IsCoping) 
+            if (IsCopying) 
                 return;
             
             if (!GetVirtualCenter(out Vector2 myCenter, out float myRot)) 
@@ -35,7 +37,10 @@ namespace LSW._02._Code.Environment.InteractableObject
             if (!_puzzleManager.GetBlueprint(pieceId, out var blueprint)) 
                 return;
             
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, blueprint.posTolerance * 2f);
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, blueprint.posTolerance * 2f, pieceLayer);
+            if(colliders.Length <= 1) {
+                Debug.Log($"{gameObject.name}: 주변에 아무도 없다고 생각함. 감지된 수: {colliders.Length}");
+            }
             
             bool foundMatch = false;
             foreach (var hit in colliders)
@@ -63,8 +68,8 @@ namespace LSW._02._Code.Environment.InteractableObject
         {
             if (_puzzleManager.GetPiece(pieceId, out var data))
             {
-                centerRot = transform.eulerAngles.z - data.localRotationZ;
-                Vector2 rotatedOffset = Quaternion.Euler(0, 0, centerRot) * data.localPosition;
+                centerRot = Mathf.DeltaAngle(data.localRotationZ, transform.eulerAngles.z);
+                Vector2 rotatedOffset = Quaternion.Euler(0, 0, centerRot) * (Vector3)data.localPosition;
                 centerPos = (Vector2)transform.position - rotatedOffset;
                 return true;
             }
@@ -73,7 +78,7 @@ namespace LSW._02._Code.Environment.InteractableObject
             return false;
         }
 
-        public void Copy() => IsCoping = true;
-        public void Paste() => IsCoping = false;
+        public void Copy() => IsCopying = true;
+        public void Paste() => IsCopying = false;
     }
 }

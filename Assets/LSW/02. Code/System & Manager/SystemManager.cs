@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using LSW._02._Code.Data;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -33,6 +34,20 @@ namespace LSW._02._Code.System___Manager
         public T GetSystemManager<T>() where T : class, ISystemManager
         {
             return _managerList.Find(x => x is T) as T;
+        }
+
+        public List<IDataLoadManager> GetDataLoadManagers()
+        {
+            List<IDataLoadManager> dataLoadManagers = new List<IDataLoadManager>();
+            foreach (var manager in _managerList)
+            {
+                if (manager is IDataLoadManager)
+                {
+                    dataLoadManagers.Add(manager as IDataLoadManager);
+                }
+            }
+
+            return dataLoadManagers;
         }
         
         private void LoadScene(Scene scene)

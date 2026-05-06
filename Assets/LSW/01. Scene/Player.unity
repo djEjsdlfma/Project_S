@@ -318,10 +318,10 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 387621857230158733, guid: 8772c05b25fbfba4c88aa13e1392a599, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 81247255}
+      addedObject: {fileID: 81247254}
     - targetCorrespondingSourceObject: {fileID: 387621857230158733, guid: 8772c05b25fbfba4c88aa13e1392a599, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 81247254}
+      addedObject: {fileID: 81247260}
   m_SourcePrefab: {fileID: 100100000, guid: 8772c05b25fbfba4c88aa13e1392a599, type: 3}
 --- !u!1 &81247253 stripped
 GameObject:
@@ -341,7 +341,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LSW._02._Code.Environment.InteractableObject.Piece
   pieceId: 3
---- !u!50 &81247255
+  pieceLayer:
+    serializedVersion: 2
+    m_Bits: 64
+--- !u!50 &81247260
 Rigidbody2D:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -349,7 +352,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 81247253}
-  m_BodyType: 0
+  m_BodyType: 2
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -367,7 +370,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!1 &196159641
 GameObject:
   m_ObjectHideFlags: 0
@@ -562,10 +565,10 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 387621857230158733, guid: 8772c05b25fbfba4c88aa13e1392a599, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 203465013}
+      addedObject: {fileID: 203465012}
     - targetCorrespondingSourceObject: {fileID: 387621857230158733, guid: 8772c05b25fbfba4c88aa13e1392a599, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 203465012}
+      addedObject: {fileID: 203465018}
   m_SourcePrefab: {fileID: 100100000, guid: 8772c05b25fbfba4c88aa13e1392a599, type: 3}
 --- !u!1 &203465011 stripped
 GameObject:
@@ -585,7 +588,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LSW._02._Code.Environment.InteractableObject.Piece
   pieceId: 4
---- !u!50 &203465013
+  pieceLayer:
+    serializedVersion: 2
+    m_Bits: 64
+--- !u!50 &203465018
 Rigidbody2D:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -593,7 +599,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 203465011}
-  m_BodyType: 0
+  m_BodyType: 2
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -611,7 +617,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!1 &324396566
 GameObject:
   m_ObjectHideFlags: 0
@@ -1204,10 +1210,10 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 387621857230158733, guid: 8772c05b25fbfba4c88aa13e1392a599, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 928171171}
+      addedObject: {fileID: 928171170}
     - targetCorrespondingSourceObject: {fileID: 387621857230158733, guid: 8772c05b25fbfba4c88aa13e1392a599, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 928171170}
+      addedObject: {fileID: 928171176}
   m_SourcePrefab: {fileID: 100100000, guid: 8772c05b25fbfba4c88aa13e1392a599, type: 3}
 --- !u!1 &928171169 stripped
 GameObject:
@@ -1227,7 +1233,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LSW._02._Code.Environment.InteractableObject.Piece
   pieceId: 1
---- !u!50 &928171171
+  pieceLayer:
+    serializedVersion: 2
+    m_Bits: 64
+--- !u!50 &928171176
 Rigidbody2D:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -1235,7 +1244,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 928171169}
-  m_BodyType: 0
+  m_BodyType: 2
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -1253,7 +1262,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!1 &1056100973
 GameObject:
   m_ObjectHideFlags: 0
@@ -1312,8 +1321,8 @@ MonoBehaviour:
     - pieceId: 4
       localPosition: {x: -0.5, y: 0.5}
       localRotationZ: 0
-    resultPrefab: {fileID: 387621857230158733, guid: 92e239fcd7a489c44925925bb31132f6, type: 3}
-    posTolerance: 0.1
+    resultPrefab: {fileID: 387621857230158733, guid: 8772c05b25fbfba4c88aa13e1392a599, type: 3}
+    posTolerance: 1
     rotTolerance: 15
 --- !u!1 &1056165335 stripped
 GameObject:
@@ -1528,7 +1537,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1056100975}
-  - {fileID: 1932091574}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1258540839
@@ -1956,10 +1964,10 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 387621857230158733, guid: 8772c05b25fbfba4c88aa13e1392a599, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1365157338}
+      addedObject: {fileID: 1365157337}
     - targetCorrespondingSourceObject: {fileID: 387621857230158733, guid: 8772c05b25fbfba4c88aa13e1392a599, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1365157337}
+      addedObject: {fileID: 1365157343}
   m_SourcePrefab: {fileID: 100100000, guid: 8772c05b25fbfba4c88aa13e1392a599, type: 3}
 --- !u!1 &1365157336 stripped
 GameObject:
@@ -1979,7 +1987,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LSW._02._Code.Environment.InteractableObject.Piece
   pieceId: 2
---- !u!50 &1365157338
+  pieceLayer:
+    serializedVersion: 2
+    m_Bits: 64
+--- !u!50 &1365157343
 Rigidbody2D:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -1987,7 +1998,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1365157336}
-  m_BodyType: 0
+  m_BodyType: 2
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -2005,7 +2016,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!1 &1531993807
 GameObject:
   m_ObjectHideFlags: 0
@@ -2133,59 +2144,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!1 &1932091573
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1932091574}
-  - component: {fileID: 1932091575}
-  m_Layer: 0
-  m_Name: Dialogue Data
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1932091574
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1932091573}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1253706207}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1932091575
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1932091573}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 244e7cd8b26541818a6b6a954357aa7e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LSW._02._Code.CSV.Importer.DialogueCSVImporter
-  sheetData:
-  - sheetName: Tutorial
-    sheetUrl: https://docs.google.com/spreadsheets/d/e/2PACX-1vSVCmLGiKR9IbDKjMrRwxk7GhZTY4UPNeD4kgHQ1r0hdsKIBKh8X7uQ0X--k33W0sohwsgLQTPERFul/pub?gid=0&single=true&output=csv
-  - sheetName: Anna
-    sheetUrl: https://docs.google.com/spreadsheets/d/e/2PACX-1vSVCmLGiKR9IbDKjMrRwxk7GhZTY4UPNeD4kgHQ1r0hdsKIBKh8X7uQ0X--k33W0sohwsgLQTPERFul/pub?gid=1864764450&single=true&output=csv
-  - sheetName: Desiree
-    sheetUrl: https://docs.google.com/spreadsheets/d/e/2PACX-1vSVCmLGiKR9IbDKjMrRwxk7GhZTY4UPNeD4kgHQ1r0hdsKIBKh8X7uQ0X--k33W0sohwsgLQTPERFul/pub?gid=383238783&single=true&output=csv
-  - sheetName: Leah
-    sheetUrl: https://docs.google.com/spreadsheets/d/e/2PACX-1vSVCmLGiKR9IbDKjMrRwxk7GhZTY4UPNeD4kgHQ1r0hdsKIBKh8X7uQ0X--k33W0sohwsgLQTPERFul/pub?gid=1615978382&single=true&output=csv
 --- !u!1001 &1941732347
 PrefabInstance:
   m_ObjectHideFlags: 0
