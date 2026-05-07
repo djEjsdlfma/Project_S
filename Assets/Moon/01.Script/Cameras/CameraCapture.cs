@@ -73,8 +73,8 @@ namespace Moon._01.Script.Cameras
         {
             Bounds objBounds = collider.bounds;
 
-            // 검사할 해상도 (30x30 = 900개의 점 검사)
-            const int resolution = 30;
+            // 검사할 해상도 (40x40 = 1600개의 점 검사)
+            const int resolution = 40;
 
             int totalPointsInObject = 0;
             int pointsInsideCamera = 0;

@@ -274,6 +274,7 @@ MonoBehaviour:
     m_Bits: 64
   _img: {fileID: 4230121097832342655}
   camerasFinder: {fileID: 11400000, guid: 51fc18d6fb6fed540bea9fce565207ec, type: 2}
+  input: {fileID: 11400000, guid: 115a39429ad911340b5e5aa94a8ec03f, type: 2}
 --- !u!1 &7492650314901606977
 GameObject:
   m_ObjectHideFlags: 0

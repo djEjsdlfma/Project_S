@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -15,11 +16,13 @@ public struct CopiedObj
 {
     public Vector2 camToPos;
     public GameObject copyObj;
+    public float gravityScale;
 
-    public CopiedObj(Vector2 camToPos, GameObject copyObj)
+    public CopiedObj(Vector2 camToPos, GameObject copyObj, float gravityScale)
     {
         this.camToPos = camToPos;
         this.copyObj = copyObj;
+        this.gravityScale = gravityScale;
     }
 
     public void ChangeTransform(Vector2 camPos)
@@ -40,11 +43,15 @@ public class CameraScript : MonoBehaviour
 
     [SerializeField] private ScriptListFinderSO camerasFinder;
 
+    [SerializeField] private CameraInputSO input;
+
     private RectTransform myPosition;
     private Vector3 _position;
     private MyColor _nowColor;
 
     private bool _copying = false;
+
+    private Camera _main;
 
     // 원본 오브젝트 -> 복사된 오브젝트 정보
     private readonly Dictionary<GameObject, CopiedObj> _copyObjs = new();
@@ -57,13 +64,42 @@ public class CameraScript : MonoBehaviour
         _camera = Camera.main;
         myPosition = GetComponent<RectTransform>();
         _nowColor = MyColor.None;
+
+        input.OnCaptureAction += HandlePhotoInput;
+        input.OnCopyAction += HandleCaptureInput;
+
+        _main = Camera.main;
+    }
+
+
+    private void OnDestroy()
+    {
+        input.OnCaptureAction -= HandlePhotoInput;
+        input.OnCopyAction -= HandleCaptureInput;
     }
 
     private void Update()
     {
         UpdateMouseFollowerUI();
 
-        Vector2 worldMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        // // 복사 중이면, 복사된 오브젝트들을 카메라/마우스 기준으로 계속 이동
+        // if (_copying)
+        // {
+        //     foreach (var camObj in _copyObjs)
+        //     {
+        //         camObj.Value.ChangeTransform(worldMousePos);
+        //     }
+        // }
+    }
+    
+    private void HandleCaptureInput()
+    {
+        HandleCopyInput(_main.ScreenToWorldPoint(input.MousePos));
+    }
+
+    private void FixedUpdate()
+    {
+        Vector2 worldMousePos = _main.ScreenToWorldPoint(input.MousePos);
 
         // 복사 중이면, 복사된 오브젝트들을 카메라/마우스 기준으로 계속 이동
         if (_copying)
@@ -73,11 +109,8 @@ public class CameraScript : MonoBehaviour
                 camObj.Value.ChangeTransform(worldMousePos);
             }
         }
-
-        HandleCopyInput(worldMousePos);
-        HandlePhotoInput();
     }
-    
+
     private void HandlePhotoInput()
     {
         if (!Keyboard.current.fKey.wasPressedThisFrame || !camerasFinder.GetTarget<PhotoStorage>().CanPhoto())
@@ -100,9 +133,10 @@ public class CameraScript : MonoBehaviour
     /// </summary>
     private void UpdateMouseFollowerUI()
     {
+        Vector2 mousePos = input.MousePos;
         _position = new Vector3(
-            Input.mousePosition.x - (myPosition.sizeDelta.x / 2),
-            Input.mousePosition.y - (myPosition.sizeDelta.y / 2),
+            mousePos.x - (myPosition.sizeDelta.x / 2),
+            mousePos.y - (myPosition.sizeDelta.y / 2),
             0f
         );
 
@@ -166,9 +200,18 @@ public class CameraScript : MonoBehaviour
             // 복사본은 유지하고, 충돌 판정만 다시 켬
             foreach (var camObj in _copyObjs)
             {
-                if (camObj.Value.copyObj && camObj.Value.copyObj.TryGetComponent(out Collider2D col))
+                if (camObj.Value.copyObj)
                 {
-                    col.enabled = true;
+                    if (camObj.Value.copyObj.TryGetComponent(out Collider2D col))
+                    {
+                        col.enabled = true;
+                    }
+                    
+                    if (col.TryGetComponent(out Rigidbody2D rb))
+                    {
+                        rb.gravityScale = camObj.Value.gravityScale;
+                    }
+                    
                     if (camObj.Value.copyObj.TryGetComponent(out ICopyable copyable))
                     {
                         copyable.Paste();
@@ -259,12 +302,20 @@ public class CameraScript : MonoBehaviour
                 col.enabled = false;
             }
             
+            float gravityScale = 0f;
+
+            if (obj.TryGetComponent(out Rigidbody2D rb))
+            {
+                gravityScale = rb.gravityScale;
+                rb.gravityScale = 0;
+            }
+            
             if(obj.TryGetComponent(out ICopyable copyable))
                 copyable.Copy();
 
             if (!_copyObjs.ContainsKey(item.gameObject))
             {
-                _copyObjs.Add(item.gameObject, new CopiedObj(realCenter - pos, obj));
+                _copyObjs.Add(item.gameObject, new CopiedObj(realCenter - pos, obj, gravityScale));
             }
         }
 
