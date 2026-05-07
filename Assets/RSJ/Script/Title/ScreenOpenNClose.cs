@@ -9,6 +9,7 @@ public class ScreenOpenNClose : MonoBehaviour
     [SerializeField] private RectTransform application;
     [SerializeField] private RectTransform Pad;
     [SerializeField] private RectTransform PadCenter;
+    [SerializeField] private Image _appIcon;
 
     private GameObject TurnOnApp;
 
@@ -35,6 +36,11 @@ public class ScreenOpenNClose : MonoBehaviour
     public void SetMyApp(GameObject App)
     {
         TurnOnApp = App;
+    }
+
+    public void SetIcon(Image img)
+    {
+        _appIcon.sprite = img.sprite;
     }
 
     private IEnumerator ShowApplication()

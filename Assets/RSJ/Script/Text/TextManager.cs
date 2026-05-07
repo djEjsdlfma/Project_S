@@ -15,4 +15,14 @@ public class TextManager : MonoBehaviour
     {
         waitingTime = value;
     }
+
+    public void GetTextSpeed()
+    {
+
+    }
+
+    public void GetWaitingSpeed()
+    {
+
+    }
 }
