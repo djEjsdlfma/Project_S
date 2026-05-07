@@ -68,7 +68,36 @@ namespace LSW._02._Code.Core.Cores
             }
             else
             {
-                OnLoadError?.Invoke($"Load Failed. ({sheet.sheetName}): {webRequest.error}");
+                string errorLog;
+                long errorCode = webRequest.responseCode;
+                
+                switch (webRequest.result)
+                {
+                    case UnityWebRequest.Result.ProtocolError:
+                    {
+                        errorLog = "Protocol Error: " + errorCode + $"\n{webRequest.error}";
+                        break;
+                    }                    
+                    case UnityWebRequest.Result.DataProcessingError:
+                    {
+                        errorLog = "Data Processing Error: " + errorCode + $"\n{webRequest.error}";
+                        break;
+                    }
+                    case UnityWebRequest.Result.ConnectionError:
+                    {
+                        if (Application.internetReachability == NetworkReachability.NotReachable)
+                            errorLog = "Please Check Internet Connection Statue.";
+                        else
+                            errorLog = "Connection Error: " + errorCode + $"\n{webRequest.error}";
+                        break;
+                    }
+                    default:
+                    {
+                        errorLog = $"{webRequest.result.ToString()}: " + errorCode;
+                        break;
+                    }
+                }
+                OnLoadError?.Invoke(errorLog);
             }
         }
 
@@ -99,7 +128,8 @@ namespace LSW._02._Code.Core.Cores
                     Type = ParseFlags<DialogueType>(values[5].Trim()),
                     Branch = values[6].Trim(),
                     NextKey = values[7].Trim(),
-                    Content = values[8].Trim()
+                    Content = values[8].Trim(),
+                    Sincerity = int.Parse(values[9].Trim())
                 };
                 
                 VLog.LogStruct($"Dialogue Data of Key :{key}", dialogueData);
@@ -254,13 +284,14 @@ namespace LSW._02._Code.Core.Cores
         public string Branch;
         public string NextKey;
         public string Content;
+        public int Sincerity;
 
         public bool Equals(DialogueData other)
         {
             return ID == other.ID && Day == other.Day && 
                    Seq == other.Seq && Speaker == other.Speaker && 
                    Type == other.Type && Branch == other.Branch && 
-                   NextKey == other.NextKey && Content == other.Content;
+                   NextKey == other.NextKey && Content == other.Content && Sincerity == other.Sincerity;
         }
 
         public override bool Equals(object obj)
@@ -270,7 +301,19 @@ namespace LSW._02._Code.Core.Cores
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(ID, Day, Seq, (int)Speaker, (int)Type, Branch, NextKey, Content);
+            var hash = new HashCode();
+
+            hash.Add(ID);
+            hash.Add(Day);
+            hash.Add(Seq);
+            hash.Add((int)Speaker);
+            hash.Add((int)Type);
+            hash.Add(Branch);
+            hash.Add(NextKey);
+            hash.Add(Content);
+            hash.Add(Sincerity);
+
+            return hash.ToHashCode();
         }
     }
 

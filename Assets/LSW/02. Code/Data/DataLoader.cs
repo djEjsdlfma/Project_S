@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using DG.Tweening;
 using LSW._02._Code.Core;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -11,7 +12,14 @@ namespace LSW._02._Code.Data
     {
         [Header("Load UI")]
         [SerializeField] private Slider loadingSlider;
+        [SerializeField] private TextMeshProUGUI loadingText;
         [SerializeField] private float duration = 0.5f;
+        
+        [Header("Error UI")]
+        [SerializeField] private CanvasGroup errorCanvas;
+        [SerializeField] private float errorCanvasFadeDuration = 0.5f;
+        [SerializeField] private Button retryButton;
+        [SerializeField] private TextMeshProUGUI errorLog;
         
         [Header("Scene")]
         [SerializeField] private SceneType loadSceneType;
@@ -19,6 +27,7 @@ namespace LSW._02._Code.Data
         private List<IDataLoadManager> _managers;
         private bool _isLoadStarted = false;
         private Tweener _sliderTween;
+        private Tweener _errorFadeTween;
         private float _lastTargetProgress = -1f;
 
         private void Start()
@@ -29,9 +38,27 @@ namespace LSW._02._Code.Data
             {
                 loadingSlider.value = 1f;
                 CompleteLoading();
-                return;
             }
+            
+            StartLoad();
+        }
 
+        private void RetryLoad()
+        {
+            errorCanvas.interactable = false;
+            errorCanvas.blocksRaycasts = false;
+
+            _errorFadeTween?.Kill();
+            _errorFadeTween = errorCanvas.DOFade(0f, errorCanvasFadeDuration)
+                .OnComplete(() =>
+                {
+                    errorLog.SetText("");
+                    StartLoad();
+                });
+        }
+
+        private void StartLoad()
+        {
             loadingSlider.value = 0f;
 
             foreach (var manager in _managers)
@@ -65,7 +92,11 @@ namespace LSW._02._Code.Data
                 if (loadingSlider != null)
                 {
                     _sliderTween = loadingSlider.DOValue(targetProgress, duration)
-                        .SetEase(Ease.OutQuad);
+                        .SetEase(Ease.OutQuad)
+                        .OnUpdate(() =>
+                        {
+                            loadingText.SetText(Mathf.RoundToInt(loadingSlider.value * 100).ToString() + "%");
+                        });
                 }
             }
 
@@ -86,7 +117,22 @@ namespace LSW._02._Code.Data
 
         private void HandleLoadError(string errorMsg)
         {
-            Debug.LogError($"[DataLoad Error] {errorMsg}");
+            _isLoadStarted = false;
+            
+            errorLog.SetText(errorMsg);
+
+            _errorFadeTween?.Kill();
+            
+            errorCanvas.gameObject.SetActive(true);
+            _errorFadeTween = errorCanvas.DOFade(1f, errorCanvasFadeDuration)
+                .OnComplete(() =>
+                {
+                    errorCanvas.interactable = true;
+                    errorCanvas.blocksRaycasts = true;
+                    
+                    retryButton.onClick.RemoveListener(RetryLoad);
+                    retryButton.onClick.AddListener(RetryLoad);
+                });
         }
 
         private void CompleteLoading()
@@ -99,7 +145,7 @@ namespace LSW._02._Code.Data
         {
             DOVirtual.DelayedCall(0.1f, () =>
             {
-                SceneManager.LoadScene((int)loadSceneType); 
+                SceneManager.LoadScene((int)loadSceneType);
             }).SetUpdate(true);
         }
 
