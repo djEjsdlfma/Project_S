@@ -36,8 +36,10 @@ public class BubbleManager : MonoBehaviour, ITabletUI
     private bool wasChatNpc;
     private GameObject nowBubble;
     private string choiceText2;
+    private int choiceSincerity1;
     private string nextKey1;
     private string choiceText1;
+    private int choiceSincerity2;
     private string nextKey2;
     private bool wasEndChat = false;
 
@@ -105,6 +107,10 @@ public class BubbleManager : MonoBehaviour, ITabletUI
         else
         {
             StartCoroutine(DelayInteract());
+            
+            if (data.Sincerity != 0)
+                _playerStatCore.ChangeSincerityAmount(sheetName, data.Sincerity);
+
             ShowPlayerText(data.Content, wasChatNpc);
             if (data.NextKey == "END")
             {
@@ -193,7 +199,7 @@ public class BubbleManager : MonoBehaviour, ITabletUI
     {
         if(!_dialogueDataCore.GetAllDialogueData(sheetName, out var allData))
             return;
-        
+    
         var choices = allData.Values
             .Where(x => x.Seq == seqNum && x.Type == DialogueType.Select)
             .OrderBy(x => x.ID)
@@ -203,15 +209,22 @@ public class BubbleManager : MonoBehaviour, ITabletUI
         {
             choiceText1 = choices[0].Content;
             choiceText2 = choices[1].Content;
-        
+    
             nextKey1 = choices[0].NextKey;
             nextKey2 = choices[1].NextKey;
+            
+            choiceSincerity1 = choices[0].Sincerity;
+            choiceSincerity2 = choices[1].Sincerity;
+        
             choice.ChoiceInit(choices[0].Content, choices[1].Content);
         }
     }
 
     private void ChoseOne(GameObject target)
     {
+        if (choiceSincerity1 != 0)
+            _playerStatCore.ChangeSincerityAmount(sheetName, choiceSincerity1); 
+
         ShowPlayerText(choiceText1, wasChatNpc);
 
         _currentKey = nextKey1;
@@ -222,6 +235,9 @@ public class BubbleManager : MonoBehaviour, ITabletUI
 
     private void ChoseTwo(GameObject target)
     {
+        if (choiceSincerity2 != 0)
+            _playerStatCore.ChangeSincerityAmount(sheetName, choiceSincerity2);
+
         ShowPlayerText(choiceText2, wasChatNpc);
 
         _currentKey = nextKey2;
