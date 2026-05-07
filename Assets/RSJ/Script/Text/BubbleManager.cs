@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Linq;
 using LSW._02._Code.Core;
@@ -5,7 +6,6 @@ using LSW._02._Code.Core.Cores;
 using LSW._02._Code.So;
 using LSW._02._Code.UI;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
@@ -27,6 +27,9 @@ public class BubbleManager : MonoBehaviour, ITabletUI
     [SerializeField] private RectTransform _contaner;
     [SerializeField] private ScrollRect scrollRect;
     
+    [SerializeField] private CloseCafeButton closeCafeBtn;
+    
+    public event Action onEndChat;
     public string sheetName = "Sheet1";
     
     private WaitForSecondsRealtime _interactDelayCoroutine;
@@ -58,6 +61,9 @@ public class BubbleManager : MonoBehaviour, ITabletUI
         }
 
         _currentKey = entry.key;
+
+        if(closeCafeBtn != null)
+            onEndChat += closeCafeBtn.EnableInteractable;
     }
 
     private void Update()
@@ -87,45 +93,41 @@ public class BubbleManager : MonoBehaviour, ITabletUI
         
         DisableInteract();
         
-        if (data.type == DialogueType.Select)
+        if (data.nextKey == "END")
+        {
+            if (data.sincerity != 0)
+                _playerStatCore.ChangeSincerityAmount(sheetName, data.sincerity);
+            ShowPlayerText(data.content, wasChatNpc);
+            wasEndChat = true;
+            onEndChat?.Invoke();
+        }
+        else if (data.type == DialogueType.Select)
         {
             ChoiceBubble choice = Instantiate(PlayerChoice, _contaner);
-            StartCoroutine(RefreshLayout(_contaner));
             FindChoice(data.seq, choice);
             choice.AddEvent(Choose);
         }
         else if(data.speaker == SpeakerType.NPC)
         {
-            StartCoroutine(DelayInteract());
             ShowNPCText(data.content, wasChatNpc, data.speaker.ToString());
             _currentKey = data.nextKey;
+            
+            StartCoroutine(DelayInteract());
         }
         else
         {
-            StartCoroutine(DelayInteract());
-            
             if (data.sincerity != 0)
                 _playerStatCore.ChangeSincerityAmount(sheetName, data.sincerity);
 
             ShowPlayerText(data.content, wasChatNpc);
-            if (data.nextKey == "END")
-            {
-                wasEndChat = true;
-            }
-            else
-            {
-                _currentKey = data.nextKey;
-            }
+            _currentKey = data.nextKey;
+            
+            StartCoroutine(DelayInteract());
         }
         
         _dialogueCount++;
+        StartCoroutine(RefreshLayout(_contaner));
         StartCoroutine(ScrollToBottom());
-    }
-
-    IEnumerator RefreshLayout(RectTransform rect)
-    {
-        yield return new WaitForEndOfFrame();
-        LayoutRebuilder.ForceRebuildLayoutImmediate(rect);
     }
 
     private void ShowNPCText(string log, bool wasNPC, string speakerName = "NPC")
@@ -236,6 +238,19 @@ public class BubbleManager : MonoBehaviour, ITabletUI
     public void DisableInteract()
     {
         CanInteract = false;
+    }
+    
+    IEnumerator RefreshLayout(RectTransform rect)
+    {
+        yield return new WaitForEndOfFrame();
+        LayoutRebuilder.ForceRebuildLayoutImmediate(rect);
+    }
+
+
+    private void OnDestroy()
+    {
+        if(closeCafeBtn != null)
+            onEndChat -= closeCafeBtn.EnableInteractable;
     }
 }
 

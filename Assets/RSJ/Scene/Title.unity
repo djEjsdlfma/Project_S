@@ -5279,6 +5279,7 @@ MonoBehaviour:
   NPCChatting: {fileID: 8828294354088570858, guid: 7404b72f9a7138f4c942fcca0d6f5044, type: 3}
   _contaner: {fileID: 291350745}
   scrollRect: {fileID: 1311108328}
+  closeCafeBtn: {fileID: 1077314403}
   sheetName: Sheet1
 --- !u!1 &526248611
 GameObject:
@@ -11913,6 +11914,7 @@ GameObject:
   - component: {fileID: 1077314402}
   - component: {fileID: 1077314401}
   - component: {fileID: 1077314400}
+  - component: {fileID: 1077314403}
   m_Layer: 5
   m_Name: Image (4)
   m_TagString: Untagged
@@ -12022,6 +12024,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1077314398}
   m_CullTransparentMesh: 1
+--- !u!114 &1077314403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1077314398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b45d824b9764c6aa6f2c001d85381dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LSW._02._Code.UI.CloseCafeButton
 --- !u!1 &1078544332
 GameObject:
   m_ObjectHideFlags: 0

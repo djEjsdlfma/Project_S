@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace LSW._02._Code.Core.Cores
 {
@@ -10,8 +11,6 @@ namespace LSW._02._Code.Core.Cores
 
         public int CurrentDay { get; private set; } = 1;
         public Dictionary<Guest, GuestData> GuestsData { get; private set; } = new Dictionary<Guest, GuestData>();
-        
-        public event Action<int> OnDayChanged;
 
         private DialogueDataCore _dialogueDataCore;
         
@@ -45,7 +44,7 @@ namespace LSW._02._Code.Core.Cores
         public void IncreaseDay(int increaseAmount = 1)
         {
             CurrentDay = Mathf.Clamp(CurrentDay + increaseAmount, 1, maxDay);
-            OnDayChanged?.Invoke(CurrentDay);
+            SceneManager.LoadScene((int)SceneType.DataLoadScene);
         }
 
         public void ChangeSincerityAmount(string guestName, int amount)
