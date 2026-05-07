@@ -43,11 +43,15 @@ public class CameraScript : MonoBehaviour
 
     [SerializeField] private ScriptListFinderSO camerasFinder;
 
+    [SerializeField] private CameraInputSO input;
+
     private RectTransform myPosition;
     private Vector3 _position;
     private MyColor _nowColor;
 
     private bool _copying = false;
+
+    private Camera _main;
 
     // 원본 오브젝트 -> 복사된 오브젝트 정보
     private readonly Dictionary<GameObject, CopiedObj> _copyObjs = new();
@@ -60,13 +64,23 @@ public class CameraScript : MonoBehaviour
         _camera = Camera.main;
         myPosition = GetComponent<RectTransform>();
         _nowColor = MyColor.None;
+
+        input.OnCaptureAction += HandlePhotoInput;
+        input.OnCopyAction += HandleCaptureInput;
+
+        _main = Camera.main;
+    }
+
+
+    private void OnDestroy()
+    {
+        input.OnCaptureAction -= HandlePhotoInput;
+        input.OnCopyAction -= HandleCaptureInput;
     }
 
     private void Update()
     {
         UpdateMouseFollowerUI();
-
-        Vector2 worldMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         // // 복사 중이면, 복사된 오브젝트들을 카메라/마우스 기준으로 계속 이동
         // if (_copying)
@@ -76,14 +90,16 @@ public class CameraScript : MonoBehaviour
         //         camObj.Value.ChangeTransform(worldMousePos);
         //     }
         // }
-
-        HandleCopyInput(worldMousePos);
-        HandlePhotoInput();
+    }
+    
+    private void HandleCaptureInput()
+    {
+        HandleCopyInput(_main.ScreenToWorldPoint(input.MousePos));
     }
 
     private void FixedUpdate()
     {
-        Vector2 worldMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 worldMousePos = _main.ScreenToWorldPoint(input.MousePos);
 
         // 복사 중이면, 복사된 오브젝트들을 카메라/마우스 기준으로 계속 이동
         if (_copying)
@@ -117,9 +133,10 @@ public class CameraScript : MonoBehaviour
     /// </summary>
     private void UpdateMouseFollowerUI()
     {
+        Vector2 mousePos = input.MousePos;
         _position = new Vector3(
-            Input.mousePosition.x - (myPosition.sizeDelta.x / 2),
-            Input.mousePosition.y - (myPosition.sizeDelta.y / 2),
+            mousePos.x - (myPosition.sizeDelta.x / 2),
+            mousePos.y - (myPosition.sizeDelta.y / 2),
             0f
         );
 
