@@ -1,10 +1,11 @@
-
 using System.Collections;
 using System.Linq;
 using LSW._02._Code.Core;
 using LSW._02._Code.Core.Cores;
+using LSW._02._Code.So;
 using LSW._02._Code.UI;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
@@ -35,17 +36,14 @@ public class BubbleManager : MonoBehaviour, ITabletUI
     private PlayerStatCore _playerStatCore;
     private bool wasChatNpc;
     private GameObject nowBubble;
-    private string choiceText2;
-    private int choiceSincerity1;
-    private string nextKey1;
-    private string choiceText1;
-    private int choiceSincerity2;
-    private string nextKey2;
+
+    private ChoiceBubbleData[] choiceData = new ChoiceBubbleData[3];
+    
     private bool wasEndChat = false;
 
     private int _dialogueCount = 0;
     public bool CanInteract { get; private set; }
-
+    
     private void Awake()
     {
         _interactDelayCoroutine = new WaitForSecondsRealtime(1.25f);
@@ -53,13 +51,13 @@ public class BubbleManager : MonoBehaviour, ITabletUI
         _dialogueDataCore = CoreHandler.Instance.GetCore<DialogueDataCore>();
         _playerStatCore = CoreHandler.Instance.GetCore<PlayerStatCore>();
 
-        if (!_dialogueDataCore.GetFirstDialogueByDay(sheetName, _playerStatCore.CurrentDay, out string foundKey, out _))
+        if (!_dialogueDataCore.GetFirstDialogueByDay(sheetName, _playerStatCore.CurrentDay, out DialogueEntry entry))
         {
             Debug.Log($"No Day Dialogue in Sheet, Day : {_playerStatCore.CurrentDay}, Sheet : {sheetName}");
             return;
         }
 
-        _currentKey = foundKey;
+        _currentKey = entry.key;
     }
 
     private void Update()
@@ -84,52 +82,46 @@ public class BubbleManager : MonoBehaviour, ITabletUI
         if(wasEndChat)
             return;
         
-        if (!_dialogueDataCore.GetDialogueDataByKey(sheetName, _currentKey, out DialogueData data)) 
+        if (!_dialogueDataCore.GetDialogueDataByKey(sheetName, _currentKey, out DialogueEntry data)) 
             return;
         
         DisableInteract();
-        if(data.Speaker == SpeakerType.Npc)
+        
+        if (data.type == DialogueType.Select)
         {
-            if(data.Type == DialogueType.Normal || data.Type == DialogueType.Reaction)
-            {
-                StartCoroutine(DelayInteract());
-                ShowNPCText(data.Content, wasChatNpc, data.Speaker.ToString());
-                _currentKey = data.NextKey;
-            }
-            else if (data.Type == DialogueType.Select)
-            {
-                ChoiceBubble choice = Instantiate(PlayerChoice, _contaner);
-                StartCoroutine(RefreshLayout(_contaner));
-                FindChoice(data.Seq, choice);
-                choice.AddEvent(ChoseOne, ChoseTwo);
-            }
+            ChoiceBubble choice = Instantiate(PlayerChoice, _contaner);
+            StartCoroutine(RefreshLayout(_contaner));
+            FindChoice(data.seq, choice);
+            choice.AddEvent(Choose);
+        }
+        else if(data.speaker == SpeakerType.NPC)
+        {
+            StartCoroutine(DelayInteract());
+            ShowNPCText(data.content, wasChatNpc, data.speaker.ToString());
+            _currentKey = data.nextKey;
         }
         else
         {
             StartCoroutine(DelayInteract());
             
-            if (data.Sincerity != 0)
-                _playerStatCore.ChangeSincerityAmount(sheetName, data.Sincerity);
+            if (data.sincerity != 0)
+                _playerStatCore.ChangeSincerityAmount(sheetName, data.sincerity);
 
-            ShowPlayerText(data.Content, wasChatNpc);
-            if (data.NextKey == "END")
+            ShowPlayerText(data.content, wasChatNpc);
+            if (data.nextKey == "END")
             {
                 wasEndChat = true;
             }
-            else if (data.NextKey != "-")
+            else
             {
-                _currentKey = data.NextKey;
-            }
-            else if(_dialogueDataCore.GetDialogueKeyByIndex(_dialogueCount, out string key))
-            {
-                _currentKey = key;
+                _currentKey = data.nextKey;
             }
         }
         
         _dialogueCount++;
         StartCoroutine(ScrollToBottom());
     }
-    
+
     IEnumerator RefreshLayout(RectTransform rect)
     {
         yield return new WaitForEndOfFrame();
@@ -197,55 +189,39 @@ public class BubbleManager : MonoBehaviour, ITabletUI
 
     private void FindChoice(int seqNum, ChoiceBubble choice)
     {
-        if(!_dialogueDataCore.GetAllDialogueData(sheetName, out var allData))
+        if(!_dialogueDataCore.GetAllDialogueEntry(sheetName, out var allData))
             return;
     
         var choices = allData.Values
-            .Where(x => x.Seq == seqNum && x.Type == DialogueType.Select)
-            .OrderBy(x => x.ID)
+            .Where(x => x.seq == seqNum && x.type == DialogueType.Select)
+            .OrderBy(x => x.id)
             .ToList();
 
-        if (choices.Count >= 2)
+        if (choices.Count == 3)
         {
-            choiceText1 = choices[0].Content;
-            choiceText2 = choices[1].Content;
-    
-            nextKey1 = choices[0].NextKey;
-            nextKey2 = choices[1].NextKey;
-            
-            choiceSincerity1 = choices[0].Sincerity;
-            choiceSincerity2 = choices[1].Sincerity;
+            for (int i = 0; i < choices.Count; i++)
+            {
+                choiceData[i].ChoiceText = choices[i].content;
+                choiceData[i].NextKey = choices[i].nextKey;
+                choiceData[i].ChoiceSincerity = choices[i].sincerity;
+            }
         
-            choice.ChoiceInit(choices[0].Content, choices[1].Content);
+            choice.ChoiceInit(choices.Select(x => x.content).ToArray());
         }
     }
 
-    private void ChoseOne(GameObject target)
+    private void Choose(GameObject target, int num)
     {
-        if (choiceSincerity1 != 0)
-            _playerStatCore.ChangeSincerityAmount(sheetName, choiceSincerity1); 
+        _playerStatCore.ChangeSincerityAmount(sheetName, choiceData[num].ChoiceSincerity); 
 
-        ShowPlayerText(choiceText1, wasChatNpc);
+        ShowPlayerText(choiceData[num].ChoiceText, wasChatNpc);
 
-        _currentKey = nextKey1;
+        _currentKey = choiceData[num].NextKey;
 
         Destroy(target);
         StartCoroutine(NextStepAfterChoice());
     }
-
-    private void ChoseTwo(GameObject target)
-    {
-        if (choiceSincerity2 != 0)
-            _playerStatCore.ChangeSincerityAmount(sheetName, choiceSincerity2);
-
-        ShowPlayerText(choiceText2, wasChatNpc);
-
-        _currentKey = nextKey2;
-
-        Destroy(target);
-        StartCoroutine(NextStepAfterChoice());
-    }
-
+    
     private IEnumerator NextStepAfterChoice()
     {
         yield return new WaitForSeconds(0.5f);
@@ -261,4 +237,12 @@ public class BubbleManager : MonoBehaviour, ITabletUI
     {
         CanInteract = false;
     }
+}
+
+
+public struct ChoiceBubbleData
+{
+    public string ChoiceText;
+    public string NextKey;
+    public int ChoiceSincerity;
 }

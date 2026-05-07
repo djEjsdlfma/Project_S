@@ -36,8 +36,8 @@ namespace LSW._02._Code.Data
         
             if (_managers == null || _managers.Count == 0)
             {
-                loadingSlider.value = 1f;
                 CompleteLoading();
+                return;
             }
             
             StartLoad();
@@ -138,6 +138,8 @@ namespace LSW._02._Code.Data
         private void CompleteLoading()
         {
             _sliderTween?.Kill();
+            loadingSlider.value = 1f;
+            loadingText.SetText("100%");
             DelayedSceneLoad();
         }
 

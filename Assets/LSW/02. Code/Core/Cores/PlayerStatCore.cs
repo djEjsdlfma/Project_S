@@ -23,14 +23,17 @@ namespace LSW._02._Code.Core.Cores
             
             foreach (Guest guestName in Enum.GetValues(typeof(Guest)))
             {
-                if (_dialogueDataCore.GetAllDialogueData(guestName.ToString(), out _))
-                    return;
-                
+                if (!_dialogueDataCore.GetAllDialogueEntry(guestName.ToString(), out _))
+                    continue;
+
                 GuestData newGuestData = new GuestData
                 {
                     CurrentSincerityAmount = 0
                 };
+
                 GuestsData.TryAdd(guestName, newGuestData);
+
+                Debug.Log($"Added Guest : {guestName}");
             }
         }
 
@@ -53,6 +56,8 @@ namespace LSW._02._Code.Core.Cores
             GuestData guestData = GuestsData[guest];
             int finalAmount = Mathf.Clamp(guestData.CurrentSincerityAmount + amount, 0, 100);
             guestData.CurrentSincerityAmount = finalAmount;
+            GuestsData[guest] = guestData;
+            
             Debug.Log($"{guestName}: {guestData.CurrentSincerityAmount}");
         }
 
