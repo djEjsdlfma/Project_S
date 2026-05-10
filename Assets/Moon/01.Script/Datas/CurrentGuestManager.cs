@@ -7,9 +7,7 @@ namespace Moon._01.Script.Datas
     {
         public string CurrentGuest { get; private set; }
         
-        public readonly string C1 = "Character_1";
-        public readonly string C2 = "Character_2";
-        public readonly string C3 = "Character_3";
+        public readonly string[] C = { "Character_1" , "Character_2" , "Character_3" , "Character_4" , "Character_5" };
         
         public void SetCurrentGuest(string guestName)
         {

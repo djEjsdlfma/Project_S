@@ -13,6 +13,18 @@ namespace Moon._01.Script.Datas
         C
     }
     
+    public struct EndingData
+    {
+        public string Name;
+        public Endings Ending;
+        
+        public EndingData(string name, Endings ending)
+        {
+            Name = name;
+            Ending = ending;
+        }
+    }
+    
     public class LikeAbility : MonoBehaviour
     {
         [field:SerializeField, SerializedDictionary("Ending", "LikeAbility")] private SerializedDictionary<Endings, float> endingLikeAbilityDict;
@@ -23,35 +35,18 @@ namespace Moon._01.Script.Datas
         
         private void Awake()
         {
-            string C1 = guestScriptFinder.GetTarget<CurrentGuestManager>().C1;
-            string C2 = guestScriptFinder.GetTarget<CurrentGuestManager>().C2;
-            string C3 = guestScriptFinder.GetTarget<CurrentGuestManager>().C3;
-            
-            if(DataManager.Instance.TryGetValue(C1, out float value))
+            string[] C = guestScriptFinder.GetTarget<CurrentGuestManager>().C;
+
+            foreach (var key in C)
             {
-                _likeAbilityDict.Add(C1, value);
-            }
-            else
-            {
-                _likeAbilityDict.Add(C1, 0);
-            }
-            
-            if(DataManager.Instance.TryGetValue(C2, out value))
-            {
-                _likeAbilityDict.Add(C2, value);
-            }
-            else
-            {
-                _likeAbilityDict.Add(C2, 0);
-            }
-            
-            if(DataManager.Instance.TryGetValue(C3, out value))
-            {
-                _likeAbilityDict.Add(C3, value);
-            }
-            else
-            {
-                _likeAbilityDict.Add(C3, 0);
+                if(DataManager.Instance.TryGetValue(key, out float value))
+                {
+                    _likeAbilityDict.Add(key, value);
+                }
+                else
+                {
+                    _likeAbilityDict.Add(key, 0);
+                }
             }
         }
         
@@ -72,27 +67,31 @@ namespace Moon._01.Script.Datas
             return character;
         }
 
-        public (string, Endings) Ending()
+        public List<EndingData> Ending()
         {
-            string character = MostLikeCharacter();
-            Endings ending = Endings.A;
-
-            if (endingLikeAbilityDict.TryGetValue(Endings.A, out float likeAbilityA) && likeAbilityA <= _likeAbilityDict[character])
+            List<EndingData> endingData = new List<EndingData>();
+            Endings ending;
+            string character;
+            foreach (var kvp in _likeAbilityDict)
             {
-                ending = Endings.A;
-            }
-            else if (endingLikeAbilityDict.TryGetValue(Endings.B, out float likeAbilityB) && likeAbilityB <= _likeAbilityDict[character])
-            {
-                ending = Endings.B;
-            }
-            else if (endingLikeAbilityDict.TryGetValue(Endings.C, out float likeAbilityC) && likeAbilityC <= _likeAbilityDict[character])
-            {
-                ending = Endings.C;
+                character = kvp.Key;
+                if (endingLikeAbilityDict.TryGetValue(Endings.A, out float likeAbilityA) && likeAbilityA <= _likeAbilityDict[character])
+                {
+                    ending = Endings.A;
+                }
+                else if (endingLikeAbilityDict.TryGetValue(Endings.B, out float likeAbilityB) && likeAbilityB <= _likeAbilityDict[character])
+                {
+                    ending = Endings.B;
+                }
+                else
+                {
+                    ending = Endings.C;
+                }
+                EndingData data = new EndingData(character, ending);
+                endingData.Add(data);
             }
 
-            DevLog.Log($"{character} : Ending{ending}");
-
-            return (character, ending);
+            return endingData;
         }
         
         public void AddLikeAbility(string character, int amount)
