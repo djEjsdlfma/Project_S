@@ -13,6 +13,10 @@ namespace Moon._01.Script.Test
             DataManager.Instance.SaveData("LSW_Exam",57.2f);
             DataManager.Instance.SaveData("LSW_Male",false);
             DataManager.Instance.SlotSave(1);
+            DataManager.Instance.SaveData("LSW","Good");
+            DataManager.Instance.SaveData("LSW_IQ",120);
+            DataManager.Instance.SaveData("LSW_Exam",95.2f);
+            DataManager.Instance.SaveData("LSW_Male",true);
             DataManager.Instance.AutoSave();
         }
 

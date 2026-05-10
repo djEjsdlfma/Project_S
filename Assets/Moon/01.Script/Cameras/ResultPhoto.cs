@@ -30,7 +30,7 @@ namespace Moon._01.Script.Cameras
             _currentGuestManager = guestScriptFinder.GetTarget<CurrentGuestManager>();
             _likeAbility = guestScriptFinder.GetTarget<LikeAbility>();
             
-            _currentGuestManager.SetCurrentGuest(_currentGuestManager.C1);
+            //_currentGuestManager.SetCurrentGuest(_currentGuestManager.C1);
             
             /*if(String.IsNullOrEmpty(_currentGuestManager.CurrentGuest))
                 return;*/
