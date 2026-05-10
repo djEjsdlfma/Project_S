@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 namespace LSW._02._Code.Core.Cores
 {
-    public class PlayerStatCore : MonoBehaviour, ICore
+    public class GameStatueCore : MonoBehaviour, ICore
     {
         [SerializeField] private int maxDay;
 
@@ -53,8 +53,12 @@ namespace LSW._02._Code.Core.Cores
                 return;
 
             GuestData guestData = GuestsData[guest];
-            int finalAmount = Mathf.Clamp(guestData.CurrentSincerityAmount + amount, 0, 100);
+
+            int realAmount = guestData.CurrentSincerityAmount + amount;
+            int finalAmount = Mathf.Clamp(realAmount, 0, 100);
             guestData.CurrentSincerityAmount = finalAmount;
+            guestData.RealCurrentSincerityAmount = realAmount;
+            
             GuestsData[guest] = guestData;
             
             Debug.Log($"{guestName}: {guestData.CurrentSincerityAmount}");
@@ -66,12 +70,14 @@ namespace LSW._02._Code.Core.Cores
 
     public struct GuestData
     {
-        public int CurrentSincerityAmount { get; set; }
+        public int CurrentSincerityAmount { get; set; }     // 현재 호감도 (0 ~ 100)
+        public int RealCurrentSincerityAmount { get; set; }     // 진짜 호감도 (0 ~ )(혹시 제한없는 게 필요한 경우)
     }
     
     public enum Guest
     {
-        Sheet1 = -1,        // 테스트용임
+        Sheet1 = -2,        // 테스트용임
+        Sheet2 = -1,        // 테스트용2임
         None = 0,
     }
 }

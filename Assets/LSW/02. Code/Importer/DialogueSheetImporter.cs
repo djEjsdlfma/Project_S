@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
+using LSW._02._Code.Core.Cores;
 using LSW._02._Code.So;
 using UnityEditor;
 using UnityEngine;
@@ -16,6 +17,7 @@ namespace LSW._02._Code.Importer
         public class SheetInfo
         {
             public string sheetName;
+            public Guest guest;
             public string sheetUrl;
         }
 
@@ -47,7 +49,7 @@ namespace LSW._02._Code.Importer
 
                 string csv = request.downloadHandler.text;
 
-                DialogueSheet dialogueSheet = ParseCSV(sheet.sheetName, csv);
+                DialogueSheet dialogueSheet = ParseCSV(sheet.sheetName, sheet.guest, csv);
 
                 database.sheets.Add(dialogueSheet);
 
@@ -59,10 +61,11 @@ namespace LSW._02._Code.Importer
             Debug.Log("<color=green>Dialogue Import Complete</color>");
         }
 
-        private DialogueSheet ParseCSV(string sheetName, string csv)
+        private DialogueSheet ParseCSV(string sheetName, Guest guestType, string csv)
         {
             DialogueSheet sheet = new DialogueSheet();
             sheet.sheetName = sheetName;
+            sheet.guestType = guestType;
 
             string[] lines = csv.Split(
                 new[] { "\r\n", "\r", "\n" },

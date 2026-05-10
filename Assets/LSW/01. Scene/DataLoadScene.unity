@@ -1587,6 +1587,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LSW._02._Code.Importer.DialogueSheetImporter
   sheets:
   - sheetName: Sheet1
+    guest: -2
+    sheetUrl: https://docs.google.com/spreadsheets/d/e/2PACX-1vSVCmLGiKR9IbDKjMrRwxk7GhZTY4UPNeD4kgHQ1r0hdsKIBKh8X7uQ0X--k33W0sohwsgLQTPERFul/pub?gid=2135690651&single=true&output=csv
+  - sheetName: Sheet2
+    guest: -1
     sheetUrl: https://docs.google.com/spreadsheets/d/e/2PACX-1vSVCmLGiKR9IbDKjMrRwxk7GhZTY4UPNeD4kgHQ1r0hdsKIBKh8X7uQ0X--k33W0sohwsgLQTPERFul/pub?gid=2135690651&single=true&output=csv
   savePath: Assets/LSW/05. So/DataBase/DialogueDatabase.asset
 --- !u!1 &1700654261

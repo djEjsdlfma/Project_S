@@ -11,18 +11,18 @@ namespace LSW._02._Code.UI
     public class CloseCafeButton : MonoBehaviour
     {
         private Button _closeBtn;
-        private PlayerStatCore _playerStatCore;
+        private GameStatueCore _gameStatueCore;
         
         private UnityAction _dayChangeAction;
         
         private void Awake()
         {
-            if(_playerStatCore == null)
-                _playerStatCore = CoreHandler.Instance.GetCore<PlayerStatCore>();
+            if(_gameStatueCore == null)
+                _gameStatueCore = CoreHandler.Instance.GetCore<GameStatueCore>();
             
             _closeBtn = GetComponent<Button>();
             _closeBtn.interactable = false;
-            _dayChangeAction = (() => _playerStatCore.IncreaseDay());
+            _dayChangeAction = (() => _gameStatueCore.IncreaseDay());
         }
 
         public void EnableInteractable()

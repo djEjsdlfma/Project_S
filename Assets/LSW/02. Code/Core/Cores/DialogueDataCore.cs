@@ -98,6 +98,23 @@ namespace LSW._02._Code.Core.Cores
             return entry != null;
         }
 
+        public bool GetSheetNameByGuest(Guest guest, out string sheetName)
+        {
+            sheetName = string.Empty;
+
+            if (!_initialized)
+                return false;
+
+            DialogueSheet foundSheet = database.sheets.Find(data => data.guestType == guest);
+            if (foundSheet != null)
+            {
+                sheetName = foundSheet.sheetName;
+                return true;
+            }
+
+            return false;
+        }
+
         public void LoadScene(SceneType sceneType) { }
 
         public void Reset() { }

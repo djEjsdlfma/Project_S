@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using LSW._02._Code.Core.Cores;
 using UnityEngine;
 namespace LSW._02._Code.So
 {
@@ -13,6 +14,7 @@ namespace LSW._02._Code.So
     public class DialogueSheet
     {
         public string sheetName;
+        public Guest guestType;
         public List<DialogueEntry> dialogues = new();
     }
 
