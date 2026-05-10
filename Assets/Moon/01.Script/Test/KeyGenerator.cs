@@ -23,7 +23,7 @@ namespace Moon._01.Script.Test
                 resultString += obfuscatedBytes[i] + ", ";
             }
 
-            // 콘솔에 출력된 숫자 배열을 복사해서 위의 obfuscatedKey 배열에 넣으면 됩니다.
+            // 콘솔에 출력된 숫자 배열을 복사하여 DataManager 안에있는 obfuscatedKey 배열에 넣으면 됨
             Debug.Log("{ " + resultString.TrimEnd(',', ' ') + " }"); 
         }
     }

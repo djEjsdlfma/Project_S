@@ -47,7 +47,7 @@ namespace Moon._01.Script.Datas
         private void Init()
         {
             string rootPath = Directory.GetParent(Application.dataPath)?.FullName;
-            _path = string.IsNullOrEmpty(rootPath) ? Application.dataPath + "SaveData" : Path.Combine(rootPath, "SaveData");
+            _path = string.IsNullOrEmpty(rootPath) ? Application.dataPath + "/SaveData" : Path.Combine(rootPath, "SaveData");
             
             if (!Directory.Exists(_path))
             {
@@ -66,10 +66,34 @@ namespace Moon._01.Script.Datas
                     if (File.Exists(filePath))
                     {
                         string jsonData = File.ReadAllText(filePath);
-                        string realData = Decrypt(jsonData, RealKey.GetKey());
-                        DynamicSaveData data = JsonUtility.FromJson<DynamicSaveData>(realData);
-                        _allData.Add(data);
-                        _slotDataExist.Add(true);
+                        DynamicSaveData data = null;
+                        bool isDataValid = false;
+
+                        try
+                        {
+                            string realData = Decrypt(jsonData, RealKey.GetKey()); 
+            
+                            if (!string.IsNullOrEmpty(realData))
+                            {
+                                data = JsonUtility.FromJson<DynamicSaveData>(realData);
+                                isDataValid = true;
+                            }
+                        }
+                        catch (Exception e)
+                        {
+                            Debug.LogError($"[DataManager] Slot {i} save data is corrupted / Decryption failed : {e.Message}");
+                        }
+
+                        if (isDataValid && data != null)
+                        {
+                            _allData.Add(data);
+                            _slotDataExist.Add(true);
+                        }
+                        else 
+                        {
+                            _slotDataExist.Add(false); 
+                            _allData.Add(new DynamicSaveData());
+                        }
                     }
                     else
                     {
@@ -93,7 +117,7 @@ namespace Moon._01.Script.Datas
             }
             catch (Exception e)
             {
-                DevLog.LogError($"init load failed : {e.Message}");
+                Debug.LogError($"[DataManager] Initial load failed: {e.Message}");
             }
         }
         
@@ -105,7 +129,7 @@ namespace Moon._01.Script.Datas
         {
             if (slot < 0 || slot >= MaxSaveSlot)
             {
-                DevLog.LogError("invalid save slot");
+                Debug.LogError($"[DataManager] Invalid save slot requested: {slot}");
                 return false;
             }
             return _slotDataExist[slot];
@@ -137,7 +161,7 @@ namespace Moon._01.Script.Datas
             }
             catch (Exception e)
             {
-                DevLog.LogError($"save failed: {e.Message}");
+                Debug.LogError($"[DataManager] Save failed: {e.Message}");
             }
         }
 
@@ -154,7 +178,7 @@ namespace Moon._01.Script.Datas
             }
             catch (Exception e)
             {
-                DevLog.LogError($"save failed: {e.Message}");
+                Debug.LogError($"[DataManager] Save failed: {e.Message}");
             }
         }
 
@@ -166,7 +190,7 @@ namespace Moon._01.Script.Datas
         {
             if(slot < 0 || slot >= MaxSaveSlot)
             {
-                DevLog.LogError("invalid save slot");
+                Debug.LogError($"[DataManager] Invalid save slot requested: {slot}");
                 return null;
             }
                     
@@ -220,8 +244,15 @@ namespace Moon._01.Script.Datas
         {
             byte[] fullCipher = Convert.FromBase64String(encryptedText);
 
+            if (fullCipher == null)
+            {
+                throw new ArgumentNullException(nameof(fullCipher), "Cipher data cannot be null.");
+            }
+
             if (fullCipher.Length < 16)
-                throw new ArgumentException("Invalid cipher text.");
+            {
+                throw new ArgumentException("Invalid cipher data length.", nameof(fullCipher));
+            }
 
             byte[] iv = new byte[16];
             byte[] cipherText = new byte[fullCipher.Length - 16];
