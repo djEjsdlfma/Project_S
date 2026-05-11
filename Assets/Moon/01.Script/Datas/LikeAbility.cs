@@ -96,7 +96,7 @@ namespace Moon._01.Script.Datas
         
         public void AddLikeAbility(string character, int amount)
         {
-            if (_likeAbilityDict.ContainsKey(character))
+            if (!string.IsNullOrEmpty(character) && _likeAbilityDict.ContainsKey(character))
             {
                 _likeAbilityDict[character] += amount;
                 DataManager.Instance.SaveData(character, _likeAbilityDict[character]);
