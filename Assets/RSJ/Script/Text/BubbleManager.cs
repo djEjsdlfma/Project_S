@@ -40,14 +40,12 @@ public class BubbleManager : MonoBehaviour, ITabletUI
     private bool wasChatNpc;
     private GameObject nowBubble;
 
-    private ChoiceBubbleData[] choiceData = new ChoiceBubbleData[3];
+    private readonly List<ChoiceBubbleData> _currentChoiceData = new List<ChoiceBubbleData>();
     
     private List<GameObject> _allDialogueUI = new List<GameObject>();
     private Guest _currentGuest;
     private string _currentGuestSheetName;
     private Dictionary<Guest, SavedDialogueData> _savedDialogue = new Dictionary<Guest, SavedDialogueData>();
-    private Coroutine interactDelayRoutine;
-    private ChoiceBubble _currentChoiceUI;
     private bool _isChoiceActive;
     private int _currentChoiceSeq;
     
@@ -56,7 +54,7 @@ public class BubbleManager : MonoBehaviour, ITabletUI
     
     private void Awake()
     {
-        _interactDelayCoroutine = new WaitForSecondsRealtime(1.25f);
+        _interactDelayCoroutine = new WaitForSecondsRealtime(0.2f);
         
         _dialogueDataCore = CoreHandler.Instance.GetCore<DialogueDataCore>();
         _gameStatueCore = CoreHandler.Instance.GetCore<GameStatueCore>();
@@ -82,13 +80,12 @@ public class BubbleManager : MonoBehaviour, ITabletUI
     private IEnumerator DelayInteract()
     {
         yield return _interactDelayCoroutine;
-        interactDelayRoutine = null;
         EnableInteract();
     }
 
     public void SpawnMessage()
     {
-        if (wasEndChat)
+        if (!CanInteract || wasEndChat || _isChoiceActive) 
             return;
 
         if (string.IsNullOrEmpty(_currentGuestSheetName) || _currentGuest == Guest.None)
@@ -99,80 +96,72 @@ public class BubbleManager : MonoBehaviour, ITabletUI
 
         DisableInteract();
 
-        if (data.nextKey == "END")
-        {
-            if (data.sincerity != 0)
-                _gameStatueCore.ChangeSincerityAmount(_currentGuestSheetName, data.sincerity);
+        if (data.sincerity != 0)
+            _gameStatueCore.ChangeSincerityAmount(_currentGuestSheetName, data.sincerity);
+        
+        bool isEnding = (data.nextKey == "END");
 
-            ShowPlayerText(data.content, wasChatNpc);
-            wasEndChat = true;
-            onEndChat?.Invoke();
-        }
-        else if (data.type == DialogueType.Select)
+        if (data.type == DialogueType.Select)
         {
-            ChoiceBubble choice = Instantiate(PlayerChoice, _contaner);
-            _allDialogueUI.Add(choice.gameObject);
-            
-            _currentChoiceUI = choice;
             _isChoiceActive = true;
             _currentChoiceSeq = data.seq;
-
+        
+            ChoiceBubble choice = Instantiate(PlayerChoice, _contaner);
+            _allDialogueUI.Add(choice.gameObject);
             FindChoice(data.seq, choice);
             choice.AddEvent(Choose);
         }
         else if (data.speaker == SpeakerType.NPC)
         {
-            ShowNPCText(data.content, wasChatNpc, data.speaker.ToString());
+            ShowNPCText(data.content, wasChatNpc, data.speaker.ToString(), isEnding);
             _currentKey = data.nextKey;
-
-            interactDelayRoutine = StartCoroutine(DelayInteract());
         }
         else
         {
-            if (data.sincerity != 0)
-                _gameStatueCore.ChangeSincerityAmount(_currentGuestSheetName, data.sincerity);
-
             ShowPlayerText(data.content, wasChatNpc);
             _currentKey = data.nextKey;
 
-            interactDelayRoutine = StartCoroutine(DelayInteract());
+            if (isEnding)
+            {
+                HandleEndChat();
+            }
+            else
+            {
+                StartCoroutine(DelayInteract());
+            }
         }
 
-        StartCoroutine(RefreshLayout(_contaner));
-        StartCoroutine(ScrollToBottom());
+        StartCoroutine(UpdateUILayout());
     }
 
-    private void ShowNPCText(string log, bool wasNPC, string speakerName = "NPC")
+    private void ShowNPCText(string log, bool wasNPC, string speakerName, bool isEnding)
     {
+        Guest recordingGuest = _currentGuest;
         bool isFirst = !wasNPC;
+
+        BubbleText prefab = isFirst ? NPCFirstText : NPCText;
+        BubbleText text = Instantiate(prefab, _contaner);
+        _allDialogueUI.Add(text.gameObject);
 
         if (isFirst)
         {
             wasChatNpc = true;
-
-            BubbleText text = Instantiate(NPCFirstText, _contaner);
-            _allDialogueUI.Add(text.gameObject);
             text.InitBubble(log, 1f, speakerName);
-
-            nowBubble = text.gameObject;
         }
         else
         {
-            BubbleText text = Instantiate(NPCText, _contaner);
-            _allDialogueUI.Add(text.gameObject);
             text.InitBubble(log, 1f);
-
-            nowBubble = text.gameObject;
         }
 
-        AddHistory(SpeakerType.NPC, log, isFirst);
-
-        StartCoroutine(ScrollToBottom());
-        ShowBubbleDelay();
+        nowBubble = text.gameObject;
+        AddHistory(recordingGuest, SpeakerType.NPC, log, isFirst);
+        
+        ShowBubbleDelay(nowBubble, isEnding);
     }
 
     private void ShowPlayerText(string log, bool wasNPC = true)
     {
+        Guest recordingGuest = _currentGuest; // 현재 시점의 게스트 기록
         bool isFirst = wasNPC;
 
         wasChatNpc = false;
@@ -184,80 +173,96 @@ public class BubbleManager : MonoBehaviour, ITabletUI
 
         text.InitBubble(log, 1f);
 
-        AddHistory(SpeakerType.PLAYER, log, isFirst);
-
-        StartCoroutine(ScrollToBottom());
+        AddHistory(recordingGuest, SpeakerType.PLAYER, log, isFirst);
     }
 
-    private IEnumerator ScrollToBottom()
+    public void ShowBubbleDelay(GameObject targetBubble, bool isEnding)
     {
-        yield return new WaitForEndOfFrame();
-        scrollRect.verticalNormalizedPosition = 0f;
-    }
-
-    public void ShowBubbleDelay()
-    {
-        if(nowBubble != null)
-            nowBubble.SetActive(false);
+        if(targetBubble != null)
+            targetBubble.SetActive(false);
+    
         GameObject loading = Instantiate(NPCChatting, _contaner);
         _allDialogueUI.Add(loading.gameObject);
-        StartCoroutine(DelayChat(loading));
-    }
 
-    private IEnumerator DelayChat(GameObject loadingObject)
+        StartCoroutine(DelayChat(loading, targetBubble, isEnding));
+    }
+    
+    private IEnumerator DelayChat(GameObject loadingObject, GameObject targetBubble, bool isEnding)
     {
         yield return new WaitForSeconds(1f);
+
         if (loadingObject != null)
         {
             _allDialogueUI.Remove(loadingObject);
             Destroy(loadingObject);
         }
-        if(nowBubble != null)
-            nowBubble.SetActive(true);
-        StartCoroutine(ScrollToBottom());
+
+        if(targetBubble != null)
+            targetBubble.SetActive(true);
+
+        if (isEnding)
+        {
+            HandleEndChat();
+        }
+        else
+        {
+            StartCoroutine(DelayInteract());
+        }
+    
+        StartCoroutine(UpdateUILayout());
+    }
+    
+    private void HandleEndChat()
+    {
+        wasEndChat = true;
+        DisableInteract(); // 확실하게 잠금
+        onEndChat?.Invoke();
     }
 
     private void FindChoice(int seqNum, ChoiceBubble choice)
     {
         if(!_dialogueDataCore.GetAllDialogueEntry(_currentGuestSheetName, out var allData))
             return;
-    
+
         var choices = allData.Values
             .Where(x => x.seq == seqNum && x.type == DialogueType.Select)
             .OrderBy(x => x.id)
             .ToList();
 
-        if (choices.Count == 3)
+        _currentChoiceData.Clear(); 
+
+        foreach (var c in choices)
         {
-            for (int i = 0; i < choices.Count; i++)
+            _currentChoiceData.Add(new ChoiceBubbleData
             {
-                choiceData[i].ChoiceText = choices[i].content;
-                choiceData[i].NextKey = choices[i].nextKey;
-                choiceData[i].ChoiceSincerity = choices[i].sincerity;
-            }
-        
-            choice.ChoiceInit(choices.Select(x => x.content).ToArray());
+                ChoiceText = c.content,
+                NextKey = c.nextKey,
+                ChoiceSincerity = c.sincerity
+            });
         }
+    
+        choice.ChoiceInit(choices.Select(x => x.content).ToArray());
     }
 
     private void Choose(GameObject target, int num)
     {
-        _gameStatueCore.ChangeSincerityAmount(
-            _currentGuestSheetName,
-            choiceData[num].ChoiceSincerity
-        );
+        if (target == null) return;
+        if (num < 0 || num >= _currentChoiceData.Count) return;
 
-        string resultText = choiceData[num].ChoiceText;
-
-        ShowPlayerText(resultText, wasChatNpc);
-
-        _currentKey = choiceData[num].NextKey;
+        var selectedChoice = _currentChoiceData[num];
+        _gameStatueCore.ChangeSincerityAmount(_currentGuestSheetName, selectedChoice.ChoiceSincerity);
+        
+        ShowPlayerText(selectedChoice.ChoiceText, wasChatNpc);
+    
+        _currentKey = selectedChoice.NextKey;
 
         _allDialogueUI.Remove(target);
         Destroy(target);
-
-        _currentChoiceUI = null;
+        
         _isChoiceActive = false;
+    
+        // [수정 핵심] 사용이 끝난 선택지 데이터 초기화
+        _currentChoiceData.Clear(); 
 
         StartCoroutine(NextStepAfterChoice());
     }
@@ -265,52 +270,52 @@ public class BubbleManager : MonoBehaviour, ITabletUI
     private IEnumerator NextStepAfterChoice()
     {
         yield return new WaitForSeconds(0.5f);
+        EnableInteract(); 
         SpawnMessage();
     }
 
     public void ChangeGuestDialogue(Guest guest)
     {
+        if (_currentGuest == guest) return;
+        if (!_dialogueDataCore.GetSheetNameByGuest(guest, out var sheetName)) return;
         
-        if (_currentGuest == guest)
-            return;
-
-        if (!_dialogueDataCore.GetSheetNameByGuest(guest, out var sheetName))
-            return;
-        
-        if (interactDelayRoutine != null)
-        {
-            StopCoroutine(interactDelayRoutine);
-            interactDelayRoutine = null;
-        }
         
         if (_currentGuest != Guest.None)
         {
-            _savedDialogue[_currentGuest] = new SavedDialogueData
+            if (!_savedDialogue.ContainsKey(_currentGuest))
             {
-                LastDialogueKey = _currentKey,
-                WasChatNpc = wasChatNpc,
-                History = _savedDialogue.ContainsKey(_currentGuest)
-                    ? _savedDialogue[_currentGuest].History
-                    : new List<DialogueHistoryData>(),
-                
-                HasActiveChoice = _isChoiceActive,
-                ChoiceSeq = _currentChoiceSeq
-            };
-        }
+                _savedDialogue[_currentGuest] = new SavedDialogueData { History = new List<DialogueHistoryData>() };
+            }
+
+            var currentData = _savedDialogue[_currentGuest];
+            currentData.LastDialogueKey = _currentKey;
+            currentData.WasChatNpc = wasChatNpc;
+            currentData.HasActiveChoice = _isChoiceActive;
+            currentData.ChoiceSeq = _currentChoiceSeq;
         
+            _savedDialogue[_currentGuest] = currentData;
+        }
+
+        _isChoiceActive = false;
+        _currentChoiceData.Clear(); 
+        StopAllCoroutines();
+        DisableInteract();
+    
         foreach (var ui in _allDialogueUI)
         {
-            if (ui != null)
-                Destroy(ui);
+            if (ui != null) Destroy(ui);
         }
         _allDialogueUI.Clear();
+        
+        _currentChoiceData.Clear(); 
 
         _currentGuest = guest;
         _currentGuestSheetName = sheetName;
+        wasEndChat = false; 
 
         SavedDialogueData saveData = default;
         bool hasSave = _savedDialogue.TryGetValue(_currentGuest, out saveData);
-        
+    
         if (hasSave && !string.IsNullOrEmpty(saveData.LastDialogueKey))
         {
             _currentKey = saveData.LastDialogueKey;
@@ -318,99 +323,88 @@ public class BubbleManager : MonoBehaviour, ITabletUI
         }
         else
         {
-            if (_dialogueDataCore.GetFirstDialogueByDay(
-                    _currentGuestSheetName,
-                    _gameStatueCore.CurrentDay,
-                    out var data))
+            if (_dialogueDataCore.GetFirstDialogueByDay(_currentGuestSheetName, _gameStatueCore.CurrentDay, out var data))
             {
                 _currentKey = data.key;
                 wasChatNpc = false;
             }
         }
 
-        wasEndChat = false;
-        
         if (hasSave && saveData.History != null)
         {
             RebuildHistory(saveData);
         }
 
-        StartCoroutine(ScrollToBottom());
+        StartCoroutine(UpdateUILayout());
+        EnableInteract();
     }
     
-    private void AddHistory(SpeakerType speaker, string content, bool isFirst)
+    private void AddHistory(Guest targetGuest, SpeakerType speaker, string content, bool isFirst)
     {
-        if (!_savedDialogue.ContainsKey(_currentGuest))
+        if (targetGuest == Guest.None) return;
+
+        if (!_savedDialogue.ContainsKey(targetGuest))
         {
-            _savedDialogue[_currentGuest] = new SavedDialogueData
+            _savedDialogue[targetGuest] = new SavedDialogueData
             {
-                LastDialogueKey = _currentKey,
-                WasChatNpc = wasChatNpc,
                 History = new List<DialogueHistoryData>()
             };
         }
 
-        var data = _savedDialogue[_currentGuest];
-
+        var data = _savedDialogue[targetGuest];
         data.History ??= new List<DialogueHistoryData>();
 
         data.History.Add(new DialogueHistoryData
         {
             Speaker = speaker,
             Content = content,
-            IsFirst = isFirst,
-            IsChoice = false
+            IsFirst = isFirst
         });
 
-        _savedDialogue[_currentGuest] = data;
+        _savedDialogue[targetGuest] = data;
     }
     
     private void RebuildHistory(SavedDialogueData data)
     {
-        if (data.History == null)
-            return;
+        if (data.History == null) return;
 
         foreach (var h in data.History)
         {
+            BubbleText prefab = null;
             if (h.Speaker == SpeakerType.NPC)
-            {
-                BubbleText prefab = h.IsFirst ? NPCFirstText : NPCText;
-
-                BubbleText text = Instantiate(prefab, _contaner);
-                text.InitBubble(h.Content, 1f);
-                _allDialogueUI.Add(text.gameObject);
-            }
+                prefab = h.IsFirst ? NPCFirstText : NPCText;
             else
-            {
-                BubbleText prefab = h.IsFirst ? PlayerFirstText : PlayerText;
+                prefab = h.IsFirst ? PlayerFirstText : PlayerText;
 
+            if (prefab != null)
+            {
                 BubbleText text = Instantiate(prefab, _contaner);
                 text.InitBubble(h.Content, 1f);
                 _allDialogueUI.Add(text.gameObject);
             }
         }
-        
+    
         if (data.HasActiveChoice)
         {
+            _isChoiceActive = true; 
             StartCoroutine(DelayRestoreChoice(data.ChoiceSeq));
         }
     }
     
     private IEnumerator DelayRestoreChoice(int seq)
     {
-        yield return null;
+        yield return new WaitForEndOfFrame();
+        
+        if (_contaner.GetComponentInChildren<ChoiceBubble>() != null) 
+            yield break;
 
         ChoiceBubble choice = Instantiate(PlayerChoice, _contaner);
         _allDialogueUI.Add(choice.gameObject);
 
         FindChoice(seq, choice);
         choice.AddEvent(Choose);
-
-        _currentChoiceUI = choice;
-        _isChoiceActive = true;
         
-        StartCoroutine(RefreshLayout(_contaner));
-        StartCoroutine(ScrollToBottom());
+        StartCoroutine(UpdateUILayout());
     }
 
     public void EnableInteract()
@@ -423,13 +417,14 @@ public class BubbleManager : MonoBehaviour, ITabletUI
         CanInteract = false;
     }
     
-    IEnumerator RefreshLayout(RectTransform rect)
+    private IEnumerator UpdateUILayout()
     {
+        yield return new WaitUntil(() => _contaner != null);
+        LayoutRebuilder.ForceRebuildLayoutImmediate(_contaner);
         yield return new WaitForEndOfFrame();
-        LayoutRebuilder.ForceRebuildLayoutImmediate(rect);
+        scrollRect.verticalNormalizedPosition = 0f;
     }
-
-
+    
     private void OnDestroy()
     {
         if(closeCafeBtn != null)
