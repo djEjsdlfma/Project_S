@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -6,18 +7,33 @@ using UnityEngine.UI;
 
 public class ChoiceBubble : MonoBehaviour
 {
-    [SerializeField] private Button _choice1Btn;
-    [SerializeField] private Button _choice2Btn;
-
-    public void ChoiceInit(string cho1, string cho2)
+    [SerializeField] private List<Button> _choiceBtns = new List<Button>();
+    
+    private List<TextMeshProUGUI> _choiceTexts = new List<TextMeshProUGUI>();
+    
+    private void Awake()
     {
-        _choice1Btn.GetComponentInChildren<TextMeshProUGUI>().text = cho1;
-        _choice2Btn.GetComponentInChildren<TextMeshProUGUI>().text = cho2;
+        foreach (Button b in _choiceBtns)
+        {
+            _choiceTexts.Add(b.GetComponentInChildren<TextMeshProUGUI>());
+        }
     }
 
-    public void AddEvent(UnityAction<GameObject> action1, UnityAction<GameObject> action2)
+    public void ChoiceInit(string[] choices)
     {
-        _choice1Btn.onClick.AddListener(() => action1(this.gameObject));
-        _choice2Btn.onClick.AddListener(() => action2(this.gameObject));
+        for (int i = 0; i < _choiceTexts.Count; i++)
+        {
+            _choiceTexts[i].SetText(choices[i]);
+        }
+    }
+
+    public void AddEvent(UnityAction<GameObject, int> actions)
+    {
+        for (int i = 0; i < _choiceBtns.Count; i++)
+        {
+            int index = i;
+
+            _choiceBtns[index].onClick.AddListener(() => { actions(this.gameObject, index); });
+        }
     }
 }

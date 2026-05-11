@@ -1712,13 +1712,14 @@ GameObject:
   - component: {fileID: 198569656}
   - component: {fileID: 198569655}
   - component: {fileID: 198569657}
+  - component: {fileID: 198569658}
   m_Layer: 5
   m_Name: Char2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &198569654
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1734,9 +1735,9 @@ RectTransform:
   - {fileID: 798523796}
   m_Father: {fileID: 905626125}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 35, y: -105.94}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &198569655
@@ -1821,6 +1822,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &198569658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 198569653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a588db8003a440e0ac012d75f37913f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LSW._02._Code.UI.GuestProfileSelectBtn
+  bubbleManager: {fileID: 524758812}
+  guest: -1
 --- !u!1 &204285247
 GameObject:
   m_ObjectHideFlags: 0
@@ -5279,7 +5294,7 @@ MonoBehaviour:
   NPCChatting: {fileID: 8828294354088570858, guid: 7404b72f9a7138f4c942fcca0d6f5044, type: 3}
   _contaner: {fileID: 291350745}
   scrollRect: {fileID: 1311108328}
-  sheetName: Sheet1
+  closeCafeBtn: {fileID: 1077314403}
 --- !u!1 &526248611
 GameObject:
   m_ObjectHideFlags: 0
@@ -8890,6 +8905,7 @@ GameObject:
   - component: {fileID: 822648123}
   - component: {fileID: 822648122}
   - component: {fileID: 822648124}
+  - component: {fileID: 822648125}
   m_Layer: 5
   m_Name: Char3
   m_TagString: Untagged
@@ -8999,6 +9015,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &822648125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 822648120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a588db8003a440e0ac012d75f37913f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LSW._02._Code.UI.GuestProfileSelectBtn
+  bubbleManager: {fileID: 524758812}
+  guest: -1
 --- !u!1 &828768068
 GameObject:
   m_ObjectHideFlags: 0
@@ -10488,6 +10518,7 @@ GameObject:
   - component: {fileID: 967027433}
   - component: {fileID: 967027432}
   - component: {fileID: 967027434}
+  - component: {fileID: 967027435}
   m_Layer: 5
   m_Name: Char1
   m_TagString: Untagged
@@ -10598,6 +10629,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &967027435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 967027430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a588db8003a440e0ac012d75f37913f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LSW._02._Code.UI.GuestProfileSelectBtn
+  bubbleManager: {fileID: 524758812}
+  guest: -2
 --- !u!1 &971777133
 GameObject:
   m_ObjectHideFlags: 0
@@ -11913,6 +11958,7 @@ GameObject:
   - component: {fileID: 1077314402}
   - component: {fileID: 1077314401}
   - component: {fileID: 1077314400}
+  - component: {fileID: 1077314403}
   m_Layer: 5
   m_Name: Image (4)
   m_TagString: Untagged
@@ -12022,6 +12068,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1077314398}
   m_CullTransparentMesh: 1
+--- !u!114 &1077314403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1077314398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b45d824b9764c6aa6f2c001d85381dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LSW._02._Code.UI.CloseCafeButton
 --- !u!1 &1078544332
 GameObject:
   m_ObjectHideFlags: 0
