@@ -17,6 +17,8 @@ namespace Moon._01.Script.Datas
         [field: SerializeField] public int MaxSaveSlot { get; private set; } = 3;
         
         public DynamicSaveData CurrentData { get; private set; } = new DynamicSaveData();
+
+        public int CurrentSaveSlot { get; private set; } = 0;
         
         private DynamicSaveData _autoSaved = new DynamicSaveData();
 
@@ -165,6 +167,11 @@ namespace Moon._01.Script.Datas
             }
         }
 
+        public void AutoSavedToCurrent()
+        {
+            SlotSave(CurrentSaveSlot);
+        }
+
         public void AutoSave()
         {
             try
@@ -196,6 +203,7 @@ namespace Moon._01.Script.Datas
                     
             string clonedJson = JsonUtility.ToJson(_allData[slot]);
             CurrentData = JsonUtility.FromJson<DynamicSaveData>(clonedJson);
+            CurrentSaveSlot = slot;
             return CurrentData;
         }
                 
