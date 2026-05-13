@@ -79,5 +79,10 @@ namespace LSW._02._Code.Core.Cores
         Sheet1 = -2,        // 테스트용임
         Sheet2 = -1,        // 테스트용2임
         None = 0,
+        JaeYoonLee,     // 이재윤
+        SoHeeNa,        // 나소희
+        YulPark,        // 박율
+        SeoAhYoon,      // 윤서아
+        MyeongJinChoi   // 최명진
     }
 }
