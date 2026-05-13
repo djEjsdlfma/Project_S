@@ -30,13 +30,13 @@ ScriptedImporter:
     ignoreMipmapLimit: 0
     nPOTScale: 1
     sRGBTexture: 1
-    spriteMode: 1
+    spriteMode: 2
     spriteExtrude: 0
     spriteMeshType: 1
     alignment: 0
     spritePivot: {x: 0.5, y: 0.5}
     spritePixelsToUnits: 64
-    spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+    spriteBorder: {x: 1, y: 1, z: 1, w: 1}
     spriteGenerateFallbackPhysicsShape: 0
     generateCubemap: 6
     cubemapConvolution: 0
@@ -95,6 +95,50 @@ ScriptedImporter:
     spritePosition: {x: 0, y: 0}
   multiSpriteImportData: []
   layeredSpriteImportData:
+  - name: Layer 3
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 5782
+      width: 5176
+      height: 2840
+    spriteID: 61651cfeda31c3b46b1dd51313237445
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 5782}
+    spritePosition: {x: 64, y: 42}
+  - name: Layer 2
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 2908
+      width: 5179
+      height: 2866
+    spriteID: f9e941584ac47384abc5ac28a55e6de8
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 2908}
+    spritePosition: {x: 46, y: 31}
   - name: Layer 1
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -116,7 +160,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
-    spritePosition: {x: 16, y: 16}
+    spritePosition: {x: 30, y: 16}
   spriteImportData: []
   rigSpriteImportData: []
   sharedRigSpriteImportData: []
@@ -188,6 +232,26 @@ ScriptedImporter:
   resliceFromLayer: 0
   pSDLayerImportSetting: []
   psdLayers:
+  - name: Layer 3
+    spriteName: Layer 3
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 61651cfeda31c3b46b1dd51313237445
+    layerID: 6
+    mosaicPosition: {x: 4, y: 5782}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Layer 2
+    spriteName: Layer 2
+    isGroup: 0
+    parentIndex: -1
+    spriteID: f9e941584ac47384abc5ac28a55e6de8
+    layerID: 3
+    mosaicPosition: {x: 4, y: 2908}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
   - name: Layer 1
     spriteName: Layer 1
     isGroup: 0
