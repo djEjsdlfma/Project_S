@@ -9,4 +9,11 @@ public class Sound : MonoBehaviour
     [SerializeField] private Slider SFX;
 
     [SerializeField] private AudioMixer _mixer;
+
+    public void OnChangeToggle(bool value)
+    {
+        // value chagne part
+
+
+    }
 }

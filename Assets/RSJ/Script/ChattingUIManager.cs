@@ -8,7 +8,6 @@ public class ChattingUIManager : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log("?");
         _profilBound.padding = (new Vector4(-1f, -600f, -1000f, -88f));
     }
 
