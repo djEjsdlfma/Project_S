@@ -113,7 +113,7 @@ public class CameraScript : MonoBehaviour
 
     private void HandlePhotoInput()
     {
-        if (!Keyboard.current.fKey.wasPressedThisFrame || !camerasFinder.GetTarget<PhotoStorage>().CanPhoto())
+        if (!camerasFinder.GetTarget<PhotoStorage>().CanPhoto())
             return;
         StopCopy();
 
@@ -148,8 +148,6 @@ public class CameraScript : MonoBehaviour
     /// </summary>
     private void HandleCopyInput(Vector2 worldMousePos)
     {
-        if (!Keyboard.current.gKey.wasPressedThisFrame)
-            return;
 
         if (_copying)
         {
@@ -270,7 +268,7 @@ public class CameraScript : MonoBehaviour
                 obj = Instantiate(item.gameObject);
                 SpriteRenderer newSr = obj.GetComponent<SpriteRenderer>();
                 newSr.sortingOrder = sr.sortingOrder + 1;
-
+                
                 realCenter = obj.transform.position;
             }
             else
@@ -396,7 +394,7 @@ public class CameraScript : MonoBehaviour
         
         if (camObj)
         {
-            camObj.Ratio = preservedRatio;
+            camObj.Ratio *= preservedRatio;
         }
     }
 
