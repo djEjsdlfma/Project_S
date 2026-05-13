@@ -172,6 +172,7 @@ public class BubbleManager : MonoBehaviour, ITabletUI
         _allDialogueUI.Add(text.gameObject);
 
         text.InitBubble(log, 1f);
+        text.InitScale();
 
         AddHistory(recordingGuest, SpeakerType.PLAYER, log, isFirst);
     }

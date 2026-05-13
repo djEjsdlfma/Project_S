@@ -6,7 +6,6 @@ using UnityEngine;
 public class GetRealTime : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _time;
-    [SerializeField] private TextMeshProUGUI _day;
 
     private void Start()
     {
@@ -18,7 +17,6 @@ public class GetRealTime : MonoBehaviour
         while(true)
         {
             _time.text = DateTime.Now.ToString("HH:mm");
-            _day.text = DateTime.Now.ToString("M¿ù dÀÏ dddd");
 
             yield return new WaitForSecondsRealtime(1f);
         }
