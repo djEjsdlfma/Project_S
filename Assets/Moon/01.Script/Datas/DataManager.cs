@@ -206,7 +206,7 @@ namespace Moon._01.Script.Datas
             CurrentSaveSlot = slot;
             return CurrentData;
         }
-                
+        
         public DynamicSaveData LoadAutoSave()
         {
             string clonedJson = JsonUtility.ToJson(_autoSaved);
