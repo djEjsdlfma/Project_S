@@ -6,7 +6,7 @@ namespace Moon._01.Script.Cameras
     {
         [field: SerializeField] public string Name { get; private set; } = "CamObject";
         
-        [SerializeField] private float ratio = 1.0f;
-        public float Ratio { get => ratio; set => ratio = value; }
+        [SerializeField] protected float ratio = 1.0f;
+        public virtual float Ratio { get => ratio; set => ratio = value; }
     }
 }
