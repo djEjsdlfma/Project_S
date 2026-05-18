@@ -89,6 +89,28 @@ public class CameraScript : MonoBehaviour
         //     }
         // }
     }
+
+    private void CheckUIInArea()
+    {
+        Vector2 boxSize = myPosition.sizeDelta * (CHECK_BOX_SCALE * (_camera.orthographicSize * 0.2f));
+    
+        Vector2 worldMin = (Vector2)checkPos.position - (boxSize * 0.5f);
+        Vector2 worldMax = (Vector2)checkPos.position + (boxSize * 0.5f);
+
+        Vector2 screenMin = _camera.WorldToScreenPoint(worldMin);
+        Vector2 screenMax = _camera.WorldToScreenPoint(worldMax);
+
+        Rect screenRect = Rect.MinMaxRect(
+            Mathf.Min(screenMin.x, screenMax.x), 
+            Mathf.Min(screenMin.y, screenMax.y), 
+            Mathf.Max(screenMin.x, screenMax.x), 
+            Mathf.Max(screenMin.y, screenMax.y)
+        );
+
+        camerasFinder.GetTarget<CamDelUI>().CheckUI(screenRect);
+    }
+
+    
     
     private void HandleCaptureInput()
     {
@@ -114,6 +136,8 @@ public class CameraScript : MonoBehaviour
         if (!camerasFinder.GetTarget<PhotoStorage>().CanPhoto())
             return;
         StopCopy();
+
+        CheckUIInArea();
 
         _img.color = new Color(1, 1, 1, 1);
         _img.DOFade(0f, 0.2f);
@@ -187,7 +211,8 @@ public class CameraScript : MonoBehaviour
             {
                 if (camObj.Value.CopyObj)
                 {
-                    DestroyImmediate(camObj.Value.CopyObj);
+                    camObj.Value.CopyObj.SetActive(false);
+                    Destroy(camObj.Value.CopyObj);
                 }
             }
         }

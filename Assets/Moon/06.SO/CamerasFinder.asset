@@ -35,3 +35,7 @@ MonoBehaviour:
       typeName: Moon._01.Script.Cameras.ResultPhoto, Assembly-CSharp, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
     IsFindChild: 0
+  - SType:
+      typeName: Moon._01.Script.Cameras.CamDelUI, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+    IsFindChild: 0
