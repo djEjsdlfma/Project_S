@@ -2,7 +2,6 @@ using DG.Tweening;
 using System;
 using System.Collections;
 using TMPro;
-using UnityEditor.Toolbars;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
