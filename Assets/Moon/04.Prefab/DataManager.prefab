@@ -44,4 +44,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aca9c20e7f504f4dbdee32fb732d7c23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Moon._01.Script.Datas.DataManager
-  <MaxSaveSlot>k__BackingField: 3
+  <MaxSaveSlot>k__BackingField: 23

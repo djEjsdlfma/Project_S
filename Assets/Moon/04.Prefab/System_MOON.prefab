@@ -474,6 +474,56 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8858398086d42f79bfe02faedbfc742, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Moon._01.Script.Datas.CurrentGuestManager
+--- !u!1 &8073750707293931102
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9187673178496136766}
+  - component: {fileID: 8739513831468381767}
+  m_Layer: 0
+  m_Name: CamDelUI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9187673178496136766
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8073750707293931102}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5800166738284915372}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8739513831468381767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8073750707293931102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5f0fbf41f734676a9d45c8f96a112ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Moon._01.Script.Cameras.CamDelUI
+  targetPrefab: {fileID: 4473312869719883243, guid: d66dbe2d1dd3df94aa99efdbc49676b1, type: 3}
+  targetParent: {fileID: 0}
+  minDistanceToPlayerWorldDis: 2
+  createTime: 1
+  maxUICount: 5
+  playerFinder: {fileID: 11400000, guid: d0cd58a8765f43a478f21e9ec88d332c, type: 2}
 --- !u!1 &8792475138434462152
 GameObject:
   m_ObjectHideFlags: 0
@@ -629,7 +679,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -673,7 +723,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3178651653227676661, guid: 6204e90997527ce40ab7a3b3e4109333, type: 3}
       propertyPath: finders.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3178651653227676661, guid: 6204e90997527ce40ab7a3b3e4109333, type: 3}
       propertyPath: 'finders.Array.data[0]'
@@ -683,6 +733,10 @@ PrefabInstance:
       propertyPath: 'finders.Array.data[1]'
       value: 
       objectReference: {fileID: 11400000, guid: 0b3a04ad8709d154d8102a424b4a96a0, type: 2}
+    - target: {fileID: 3178651653227676661, guid: 6204e90997527ce40ab7a3b3e4109333, type: 3}
+      propertyPath: 'finders.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: d0cd58a8765f43a478f21e9ec88d332c, type: 2}
     - target: {fileID: 3325080642434230450, guid: 6204e90997527ce40ab7a3b3e4109333, type: 3}
       propertyPath: m_Name
       value: System_MOON
@@ -736,6 +790,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3994229506672303444, guid: 6204e90997527ce40ab7a3b3e4109333, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5005891598569191603}
+    - targetCorrespondingSourceObject: {fileID: 3994229506672303444, guid: 6204e90997527ce40ab7a3b3e4109333, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9187673178496136766}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6204e90997527ce40ab7a3b3e4109333, type: 3}
 --- !u!4 &5800166738284915372 stripped
