@@ -8,7 +8,6 @@ public class Title : MonoBehaviour
 {
     [SerializeField] private GameObject[] etcBackground;
     [SerializeField] private RectTransform _titleImg;
-    [SerializeField] private RectTransform _mainBG;
     [SerializeField] private Image[] _passWord;
     [SerializeField] private RectTransform _padMain;
     [SerializeField] private GameObject _start;
@@ -24,6 +23,8 @@ public class Title : MonoBehaviour
 
     private void Start()
     {
+        if (isStarted) return;
+
         _start.SetActive(true);
 
         DOTween.SetTweensCapacity(500, 50);
@@ -38,9 +39,7 @@ public class Title : MonoBehaviour
 
     private void Update()
     {
-        //나중에 이 부분은 지울것
-        if (Keyboard.current.spaceKey.wasPressedThisFrame)
-            SceneManager.LoadScene(0);
+        if(isStarted) return;
 
         if (!_titleImg.gameObject.activeSelf || moving) return;
 
@@ -53,14 +52,8 @@ public class Title : MonoBehaviour
         if(inputTry >= 4)
         {
             moving = true;
+            isStarted = true;
             _titleImg.DOAnchorPosY(980f, 0.5f)
-                .OnStart(() =>
-                {
-                    _mainBG.DOScale(Vector3.one, 0.5f).OnComplete(() =>
-                    {
-                        _padMain.DOAnchorPosX(-214.65f, moveTime).SetEase(easeGrpah);
-                    });
-                })
                 .OnComplete(() => _titleImg.gameObject.SetActive(false));
         }
     }

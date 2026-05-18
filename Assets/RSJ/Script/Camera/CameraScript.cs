@@ -12,24 +12,24 @@ using MoonLib.ScriptFinder_Pro.RunTime.Finder.ListFinder;
 /// <summary>
 /// 화면에 복사된 오브젝트를 원본 기준 오프셋으로 따라다니게 하는 정보 구조체.
 /// </summary>
-public struct CopiedObj
+public readonly struct CopiedObj
 {
-    public Vector2 camToPos;
-    public GameObject copyObj;
-    public float gravityScale;
+    private readonly Vector2 _camToPos;
+    public readonly GameObject CopyObj;
+    public readonly float GravityScale;
 
     public CopiedObj(Vector2 camToPos, GameObject copyObj, float gravityScale)
     {
-        this.camToPos = camToPos;
-        this.copyObj = copyObj;
-        this.gravityScale = gravityScale;
+        _camToPos = camToPos;
+        CopyObj = copyObj;
+        GravityScale = gravityScale;
     }
 
     public void ChangeTransform(Vector2 camPos)
     {
-        if (copyObj)
+        if (CopyObj)
         {
-            copyObj.transform.position = camPos + camToPos;
+            CopyObj.transform.position = camPos + _camToPos;
         }
     }
 }
@@ -47,7 +47,6 @@ public class CameraScript : MonoBehaviour
 
     private RectTransform myPosition;
     private Vector3 _position;
-    private MyColor _nowColor;
 
     private bool _copying = false;
 
@@ -63,7 +62,6 @@ public class CameraScript : MonoBehaviour
     {
         _camera = Camera.main;
         myPosition = GetComponent<RectTransform>();
-        _nowColor = MyColor.None;
 
         input.OnCaptureAction += HandlePhotoInput;
         input.OnCopyAction += HandleCaptureInput;
@@ -187,9 +185,9 @@ public class CameraScript : MonoBehaviour
             // 복사본 전부 제거
             foreach (var camObj in _copyObjs)
             {
-                if (camObj.Value.copyObj)
+                if (camObj.Value.CopyObj)
                 {
-                    DestroyImmediate(camObj.Value.copyObj);
+                    DestroyImmediate(camObj.Value.CopyObj);
                 }
             }
         }
@@ -198,19 +196,19 @@ public class CameraScript : MonoBehaviour
             // 복사본은 유지하고, 충돌 판정만 다시 켬
             foreach (var camObj in _copyObjs)
             {
-                if (camObj.Value.copyObj)
+                if (camObj.Value.CopyObj)
                 {
-                    if (camObj.Value.copyObj.TryGetComponent(out Collider2D col))
+                    if (camObj.Value.CopyObj.TryGetComponent(out Collider2D col))
                     {
                         col.enabled = true;
                     }
                     
                     if (col.TryGetComponent(out Rigidbody2D rb))
                     {
-                        rb.gravityScale = camObj.Value.gravityScale;
+                        rb.gravityScale = camObj.Value.GravityScale;
                     }
                     
-                    if (camObj.Value.copyObj.TryGetComponent(out ICopyable copyable))
+                    if (camObj.Value.CopyObj.TryGetComponent(out ICopyable copyable))
                     {
                         copyable.Paste();
                     }

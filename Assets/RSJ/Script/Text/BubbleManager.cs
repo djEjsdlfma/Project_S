@@ -21,6 +21,7 @@ public class BubbleManager : MonoBehaviour, ITabletUI
     [SerializeField] private BubbleText PlayerText;
     
     [SerializeField] private ChoiceBubble PlayerChoice;
+    [SerializeField] private GameObject ChoiceObject;
 
     //???? ??? ??
     [SerializeField] private GameObject NPCChatting;
@@ -225,6 +226,8 @@ public class BubbleManager : MonoBehaviour, ITabletUI
         if(!_dialogueDataCore.GetAllDialogueEntry(_currentGuestSheetName, out var allData))
             return;
 
+        ChoiceObject.SetActive(true);
+
         var choices = allData.Values
             .Where(x => x.seq == seqNum && x.type == DialogueType.Select)
             .OrderBy(x => x.id)
@@ -263,8 +266,8 @@ public class BubbleManager : MonoBehaviour, ITabletUI
         _isChoiceActive = false;
     
         // [수정 핵심] 사용이 끝난 선택지 데이터 초기화
-        _currentChoiceData.Clear(); 
-
+        _currentChoiceData.Clear();
+        ChoiceObject.SetActive(false);
         StartCoroutine(NextStepAfterChoice());
     }
     
