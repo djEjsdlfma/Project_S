@@ -4,6 +4,7 @@ using System.Collections;
 using TMPro;
 using UnityEditor.Toolbars;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class TitleManager : MonoBehaviour
@@ -35,8 +36,8 @@ public class TitleManager : MonoBehaviour
     {
         yield return new WaitForSeconds(0.35f);
 
-        _sceneFadeImg.DOFade(1f, 0.6f);
-            //.OnComplete(() => _textsObj.SetActive(true));
+        _sceneFadeImg.DOFade(1f, 0.6f)
+            .OnComplete(() => SceneManager.LoadScene("ChoiMyeongJin"));
     }
 
     private IEnumerator StartFade()

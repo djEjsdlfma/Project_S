@@ -14,5 +14,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/RSJ/Scene/Title.unity
     guid: d82feb4b11fcb44498d426f98acc8993
+  - enabled: 1
+    path: Assets/LSW/01. Scene/ChoiMyeongJin.unity
+    guid: e5c3c777cea551643a16c82f451956d2
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
