@@ -19,6 +19,7 @@ public class TitleManager : MonoBehaviour
     [SerializeField] private Image _sceneFadeImg;
 
     private float timer = 0f;
+    private GameObject nowGameObjcet;
 
     public void ChangeDay()
     {
@@ -30,6 +31,15 @@ public class TitleManager : MonoBehaviour
     {
         _teaImg.DOSizeDelta(new Vector2(12000f, 12000f), 0.95f);
         StartCoroutine(StartChangeScene());
+    }
+
+    public void TurnOnPart(GameObject part)
+    {
+        if(nowGameObjcet != null)
+            nowGameObjcet.SetActive(false);
+
+        nowGameObjcet = part;
+        part.SetActive(true);
     }
 
     private IEnumerator StartChangeScene()
