@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using LSW._02._Code.Environment.Takable;
 using MoonLib.ScriptFinder_Pro.RunTime.Finder.ListFinder;
 using UnityEngine;
 
@@ -62,6 +63,10 @@ namespace Moon._01.Script.Cameras
                     if (IsMoreThanHalfInside(hit, cameraBounds, camObj))
                     {
                         camObjs.Add(camObj.Name);
+                        if(camObj.TryGetComponent(out ITakable takable))
+                        {
+                            takable.Take();
+                        }
                     }
                 }
             }

@@ -5,70 +5,79 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using DG.Tweening;
 using LSW._02._Code.Environment.InteractableObject;
+using LSW._02._Code.Environment.Takable;
 using Moon._01.Script.Cameras;
 using MoonLib.ScriptFinder_Pro.RunTime.DevLogs;
 using MoonLib.ScriptFinder_Pro.RunTime.Finder.ListFinder;
 
+public enum CameraMode
+{
+    Copy,
+    Move
+}
+
 /// <summary>
 /// 화면에 복사된 오브젝트를 원본 기준 오프셋으로 따라다니게 하는 정보 구조체.
 /// </summary>
-public readonly struct CopiedObj
+public readonly struct InteractTarget
 {
     private readonly Vector2 _camToPos;
-    public readonly GameObject CopyObj;
+    public readonly GameObject TargetObj;
     public readonly float GravityScale;
 
-    public CopiedObj(Vector2 camToPos, GameObject copyObj, float gravityScale)
+    public InteractTarget(Vector2 camToPos, GameObject targetObj, float gravityScale)
     {
         _camToPos = camToPos;
-        CopyObj = copyObj;
+        TargetObj = targetObj;
         GravityScale = gravityScale;
     }
 
     public void ChangeTransform(Vector2 camPos)
     {
-        if (CopyObj)
+        if (TargetObj)
         {
-            CopyObj.transform.position = camPos + _camToPos;
+            TargetObj.transform.position = camPos + _camToPos;
         }
     }
 }
 
 public class CameraScript : MonoBehaviour
 {
+    [field:SerializeField] public bool CanCapture { get; private set; } = false;
+    
+    [Header("Mode Settings")]
+    [SerializeField] private CameraMode _currentMode = CameraMode.Copy; // 현재 모드 설정
+
     [Header("Target / UI")]
-    [SerializeField] private Transform checkPos;          // 복사 판정을 할 기준 위치
-    [SerializeField] private LayerMask coloredObject;     // 복사 대상 레이어
+    [SerializeField] private Transform checkPos;          // 복사/이동 판정을 할 기준 위치
+    [SerializeField] private LayerMask coloredObject;     // 대상 레이어
     [SerializeField] private Image _img;                  // UI 이미지 페이드 연출용
-
     [SerializeField] private ScriptListFinderSO camerasFinder;
-
     [SerializeField] private CameraInputSO input;
 
     private RectTransform myPosition;
     private Vector3 _position;
-
-    private bool _copying = false;
-
     private Camera _main;
-
-    // 원본 오브젝트 -> 복사된 오브젝트 정보
-    private readonly Dictionary<GameObject, CopiedObj> _copyObjs = new();
     private Camera _camera;
 
+    // 상태 플래그
+    private bool _copying = false;
+    private bool _moving = false;
+
+    // 조작 중인 오브젝트 정보 (복사 & 이동 공용으로 사용하거나 분리 가능)
+    private readonly Dictionary<GameObject, InteractTarget> _interactObjs = new();
+    
     private const float CHECK_BOX_SCALE = 0.009f;
 
     private void Awake()
     {
         _camera = Camera.main;
+        _main = Camera.main;
         myPosition = GetComponent<RectTransform>();
 
         input.OnCaptureAction += HandlePhotoInput;
-        input.OnCopyAction += HandleCaptureInput;
-
-        _main = Camera.main;
+        input.OnCopyAction += HandleCaptureInput; // G키 입력
     }
-
 
     private void OnDestroy()
     {
@@ -79,15 +88,364 @@ public class CameraScript : MonoBehaviour
     private void Update()
     {
         UpdateMouseFollowerUI();
+    }
 
-        // // 복사 중이면, 복사된 오브젝트들을 카메라/마우스 기준으로 계속 이동
-        // if (_copying)
-        // {
-        //     foreach (var camObj in _copyObjs)
-        //     {
-        //         camObj.Value.ChangeTransform(worldMousePos);
-        //     }
-        // }
+    private void FixedUpdate()
+    {
+        Vector2 worldMousePos = _main.ScreenToWorldPoint(input.MousePos);
+
+        // 복사 중이거나 이동 중이면, 대상 오브젝트들을 카메라/마우스 기준으로 계속 이동
+        if (_copying || _moving)
+        {
+            foreach (var target in _interactObjs)
+            {
+                target.Value.ChangeTransform(worldMousePos);
+            }
+        }
+    }
+
+    /// <summary>
+    /// 외부에서 모드를 변경할 때 호출 (UI 버튼이나 단축키 등)
+    /// </summary>
+    public void ChangeMode(CameraMode newMode)
+    {
+        if (_currentMode == newMode) return;
+
+        // 모드 변경 전 진행 중이던 작업 취소
+        if (_copying) StopCopy(true);
+        if (_moving) DropObj();
+
+        _currentMode = newMode;
+        DevLog.Log($"Camera Mode Changed to: {_currentMode}");
+    }
+
+    private void HandleCaptureInput()
+    {
+        HandleActionInput(_main.ScreenToWorldPoint(input.MousePos));
+    }
+
+    /// <summary>
+    /// G 키 입력 시 Enum 모드에 따라 동작 분기
+    /// </summary>
+    private void HandleActionInput(Vector2 worldMousePos)
+    {
+        switch (_currentMode)
+        {
+            case CameraMode.Copy:
+                HandleCopyMode(worldMousePos);
+                break;
+            case CameraMode.Move:
+                HandleMoveMode(worldMousePos);
+                break;
+        }
+    }
+
+    #region COPY MODE LOGIC
+    private void HandleCopyMode(Vector2 worldMousePos)
+    {
+        if (_copying)
+        {
+            // 이미 복사 중이면 현재 복사본을 "확정"
+            PressObj();
+            DevLog.Log("Copy Confirmed (Pressed)");
+        }
+        else
+        {
+            // 새 복사 시작
+            _img.color = new Color(1, 1, 1, 1);
+            CopyObj(worldMousePos);
+            _img.DOFade(0f, 0.2f);
+            DevLog.Log("Copy Start");
+        }
+    }
+
+    private void PressObj()
+    {
+        StopCopy(false);
+    }
+
+    private void StopCopy(bool cancel = true)
+    {
+        _copying = false;
+
+        if (cancel)
+        {
+            // 복사본 전부 제거
+            foreach (var target in _interactObjs)
+            {
+                if (target.Value.TargetObj)
+                {
+                    target.Value.TargetObj.SetActive(false);
+                    Destroy(target.Value.TargetObj);
+                }
+            }
+        }
+        else
+        {
+            // 복사본은 유지하고, 충돌 판정만 다시 켬
+            foreach (var target in _interactObjs)
+            {
+                if (target.Value.TargetObj)
+                {
+                    if (target.Value.TargetObj.TryGetComponent(out Collider2D col))
+                        col.enabled = true;
+                    
+                    if (target.Value.TargetObj.TryGetComponent(out Rigidbody2D rb))
+                        rb.gravityScale = target.Value.GravityScale;
+                    
+                    if (target.Value.TargetObj.TryGetComponent(out ICopyable copyable))
+                        copyable.Paste();
+                }
+            }
+        }
+
+        _interactObjs.Clear();
+    }
+
+    private void CopyObj(Vector2 pos)
+    {
+        Collider2D[] items = Physics2D.OverlapBoxAll(
+            checkPos.position,
+            myPosition.sizeDelta * (CHECK_BOX_SCALE * (_camera.orthographicSize * 0.2f)),
+            0,
+            coloredObject
+        );
+
+        if (items == null || items.Length == 0) return;
+
+        Vector2 checkMin = (Vector2)checkPos.position - myPosition.sizeDelta * (CHECK_BOX_SCALE * (_camera.orthographicSize * 0.2f) * 0.5f);
+        Vector2 checkMax = (Vector2)checkPos.position + myPosition.sizeDelta * (CHECK_BOX_SCALE * (_camera.orthographicSize * 0.2f) * 0.5f);
+
+        foreach (var item in items)
+        {
+            if (item == null) continue;
+            
+            if (item.TryGetComponent(out TakableObject takable))
+            {
+                continue;
+            }
+            
+            Vector2 itemMin = item.bounds.min;
+            Vector2 itemMax = item.bounds.max;
+            
+            if (itemMax.x < checkMin.x || itemMin.x > checkMax.x ||
+                itemMax.y < checkMin.y || itemMin.y > checkMax.y)
+                continue;
+
+            SpriteRenderer sr = item.GetComponent<SpriteRenderer>();
+            if (sr == null || sr.sprite == null) continue;
+
+            bool inBox =
+                itemMin.x >= checkMin.x && itemMax.x <= checkMax.x &&
+                itemMin.y >= checkMin.y && itemMax.y <= checkMax.y;
+
+            GameObject obj;
+            Vector2 realCenter;
+
+            if (inBox)
+            {
+                obj = Instantiate(item.gameObject, null, true);
+                obj.transform.position = item.transform.position;
+                obj.transform.rotation = item.transform.rotation;
+                obj.transform.localScale = item.transform.lossyScale;
+
+                SpriteRenderer newSr = obj.GetComponent<SpriteRenderer>();
+                newSr.sortingOrder = sr.sortingOrder + 1;
+                
+                realCenter = obj.transform.position;
+            }
+            else
+            {
+                Sprite clippedSprite = ClipSprite(sr, checkMin, checkMax, out float preservedRatio);
+                if (clippedSprite == null) continue;
+
+                obj = Instantiate(item.gameObject, null, true);
+                obj.transform.position = item.transform.position;
+                obj.transform.rotation = item.transform.rotation;
+                obj.transform.localScale = item.transform.lossyScale;
+
+                SpriteRenderer newSr = obj.GetComponent<SpriteRenderer>();
+                newSr.sprite = clippedSprite;
+                newSr.sortingOrder = sr.sortingOrder + 1;
+
+                realCenter = obj.transform.position;
+                
+                ReplaceClippedCollider(item.gameObject, obj, checkMin, checkMax);
+                
+                if (preservedRatio < 0.5f)
+                {
+                    if (obj.TryGetComponent(out Piece piece))
+                    {
+                        Destroy(piece);
+                    }
+                }
+            }
+
+            if (obj.TryGetComponent(out Collider2D col))
+                col.enabled = false;
+            
+            float gravityScale = 0f;
+            if (obj.TryGetComponent(out Rigidbody2D rb))
+            {
+                gravityScale = rb.gravityScale;
+                rb.gravityScale = 0;
+            }
+            
+            if(obj.TryGetComponent(out ICopyable copyable))
+                copyable.Copy();
+
+            if (!_interactObjs.ContainsKey(item.gameObject))
+            {
+                _interactObjs.Add(item.gameObject, new InteractTarget(realCenter - pos, obj, gravityScale));
+            }
+        }
+
+        if (_interactObjs.Count > 0)
+            _copying = true;
+    }
+    #endregion
+
+    #region MOVE MODE LOGIC
+    private void HandleMoveMode(Vector2 worldMousePos)
+    {
+        if (_moving)
+        {
+            // 이동 중이면 원하는 위치에 내려놓음
+            DropObj();
+        }
+        else
+        {
+            // 이동할 원본 오브젝트 픽업
+            _img.color = new Color(1, 1, 1, 1);
+            SelectMoveObj(worldMousePos);
+            _img.DOFade(0f, 0.2f);
+        }
+    }
+
+    /// <summary>
+    /// 복사(Instantiate)하지 않고 기존 오브젝트를 선택해서 들기
+    /// </summary>
+    private void SelectMoveObj(Vector2 pos)
+    {
+        Collider2D[] items = Physics2D.OverlapBoxAll(
+            checkPos.position,
+            myPosition.sizeDelta * (CHECK_BOX_SCALE * (_camera.orthographicSize * 0.2f)),
+            0,
+            coloredObject
+        );
+
+        if (items == null || items.Length == 0) return;
+
+        foreach (var item in items)
+        {
+            if (item == null) continue;
+            
+            if (item.TryGetComponent(out TakableObject takable))
+            {
+                continue;
+            }
+            
+            GameObject obj = item.gameObject;
+            Vector2 realCenter = obj.transform.position;
+
+            // 이동 중 충돌 방지
+            if (obj.TryGetComponent(out Collider2D col))
+                col.enabled = false;
+            
+            float gravityScale = 0f;
+            if (obj.TryGetComponent(out Rigidbody2D rb))
+            {
+                gravityScale = rb.gravityScale;
+                rb.gravityScale = 0;
+                rb.linearVelocity = Vector2.zero; // 이동 전 물리 속도 초기화
+            }
+
+            if (!_interactObjs.ContainsKey(obj))
+            {
+                _interactObjs.Add(obj, new InteractTarget(realCenter - pos, obj, gravityScale));
+            }
+        }
+
+        if (_interactObjs.Count > 0)
+            _moving = true;
+    }
+
+    /// <summary>
+    /// 들고 있던 오브젝트를 현재 위치에 내려놓기
+    /// </summary>
+    private void DropObj()
+    {
+        _moving = false;
+
+        foreach (var target in _interactObjs)
+        {
+            if (target.Value.TargetObj)
+            {
+                // 충돌 및 물리 다시 활성화
+                if (target.Value.TargetObj.TryGetComponent(out Collider2D col))
+                    col.enabled = true;
+                
+                if (target.Value.TargetObj.TryGetComponent(out Rigidbody2D rb))
+                    rb.gravityScale = target.Value.GravityScale;
+            }
+        }
+
+        _interactObjs.Clear();
+    }
+    #endregion
+
+    #region PHOTO / UI LOGIC
+    private void HandlePhotoInput()
+    {
+        if(!CanCapture)
+            return;
+        
+        if (CheckAndTakeObject())
+            return; 
+        
+        if (!camerasFinder.GetTarget<PhotoStorage>().CanPhoto())
+            return;
+        
+        if (_copying) StopCopy(true);
+        if (_moving) DropObj();
+
+        CheckUIInArea();
+
+        _img.color = new Color(1, 1, 1, 1);
+        _img.DOFade(0f, 0.2f);
+        DevLog.Log("찰칵");
+        CheckObj();
+    }
+
+    private bool CheckAndTakeObject()
+    {
+        Collider2D[] items = Physics2D.OverlapBoxAll(
+            checkPos.position,
+            myPosition.sizeDelta * (CHECK_BOX_SCALE * (_camera.orthographicSize * 0.2f)),
+            0,
+            coloredObject
+        );
+
+        if (items == null || items.Length == 0) return false;
+
+        foreach (var item in items)
+        {
+            if (item == null) continue;
+            
+            if (item.TryGetComponent(out ITakable takable))
+            {
+                CanCapture = false;
+                takable.Take();
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private void CheckObj()
+    {
+        camerasFinder.GetTarget<CameraCapture>().TakePhoto();
     }
 
     private void CheckUIInArea()
@@ -110,49 +468,6 @@ public class CameraScript : MonoBehaviour
         camerasFinder.GetTarget<CamDelUI>().CheckUI(screenRect);
     }
 
-    
-    
-    private void HandleCaptureInput()
-    {
-        HandleCopyInput(_main.ScreenToWorldPoint(input.MousePos));
-    }
-
-    private void FixedUpdate()
-    {
-        Vector2 worldMousePos = _main.ScreenToWorldPoint(input.MousePos);
-
-        // 복사 중이면, 복사된 오브젝트들을 카메라/마우스 기준으로 계속 이동
-        if (_copying)
-        {
-            foreach (var camObj in _copyObjs)
-            {
-                camObj.Value.ChangeTransform(worldMousePos);
-            }
-        }
-    }
-
-    private void HandlePhotoInput()
-    {
-        if (!camerasFinder.GetTarget<PhotoStorage>().CanPhoto())
-            return;
-        StopCopy();
-
-        CheckUIInArea();
-
-        _img.color = new Color(1, 1, 1, 1);
-        _img.DOFade(0f, 0.2f);
-        DevLog.Log("찰칵");
-        CheckObj();
-    }
-
-    private void CheckObj()
-    {
-        camerasFinder.GetTarget<CameraCapture>().TakePhoto();
-    }
-
-    /// <summary>
-    /// 마우스를 따라 UI가 움직이도록 갱신.
-    /// </summary>
     private void UpdateMouseFollowerUI()
     {
         Vector2 mousePos = input.MousePos;
@@ -164,206 +479,22 @@ public class CameraScript : MonoBehaviour
 
         myPosition.anchoredPosition = _position;
     }
+    #endregion
 
-    /// <summary>
-    /// G 키 입력: 복사 시작 / 복사 확정
-    /// </summary>
-    private void HandleCopyInput(Vector2 worldMousePos)
-    {
-
-        if (_copying)
-        {
-            // 이미 복사 중이면 현재 복사본을 "확정"
-            PressObj();
-            DevLog.Log("Pressed");
-        }
-        else
-        {
-            // 새 복사 시작
-            _img.color = new Color(1, 1, 1, 1);
-            CopyObj(worldMousePos);
-            _img.DOFade(0f, 0.2f);
-            DevLog.Log("Copy");
-        }
-    }
+    #region POLYGON / CLIPPING UTILS (기존 로직 유지)
     
-    /// <summary>
-    /// 복사본을 확정하는 동작.
-    /// </summary>
-    private void PressObj()
-    {
-        StopCopy(false);
-    }
-
-    /// <summary>
-    /// 복사 상태 종료.
-    /// b == true  : 복사본 삭제
-    /// b == false : 복사본 유지 + 콜라이더만 활성화
-    /// </summary>
-    private void StopCopy(bool b = true)
-    {
-        _copying = false;
-
-        if (b)
-        {
-            // 복사본 전부 제거
-            foreach (var camObj in _copyObjs)
-            {
-                if (camObj.Value.CopyObj)
-                {
-                    camObj.Value.CopyObj.SetActive(false);
-                    Destroy(camObj.Value.CopyObj);
-                }
-            }
-        }
-        else
-        {
-            // 복사본은 유지하고, 충돌 판정만 다시 켬
-            foreach (var camObj in _copyObjs)
-            {
-                if (camObj.Value.CopyObj)
-                {
-                    if (camObj.Value.CopyObj.TryGetComponent(out Collider2D col))
-                    {
-                        col.enabled = true;
-                    }
-                    
-                    if (col.TryGetComponent(out Rigidbody2D rb))
-                    {
-                        rb.gravityScale = camObj.Value.GravityScale;
-                    }
-                    
-                    if (camObj.Value.CopyObj.TryGetComponent(out ICopyable copyable))
-                    {
-                        copyable.Paste();
-                    }
-                }
-            }
-        }
-
-        _copyObjs.Clear();
-    }
-
-    /// <summary>
-    /// checkPos 주변의 오브젝트를 검사해서, 화면에 복사본을 생성.
-    /// </summary>
-    private void CopyObj(Vector2 pos)
-    {
-        Collider2D[] items = Physics2D.OverlapBoxAll(
-            checkPos.position,
-            myPosition.sizeDelta * (CHECK_BOX_SCALE * (_camera.orthographicSize * 0.2f)),
-            0,
-            coloredObject
-        );
-
-        if (items == null || items.Length == 0)
-            return;
-
-        Vector2 checkMin = (Vector2)checkPos.position - myPosition.sizeDelta * (CHECK_BOX_SCALE * (_camera.orthographicSize * 0.2f) * 0.5f);
-        Vector2 checkMax = (Vector2)checkPos.position + myPosition.sizeDelta * (CHECK_BOX_SCALE * (_camera.orthographicSize * 0.2f) * 0.5f);
-
-        foreach (var item in items)
-        {
-            if (item == null)
-                continue;
-            
-            Vector2 itemMin = item.bounds.min;
-            Vector2 itemMax = item.bounds.max;
-            
-            if (itemMax.x < checkMin.x || itemMin.x > checkMax.x ||
-                itemMax.y < checkMin.y || itemMin.y > checkMax.y)
-                continue;
-
-            SpriteRenderer sr = item.GetComponent<SpriteRenderer>();
-            if (sr == null || sr.sprite == null)
-                continue;
-
-            bool inBox =
-                itemMin.x >= checkMin.x && itemMax.x <= checkMax.x &&
-                itemMin.y >= checkMin.y && itemMax.y <= checkMax.y;
-
-            GameObject obj;
-            Vector2 realCenter;
-
-            if (inBox)
-            {
-                // 오브젝트가 완전히 들어오면 그대로 복사
-                obj = Instantiate(item.gameObject);
-                SpriteRenderer newSr = obj.GetComponent<SpriteRenderer>();
-                newSr.sortingOrder = sr.sortingOrder + 1;
-                
-                realCenter = obj.transform.position;
-            }
-            else
-            {
-                Sprite clippedSprite = ClipSprite(sr, checkMin, checkMax, out float preservedRatio);
-                if (clippedSprite == null)
-                    continue;
-
-                obj = Instantiate(item.gameObject);
-                SpriteRenderer newSr = obj.GetComponent<SpriteRenderer>();
-                newSr.sprite = clippedSprite;
-                newSr.sortingOrder = sr.sortingOrder + 1;
-
-                realCenter = obj.transform.position;
-                
-                ReplaceClippedCollider(item.gameObject, obj, checkMin, checkMax);
-                
-                if (preservedRatio < 0.5f)
-                {
-                    if (obj.TryGetComponent(out Piece piece))
-                    {
-                        Destroy(piece);
-                    }
-                }
-            }
-
-            if (obj.TryGetComponent(out Collider2D col))
-            {
-                col.enabled = false;
-            }
-            
-            float gravityScale = 0f;
-
-            if (obj.TryGetComponent(out Rigidbody2D rb))
-            {
-                gravityScale = rb.gravityScale;
-                rb.gravityScale = 0;
-            }
-            
-            if(obj.TryGetComponent(out ICopyable copyable))
-                copyable.Copy();
-
-            if (!_copyObjs.ContainsKey(item.gameObject))
-            {
-                _copyObjs.Add(item.gameObject, new CopiedObj(realCenter - pos, obj, gravityScale));
-            }
-        }
-
-        if (_copyObjs.Count == 0)
-            return;
-
-        _copying = true;
-    }
-
-    /// <summary>
-    /// 잘린 스프라이트 복사본에 맞게 콜라이더를 새로 생성하고, 남은 면적 비율을 반환한다.
-    /// </summary>
     private void ReplaceClippedCollider(GameObject originalItem, GameObject copiedObj, Vector2 checkMin, Vector2 checkMax)
     {
         float preservedRatio = 0f;
 
-        // 복사본에 붙은 기존 콜라이더 제거
         foreach (var col in copiedObj.GetComponents<Collider2D>())
         {
             Destroy(col);
         }
 
         Collider2D originalCol = originalItem.GetComponent<Collider2D>();
-        if (originalCol == null)
-            return;
+        if (originalCol == null) return;
 
-        // 원본 콜라이더를 월드 좌표 기준 다각형으로 변환
         List<List<Vector2>> originalPaths = GetWorldPathsFromCollider(originalCol);
 
         float originalTotalArea = 0f;
@@ -374,24 +505,17 @@ public class CameraScript : MonoBehaviour
 
         foreach (var path in originalPaths)
         {
-            // 1. 원본 다각형의 넓이 누적
             originalTotalArea += CalculatePolygonArea(path);
-
-            // 카메라 영역으로 다각형 자르기
             List<Vector2> clippedWorldPath = ClipPolygonAgainstAABB(path, checkMin, checkMax);
-
-            // 2. 잘려나간 후 남은 다각형의 넓이 누적
             clippedTotalArea += CalculatePolygonArea(clippedWorldPath);
 
-            if (clippedWorldPath.Count <= 2)
-                continue;
+            if (clippedWorldPath.Count <= 2) continue;
 
             if (polyCol == null)
                 polyCol = copiedObj.AddComponent<PolygonCollider2D>();
 
             polyCol.pathCount = pathIndex + 1;
 
-            // 월드 좌표 -> 복사본 로컬 좌표 변환
             Vector2[] localPath = new Vector2[clippedWorldPath.Count];
             for (int i = 0; i < clippedWorldPath.Count; i++)
             {
@@ -407,23 +531,18 @@ public class CameraScript : MonoBehaviour
             polyCol.enabled = false;
         }
 
-        // 3. 최종 비율 계산 (0.0 ~ 1.0)
         if (originalTotalArea > 0f)
         {
             preservedRatio = clippedTotalArea / originalTotalArea;
         }
         
         CamObject camObj = copiedObj.GetComponent<CamObject>();
-        
         if (camObj)
         {
             camObj.Ratio *= preservedRatio;
         }
     }
 
-    /// <summary>
-    /// 사각형 영역(AABB)에 맞춰 다각형을 잘라낸다.
-    /// </summary>
     private List<Vector2> ClipPolygonAgainstAABB(List<Vector2> poly, Vector2 min, Vector2 max)
     {
         poly = ClipEdge(poly, 0, min.x); // Left
@@ -433,36 +552,25 @@ public class CameraScript : MonoBehaviour
         return poly;
     }
 
-    /// <summary>
-    /// 한 변 기준으로 폴리곤을 클리핑한다.
-    /// edge:
-    /// 0 = Left, 1 = Right, 2 = Bottom, 3 = Top
-    /// </summary>
     private List<Vector2> ClipEdge(List<Vector2> poly, int edge, float value)
     {
-        if (poly.Count == 0)
-            return poly;
+        if (poly.Count == 0) return poly;
 
         List<Vector2> clipped = new List<Vector2>();
-
         Vector2 prev = poly[^1];
         bool prevInside = IsInside(prev, edge, value);
 
         foreach (Vector2 curr in poly)
         {
             bool currInside = IsInside(curr, edge, value);
-
-            // 선을 넘으면 교차점 추가
             if (currInside != prevInside)
             {
                 clipped.Add(GetIntersection(prev, curr, edge, value));
             }
-
             if (currInside)
             {
                 clipped.Add(curr);
             }
-
             prev = curr;
             prevInside = currInside;
         }
@@ -470,9 +578,6 @@ public class CameraScript : MonoBehaviour
         return clipped;
     }
 
-    /// <summary>
-    /// 현재 점이 클리핑 기준 안쪽인지 검사한다.
-    /// </summary>
     private bool IsInside(Vector2 p, int edge, float value)
     {
         return edge switch
@@ -485,28 +590,20 @@ public class CameraScript : MonoBehaviour
         };
     }
 
-    /// <summary>
-    /// 두 점 사이에서 클리핑 선과 만나는 교차점을 구한다.
-    /// </summary>
     private Vector2 GetIntersection(Vector2 p1, Vector2 p2, int edge, float value)
     {
         if (edge == 0 || edge == 1)
         {
-            // 수직선과의 교차
             float t = (value - p1.x) / (p2.x - p1.x);
             return new Vector2(value, p1.y + t * (p2.y - p1.y));
         }
         else
         {
-            // 수평선과의 교차
             float t = (value - p1.y) / (p2.y - p1.y);
             return new Vector2(p1.x + t * (p2.x - p1.x), value);
         }
     }
 
-    /// <summary>
-    /// 다양한 Collider2D를 월드 좌표 다각형으로 변환한다.
-    /// </summary>
     private List<List<Vector2>> GetWorldPathsFromCollider(Collider2D col)
     {
         List<List<Vector2>> paths = new List<List<Vector2>>();
@@ -518,12 +615,10 @@ public class CameraScript : MonoBehaviour
             {
                 Vector2[] path = poly.GetPath(i);
                 List<Vector2> worldPath = new List<Vector2>();
-
                 foreach (Vector2 p in path)
                 {
                     worldPath.Add(t.TransformPoint(p + poly.offset));
                 }
-
                 paths.Add(worldPath);
             }
         }
@@ -531,7 +626,6 @@ public class CameraScript : MonoBehaviour
         {
             Vector2 halfSize = box.size * 0.5f;
             Vector2 offset = box.offset;
-
             List<Vector2> worldPath = new List<Vector2>
             {
                 t.TransformPoint(offset + new Vector2(-halfSize.x, -halfSize.y)),
@@ -539,21 +633,18 @@ public class CameraScript : MonoBehaviour
                 t.TransformPoint(offset + new Vector2( halfSize.x,  halfSize.y)),
                 t.TransformPoint(offset + new Vector2(-halfSize.x,  halfSize.y))
             };
-
             paths.Add(worldPath);
         }
         else if (col is CircleCollider2D circle)
         {
             List<Vector2> worldPath = new List<Vector2>();
             int segments = 24;
-
             for (int i = 0; i < segments; i++)
             {
                 float angle = i * Mathf.PI * 2f / segments;
                 Vector2 localPoint = circle.offset + new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * circle.radius;
                 worldPath.Add(t.TransformPoint(localPoint));
             }
-
             paths.Add(worldPath);
         }
         else if (col is CapsuleCollider2D capsule)
@@ -564,9 +655,6 @@ public class CameraScript : MonoBehaviour
         return paths;
     }
 
-    /// <summary>
-    /// 캡슐 콜라이더를 근사 다각형으로 변환한다.
-    /// </summary>
     private List<Vector2> GenerateCapsuleWorldPoints(CapsuleCollider2D capsule)
     {
         List<Vector2> points = new List<Vector2>();
@@ -590,7 +678,6 @@ public class CameraScript : MonoBehaviour
                 float angle = Mathf.Lerp(0, Mathf.PI, (float)i / segments);
                 points.Add(t.TransformPoint(topCenter + new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * radius));
             }
-
             for (int i = 0; i <= segments; i++)
             {
                 float angle = Mathf.Lerp(Mathf.PI, Mathf.PI * 2, (float)i / segments);
@@ -607,7 +694,6 @@ public class CameraScript : MonoBehaviour
                 float angle = Mathf.Lerp(-Mathf.PI / 2, Mathf.PI / 2, (float)i / segments);
                 points.Add(t.TransformPoint(rightCenter + new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * radius));
             }
-
             for (int i = 0; i <= segments; i++)
             {
                 float angle = Mathf.Lerp(Mathf.PI / 2, Mathf.PI * 1.5f, (float)i / segments);
@@ -617,22 +703,15 @@ public class CameraScript : MonoBehaviour
 
         return points;
     }
-    
-    /// <summary>
-    /// 신발끈 공식을 사용하여 다각형의 기하학적 넓이를 계산합니다.
-    /// </summary>
+
     private float CalculatePolygonArea(List<Vector2> points)
     {
-        // 점이 3개 미만이면 선이나 점이므로 넓이는 0
-        if (points.Count < 3) 
-            return 0f;
+        if (points.Count < 3) return 0f;
 
         float area = 0f;
         for (int i = 0; i < points.Count; i++)
         {
-            // 다음 인덱스 (마지막 점의 다음은 첫 번째 점)
             int j = (i + 1) % points.Count; 
-        
             area += points[i].x * points[j].y;
             area -= points[j].x * points[i].y;
         }
@@ -640,15 +719,9 @@ public class CameraScript : MonoBehaviour
         return Mathf.Abs(area) * 0.5f;
     }
 
-    /// <summary>
-    /// 원본 스프라이트를 월드 좌표 기준으로 잘라 새 스프라이트를 만든다.
-    /// </summary>
-    /// <summary>
-    /// 원본 스프라이트를 월드 좌표 카메라 박스(worldMin, worldMax) 기준으로 잘라 새 스프라이트를 만듭니다. (회전/스케일 지원)
-    /// </summary>
     private Sprite ClipSprite(SpriteRenderer sr, Vector2 worldMin, Vector2 worldMax, out float preservedRatio)
     {
-        preservedRatio = 0f; // 초기화
+        preservedRatio = 0f;
         Sprite original = sr.sprite;
         if (original == null) return null;
 
@@ -705,7 +778,6 @@ public class CameraScript : MonoBehaviour
                 else
                 {
                     keptPixels++;
-
                     if (x < minX) minX = x;
                     if (x > maxX) maxX = x;
                     if (y < minY) minY = y;
@@ -715,8 +787,7 @@ public class CameraScript : MonoBehaviour
             }
         }
 
-        if (!hasVisiblePixels) 
-            return null;
+        if (!hasVisiblePixels) return null;
         
         if (totalValidPixels > 0)
         {
@@ -754,9 +825,6 @@ public class CameraScript : MonoBehaviour
         );
     }
     
-    /// <summary>
-    /// 비읽기 텍스처를 읽을 수 있는 Texture2D로 복제한다.
-    /// </summary>
     private Texture2D GetReadableTexture(Texture2D source)
     {
         RenderTexture rt = RenderTexture.GetTemporary(
@@ -781,13 +849,22 @@ public class CameraScript : MonoBehaviour
 
         return readable;
     }
-    
+
+    public void SetCanCapture(bool b)
+    {
+        CanCapture = b;
+    }
+
     private void OnDrawGizmosSelected()
     {
         if (myPosition != null && checkPos != null)
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawWireCube(checkPos.position, myPosition.sizeDelta * (CHECK_BOX_SCALE * (_camera.orthographicSize * 0.2f)));
+            if (_camera != null)
+            {
+                Gizmos.DrawWireCube(checkPos.position, myPosition.sizeDelta * (CHECK_BOX_SCALE * (_camera.orthographicSize * 0.2f)));
+            }
         }
     }
+    #endregion
 }
