@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class ChattingUIManager : MonoBehaviour
 {
     [SerializeField] private RectMask2D _profilBound;
+    [SerializeField] private GameObject _chatAlarm;
 
     private void Awake()
     {
@@ -12,8 +13,20 @@ public class ChattingUIManager : MonoBehaviour
     }
 
     public void SetChatting(Transform myGameObj)
-    { 
+    {
+        Debug.Log("asdasd");
         myGameObj.parent.SetAsFirstSibling();
         _profilBound.padding = (new Vector4(-1f, 65f, -1000f, -60f));
+    }
+
+    public void ReadText(GameObject myAlarm)
+    {
+        _chatAlarm.SetActive(false);
+        myAlarm.SetActive(false);
+    }
+
+    public void ShowMyText(GameObject texts)
+    {
+        texts.SetActive(true);
     }
 }
