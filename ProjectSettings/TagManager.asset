@@ -12,7 +12,7 @@ TagManager:
   - Water
   - UI
   - CameraObj
-  - 
+  - Piece
   - 
   - 
   - 
@@ -38,8 +38,17 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: BackGround
+    uniqueID: 528487353
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Struct
+    uniqueID: 1061587037
+    locked: 0
+  - name: Character
+    uniqueID: 2260954249
     locked: 0
   - name: Cam
     uniqueID: 185967535

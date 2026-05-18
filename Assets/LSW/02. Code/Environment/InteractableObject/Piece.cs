@@ -14,12 +14,12 @@ namespace LSW._02._Code.Environment.InteractableObject
         
         public bool IsInCorrectPlace { get; private set; }
         
-        private PuzzleManager _puzzleManager;
+        private PieceManager _pieceManager;
 
         private void Start()
         {
-            _puzzleManager = SystemManager.Instance.GetSystemManager<PuzzleManager>();
-            _puzzleManager.RegisterPiece(this);
+            _pieceManager = SystemManager.Instance.GetSystemManager<PieceManager>();
+            _pieceManager.RegisterPiece(this);
         }
         
         private void Update()
@@ -35,7 +35,7 @@ namespace LSW._02._Code.Environment.InteractableObject
             if (!GetVirtualCenter(out Vector2 myCenter, out float myRot)) 
                 return;
             
-            if (!_puzzleManager.GetBlueprint(pieceId, out var blueprint)) 
+            if (!_pieceManager.GetBlueprint(pieceId, out var blueprint)) 
                 return;
             
             Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, blueprint.posTolerance * 2f, pieceLayer);
@@ -64,7 +64,7 @@ namespace LSW._02._Code.Environment.InteractableObject
         
         public bool GetVirtualCenter(out Vector2 centerPos, out float centerRot)
         {
-            if (_puzzleManager.GetPiece(pieceId, out var data))
+            if (_pieceManager.GetPiece(pieceId, out var data))
             {
                 centerRot = Mathf.DeltaAngle(data.localRotationZ, transform.eulerAngles.z);
                 Vector2 rotatedOffset = Quaternion.Euler(0, 0, centerRot) * data.localPosition;
@@ -82,7 +82,7 @@ namespace LSW._02._Code.Environment.InteractableObject
         
             if (IsInCorrectPlace)
             {
-                _puzzleManager.CheckPuzzleCompletion(pieceId);
+                _pieceManager.CheckPuzzleCompletion(pieceId);
             }
         }
 
@@ -96,8 +96,8 @@ namespace LSW._02._Code.Environment.InteractableObject
         
         private void OnDestroy()
         {
-            if (_puzzleManager != null)
-                _puzzleManager.UnregisterPiece(this);
+            if (_pieceManager != null)
+                _pieceManager.UnregisterPiece(this);
         }
     }
 }

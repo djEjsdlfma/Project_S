@@ -7,7 +7,7 @@ namespace LSW._02._Code.Core.Cores
 {
     public class DialogueDataCore : MonoBehaviour, ICore
     {
-        [SerializeField] private DialogueDatabaseSo database;
+        [field:SerializeField] public DialogueDatabaseSo Database { get; private set; }
 
         private readonly Dictionary<string, Dictionary<string, DialogueEntry>>
             _allDialogues = new();
@@ -18,7 +18,7 @@ namespace LSW._02._Code.Core.Cores
         {
             _allDialogues.Clear();
 
-            foreach (DialogueSheet sheet in database.sheets)
+            foreach (DialogueSheet sheet in Database.sheets)
             {
                 Dictionary<string, DialogueEntry> map = new();
 
@@ -105,7 +105,7 @@ namespace LSW._02._Code.Core.Cores
             if (!_initialized)
                 return false;
 
-            DialogueSheet foundSheet = database.sheets.Find(data => data.guestType == guest);
+            DialogueSheet foundSheet = Database.sheets.Find(data => data.guestType == guest);
             if (foundSheet != null)
             {
                 sheetName = foundSheet.sheetName;

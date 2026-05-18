@@ -26,7 +26,7 @@ namespace LSW._02._Code.Environment.InteractableObject
         public float rotTolerance = 15f;
     }
     
-    public class PuzzleManager : MonoBehaviour, ISystemManager
+    public class PieceManager : MonoBehaviour, ISystemManager
     {
         [SerializeField] private List<PieceBlueprint> blueprints = new List<PieceBlueprint>();
         
