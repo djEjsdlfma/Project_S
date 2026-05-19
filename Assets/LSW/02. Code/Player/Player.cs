@@ -20,6 +20,7 @@ namespace LSW._02._Code.Player
         
         private bool _isSprinting;
         private float _speedModifier;
+        private float _trapSpeedMultiplier = 1f;
         
         private EntityHealth _health;
         
@@ -108,19 +109,17 @@ namespace LSW._02._Code.Player
 
         public void ApplyDeBuffDamage(EffectType effectType, float buffAmount) { }
 
-        public void AddSpeed(float value)
+        public void SetTrapSpeedMultiplier(float multiplier)
         {
-            _speedModifier += value;
+            _trapSpeedMultiplier = multiplier;
         }
 
-        // private float GetCurrentMoveSpeed()
-        // {
-        //     if (Stat == null)
-        //         return 0f;
-        //
-        //     bool canSprint = _staminaCompo != null ? _staminaCompo.IsRun() : _isSprinting;
-        //     float baseSpeed = canSprint ? Stat.runSpeed : Stat.walkSpeed;
-        //     return Mathf.Max(0f, baseSpeed + _speedModifier);
-        // }
+        public float GetCurrentMoveSpeed()
+        {
+            if (stat == null)
+                return 0f;
+            
+            return Mathf.Max(0f, (stat.moveSpeed + _speedModifier) * _trapSpeedMultiplier);
+        }
     }
 }

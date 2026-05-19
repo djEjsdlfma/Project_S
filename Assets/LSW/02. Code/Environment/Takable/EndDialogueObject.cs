@@ -7,10 +7,10 @@ using UnityEngine.Events;
 
 namespace LSW._02._Code.Environment.Takable
 {
-    public class TakableObject : MonoBehaviour, ITakable
+    public class EndDialogueObject : MonoBehaviour, ITakable
     {
         [SerializeField] private List<string> wordList;
-        [SerializeField] private UnityEvent<TakableObject, List<string>> takePictureEvent;
+        [SerializeField] private UnityEvent<EndDialogueObject, List<string>> takePictureEvent;
         
         private bool IsAlreadyTook { get; set; } = false;
         private ShowWordUISystem _showWordUISystem;
@@ -30,6 +30,11 @@ namespace LSW._02._Code.Environment.Takable
             
             IsAlreadyTook = true;
             takePictureEvent?.Invoke(this, wordList);
+        }
+
+        public bool IsDisableCapture()
+        {
+            return true;
         }
 
         private void OnDestroy()

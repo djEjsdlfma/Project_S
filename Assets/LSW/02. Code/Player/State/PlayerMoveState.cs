@@ -64,7 +64,7 @@ public class PlayerMoveState : State
         if (_rigidbody == null)
             return;
 
-        _rigidbody.linearVelocity = new Vector2(_moveInput.x * Info.moveSpeed, _rigidbody.linearVelocity.y);
+        _rigidbody.linearVelocity = new Vector2(_moveInput.x * _player.GetCurrentMoveSpeed(), _rigidbody.linearVelocity.y);
     }
 
     private void HandleMoveInput(Vector2 moveInput)
