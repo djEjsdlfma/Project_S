@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -21,6 +22,14 @@ namespace Moon._01.Script.Triggers
                 effectVolume.gameObject.SetActive(false);
             }
             
+            if(material != null)
+            {
+                material.SetFloat(Round, 1.25f);
+            }
+        }
+
+        private void OnDestroy()
+        {
             if(material != null)
             {
                 material.SetFloat(Round, 1.25f);
