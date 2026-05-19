@@ -814,6 +814,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Moon._01.Script.Triggers.TriggerToVolume
   effectVolume: {fileID: 118785448}
+  material: {fileID: 2100000, guid: 6ab0dff2228eedb4bac303886e6bc01a, type: 2}
 --- !u!1 &700832806
 GameObject:
   m_ObjectHideFlags: 0
@@ -2792,12 +2793,12 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 2396247417323949202, guid: d144543a2736c4a4c977c74dc73b101d, type: 3}
+  m_Sprite: {fileID: 2396247417323949202, guid: 668bb78aa57ad37409c8b3b7c9d948c2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 10, y: 10}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

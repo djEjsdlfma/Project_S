@@ -5,7 +5,9 @@ namespace Moon._01.Script.Triggers
 {
     public class TriggerToVolume : MonoBehaviour, ITriggerable
     {
+        private static readonly int Round = Shader.PropertyToID("_Radius");
         [SerializeField] private Volume effectVolume;
+        [SerializeField] private Material material;
         
         private MainTrigger _mainTrigger;
 
@@ -17,6 +19,11 @@ namespace Moon._01.Script.Triggers
             {
                 effectVolume.weight = 0f;
                 effectVolume.gameObject.SetActive(false);
+            }
+            
+            if(material != null)
+            {
+                material.SetFloat(Round, 1.25f);
             }
         }
 
@@ -39,7 +46,11 @@ namespace Moon._01.Script.Triggers
                     ratio = distFromStart / totalDistance; 
                 }
 
-                effectVolume.weight = Mathf.Clamp01(ratio); 
+                effectVolume.weight = Mathf.Clamp01(ratio);
+
+                float metRatio = 1.25f - ratio * 1.25f;
+                
+                material.SetFloat(Round, metRatio);
             }
             else
             {
