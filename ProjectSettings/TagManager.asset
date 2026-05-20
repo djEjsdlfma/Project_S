@@ -15,9 +15,9 @@ TagManager:
   - Piece
   - Struct
   - WeightObject
-  - 
-  - 
-  - 
+  - Obstacle
+  - Wall
+  - Ground
   - 
   - 
   - 
