@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 788875863654935520}
   - component: {fileID: 4886883259602819105}
   - component: {fileID: 6067473331164842132}
+  - component: {fileID: 8645296430172125776}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -75,6 +76,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8645296430172125776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 813507994905173747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42353d5b36ad418386ed728549150128, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Moon._01.Script.Cameras.SetCamBlur
+  blurActiveSet: 0.025
+  blurMat: {fileID: 2100000, guid: 8655e7a6692ed4a43a9d667d872edd02, type: 2}
 --- !u!1 &3040179464144361491
 GameObject:
   m_ObjectHideFlags: 0

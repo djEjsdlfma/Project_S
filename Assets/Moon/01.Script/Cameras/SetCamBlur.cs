@@ -11,6 +11,8 @@ namespace Moon._01.Script.Cameras
 
         private bool _blurActive = false;
 
+        public bool BlurActive => _blurActive;
+
         private void Awake()
         {
             if (blurMat != null)
