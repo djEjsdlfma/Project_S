@@ -43,7 +43,7 @@ public readonly struct InteractTarget
 
 public class CameraScript : MonoBehaviour
 {
-    [field:SerializeField] public bool CanCapture { get; private set; } = false;
+    [field:SerializeField]public bool CanCapture { get; private set; } = true;
     
     [Header("Mode Settings")]
     [SerializeField] private CameraMode _currentMode = CameraMode.Copy; // 현재 모드 설정

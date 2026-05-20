@@ -55,4 +55,4 @@ MonoBehaviour:
   visionColor: {r: 0.2, g: 0.6, b: 1, a: 0.15}
   detectedColor: {r: 1, g: 0.3, b: 0.3, a: 0.25}
   edgeColor: {r: 0.2, g: 0.6, b: 1, a: 0.8}
-  gizmoSegments: 128
+  gizmoSegments: 60
