@@ -1,8 +1,6 @@
-using System;
-using MoonLib.ScriptFinder_Pro.RunTime.Finder.OneFinder;
 using UnityEngine;
 
-namespace Moon._01.Script
+namespace Moon._01.Script.Gimmick
 {
     public class ArrowSeeTarget : MonoBehaviour
     {
