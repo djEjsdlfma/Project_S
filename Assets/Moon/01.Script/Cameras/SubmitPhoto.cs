@@ -38,8 +38,8 @@ namespace Moon._01.Script.Cameras
             _photos.Clear();
             _photos = camerasFinder.GetTarget<PhotoStorage>().GetPhotos();
             
-            if(_photos.Count < AnswerCount)
-                return;
+            /*if(_photos.Count < AnswerCount)
+                return;*/
             
             _answerIsScored.Clear();
 
