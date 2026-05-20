@@ -17,6 +17,7 @@ public class DropdownSetter : MonoBehaviour
     private void Start()
     {
         originHeight = List.sizeDelta.y;
+        List.sizeDelta = new Vector2(List.sizeDelta.x, 0f);
     }
 
     public void ChangeState(DropdownButton button)
