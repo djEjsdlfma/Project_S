@@ -21300,7 +21300,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2123205340}
   - component: {fileID: 2123205341}
-  - component: {fileID: 2123205342}
   m_Layer: 0
   m_Name: SettingManager
   m_TagString: Untagged
@@ -21339,18 +21338,6 @@ MonoBehaviour:
   BGM: {fileID: 1436978369}
   SFX: {fileID: 472435053}
   _mixer: {fileID: 24100000, guid: 18dbd229627698846934e4865f1760c3, type: 2}
---- !u!114 &2123205342
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2123205339}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac017bc49d71a1f41806d939ce96691b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SettingManager
 --- !u!1 &2136468223
 GameObject:
   m_ObjectHideFlags: 0

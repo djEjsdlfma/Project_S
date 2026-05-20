@@ -8,26 +8,43 @@ using UnityEngine.UI;
 
 public class TitleManager : MonoBehaviour
 {
+    [Header("Candle")]
     [SerializeField] private Image _fadeImg;
     [SerializeField] private GameObject _candleLight;
 
+    [Header("Calender")]
     [SerializeField] private GameObject _textsObj;
-    [SerializeField] private TextMeshProUGUI _dayText;
+    [SerializeField] private TextMeshProUGUI _gameDayText;
+    [SerializeField] private TextMeshProUGUI _canlenderNumberText;
+    [SerializeField] private TextMeshProUGUI _canlenderDayText;
+    [SerializeField] private TextMeshProUGUI _canlenderMonthText;
 
+    [Header("tea")]
     [SerializeField] private RectTransform _teaImg;
     [SerializeField] private Image _sceneFadeImg;
+
+    [Header("button")]
+    [SerializeField] private Button _candleBtn;
+    [SerializeField] private Button _teaBtn;
 
     private float timer = 0f;
     private GameObject nowGameObjcet;
 
     public void ChangeDay()
     {
+        _candleBtn.interactable = false;
         _candleLight.SetActive(false);
         StartCoroutine(StartFade());
     }
 
+    public void ActiveBtn(Button btn)
+    {
+        btn.interactable = true;
+    }
+
     public void ChangeScene()
     {
+        _teaBtn.interactable = false;
         _teaImg.DOSizeDelta(new Vector2(12000f, 12000f), 0.95f);
         StartCoroutine(StartChangeScene());
     }
