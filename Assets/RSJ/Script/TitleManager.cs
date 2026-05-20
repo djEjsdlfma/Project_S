@@ -1,8 +1,10 @@
 using DG.Tweening;
-using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Net.Sockets;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -26,9 +28,20 @@ public class TitleManager : MonoBehaviour
     [Header("button")]
     [SerializeField] private Button _candleBtn;
     [SerializeField] private Button _teaBtn;
+    [SerializeField] private Button _leftBtn;
+    [SerializeField] private Button _rightBtn;
+
+    private Stack<GameObject> _prevStack = new Stack<GameObject>();
+    private Stack<GameObject> _nextStack = new Stack<GameObject>();
 
     private float timer = 0f;
     private GameObject nowGameObjcet;
+
+    private void Awake()
+    {
+        _leftBtn.interactable = false;
+        _rightBtn.interactable = false;
+    }
 
     public void ChangeDay()
     {
@@ -51,8 +64,18 @@ public class TitleManager : MonoBehaviour
 
     public void TurnOnPart(GameObject part)
     {
-        if(nowGameObjcet != null)
+        if (nowGameObjcet != null)
+        {
+            _prevStack.Push(nowGameObjcet);
+            _leftBtn.interactable = true;
             nowGameObjcet.SetActive(false);
+        }
+
+        if (_nextStack.Count > 0)
+        {
+            _rightBtn.interactable = false;
+            _nextStack.Clear();
+        }
 
         nowGameObjcet = part;
         part.SetActive(true);
@@ -76,6 +99,13 @@ public class TitleManager : MonoBehaviour
 
     private void Update()
     {
+        FlickCandle();
+
+        if (_prevStack.Count > 0)
+            _leftBtn.interactable = true;
+        if (_nextStack.Count > 0)
+            _rightBtn.interactable = true;
+
         if (_textsObj.activeSelf == false) return;
 
         timer += Time.deltaTime;
@@ -85,6 +115,46 @@ public class TitleManager : MonoBehaviour
             timer = 0f;
             _textsObj.SetActive(false);
             _fadeImg.color = new Color(0f, 0f, 0f, 0);
+        }
+    }
+
+    public void GotoPrev()
+    {
+        _nextStack.Push(nowGameObjcet);
+        if(nowGameObjcet != null)
+            nowGameObjcet.SetActive(false);
+        
+        nowGameObjcet = _prevStack.Peek();
+        nowGameObjcet.SetActive(true);
+        _prevStack.Pop();
+
+        if (_prevStack.Count <= 0)
+            _leftBtn.interactable = false;
+    }
+
+    public void GoToNext()
+    {
+        _prevStack.Push(nowGameObjcet);
+        nowGameObjcet.SetActive(false);
+        nowGameObjcet = _nextStack.Peek();
+        nowGameObjcet.SetActive(true);
+        _nextStack.Pop();
+
+
+        if (_nextStack.Count <= 0)
+            _rightBtn.interactable = false;
+    }
+
+    public void FlickCandle()
+    {
+        float noise = Mathf.PerlinNoise(Time.time * 0.7f, 0f);
+
+        // 노이즈 값을 -1.0 ~ 1.0 사이로 정규화한 뒤 일렁임 범위를 곱합니다.
+        float intensityFlicker = (noise - 0.5f) * 2f * 2.7f;
+
+        if (_candleLight.activeSelf != false)
+        {
+            _candleLight.GetComponent<Light2D>().intensity = 11f + intensityFlicker;
         }
     }
 }
