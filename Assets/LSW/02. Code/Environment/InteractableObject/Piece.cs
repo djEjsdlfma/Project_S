@@ -4,12 +4,11 @@ using UnityEngine;
 
 namespace LSW._02._Code.Environment.InteractableObject
 {
-    public class Piece : MonoBehaviour, ICopyable
+    public class Piece : MonoBehaviour
     {
         [SerializeField] private string pieceId;
         [SerializeField] private LayerMask pieceLayer;
         
-        public bool IsCopying { get; set; }
         public string PieceId => pieceId;
         
         public bool IsInCorrectPlace { get; private set; }
@@ -25,13 +24,11 @@ namespace LSW._02._Code.Environment.InteractableObject
         private void Update()
         {
             CheckOverlapStatus();
+            FinalizePosition();
         }
 
         private void CheckOverlapStatus()
         {
-            if (IsCopying) 
-                return;
-            
             if (!GetVirtualCenter(out Vector2 myCenter, out float myRot)) 
                 return;
             
@@ -84,14 +81,6 @@ namespace LSW._02._Code.Environment.InteractableObject
             {
                 _pieceManager.CheckPuzzleCompletion(pieceId);
             }
-        }
-
-        public void Copy() => IsCopying = true;
-
-        public void Paste()
-        {
-            IsCopying = false;
-            FinalizePosition();
         }
         
         private void OnDestroy()
