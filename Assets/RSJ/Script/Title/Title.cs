@@ -1,4 +1,6 @@
 using DG.Tweening;
+using System.Runtime.InteropServices.ComTypes;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -12,6 +14,14 @@ public class Title : MonoBehaviour
     [SerializeField] private RectTransform _padMain;
     [SerializeField] private GameObject _start;
 
+    [SerializeField] private TextMeshProUGUI _guidText;
+
+    [Header("Objs")]
+    [SerializeField] private RectTransform Pad;
+    [SerializeField] private RectTransform Calendar;
+    [SerializeField] private RectTransform Candle;
+    [SerializeField] private RectTransform Tea;
+
     [SerializeField, Range(0f, 1f)]
     private float moveTime = 1f;
     [SerializeField]
@@ -24,6 +34,13 @@ public class Title : MonoBehaviour
     private void Start()
     {
         if (isStarted) return;
+
+        Pad.anchoredPosition = new Vector3(90f, 0f);
+        Calendar.anchoredPosition = new Vector3(Screen.width + 15f, 368f);
+        Candle.anchoredPosition = new Vector3(Screen.width + 15f, 175f);
+        Tea.anchoredPosition = new Vector3(Screen.width + 15f, -299f);
+
+        BlinkText(true);
 
         _start.SetActive(true);
 
@@ -45,7 +62,13 @@ public class Title : MonoBehaviour
 
         if (Keyboard.current.anyKey.wasPressedThisFrame)
         {
-            _passWord[inputTry].color = Color.black;
+            RectTransform nowImgPos;
+            _passWord[inputTry].color = Color.gray3;
+
+            nowImgPos = _passWord[inputTry].GetComponent<RectTransform>();
+            nowImgPos.DOAnchorPosY(nowImgPos.anchoredPosition.y + 5f, 0.2f)
+                .OnComplete(() => nowImgPos.DOAnchorPosY(nowImgPos.anchoredPosition.y - 5f, 0.2f));
+
             inputTry++;
         }
 
@@ -54,7 +77,34 @@ public class Title : MonoBehaviour
             moving = true;
             isStarted = true;
             _titleImg.DOAnchorPosY(980f, 0.5f)
-                .OnComplete(() => _titleImg.gameObject.SetActive(false));
+                .OnComplete(() => 
+                {
+                    _titleImg.gameObject.SetActive(false);
+                    SetObjects();
+                });
+
         }
+    }
+
+    private void BlinkText(bool isTurntonInvisible)
+    {
+        _guidText.DOFade(isTurntonInvisible ? 0.5f : 1f, 2.5f)
+            .OnComplete(() => BlinkText(!isTurntonInvisible));
+    }
+
+    private void SetObjects()
+    {
+        Pad.DOAnchorPosX(-430f, 0.6f).SetEase(Ease.OutCirc)
+            .OnComplete(() =>
+            {
+                Calendar.DOAnchorPosX(188f,0.45f).SetEase(Ease.OutCirc).OnComplete(() => 
+                {
+                    Candle.DOAnchorPosX(677f, 0.45f).SetEase(Ease.OutCirc)
+                        .OnComplete(() =>
+                        {
+                            Tea.DOAnchorPosX(540f, 0.45f).SetEase(Ease.OutCirc);
+                        });
+                });
+            });
     }
 }
