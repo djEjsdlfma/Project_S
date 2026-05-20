@@ -1,6 +1,7 @@
 using System.Linq;
 using MoonLib.ScriptFinder_Pro.RunTime.Finder.OneFinder;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Moon._01.Script.Triggers
 {
@@ -18,6 +19,9 @@ namespace Moon._01.Script.Triggers
         public float TriggerDistance { get; private  set; } = 0;
 
         public bool WorkActive { get; set; } = true;
+
+        public UnityAction OnAvoidToActive;
+        public UnityAction OnEndToActive;
         
 
         private Transform _player;
@@ -37,6 +41,8 @@ namespace Moon._01.Script.Triggers
             Distance = Mathf.Abs(_player.position.x - triggerPos.position.x);
             
             TriggerDistance = Mathf.Abs(_player.position.x - triggerObj.position.x);
+
+            bool lastActive = WorkActive && IsActive;
             
             if ((isRight && _player.position.x > triggerPos.position.x) ||
                 (!isRight && _player.position.x < triggerPos.position.x))
@@ -48,10 +54,27 @@ namespace Moon._01.Script.Triggers
                 IsActive = false;
             }
 
+            if (!IsActive)
+            {
+                if (lastActive)
+                {
+                    OnAvoidToActive?.Invoke();
+                }
+            }
+
             if (isRight && _player.position.x <= triggerPos.position.x
                 || !isRight && _player.position.x >= triggerPos.position.x)
             {
                 TriggerDistance = 0;
+            }
+            
+            if (IsActive)
+            {
+                if(Mathf.Approximately(TriggerDistance, 0f))
+                {
+                    OnEndToActive?.Invoke();
+                    WorkActive = false;
+                }
             }
         }
     }
