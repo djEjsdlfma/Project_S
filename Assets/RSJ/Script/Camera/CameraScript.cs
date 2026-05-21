@@ -43,7 +43,7 @@ public readonly struct InteractTarget
 
 public class CameraScript : MonoBehaviour
 {
-    [field:SerializeField] public bool CanCapture { get; private set; } = false;
+    [field:SerializeField]public bool CanCapture { get; private set; } = true;
     
     [Header("Mode Settings")]
     [SerializeField] private CameraMode _currentMode = CameraMode.Copy; // 현재 모드 설정
@@ -121,6 +121,8 @@ public class CameraScript : MonoBehaviour
 
     private void HandleCaptureInput()
     {
+        if (camerasFinder.GetTarget<SetCamBlur>(false) is var blur && blur && blur.BlurActive)
+            return;
         HandleActionInput(_main.ScreenToWorldPoint(input.MousePos));
     }
 
@@ -397,6 +399,8 @@ public class CameraScript : MonoBehaviour
     #region PHOTO / UI LOGIC
     private void HandlePhotoInput()
     {
+        if (camerasFinder.GetTarget<SetCamBlur>(false) is var blur && blur && blur.BlurActive)
+            return;
         if(!CanCapture)
             return;
         
