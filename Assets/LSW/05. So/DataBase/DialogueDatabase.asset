@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: DialogueDatabase
   m_EditorClassIdentifier: Assembly-CSharp::LSW._02._Code.So.DialogueDatabaseSo
   sheets:
-  - sheetName: Sheet1
-    guestType: -2
+  - sheetName: "\uC724\uC11C\uC544"
+    guestType: 4
     dialogues:
     - key: DAY1_NPC_NORM_001_1
       id: 110011
@@ -1138,7 +1138,7 @@ MonoBehaviour:
       type: 1
       branch: 
       nextKey: DAY2_PLAYER_NORM_020_110
-      content: "\uC190 \uAC00\uB294 \uB300\uB85C, \uC5B4\uB9B0\uC560\uAC00 \uD53C\uC544\uB178
+      content: "\uC190 \uAC00\uB294 \uB300\uB85C \uC5B4\uB9B0\uC560\uAC00 \uD53C\uC544\uB178
         \uC55E\uC5D0 \uC549\uC544\uC11C \uC544\uBB34\uAC70\uB098 \uCE58\uB294 \uAC70
         \uC788\uC796\uC544\uC694. \uADF8\uAC70\uC608\uC694"
       sincerity: 0

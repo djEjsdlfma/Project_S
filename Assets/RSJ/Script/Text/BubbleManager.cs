@@ -5,12 +5,13 @@ using System.Linq;
 using LSW._02._Code.Core;
 using LSW._02._Code.Core.Cores;
 using LSW._02._Code.So;
+using LSW._02._Code.System___Manager;
 using LSW._02._Code.UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class BubbleManager : MonoBehaviour, ITabletUI
+public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
 {
     //ó??
     [SerializeField] private BubbleText NPCFirstText;
@@ -21,15 +22,14 @@ public class BubbleManager : MonoBehaviour, ITabletUI
     [SerializeField] private BubbleText PlayerText;
     
     [SerializeField] private ChoiceBubble PlayerChoice;
-    [SerializeField] private GameObject ChoiceObject;
+    [SerializeField] private GameObject SelectionTrm;
 
     //???? ??? ??
-    [SerializeField] private GameObject NPCChatting;
+    [SerializeField] private Chatting NPCChatting;
+    [SerializeField] private GameObject Empty;
 
     [SerializeField] private RectTransform _contaner;
     [SerializeField] private ScrollRect scrollRect;
-    
-    [SerializeField] private CloseCafeButton closeCafeBtn;
     
     public event Action onEndChat;
     
@@ -50,21 +50,22 @@ public class BubbleManager : MonoBehaviour, ITabletUI
     private bool _isChoiceActive;
     private int _currentChoiceSeq;
     
+    private GameObject _bottomEmptySpace;
     private bool wasEndChat = false;
+    
     public bool CanInteract { get; private set; }
     
-    private void Awake()
+    public void Initialize(SystemManager _)
     {
         _interactDelayCoroutine = new WaitForSecondsRealtime(0.2f);
         
         _dialogueDataCore = CoreHandler.Instance.GetCore<DialogueDataCore>();
         _gameStatueCore = CoreHandler.Instance.GetCore<GameStatueCore>();
 
-        if(closeCafeBtn != null)
-            onEndChat += closeCafeBtn.EnableInteractable;
-        
         if (_savedDialogue == null)
             _savedDialogue = new Dictionary<Guest, SavedDialogueData>();
+        
+        DisableInteract();
     }
 
     private void Update()
@@ -106,15 +107,13 @@ public class BubbleManager : MonoBehaviour, ITabletUI
         {
             _isChoiceActive = true;
             _currentChoiceSeq = data.seq;
-        
-            ChoiceBubble choice = Instantiate(PlayerChoice, _contaner);
-            _allDialogueUI.Add(choice.gameObject);
-            FindChoice(data.seq, choice);
-            choice.AddEvent(Choose);
+
+            FindChoice(data.seq);
+            PlayerChoice.AddEvent(Choose);
         }
         else if (data.speaker == SpeakerType.NPC)
         {
-            ShowNPCText(data.content, wasChatNpc, data.speaker.ToString(), isEnding);
+            ShowNPCText(data.content, wasChatNpc, _currentGuestSheetName, isEnding);
             _currentKey = data.nextKey;
         }
         else
@@ -139,6 +138,11 @@ public class BubbleManager : MonoBehaviour, ITabletUI
     {
         Guest recordingGuest = _currentGuest;
         bool isFirst = !wasNPC;
+        
+        if (isFirst && _allDialogueUI.Count > 0)
+        {
+            ShowEmptySpace();
+        }
 
         BubbleText prefab = isFirst ? NPCFirstText : NPCText;
         BubbleText text = Instantiate(prefab, _contaner);
@@ -157,7 +161,7 @@ public class BubbleManager : MonoBehaviour, ITabletUI
         nowBubble = text.gameObject;
         AddHistory(recordingGuest, SpeakerType.NPC, log, isFirst);
         
-        ShowBubbleDelay(nowBubble, isEnding);
+        ShowBubbleDelay(nowBubble, speakerName, isEnding);
     }
 
     private void ShowPlayerText(string log, bool wasNPC = true)
@@ -165,6 +169,11 @@ public class BubbleManager : MonoBehaviour, ITabletUI
         Guest recordingGuest = _currentGuest; // 현재 시점의 게스트 기록
         bool isFirst = wasNPC;
 
+        if (isFirst && _allDialogueUI.Count > 0)
+        {
+            ShowEmptySpace();
+        }
+        
         wasChatNpc = false;
 
         BubbleText prefab = isFirst ? PlayerFirstText : PlayerText;
@@ -176,26 +185,56 @@ public class BubbleManager : MonoBehaviour, ITabletUI
         text.InitScale();
 
         AddHistory(recordingGuest, SpeakerType.PLAYER, log, isFirst);
+        
+        UpdateBottomEmptySpace();
+    }
+    
+    private void ShowEmptySpace()
+    {
+        if (Empty != null)
+        {
+            GameObject emptyObj = Instantiate(Empty, _contaner);
+            _allDialogueUI.Add(emptyObj);
+        }
+    }
+    
+    private void UpdateBottomEmptySpace()
+    {
+        if (Empty == null) 
+            return;
+        
+        if (_bottomEmptySpace != null)
+        {
+            _allDialogueUI.Remove(_bottomEmptySpace);
+            Destroy(_bottomEmptySpace);
+            _bottomEmptySpace = null;
+        }
+
+        _bottomEmptySpace = Instantiate(Empty, _contaner);
+        _allDialogueUI.Add(_bottomEmptySpace);
     }
 
-    public void ShowBubbleDelay(GameObject targetBubble, bool isEnding)
+    public void ShowBubbleDelay(GameObject targetBubble, string chatterName, bool isEnding)
     {
         if(targetBubble != null)
             targetBubble.SetActive(false);
     
-        GameObject loading = Instantiate(NPCChatting, _contaner);
+        Chatting loading = Instantiate(NPCChatting, _contaner);
+        loading.SetName(chatterName);
         _allDialogueUI.Add(loading.gameObject);
+        
+        UpdateBottomEmptySpace();
 
         StartCoroutine(DelayChat(loading, targetBubble, isEnding));
     }
     
-    private IEnumerator DelayChat(GameObject loadingObject, GameObject targetBubble, bool isEnding)
+    private IEnumerator DelayChat(Chatting loadingObject, GameObject targetBubble, bool isEnding)
     {
         yield return new WaitForSeconds(1f);
 
         if (loadingObject != null)
         {
-            _allDialogueUI.Remove(loadingObject);
+            _allDialogueUI.Remove(loadingObject.gameObject);
             Destroy(loadingObject);
         }
 
@@ -221,12 +260,12 @@ public class BubbleManager : MonoBehaviour, ITabletUI
         onEndChat?.Invoke();
     }
 
-    private void FindChoice(int seqNum, ChoiceBubble choice)
+    private void FindChoice(int seqNum)
     {
         if(!_dialogueDataCore.GetAllDialogueEntry(_currentGuestSheetName, out var allData))
             return;
 
-        ChoiceObject.SetActive(true);
+        SelectionTrm.SetActive(true);
 
         var choices = allData.Values
             .Where(x => x.seq == seqNum && x.type == DialogueType.Select)
@@ -245,29 +284,29 @@ public class BubbleManager : MonoBehaviour, ITabletUI
             });
         }
     
-        choice.ChoiceInit(choices.Select(x => x.content).ToArray());
+        PlayerChoice.ChoiceInit(choices.Select(x => x.content).ToArray());
     }
 
     private void Choose(GameObject target, int num)
     {
-        if (target == null) return;
-        if (num < 0 || num >= _currentChoiceData.Count) return;
+        if (target == null) 
+            return;
+        
+        if (num < 0 || num >= _currentChoiceData.Count) 
+            return;
 
         var selectedChoice = _currentChoiceData[num];
         _gameStatueCore.ChangeSincerityAmount(_currentGuestSheetName, selectedChoice.ChoiceSincerity);
-        
+    
+        PlayerChoice.Hide();
         ShowPlayerText(selectedChoice.ChoiceText, wasChatNpc);
-    
-        _currentKey = selectedChoice.NextKey;
 
-        _allDialogueUI.Remove(target);
-        Destroy(target);
-        
+        _currentKey = selectedChoice.NextKey;
         _isChoiceActive = false;
-    
-        // [수정 핵심] 사용이 끝난 선택지 데이터 초기화
+        
+        SelectionTrm.SetActive(false); 
+
         _currentChoiceData.Clear();
-        ChoiceObject.SetActive(false);
         StartCoroutine(NextStepAfterChoice());
     }
     
@@ -304,12 +343,19 @@ public class BubbleManager : MonoBehaviour, ITabletUI
         _currentChoiceData.Clear(); 
         StopAllCoroutines();
         DisableInteract();
-    
+        
+        if (SelectionTrm != null)
+        {
+            SelectionTrm.SetActive(false);
+        }
+
         foreach (var ui in _allDialogueUI)
         {
             if (ui != null) Destroy(ui);
         }
         _allDialogueUI.Clear();
+        
+        _bottomEmptySpace = null;
         
         _currentChoiceData.Clear(); 
 
@@ -374,6 +420,11 @@ public class BubbleManager : MonoBehaviour, ITabletUI
 
         foreach (var h in data.History)
         {
+            if (h.IsFirst && _allDialogueUI.Count > 0)
+            {
+                ShowEmptySpace();
+            }
+
             BubbleText prefab = null;
             if (h.Speaker == SpeakerType.NPC)
                 prefab = h.IsFirst ? NPCFirstText : NPCText;
@@ -387,6 +438,8 @@ public class BubbleManager : MonoBehaviour, ITabletUI
                 _allDialogueUI.Add(text.gameObject);
             }
         }
+        
+        UpdateBottomEmptySpace();
     
         if (data.HasActiveChoice)
         {
@@ -399,15 +452,9 @@ public class BubbleManager : MonoBehaviour, ITabletUI
     {
         yield return new WaitForEndOfFrame();
         
-        if (_contaner.GetComponentInChildren<ChoiceBubble>() != null) 
-            yield break;
-
-        ChoiceBubble choice = Instantiate(PlayerChoice, _contaner);
-        _allDialogueUI.Add(choice.gameObject);
-
-        FindChoice(seq, choice);
-        choice.AddEvent(Choose);
-        
+        SelectionTrm.SetActive(true);
+        FindChoice(seq);
+    
         StartCoroutine(UpdateUILayout());
     }
 
@@ -423,17 +470,13 @@ public class BubbleManager : MonoBehaviour, ITabletUI
     
     private IEnumerator UpdateUILayout()
     {
-        yield return new WaitUntil(() => _contaner != null);
+        yield return null; 
         LayoutRebuilder.ForceRebuildLayoutImmediate(_contaner);
         yield return new WaitForEndOfFrame();
         scrollRect.verticalNormalizedPosition = 0f;
     }
-    
-    private void OnDestroy()
-    {
-        if(closeCafeBtn != null)
-            onEndChat -= closeCafeBtn.EnableInteractable;
-    }
+
+    public void Reset() { }
 }
 
 public struct SavedDialogueData
