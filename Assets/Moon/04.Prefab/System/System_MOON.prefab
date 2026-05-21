@@ -64,7 +64,7 @@ GameObject:
   m_Component:
   - component: {fileID: 279369058630334862}
   - component: {fileID: 8889556475540502247}
-  m_Layer: 13
+  m_Layer: 15
   m_Name: Thread (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -326,7 +326,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 8192
+    m_Bits: 32768
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: 117f83e6d93ffe14abf3f72f4002e2b0, type: 2}
   m_TargetDisplay: 1
@@ -629,7 +629,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3824258481435448453}
   - component: {fileID: 3293976661212585012}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Triangle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -966,7 +966,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1108569253304441224}
   - component: {fileID: 8275133727739550888}
-  m_Layer: 13
+  m_Layer: 15
   m_Name: Thread (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1057,7 +1057,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7246393689687123089}
   - component: {fileID: 8282489123097950665}
-  m_Layer: 13
+  m_Layer: 15
   m_Name: Thread (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1258,7 +1258,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 24543
+    m_Bits: 98271
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: 117f83e6d93ffe14abf3f72f4002e2b0, type: 2}
   m_TargetDisplay: 1
@@ -1401,7 +1401,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 24543
+    m_Bits: 98271
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: 3ee2d8419d6385a4ca736d639667db5d, type: 2}
   m_TargetDisplay: 0

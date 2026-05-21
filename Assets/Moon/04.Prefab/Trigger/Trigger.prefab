@@ -365,7 +365,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6095545286663098628}
   - component: {fileID: 417480453359545436}
-  m_Layer: 14
+  m_Layer: 0
   m_Name: Round
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -638,7 +638,7 @@ GameObject:
   - component: {fileID: 2863574023061224157}
   - component: {fileID: 6659665696546602076}
   - component: {fileID: 7627404313973488507}
-  m_Layer: 14
+  m_Layer: 16
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
