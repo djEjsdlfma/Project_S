@@ -1,7 +1,10 @@
+using TMPro;
 using UnityEngine;
 
 public class Chatting : MonoBehaviour
 {
+    [SerializeField] private TextMeshProUGUI questName;
+    
     private float timer;
 
     private void Update()
@@ -12,5 +15,10 @@ public class Chatting : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public void SetName(string guestName)
+    {
+        questName.SetText(guestName);
     }
 }

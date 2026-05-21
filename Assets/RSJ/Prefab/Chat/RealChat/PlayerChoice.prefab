@@ -80,6 +80,7 @@ MonoBehaviour:
   - {fileID: 1383095059486485112}
   - {fileID: 4462934683143156268}
   - {fileID: 8192249769998799126}
+  _selectionTrm: {fileID: 0}
 --- !u!1 &895119738989858609
 GameObject:
   m_ObjectHideFlags: 0
@@ -494,11 +495,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1481912407758987299, guid: 3ac702be6af09f64183c4be04fd1c798, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -252.65
+      value: -6
       objectReference: {fileID: 0}
     - target: {fileID: 1481912407758987299, guid: 3ac702be6af09f64183c4be04fd1c798, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -42.5
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1481912407758987299, guid: 3ac702be6af09f64183c4be04fd1c798, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

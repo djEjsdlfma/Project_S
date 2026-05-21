@@ -1,0 +1,789 @@
+fileFormatVersion: 2
+guid: 70e5ec8691323d34189fe039eb875c0a
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8538110172861503478
+    second: Map_NaSoHee_0
+  - first:
+      213: -6840629065995617266
+    second: Map_NaSoHee_1
+  - first:
+      213: -5318411948646114859
+    second: Map_NaSoHee_2
+  - first:
+      213: -4641753697123645052
+    second: Map_NaSoHee_3
+  - first:
+      213: -1440449209348005967
+    second: Map_NaSoHee_4
+  - first:
+      213: 1783330758283578832
+    second: Map_NaSoHee_5
+  - first:
+      213: -3224257440150979314
+    second: Map_NaSoHee_6
+  - first:
+      213: 4192965340221791546
+    second: Map_NaSoHee_7
+  - first:
+      213: 2892469813123707037
+    second: Map_NaSoHee_8
+  - first:
+      213: 7454557497249400179
+    second: Map_NaSoHee_9
+  - first:
+      213: 7054522396784738093
+    second: Map_NaSoHee_10
+  - first:
+      213: 244452553289803321
+    second: Map_NaSoHee_11
+  - first:
+      213: -4717361854180839559
+    second: Map_NaSoHee_12
+  - first:
+      213: -1169203122301300272
+    second: Map_NaSoHee_13
+  - first:
+      213: -7864046291726776840
+    second: Map_NaSoHee_14
+  - first:
+      213: -3275085618450697621
+    second: Map_NaSoHee_15
+  - first:
+      213: -8504687640117265978
+    second: Map_NaSoHee_16
+  - first:
+      213: 2722728114198684437
+    second: Map_NaSoHee_17
+  - first:
+      213: 7529379430593145040
+    second: Map_NaSoHee_18
+  - first:
+      213: -4900197729363123340
+    second: Map_NaSoHee_19
+  - first:
+      213: 2460740428644661582
+    second: Map_NaSoHee_20
+  - first:
+      213: -3717584051207809422
+    second: Map_NaSoHee_21
+  - first:
+      213: 6683646669470073282
+    second: Map_NaSoHee_22
+  - first:
+      213: -1884985534178431299
+    second: Map_NaSoHee_23
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Map_NaSoHee_0
+      rect:
+        serializedVersion: 2
+        x: 175
+        y: 1244
+        width: 625
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f71f8227f57d7670800000000000000
+      internalID: 8538110172861503478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Map_NaSoHee_1
+      rect:
+        serializedVersion: 2
+        x: 959
+        y: 1162
+        width: 157
+        height: 262
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e0c7e119b143111a0800000000000000
+      internalID: -6840629065995617266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Map_NaSoHee_2
+      rect:
+        serializedVersion: 2
+        x: 1144
+        y: 1161
+        width: 164
+        height: 265
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d951c7c2843136b0800000000000000
+      internalID: -5318411948646114859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Map_NaSoHee_3
+      rect:
+        serializedVersion: 2
+        x: 1820
+        y: 1161
+        width: 163
+        height: 265
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 489c6140b9d259fb0800000000000000
+      internalID: -4641753697123645052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Map_NaSoHee_4
+      rect:
+        serializedVersion: 2
+        x: 2043
+        y: 1161
+        width: 162
+        height: 265
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1bfd1df631f720ce0800000000000000
+      internalID: -1440449209348005967
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Map_NaSoHee_5
+      rect:
+        serializedVersion: 2
+        x: 2292
+        y: 1161
+        width: 411
+        height: 265
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0dd458c40e9afb810800000000000000
+      internalID: 1783330758283578832
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Map_NaSoHee_6
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 1202
+        width: 626
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e0df367e0f22143d0800000000000000
+      internalID: -3224257440150979314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Map_NaSoHee_7
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 1140
+        width: 626
+        height: 44
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3dd17bf2c7603a30800000000000000
+      internalID: 4192965340221791546
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Map_NaSoHee_8
+      rect:
+        serializedVersion: 2
+        x: 1390
+        y: 873
+        width: 140
+        height: 116
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d9077c658fd142820800000000000000
+      internalID: 2892469813123707037
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Map_NaSoHee_9
+      rect:
+        serializedVersion: 2
+        x: 1693
+        y: 873
+        width: 140
+        height: 116
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 375864d3c88e37760800000000000000
+      internalID: 7454557497249400179
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Map_NaSoHee_10
+      rect:
+        serializedVersion: 2
+        x: 2128
+        y: 705
+        width: 260
+        height: 242
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d2f34605eb2b6e160800000000000000
+      internalID: 7054522396784738093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Map_NaSoHee_11
+      rect:
+        serializedVersion: 2
+        x: 1390
+        y: 727
+        width: 140
+        height: 117
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 936a6435d48746300800000000000000
+      internalID: 244452553289803321
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Map_NaSoHee_12
+      rect:
+        serializedVersion: 2
+        x: 1694
+        y: 727
+        width: 139
+        height: 117
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97fa2942360988eb0800000000000000
+      internalID: -4717361854180839559
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Map_NaSoHee_13
+      rect:
+        serializedVersion: 2
+        x: 2031
+        y: 360
+        width: 159
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d114f874f726cfe0800000000000000
+      internalID: -1169203122301300272
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Map_NaSoHee_14
+      rect:
+        serializedVersion: 2
+        x: 2249
+        y: 360
+        width: 182
+        height: 211
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8f5c56c209b4dd290800000000000000
+      internalID: -7864046291726776840
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Map_NaSoHee_15
+      rect:
+        serializedVersion: 2
+        x: 2502
+        y: 359
+        width: 236
+        height: 220
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b62714f6bfe8c82d0800000000000000
+      internalID: -3275085618450697621
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Map_NaSoHee_16
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 87
+        width: 174
+        height: 178
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c9b72da6a749f980800000000000000
+      internalID: -8504687640117265978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Map_NaSoHee_17
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 89
+        width: 77
+        height: 207
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51328c25bc219c520800000000000000
+      internalID: 2722728114198684437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Map_NaSoHee_18
+      rect:
+        serializedVersion: 2
+        x: 412
+        y: 88
+        width: 139
+        height: 206
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d823a323babd7860800000000000000
+      internalID: 7529379430593145040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Map_NaSoHee_19
+      rect:
+        serializedVersion: 2
+        x: 610
+        y: 88
+        width: 168
+        height: 204
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 473a224a0200ffbb0800000000000000
+      internalID: -4900197729363123340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Map_NaSoHee_20
+      rect:
+        serializedVersion: 2
+        x: 841
+        y: 88
+        width: 270
+        height: 155
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e49becdd16e462220800000000000000
+      internalID: 2460740428644661582
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Map_NaSoHee_21
+      rect:
+        serializedVersion: 2
+        x: 1555
+        y: 84
+        width: 132
+        height: 197
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 276d915800d786cc0800000000000000
+      internalID: -3717584051207809422
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Map_NaSoHee_22
+      rect:
+        serializedVersion: 2
+        x: 1721
+        y: 80
+        width: 241
+        height: 216
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c18cf10c3511cc50800000000000000
+      internalID: 6683646669470073282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Map_NaSoHee_23
+      rect:
+        serializedVersion: 2
+        x: 2080
+        y: 98
+        width: 106
+        height: 178
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dbe6b8cc4af27d5e0800000000000000
+      internalID: -1884985534178431299
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Map_NaSoHee_24
+      rect:
+        serializedVersion: 2
+        x: 2291
+        y: 111
+        width: 228
+        height: 132
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7522fac8860ab704cad63ca7722fe729
+      internalID: -1997301848
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Map_NaSoHee_25
+      rect:
+        serializedVersion: 2
+        x: 2615
+        y: 87
+        width: 103
+        height: 196
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78bc801341a05664eaddc010959d0a1c
+      internalID: 1205685136
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 80a0e19e4006ea14f891e2795fc49b6b
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      Map_NaSoHee_0: 8538110172861503478
+      Map_NaSoHee_1: -6840629065995617266
+      Map_NaSoHee_10: 7054522396784738093
+      Map_NaSoHee_11: 244452553289803321
+      Map_NaSoHee_12: -4717361854180839559
+      Map_NaSoHee_13: -1169203122301300272
+      Map_NaSoHee_14: -7864046291726776840
+      Map_NaSoHee_15: -3275085618450697621
+      Map_NaSoHee_16: -8504687640117265978
+      Map_NaSoHee_17: 2722728114198684437
+      Map_NaSoHee_18: 7529379430593145040
+      Map_NaSoHee_19: -4900197729363123340
+      Map_NaSoHee_2: -5318411948646114859
+      Map_NaSoHee_20: 2460740428644661582
+      Map_NaSoHee_21: -3717584051207809422
+      Map_NaSoHee_22: 6683646669470073282
+      Map_NaSoHee_23: -1884985534178431299
+      Map_NaSoHee_24: -1997301848
+      Map_NaSoHee_25: 1205685136
+      Map_NaSoHee_3: -4641753697123645052
+      Map_NaSoHee_4: -1440449209348005967
+      Map_NaSoHee_5: 1783330758283578832
+      Map_NaSoHee_6: -3224257440150979314
+      Map_NaSoHee_7: 4192965340221791546
+      Map_NaSoHee_8: 2892469813123707037
+      Map_NaSoHee_9: 7454557497249400179
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

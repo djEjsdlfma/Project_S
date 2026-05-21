@@ -20,12 +20,13 @@ Shader "Custom/URPSpriteBlur"
         }
 
         Cull Off
-        Lighting Off
         ZWrite Off
         Blend SrcAlpha OneMinusSrcAlpha
 
         Pass
         {
+            Tags { "LightMode"="Universal2D" }
+            
             HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag

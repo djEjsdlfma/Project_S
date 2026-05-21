@@ -4,6 +4,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 using LSW._02._Code.Core.Cores;
 using LSW._02._Code.So;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -16,7 +17,7 @@ namespace LSW._02._Code.Importer
         [Serializable]
         public class SheetInfo
         {
-            public string sheetName;
+            public string guestName;
             public Guest guest;
             public string sheetUrl;
         }
@@ -43,17 +44,17 @@ namespace LSW._02._Code.Importer
 
                 if (request.result != UnityWebRequest.Result.Success)
                 {
-                    Debug.LogError($"[Dialogue Import] 실패 : {sheet.sheetName}\n{request.error}");
+                    Debug.LogError($"[Dialogue Import] 실패 : {sheet.guestName}\n{request.error}");
                     continue;
                 }
 
                 string csv = request.downloadHandler.text;
 
-                DialogueSheet dialogueSheet = ParseCSV(sheet.sheetName, sheet.guest, csv);
+                DialogueSheet dialogueSheet = ParseCSV(sheet.guestName, sheet.guest, csv);
 
                 database.sheets.Add(dialogueSheet);
 
-                Debug.Log($"[Dialogue Import] 성공 : {sheet.sheetName}");
+                Debug.Log($"[Dialogue Import] 성공 : {sheet.guestName}");
             }
 
             SaveDatabase(database);
@@ -134,7 +135,7 @@ namespace LSW._02._Code.Importer
 
         private string Clean(string value)
         {
-            return value.Replace("\"", "").Replace("\'", "").Trim();
+            return value.Replace("\"", "").Replace("\'", "").Replace("$", ",").Trim();
         }
 
         private int ParseInt(string value)

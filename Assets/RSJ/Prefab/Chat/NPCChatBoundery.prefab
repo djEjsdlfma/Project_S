@@ -96,6 +96,7 @@ MonoBehaviour:
   _name: {fileID: 0}
   _Boundery: {fileID: 0}
   myChatBound: {fileID: 0}
+  maxWidth: 600
 --- !u!1 &2055521883961174371
 GameObject:
   m_ObjectHideFlags: 0

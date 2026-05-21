@@ -18,8 +18,13 @@ TagManager:
   - Obstacle
   - Wall
   - Ground
+  - BackGround
+  - Collisionable CameraObject
   - Thread
   - CaptureUI
+  - 
+  - 
+  - 
   - 
   - 
   - 

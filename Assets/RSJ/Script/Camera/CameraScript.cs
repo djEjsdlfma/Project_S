@@ -222,7 +222,7 @@ public class CameraScript : MonoBehaviour
         {
             if (item == null) continue;
             
-            if (item.TryGetComponent(out TakableObject takable))
+            if (item.TryGetComponent(out ITakable _))
             {
                 continue;
             }
@@ -342,7 +342,7 @@ public class CameraScript : MonoBehaviour
         {
             if (item == null) continue;
             
-            if (item.TryGetComponent(out TakableObject takable))
+            if (item.TryGetComponent(out ITakable _))
             {
                 continue;
             }
@@ -438,7 +438,8 @@ public class CameraScript : MonoBehaviour
             
             if (item.TryGetComponent(out ITakable takable))
             {
-                CanCapture = false;
+                if (takable.IsDisableCapture())
+                    CanCapture = false;
                 takable.Take();
                 return true;
             }
