@@ -19,7 +19,7 @@ TagManager:
   - Wall
   - Ground
   - Thread
-  - 
+  - CaptureUI
   - 
   - 
   - 
@@ -52,6 +52,9 @@ TagManager:
     locked: 0
   - name: Cam
     uniqueID: 185967535
+    locked: 0
+  - name: CaptureUI
+    uniqueID: 1047465369
     locked: 0
   m_RenderingLayers:
   - Default

@@ -265,7 +265,7 @@ GameObject:
   - component: {fileID: 720754979438444335}
   - component: {fileID: 4771759465311667992}
   m_Layer: 0
-  m_Name: NonePP
+  m_Name: NonePPArrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1255,10 +1255,10 @@ Camera:
   field of view: 165.82735
   orthographic: 1
   orthographic size: 3.35
-  m_Depth: 0
+  m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 8191
+    m_Bits: 24543
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: 117f83e6d93ffe14abf3f72f4002e2b0, type: 2}
   m_TargetDisplay: 1
@@ -1398,10 +1398,10 @@ Camera:
   field of view: 165.82735
   orthographic: 1
   orthographic size: 3.35
-  m_Depth: 0
+  m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 8191
+    m_Bits: 24543
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: 3ee2d8419d6385a4ca736d639667db5d, type: 2}
   m_TargetDisplay: 0
