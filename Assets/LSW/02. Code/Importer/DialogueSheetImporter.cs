@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
+using LSW._02._Code.Core;
 using LSW._02._Code.Core.Cores;
 using LSW._02._Code.So;
 using Unity.VisualScripting;
@@ -135,7 +136,7 @@ namespace LSW._02._Code.Importer
 
         private string Clean(string value)
         {
-            return value.Replace("\"", "").Replace("\'", "").Replace("$", ",").Trim();
+            return value.Replace("\"", "").Replace("\'", "").Replace("$", ",").Trim().Replace("#", "\"");
         }
 
         private int ParseInt(string value)

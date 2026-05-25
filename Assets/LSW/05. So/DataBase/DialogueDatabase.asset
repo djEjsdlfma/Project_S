@@ -13,6 +13,3602 @@ MonoBehaviour:
   m_Name: DialogueDatabase
   m_EditorClassIdentifier: Assembly-CSharp::LSW._02._Code.So.DialogueDatabaseSo
   sheets:
+  - sheetName: "\uC774\uC7AC\uC724"
+    guestType: 1
+    dialogues:
+    - key: DAY1_NPC_NORM_001_1
+      id: 110011
+      day: 1
+      seq: 1
+      speaker: 1
+      type: 1
+      branch: '-'
+      nextKey: DAY1_NPC_NORM_002_2
+      content: "\uCCAB \uBC88\uC9F8 \uD14D\uC2A4\uD2B8\uC785\uB2C8\uB3C4"
+      sincerity: 0
+    - key: DAY1_NPC_NORM_002_2
+      id: 110021
+      day: 1
+      seq: 2
+      speaker: 1
+      type: 1
+      branch: '-'
+      nextKey: DAY1_PLAYER_SEL_003_3
+      content: "\uC774\uAC70 \uB450\uBC88\uC9F8\uBA74\uC11C \uB2E4\uC74C\uC740 \uC120\uD0DD\uC9C0\uC784"
+      sincerity: 0
+    - key: DAY1_PLAYER_SEL_003_3
+      id: 120032
+      day: 1
+      seq: 3
+      speaker: 2
+      type: 2
+      branch: 1A
+      nextKey: DAY1_NPC_REAC_004_6
+      content: "\uC784\uC2B9\uC6D0 \uBC8C\uC138\uC2A4"
+      sincerity: 3
+    - key: DAY1_PLAYER_SEL_003_4
+      id: 120032
+      day: 1
+      seq: 3
+      speaker: 2
+      type: 2
+      branch: 1B
+      nextKey: DAY1_NPC_REAC_005_7
+      content: "\uBC8C\uC138\uC2A4 \uC784\uC2B9\uC6D0"
+      sincerity: 1
+    - key: DAY1_PLAYER_SEL_003_5
+      id: 120032
+      day: 1
+      seq: 3
+      speaker: 2
+      type: 2
+      branch: 1C
+      nextKey: DAY1_NPC_REAC_006_8
+      content: "\uC0BC\uC0BC\uC624\uC624"
+      sincerity: -7
+    - key: DAY1_NPC_REAC_004_6
+      id: 110043
+      day: 1
+      seq: 4
+      speaker: 1
+      type: 4
+      branch: 1A
+      nextKey: DAY1_NPC_NORM_007_9
+      content: "\uC784\uC2B9\uC6D0 \uBC8C\uC138\uC2A4\uB97C \uACE8\uB790\uC744 \uB54C
+        \uB9AC\uC561\uC158"
+      sincerity: 0
+    - key: DAY1_NPC_REAC_005_7
+      id: 110053
+      day: 1
+      seq: 5
+      speaker: 1
+      type: 4
+      branch: 1B
+      nextKey: DAY1_NPC_NORM_007_9
+      content: "\uBC8C\uC138\uC2A4 \uC784\uC2B9\uC6D0\uB97C \uACE8\uB790\uC744 \uB54C
+        \uB9AC\uC561\uC158"
+      sincerity: 0
+    - key: DAY1_NPC_REAC_006_8
+      id: 110063
+      day: 1
+      seq: 6
+      speaker: 1
+      type: 4
+      branch: 1C
+      nextKey: DAY1_NPC_NORM_007_9
+      content: "1C \uB9AC\uC561\uC158"
+      sincerity: 0
+    - key: DAY1_NPC_NORM_007_9
+      id: 110071
+      day: 1
+      seq: 7
+      speaker: 1
+      type: 1
+      branch: '-'
+      nextKey: DAY1_PLAYER_NORM_008_10
+      content: "\uC5B4\uCA4C\uB77C\uACE0\uC548\uBB3C\uC5B4\uBD24\uB294\uB370\uC65C\uADF8\uB7EC\uB294\uB370"
+      sincerity: 0
+    - key: DAY1_PLAYER_NORM_008_10
+      id: 120081
+      day: 1
+      seq: 8
+      speaker: 2
+      type: 1
+      branch: '-'
+      nextKey: DAY1_PLAYER_NORM_009_11
+      content: nui - Recollection
+      sincerity: 0
+    - key: DAY1_PLAYER_NORM_009_11
+      id: 120091
+      day: 1
+      seq: 9
+      speaker: 2
+      type: 1
+      branch: '-'
+      nextKey: DAY1_PLAYER_SEL_010_12
+      content: nui - kardia
+      sincerity: 0
+    - key: DAY1_PLAYER_SEL_010_12
+      id: 120102
+      day: 1
+      seq: 10
+      speaker: 2
+      type: 2
+      branch: 2A
+      nextKey: DAY1_PLAYER_SEL_011_15
+      content: "\uC59C \uB450 \uBC88\uC9F8 \uC120\uD0DD\uC9C0 A"
+      sincerity: -99
+    - key: DAY1_PLAYER_SEL_010_13
+      id: 120102
+      day: 1
+      seq: 10
+      speaker: 2
+      type: 2
+      branch: 2B
+      nextKey: DAY1_PLAYER_SEL_011_15
+      content: "\uC59C B\uC778\uB370\uC694"
+      sincerity: 21
+    - key: DAY1_PLAYER_SEL_010_14
+      id: 120102
+      day: 1
+      seq: 10
+      speaker: 2
+      type: 2
+      branch: 2C
+      nextKey: DAY1_PLAYER_SEL_011_15
+      content: "\uC5F0\uC18D \uC120\uD0DD \uC5D0\uC774"
+      sincerity: 4
+    - key: DAY1_PLAYER_SEL_011_15
+      id: 120112
+      day: 1
+      seq: 11
+      speaker: 2
+      type: 2
+      branch: 3A
+      nextKey: DAY1_NPC_REAC_012_18
+      content: "\uC5F0 \uC120 \uBE44 \uC2B9 \uC6D0"
+      sincerity: 2
+    - key: DAY1_PLAYER_SEL_011_16
+      id: 120112
+      day: 1
+      seq: 11
+      speaker: 2
+      type: 2
+      branch: 3B
+      nextKey: DAY1_NPC_REAC_013_19
+      content: "\uC2E0\uADDC \uC120\uD0DD\uC9C0 \uBE44"
+      sincerity: 5
+    - key: DAY1_PLAYER_SEL_011_17
+      id: 120112
+      day: 1
+      seq: 11
+      speaker: 2
+      type: 2
+      branch: 3C
+      nextKey: DAY1_NPC_REAC_014_20
+      content: "\uC2E0 \uC120 \uC528"
+      sincerity: -1
+    - key: DAY1_NPC_REAC_012_18
+      id: 110123
+      day: 1
+      seq: 12
+      speaker: 1
+      type: 4
+      branch: 3A
+      nextKey: DAY1_NPC_NORM_015_21
+      content: "\uC5F0\uC18D\uC5D0\uB300\uB2F5A"
+      sincerity: 0
+    - key: DAY1_NPC_REAC_013_19
+      id: 110133
+      day: 1
+      seq: 13
+      speaker: 1
+      type: 4
+      branch: 3B
+      nextKey: DAY1_NPC_NORM_015_21
+      content: "B\uC5F0\uC18D\uC5D0\uB300\uB2F5"
+      sincerity: 0
+    - key: DAY1_NPC_REAC_014_20
+      id: 110143
+      day: 1
+      seq: 14
+      speaker: 1
+      type: 4
+      branch: 3C
+      nextKey: DAY1_NPC_NORM_015_21
+      content: "\uC2E0\uADDC \uB9AC\uC561\uC120 \uC528"
+      sincerity: 0
+    - key: DAY1_NPC_NORM_015_21
+      id: 110151
+      day: 1
+      seq: 15
+      speaker: 1
+      type: 1
+      branch: '-'
+      nextKey: DAY1_PLAYER_NORM_016_22
+      content: "\uC774\uD6C4\uC5D0 \uC5EC\uAE30\uB85C \uC640\uC838\uC57C \uC815\uC0C1\uC785\uB2C8\uB2E4"
+      sincerity: 0
+    - key: DAY1_PLAYER_NORM_016_22
+      id: 120161
+      day: 1
+      seq: 16
+      speaker: 2
+      type: 1
+      branch: '-'
+      nextKey: END
+      content: "\uCCAB \uBC88\uC9F8 \uB0A0 \uB300\uD654\uB97C \uB9C8\uBB34\uB9AC\uD558\uB294
+        \uCC44\uD305;"
+      sincerity: 0
+    - key: DAY2_NPC_NORM_001_23
+      id: 210011
+      day: 2
+      seq: 1
+      speaker: 1
+      type: 1
+      branch: '-'
+      nextKey: DAY2_NPC_NORM_002_24
+      content: "\uC774\uAC70\uB294 \uB450 \uBC88\uC9F8 \uB0A0 \uCCAB \uBC88\uC9F8
+        \uCC44\uD305\uC785\uB514\uB098"
+      sincerity: 0
+    - key: DAY2_NPC_NORM_002_24
+      id: 210021
+      day: 2
+      seq: 2
+      speaker: 1
+      type: 1
+      branch: '-'
+      nextKey: DAY2_NPC_NORM_003_25
+      content: "\uAFC8\uC18D\uC5D0\uC11C \uD56D\uC0C1 \uB3C4\uB9DD\uCE58\uACE0 \uC788\uB294,
+        \uC5BC\uBE60\uC9C4 \uB2EC\uB9AC\uB294 \uBAA8\uC2B5"
+      sincerity: 0
+    - key: DAY2_NPC_NORM_003_25
+      id: 210031
+      day: 2
+      seq: 3
+      speaker: 1
+      type: 1
+      branch: '-'
+      nextKey: DAY2_PLAYER_SEL_004_26
+      content: "\uBA54\uD0C0\uC801\uC778 \uCE58\uC0AC\uD55C \uC218\uB2E8\uC73C\uB85C
+        \uB530\uB3CC\uB9AC\uACE0\uC11C, \uC548\uB3C4\uC758 \uC228\uC744 \uB0B4\uC26C\uC5B4"
+      sincerity: 0
+    - key: DAY2_PLAYER_SEL_004_26
+      id: 220042
+      day: 2
+      seq: 4
+      speaker: 2
+      type: 2
+      branch: 1A
+      nextKey: DAY2_NPC_REAC_005_29
+      content: "\uC5C9\uCF1C\uC788\uB294 \uAC74 \uC5B4\uB290 \uC2E4\uC77C\uAE4C"
+      sincerity: 4
+    - key: DAY2_PLAYER_SEL_004_27
+      id: 220042
+      day: 2
+      seq: 4
+      speaker: 2
+      type: 2
+      branch: 1B
+      nextKey: DAY2_NPC_REAC_006_30
+      content: "\uCC3E\uACE0 \uC788\uC5C8\uB354\uB2C8 \uD574\uAC00 \uC800\uBB3C\uC5B4"
+      sincerity: -5
+    - key: DAY2_PLAYER_SEL_004_28
+      id: 220042
+      day: 2
+      seq: 4
+      speaker: 2
+      type: 2
+      branch: 1C
+      nextKey: DAY2_NPC_REAC_007_31
+      content: "\uB3D9\uD574\uBC88\uCA4D\uC11C\uD574\uBC88\uCA4D\uD64D\uAE38\uB3D9"
+      sincerity: 1
+    - key: DAY2_NPC_REAC_005_29
+      id: 210053
+      day: 2
+      seq: 5
+      speaker: 1
+      type: 4
+      branch: 1A
+      nextKey: DAY2_NPC_NORM_008_32
+      content: "\uBD88\uC30D\uD558\uACE0 \uAC00\uB828\uD560 \uBFD0, \uBCC0\uD560
+        \uC218 \uC5C6\uC5B4\uC694"
+      sincerity: 0
+    - key: DAY2_NPC_REAC_006_30
+      id: 210063
+      day: 2
+      seq: 6
+      speaker: 1
+      type: 4
+      branch: 1B
+      nextKey: DAY2_NPC_NORM_008_32
+      content: "\uAC08\uD321\uC9C8\uD321, \uB5A0\uB0B4\uB824\uAC00 \uC885\uC810"
+      sincerity: 0
+    - key: DAY2_NPC_REAC_007_31
+      id: 210073
+      day: 2
+      seq: 7
+      speaker: 1
+      type: 4
+      branch: 1C
+      nextKey: DAY2_NPC_NORM_008_32
+      content: "\uC57C\uC57C\uC57C\uC57C\uC57C\uC57C\uC57C\uC57C\uC57C\uC57C"
+      sincerity: 0
+    - key: DAY2_NPC_NORM_008_32
+      id: 210081
+      day: 2
+      seq: 8
+      speaker: 1
+      type: 1
+      branch: '-'
+      nextKey: DAY2_NPC_NORM_009_33
+      content: "\uB3CC\uACE0 \uB3CC\uC544\uB77C, \uC790\uCC45\uAC10"
+      sincerity: 0
+    - key: DAY2_NPC_NORM_009_33
+      id: 210091
+      day: 2
+      seq: 9
+      speaker: 1
+      type: 1
+      branch: '-'
+      nextKey: DAY2_NPC_NORM_010_34
+      content: "\uC124\uB839 \uBC29\uD669\uD558\uB354\uB77C\uB3C4, \uBE5B \uCABD\uC73C\uB85C"
+      sincerity: 0
+    - key: DAY2_NPC_NORM_010_34
+      id: 210101
+      day: 2
+      seq: 10
+      speaker: 1
+      type: 1
+      branch: '-'
+      nextKey: DAY2_PLAYER_NORM_011_35
+      content: "\uADC0\uC5D0, \uC190\uAC00\uB77D\uC5D0 \uC804\uD574\uC9C0\uB294 \uC704\uC120"
+      sincerity: 0
+    - key: DAY2_PLAYER_NORM_011_35
+      id: 220111
+      day: 2
+      seq: 11
+      speaker: 2
+      type: 1
+      branch: '-'
+      nextKey: DAY2_PLAYER_NORM_012_36
+      content: "\uB9E1\uACA8\uB77C, \uB4DC\uB7EC\uB0B4\uB77C, \uB208\uC0AC\uD0DC\uCC98\uB7FC"
+      sincerity: 0
+    - key: DAY2_PLAYER_NORM_012_36
+      id: 220121
+      day: 2
+      seq: 12
+      speaker: 2
+      type: 1
+      branch: '-'
+      nextKey: DAY2_PLAYER_NORM_013_37
+      content: "\uCC3E\uC544\uB77C, \uC0B4\uD3B4\uB77C, \uB208\uC744 \uB728\uC790"
+      sincerity: 0
+    - key: DAY2_PLAYER_NORM_013_37
+      id: 220131
+      day: 2
+      seq: 13
+      speaker: 2
+      type: 1
+      branch: '-'
+      nextKey: DAY2_NPC_NORM_014_38
+      content: "\uB2E8\uC21C\uD654\uD558\uB294 \uBC84\uB987\uC774 \uBC30\uC5B4\uB4E4\uAE30
+        \uC804\uC5D0"
+      sincerity: 0
+    - key: DAY2_NPC_NORM_014_38
+      id: 210141
+      day: 2
+      seq: 14
+      speaker: 1
+      type: 1
+      branch: '-'
+      nextKey: END
+      content: "\uBFD4\uBFD4\uC774 \uD769\uC5B4\uC838, \uB2FF\uC744 \uC218 \uC5C6\uC5B4\uC694"
+      sincerity: 0
+  - sheetName: "\uC815\uB2E4\uC740"
+    guestType: 2
+    dialogues:
+    - key: DAY1_NPC_NORM_001_1
+      id: 110011
+      day: 1
+      seq: 1
+      speaker: 1
+      type: 1
+      branch: 
+      nextKey: DAY1_NPC_NORM_002_2
+      content: "\uD53C\uB4DC \uCEA1\uC158\uC774 \uC800\uD55C\uD14C \uD558\uB294 \uB9D0
+        \uAC19\uC544\uC11C\uC694."
+      sincerity: 0
+    - key: DAY1_NPC_NORM_002_2
+      id: 110021
+      day: 1
+      seq: 2
+      speaker: 1
+      type: 1
+      branch: 
+      nextKey: DAY1_PLAYER_SEL_003_3
+      content: "\uC774\uC0C1\uD558\uAC8C \uB4E4\uB9B4 \uC218\uB3C4 \uC788\uB294\uB370."
+      sincerity: 0
+    - key: DAY1_PLAYER_SEL_003_3
+      id: 120032
+      day: 1
+      seq: 3
+      speaker: 2
+      type: 2
+      branch: 1A
+      nextKey: DAY1_NPC_REAC_004_6
+      content: "\uC774\uC0C1\uD558\uC9C0 \uC54A\uC544\uC694. \uC5B4\uB5A4 \uAE30\uC5B5\uC778\uAC00\uC694."
+      sincerity: 3
+    - key: DAY1_PLAYER_SEL_003_4
+      id: 120032
+      day: 1
+      seq: 3
+      speaker: 2
+      type: 2
+      branch: 1B
+      nextKey: DAY1_NPC_REAC_006_8
+      content: "\uC5B4\uB5A4 \uCEA1\uC158\uC774\uC694?"
+      sincerity: 1
+    - key: DAY1_PLAYER_SEL_003_5
+      id: 120032
+      day: 1
+      seq: 3
+      speaker: 2
+      type: 2
+      branch: 1C
+      nextKey: DAY1_NPC_REAC_008_10
+      content: "\uADF8 \uCEA1\uC158\uC774 \uC5B4\uB5BB\uAC8C \uB4E4\uB838\uC5B4\uC694."
+      sincerity: 5
+    - key: DAY1_NPC_REAC_004_6
+      id: 110043
+      day: 1
+      seq: 4
+      speaker: 1
+      type: 4
+      branch: 1A
+      nextKey: DAY1_NPC_REAC_005_7
+      content: "\uB9D0\uD558\uB824 \uD588\uB294\uB370 \uBABB \uD55C \uAC8C \uC788\uC5B4\uC694.
+        \uC544\uC8FC \uC624\uB798\uB41C \uAC74 \uC544\uB2CC\uB370"
+      sincerity: 0
+    - key: DAY1_NPC_REAC_005_7
+      id: 110053
+      day: 1
+      seq: 5
+      speaker: 1
+      type: 4
+      branch: 1A
+      nextKey: DAY1_NPC_NORM_011_13
+      content: "\uADF8\uB54C \uC81C\uAC00 \uB9D0\uC744 \uB05D\uAE4C\uC9C0 \uD588\uC73C\uBA74
+        \uC5B4\uB560\uC744\uAE4C \uC2F6\uC5B4\uC11C\uC694."
+      sincerity: 0
+    - key: DAY1_NPC_REAC_006_8
+      id: 110063
+      day: 1
+      seq: 6
+      speaker: 1
+      type: 4
+      branch: 1B
+      nextKey: DAY1_PLAYER_REAC_007_9
+      content: "\uB2F9\uC2E0\uC774 \uADF8\uB0A0 \uB05D\uAE4C\uC9C0 \uB9D0\uD588\uB2E4\uBA74.
+        \uADF8 \uCEA1\uC158\uC774\uC694."
+      sincerity: 0
+    - key: DAY1_PLAYER_REAC_007_9
+      id: 120073
+      day: 1
+      seq: 7
+      speaker: 2
+      type: 4
+      branch: 1B
+      nextKey: DAY1_NPC_NORM_011_13
+      content: "\uADF8 \uCEA1\uC158\uC774 \uB9C8\uC74C\uC5D0 \uAC78\uB838\uB358 \uAC74\uAC00\uC694."
+      sincerity: 0
+    - key: DAY1_NPC_REAC_008_10
+      id: 110083
+      day: 1
+      seq: 8
+      speaker: 1
+      type: 4
+      branch: 1C
+      nextKey: DAY1_NPC_REAC_009_11
+      content: "\uB9D0\uD558\uB824 \uD588\uB358 \uB0A0\uC774 \uC788\uC5C8\uC5B4\uC694."
+      sincerity: 0
+    - key: DAY1_NPC_REAC_009_11
+      id: 110093
+      day: 1
+      seq: 9
+      speaker: 1
+      type: 4
+      branch: 1C
+      nextKey: DAY1_PLAYER_REAC_010_12
+      content: "\uADFC\uB370 \uADF8\uB0A0 \uB05D\uAE4C\uC9C0 \uB9D0\uC744 \uBABB
+        \uD588\uAC70\uB4E0\uC694."
+      sincerity: 0
+    - key: DAY1_PLAYER_REAC_010_12
+      id: 120103
+      day: 1
+      seq: 10
+      speaker: 2
+      type: 4
+      branch: 1C
+      nextKey: DAY1_NPC_NORM_011_13
+      content: "\u2026\u2026"
+      sincerity: 0
+    - key: DAY1_NPC_NORM_011_13
+      id: 110111
+      day: 1
+      seq: 11
+      speaker: 1
+      type: 1
+      branch: 
+      nextKey: DAY1_NPC_NORM_012_14
+      content: "\uB9D0\uC744 \uBABB \uD55C \uAC8C \uC81C \uC798\uBABB\uC740 \uC544\uB2CC
+        \uAC83 \uAC19\uAE30\uB3C4 \uD558\uACE0. \uC544\uB2CC\uAC00\uC694?"
+      sincerity: 0
+    - key: DAY1_NPC_NORM_012_14
+      id: 110121
+      day: 1
+      seq: 12
+      speaker: 1
+      type: 1
+      branch: 
+      nextKey: DAY1_PLAYER_SEL_013_15
+      content: "\uB77C\uB294 \uB9D0\uC744 \uD558\uBA74\uC11C \uC81C\uAC00 \uC65C
+        \uC774\uAC78 \uBB3B\uACE0 \uC788\uB294\uC9C0 \uBAA8\uB974\uACA0\uC9C0\uB9CC."
+      sincerity: 0
+    - key: DAY1_PLAYER_SEL_013_15
+      id: 120132
+      day: 1
+      seq: 13
+      speaker: 2
+      type: 2
+      branch: 2A
+      nextKey: DAY1_NPC_REAC_014_18
+      content: "\uC798\uBABB\uC774 \uC544\uB2C8\uC5D0\uC694."
+      sincerity: -5
+    - key: DAY1_PLAYER_SEL_013_16
+      id: 120132
+      day: 1
+      seq: 13
+      speaker: 2
+      type: 2
+      branch: 2B
+      nextKey: DAY1_NPC_REAC_017_21
+      content: "\uADF8\uB0A0 \uC5B4\uB5A4 \uC77C\uC774 \uC788\uC5C8\uC5B4\uC694?"
+      sincerity: 5
+    - key: DAY1_PLAYER_SEL_013_17
+      id: 120132
+      day: 1
+      seq: 13
+      speaker: 2
+      type: 2
+      branch: 2C
+      nextKey: DAY1_NPC_REAC_020_24
+      content: "\u2026\u2026"
+      sincerity: 3
+    - key: DAY1_NPC_REAC_014_18
+      id: 110143
+      day: 1
+      seq: 14
+      speaker: 1
+      type: 4
+      branch: 2A
+      nextKey: DAY1_NPC_REAC_015_19
+      content: "...\uADF8\uB807\uC8E0. \uADF8\uB807\uACA0\uC8E0. \uADFC\uB370 \uADF8
+        \uB9D0\uC744 \uB4E4\uC5B4\uB3C4"
+      sincerity: 0
+    - key: DAY1_NPC_REAC_015_19
+      id: 110153
+      day: 1
+      seq: 15
+      speaker: 1
+      type: 4
+      branch: 2A
+      nextKey: DAY1_PLAYER_REAC_016_20
+      content: "\uBB54\uAC00 \uD574\uC18C\uAC00 \uB418\uC9C0 \uC54A\uB124\uC694.
+        \uC774\uC0C1\uD558\uAC8C."
+      sincerity: 0
+    - key: DAY1_PLAYER_REAC_016_20
+      id: 120163
+      day: 1
+      seq: 16
+      speaker: 2
+      type: 4
+      branch: 2A
+      nextKey: DAY1_NPC_NORM_022_26
+      content: "\u2026\u2026"
+      sincerity: 0
+    - key: DAY1_NPC_REAC_017_21
+      id: 110173
+      day: 1
+      seq: 17
+      speaker: 1
+      type: 4
+      branch: 2B
+      nextKey: DAY1_NPC_REAC_018_22
+      content: "\uCE5C\uAD6C\uD55C\uD14C \uC804\uD654\uB97C \uAC78\uC5C8\uB294\uB370\uC694.
+        \uC81C\uAC00 \uBA3C\uC800."
+      sincerity: 0
+    - key: DAY1_NPC_REAC_018_22
+      id: 110183
+      day: 1
+      seq: 18
+      speaker: 1
+      type: 4
+      branch: 2B
+      nextKey: DAY1_PLAYER_REAC_019_23
+      content: "\uADFC\uB370 \uADF8 \uCE5C\uAD6C\uAC00 \uBA3C\uC800 \uB9D0\uC744
+        \uC2DC\uC791\uD558\uB294 \uBC14\uB78C\uC5D0."
+      sincerity: 0
+    - key: DAY1_PLAYER_REAC_019_23
+      id: 120193
+      day: 1
+      seq: 19
+      speaker: 2
+      type: 4
+      branch: 2B
+      nextKey: DAY1_NPC_NORM_022_26
+      content: "\uB9D0\uC744 \uB04A\uC9C0 \uBABB\uD55C \uAC70\uAD70\uC694."
+      sincerity: 0
+    - key: DAY1_NPC_REAC_020_24
+      id: 110203
+      day: 1
+      seq: 20
+      speaker: 1
+      type: 4
+      branch: 2C
+      nextKey: DAY1_PLAYER_REAC_021_25
+      content: "...\uC65C \uC544\uBB34 \uB9D0\uB3C4 \uC548 \uD574\uC694?"
+      sincerity: 0
+    - key: DAY1_PLAYER_REAC_021_25
+      id: 120213
+      day: 1
+      seq: 21
+      speaker: 2
+      type: 4
+      branch: 2C
+      nextKey: DAY1_NPC_NORM_022_26
+      content: "\uB4E3\uACE0 \uC788\uC5B4\uC694."
+      sincerity: 0
+    - key: DAY1_NPC_NORM_022_26
+      id: 110221
+      day: 1
+      seq: 22
+      speaker: 1
+      type: 1
+      branch: 
+      nextKey: DAY1_NPC_NORM_023_27
+      content: "\uB450 \uC2DC\uAC04 \uB3D9\uC548 \uCE5C\uAD6C \uC598\uAE30\uB97C
+        \uB4E4\uC5C8\uC5B4\uC694. \uADF8\uB7EC\uACE0 \uB098\uC11C\uC57C \uC804\uD654\uB97C
+        \uB04A\uC5C8\uB294\uB370"
+      sincerity: 0
+    - key: DAY1_NPC_NORM_023_27
+      id: 110231
+      day: 1
+      seq: 23
+      speaker: 1
+      type: 1
+      branch: 
+      nextKey: DAY1_NPC_NORM_024_28
+      content: "\uC81C \uC598\uAE30\uB294 \uD55C \uB9C8\uB514\uB3C4 \uBABB \uD588\uAC70\uB4E0\uC694."
+      sincerity: 0
+    - key: DAY1_NPC_NORM_024_28
+      id: 110241
+      day: 1
+      seq: 24
+      speaker: 1
+      type: 1
+      branch: 
+      nextKey: DAY1_PLAYER_SEL_025_29
+      content: "\uADF8\uB54C \uC81C\uAC00 \uD558\uB824\uACE0 \uD588\uB358 \uB9D0\uC774
+        \uC788\uC5C8\uB294\uB370."
+      sincerity: 0
+    - key: DAY1_PLAYER_SEL_025_29
+      id: 120252
+      day: 1
+      seq: 25
+      speaker: 2
+      type: 2
+      branch: 3A
+      nextKey: DAY1_NPC_REAC_026_32
+      content: "\uC5B4\uB5A4 \uB9D0\uC774\uC5C8\uC5B4\uC694."
+      sincerity: 5
+    - key: DAY1_PLAYER_SEL_025_30
+      id: 120252
+      day: 1
+      seq: 25
+      speaker: 2
+      type: 2
+      branch: 3B
+      nextKey: DAY1_NPC_REAC_028_34
+      content: "\uADF8 \uCE5C\uAD6C\uAC00 \uBA3C\uC800 \uB9D0\uC744 \uC2DC\uC791\uD588\uC73C\uB2C8\uAE4C
+        \uC5B4\uCA54 \uC218 \uC5C6\uC5C8\uB358 \uAC70\uC796\uC544\uC694."
+      sincerity: -3
+    - key: DAY1_PLAYER_SEL_025_31
+      id: 120252
+      day: 1
+      seq: 25
+      speaker: 2
+      type: 2
+      branch: 3C
+      nextKey: DAY1_NPC_REAC_029_35
+      content: "\uB450 \uC2DC\uAC04 \uB3D9\uC548\uC774\uC694."
+      sincerity: 2
+    - key: DAY1_NPC_REAC_026_32
+      id: 110263
+      day: 1
+      seq: 26
+      speaker: 1
+      type: 4
+      branch: 3A
+      nextKey: DAY1_PLAYER_REAC_027_33
+      content: "\uC544\uBC84\uC9C0\uAC00 \uC554 \uC9C4\uB2E8\uC744 \uBC1B\uC73C\uC168\uB2E4\uB294
+        \uB9D0\uC774\uC694."
+      sincerity: 0
+    - key: DAY1_PLAYER_REAC_027_33
+      id: 120273
+      day: 1
+      seq: 27
+      speaker: 2
+      type: 4
+      branch: 3A
+      nextKey: DAY1_NPC_NORM_030_36
+      content: "\u2026\u2026"
+      sincerity: 0
+    - key: DAY1_NPC_REAC_028_34
+      id: 110283
+      day: 1
+      seq: 28
+      speaker: 1
+      type: 4
+      branch: 3B
+      nextKey: DAY1_NPC_NORM_030_36
+      content: "...\uC5B4\uCA54 \uC218 \uC5C6\uC5C8\uB358 \uAC74 \uB9DE\uC544\uC694.
+        \uADFC\uB370 \uADF8\uB798\uB3C4 \uC5B4\uCA50\uC9C0, \uACC4\uC18D \uB9C8\uC74C\uC5D0
+        \uAC78\uB824\uC11C\uC694."
+      sincerity: 0
+    - key: DAY1_NPC_REAC_029_35
+      id: 110293
+      day: 1
+      seq: 29
+      speaker: 1
+      type: 4
+      branch: 3C
+      nextKey: DAY1_NPC_NORM_030_36
+      content: "\uB450 \uC2DC\uAC04\uC774\uC694. \uB04A\uC744 \uD0C0\uC774\uBC0D\uC774
+        \uC5C6\uC5C8\uB358 \uAC74 \uC544\uB2CC\uB370 \uB04A\uC9C0\uB97C \uBABB\uD588\uC5B4\uC694."
+      sincerity: 0
+    - key: DAY1_NPC_NORM_030_36
+      id: 110301
+      day: 1
+      seq: 30
+      speaker: 1
+      type: 1
+      branch: 
+      nextKey: DAY1_NPC_NORM_031_37
+      content: "\uADF8\uB0A0 \uC774\uD6C4\uB85C \uC544\uBC84\uC9C0 \uBCD1\uC6D0\uC744
+        \uD63C\uC790 \uB2E4\uB154\uC5B4\uC694."
+      sincerity: 0
+    - key: DAY1_NPC_NORM_031_37
+      id: 110311
+      day: 1
+      seq: 31
+      speaker: 1
+      type: 1
+      branch: 
+      nextKey: DAY1_NPC_NORM_032_38
+      content: "\uC544\uBB34\uD55C\uD14C\uB3C4 \uC598\uAE30\uB97C \uBABB \uD588\uC5B4\uC694.
+        \uB2E4\uB4E4 \uBC14\uC05C\uB370... \uD558\uB294 \uC0DD\uAC01\uC5D0."
+      sincerity: 0
+    - key: DAY1_NPC_NORM_032_38
+      id: 110321
+      day: 1
+      seq: 32
+      speaker: 1
+      type: 1
+      branch: 
+      nextKey: DAY1_PLAYER_SEL_033_39
+      content: "\uC544\uBC84\uC9C0\uB294 \uC5EC\uB35F \uB2EC \uB4A4\uC5D0 \uB3CC\uC544\uAC00\uC168\uACE0\uC694."
+      sincerity: 0
+    - key: DAY1_PLAYER_SEL_033_39
+      id: 120332
+      day: 1
+      seq: 33
+      speaker: 2
+      type: 2
+      branch: 4A
+      nextKey: DAY1_NPC_REAC_034_42
+      content: "\uC624\uB298 \uC5F0\uB77D\uD574 \uC918\uC11C \uACE0\uB9C8\uC6CC\uC694."
+      sincerity: 1
+    - key: DAY1_PLAYER_SEL_033_40
+      id: 120332
+      day: 1
+      seq: 33
+      speaker: 2
+      type: 2
+      branch: 4B
+      nextKey: DAY1_NPC_REAC_037_45
+      content: "\uB2E4\uC74C\uC5D0 \uB610 \uC5F0\uB77D \uC8FC\uC138\uC694."
+      sincerity: 2
+    - key: DAY1_PLAYER_SEL_033_41
+      id: 120332
+      day: 1
+      seq: 33
+      speaker: 2
+      type: 2
+      branch: 4C
+      nextKey: DAY1_NPC_REAC_041_49
+      content: "\uADF8 \uB9D0\uC744 \uB05D\uAE4C\uC9C0 \uD558\uACE0 \uC2F6\uC5C8\uAD70\uC694."
+      sincerity: 5
+    - key: DAY1_NPC_REAC_034_42
+      id: 110343
+      day: 1
+      seq: 34
+      speaker: 1
+      type: 4
+      branch: 4A
+      nextKey: DAY1_PLAYER_REAC_035_43
+      content: "...\uACE0\uB9D9\uB2E4\uB294 \uB9D0\uC744 \uB4E4\uC744 \uC904 \uBAB0\uB790\uC5B4\uC694."
+      sincerity: 0
+    - key: DAY1_PLAYER_REAC_035_43
+      id: 120353
+      day: 1
+      seq: 35
+      speaker: 2
+      type: 4
+      branch: 4A
+      nextKey: DAY1_NPC_REAC_036_44
+      content: "\u2026\u2026"
+      sincerity: 0
+    - key: DAY1_NPC_REAC_036_44
+      id: 110363
+      day: 1
+      seq: 36
+      speaker: 1
+      type: 4
+      branch: 4A
+      nextKey: DAY2_NPC_NORM_001_52
+      content: "\uC640\uC918\uC11C \uAC10\uC0AC\uD588\uC5B4\uC694."
+      sincerity: 0
+    - key: DAY1_NPC_REAC_037_45
+      id: 110373
+      day: 1
+      seq: 37
+      speaker: 1
+      type: 4
+      branch: 4B
+      nextKey: DAY1_PLAYER_REAC_038_46
+      content: "\uC62C\uAC8C\uC694. \uC544\uB9C8\uB3C4\uC694."
+      sincerity: 0
+    - key: DAY1_PLAYER_REAC_038_46
+      id: 120383
+      day: 1
+      seq: 38
+      speaker: 2
+      type: 4
+      branch: 4B
+      nextKey: DAY1_NPC_REAC_039_47
+      content: "\u2026\u2026"
+      sincerity: 0
+    - key: DAY1_NPC_REAC_039_47
+      id: 110393
+      day: 1
+      seq: 39
+      speaker: 1
+      type: 4
+      branch: 4B
+      nextKey: DAY1_NPC_REAC_040_48
+      content: "\uC544\uB9C8\uB3C4\uAC00 \uC544\uB2C8\uB77C \uC62C \uAC83 \uAC19\uC544\uC694.
+        \uC774\uC0C1\uD558\uAC8C."
+      sincerity: 0
+    - key: DAY1_NPC_REAC_040_48
+      id: 110403
+      day: 1
+      seq: 40
+      speaker: 1
+      type: 4
+      branch: 4B
+      nextKey: DAY2_NPC_NORM_001_52
+      content: "\uC774 \uCC44\uB110\uC774 \uC790\uAFB8 \uC0DD\uAC01\uB0A0 \uAC83
+        \uAC19\uC544\uC11C\uC694."
+      sincerity: 0
+    - key: DAY1_NPC_REAC_041_49
+      id: 110413
+      day: 1
+      seq: 41
+      speaker: 1
+      type: 4
+      branch: 4C
+      nextKey: DAY1_PLAYER_REAC_042_50
+      content: "...\uB124. \"\uC7A0\uAE50\uB9CC\uC694\" \uB77C\uACE0 \uB9D0\uD558\uACE0
+        \uC2F6\uC5C8\uC5B4\uC694. \uB531 \uADF8 \uD55C \uB9C8\uB514\uB9CC."
+      sincerity: 0
+    - key: DAY1_PLAYER_REAC_042_50
+      id: 120423
+      day: 1
+      seq: 42
+      speaker: 2
+      type: 4
+      branch: 4C
+      nextKey: DAY1_NPC_REAC_043_51
+      content: "\u2026\u2026"
+      sincerity: 0
+    - key: DAY1_NPC_REAC_043_51
+      id: 110433
+      day: 1
+      seq: 43
+      speaker: 1
+      type: 4
+      branch: 4C
+      nextKey: DAY2_NPC_NORM_001_52
+      content: "\uB9D0\uD55C \uC801\uC774 \uC5C6\uB294 \uB9D0\uC778\uB370. \uC5EC\uAE30\uC11C
+        \uCC98\uC74C \uD574\uBD24\uB124\uC694."
+      sincerity: 0
+    - key: DAY2_NPC_NORM_001_52
+      id: 210011
+      day: 2
+      seq: 1
+      speaker: 1
+      type: 1
+      branch: 
+      nextKey: DAY2_PLAYER_SEL_002_53
+      content: "\uB2E4\uC2DC \uC654\uC5B4\uC694. \uC0DD\uAC01\uBCF4\uB2E4 \uBE68\uB9AC
+        \uC654\uC8E0?"
+      sincerity: 0
+    - key: DAY2_PLAYER_SEL_002_53
+      id: 220022
+      day: 2
+      seq: 2
+      speaker: 2
+      type: 2
+      branch: 1A
+      nextKey: DAY2_NPC_REAC_003_56
+      content: "\uAE30\uB2E4\uB9AC\uACE0 \uC788\uC5C8\uC5B4\uC694."
+      sincerity: 3
+    - key: DAY2_PLAYER_SEL_002_54
+      id: 220022
+      day: 2
+      seq: 2
+      speaker: 2
+      type: 2
+      branch: 1B
+      nextKey: DAY2_NPC_REAC_004_57
+      content: "\uC624\uB298\uC740 \uC5B4\uB5A0\uC138\uC694."
+      sincerity: 2
+    - key: DAY2_PLAYER_SEL_002_55
+      id: 220022
+      day: 2
+      seq: 2
+      speaker: 2
+      type: 2
+      branch: 1C
+      nextKey: DAY2_NPC_REAC_005_58
+      content: "\uBE68\uB9AC \uC654\uAD70\uC694."
+      sincerity: 5
+    - key: DAY2_NPC_REAC_003_56
+      id: 210033
+      day: 2
+      seq: 3
+      speaker: 1
+      type: 4
+      branch: 1A
+      nextKey: DAY2_NPC_NORM_007_60
+      content: "\uAE30\uB2E4\uB9AC\uB294 \uC0AC\uB78C\uC774 \uC788\uC73C\uBA74 \uC624\uAC8C
+        \uB418\uB354\uB77C\uACE0\uC694. \uC2E0\uAE30\uD558\uAC8C."
+      sincerity: 0
+    - key: DAY2_NPC_REAC_004_57
+      id: 210043
+      day: 2
+      seq: 4
+      speaker: 1
+      type: 4
+      branch: 1B
+      nextKey: DAY2_NPC_NORM_007_60
+      content: "\uAD1C\uCC2E\uC544\uC694. \uD56D\uC0C1 \uAD1C\uCC2E\uC544\uC694.
+        \uADF8\uAC8C \uBB38\uC81C\uC774\uAE34 \uD55C\uB370."
+      sincerity: 0
+    - key: DAY2_NPC_REAC_005_58
+      id: 210053
+      day: 2
+      seq: 5
+      speaker: 1
+      type: 4
+      branch: 1C
+      nextKey: DAY2_PLAYER_REAC_006_59
+      content: "\uC0DD\uAC01\uBCF4\uB2E4 \uBE68\uB9AC \uC654\uC5B4\uC694\u2014 \uC800\uB3C4\uC694."
+      sincerity: 0
+    - key: DAY2_PLAYER_REAC_006_59
+      id: 220063
+      day: 2
+      seq: 6
+      speaker: 2
+      type: 4
+      branch: 1C
+      nextKey: DAY2_NPC_NORM_007_60
+      content: "\u2026\u2026"
+      sincerity: 0
+    - key: DAY2_NPC_NORM_007_60
+      id: 210071
+      day: 2
+      seq: 7
+      speaker: 1
+      type: 1
+      branch: 
+      nextKey: DAY2_NPC_NORM_008_61
+      content: "\uCE5C\uAD6C \uC598\uAE30\uB97C \uB354 \uD574\uC57C \uD560 \uAC83
+        \uAC19\uC544\uC11C\uC694. \uC9C0\uB09C\uBC88\uC5D0 \uB2E4 \uB9D0 \uBABB \uD55C
+        \uAC83 \uAC19\uC544\uC11C."
+      sincerity: 0
+    - key: DAY2_NPC_NORM_008_61
+      id: 210081
+      day: 2
+      seq: 8
+      speaker: 1
+      type: 1
+      branch: 
+      nextKey: DAY2_PLAYER_SEL_009_62
+      content: "\uADF8 \uCE5C\uAD6C \uC774\uB984\uC774 \uD61C\uC778\uC774\uC5D0\uC694.
+        \uC624\uB798\uB41C \uCE5C\uAD6C\uACE0\uC694."
+      sincerity: 0
+    - key: DAY2_PLAYER_SEL_009_62
+      id: 220092
+      day: 2
+      seq: 9
+      speaker: 2
+      type: 2
+      branch: 2A
+      nextKey: DAY2_NPC_REAC_010_65
+      content: "\uD61C\uC778\uC528\uB294 \uC5B4\uB5A4 \uC0AC\uB78C\uC774\uC5D0\uC694."
+      sincerity: 3
+    - key: DAY2_PLAYER_SEL_009_63
+      id: 220092
+      day: 2
+      seq: 9
+      speaker: 2
+      type: 2
+      branch: 2B
+      nextKey: DAY2_NPC_REAC_012_67
+      content: "\uC624\uB798\uB41C \uCE5C\uAD6C\uAD70\uC694."
+      sincerity: 2
+    - key: DAY2_PLAYER_SEL_009_64
+      id: 220092
+      day: 2
+      seq: 9
+      speaker: 2
+      type: 2
+      branch: 2C
+      nextKey: DAY2_NPC_REAC_014_69
+      content: "\uADF8 \uC804\uD654 \uC774\uD6C4\uB85C \uD61C\uC778\uC528\uB791 \uC5B4\uB5BB\uAC8C
+        \uB410\uC5B4\uC694."
+      sincerity: 5
+    - key: DAY2_NPC_REAC_010_65
+      id: 210103
+      day: 2
+      seq: 10
+      speaker: 1
+      type: 4
+      branch: 2A
+      nextKey: DAY2_NPC_REAC_011_66
+      content: "\uCC29\uD55C \uC0AC\uB78C\uC774\uC5D0\uC694. \uC9C4\uC9DC\uB85C\uC694.
+        \uC790\uAE30 \uD798\uB4E0 \uAC70 \uB2E4 \uD138\uC5B4\uB193\uACE0 \uB098\uBA74
+        \uAF2D \uBC25 \uC0AC\uC92C\uACE0,"
+      sincerity: 0
+    - key: DAY2_NPC_REAC_011_66
+      id: 210113
+      day: 2
+      seq: 11
+      speaker: 1
+      type: 4
+      branch: 2A
+      nextKey: DAY2_NPC_NORM_017_72
+      content: "\uBB54\uAC00 \uC798\uBABB\uD55C \uC0AC\uB78C\uC740 \uC544\uB2C8\uC5D0\uC694."
+      sincerity: 0
+    - key: DAY2_NPC_REAC_012_67
+      id: 210123
+      day: 2
+      seq: 12
+      speaker: 1
+      type: 4
+      branch: 2B
+      nextKey: DAY2_NPC_REAC_013_68
+      content: "\uACE0\uB4F1\uD559\uAD50 \uB54C\uBD80\uD130\uC694. \uADF8 \uCE5C\uAD6C\uD55C\uD14C
+        \uC774\uBCC4 \uC598\uAE30 \uB4E4\uC5B4\uC8FC\uACE0, \uCDE8\uC5C5 \uC598\uAE30
+        \uB4E4\uC5B4\uC8FC\uACE0..."
+      sincerity: 0
+    - key: DAY2_NPC_REAC_013_68
+      id: 210133
+      day: 2
+      seq: 13
+      speaker: 1
+      type: 4
+      branch: 2B
+      nextKey: DAY2_NPC_NORM_017_72
+      content: "\uADF8\uB7EC\uB2E4 \uBCF4\uB2C8\uAE4C \uADF8\uB0E5 \uADF8\uB7F0 \uAD00\uACC4\uAC00
+        \uB410\uC5B4\uC694."
+      sincerity: 0
+    - key: DAY2_NPC_REAC_014_69
+      id: 210143
+      day: 2
+      seq: 14
+      speaker: 1
+      type: 4
+      branch: 2C
+      nextKey: DAY2_PLAYER_REAC_015_70
+      content: "\uC9C0\uAE08\uB3C4 \uC5F0\uB77D\uD574\uC694. \uC9C0\uB09C\uC8FC\uC5D0\uB3C4
+        \uBD24\uACE0\uC694."
+      sincerity: 0
+    - key: DAY2_PLAYER_REAC_015_70
+      id: 220153
+      day: 2
+      seq: 15
+      speaker: 2
+      type: 4
+      branch: 2C
+      nextKey: DAY2_NPC_REAC_016_71
+      content: "\uC9C0\uAE08\uB3C4\uC694."
+      sincerity: 0
+    - key: DAY2_NPC_REAC_016_71
+      id: 210163
+      day: 2
+      seq: 16
+      speaker: 1
+      type: 4
+      branch: 2C
+      nextKey: DAY2_NPC_NORM_017_72
+      content: "\uC5EC\uC804\uD788 \uB4E4\uC5B4\uC8FC\uB294 \uCABD\uC774\uC5D0\uC694.
+        \uC800\uB294."
+      sincerity: 0
+    - key: DAY2_NPC_NORM_017_72
+      id: 210171
+      day: 2
+      seq: 17
+      speaker: 1
+      type: 1
+      branch: 
+      nextKey: DAY2_NPC_NORM_018_73
+      content: "\uADF8\uB0A0 \uC804\uD654\uB97C \uB04A\uACE0 \uB098\uC11C \uD63C\uC790
+        \uC6B8\uC5C8\uC5B4\uC694."
+      sincerity: 0
+    - key: DAY2_NPC_NORM_018_73
+      id: 210181
+      day: 2
+      seq: 18
+      speaker: 1
+      type: 1
+      branch: 
+      nextKey: DAY2_NPC_NORM_019_74
+      content: "\uC544\uBC84\uC9C0 \uC598\uAE30\uB97C \uAEBC\uB0B4\uC9C0\uB3C4 \uBABB\uD55C
+        \uCC44\uB85C."
+      sincerity: 0
+    - key: DAY2_NPC_NORM_019_74
+      id: 210191
+      day: 2
+      seq: 19
+      speaker: 1
+      type: 1
+      branch: 
+      nextKey: DAY2_PLAYER_SEL_020_75
+      content: "\uADFC\uB370 \uD61C\uC778\uC774\uAC00 \uB098\uC05C \uAC8C \uC544\uB2C8\uC5D0\uC694.
+        \uADF8 \uCE5C\uAD6C\uB294 \uBAB0\uB790\uB358 \uAC70\uB2C8\uAE4C\uC694."
+      sincerity: 0
+    - key: DAY2_PLAYER_SEL_020_75
+      id: 220202
+      day: 2
+      seq: 20
+      speaker: 2
+      type: 2
+      branch: 3A
+      nextKey: DAY2_NPC_REAC_021_78
+      content: "\uADF8\uB0A0 \uBC24 \uB2E4\uC740\uC528\uB294 \uBB50\uAC00 \uD544\uC694\uD588\uC5B4\uC694."
+      sincerity: 15
+    - key: DAY2_PLAYER_SEL_020_76
+      id: 220202
+      day: 2
+      seq: 20
+      speaker: 2
+      type: 2
+      branch: 3B
+      nextKey: DAY2_NPC_REAC_026_83
+      content: "\uD61C\uC778\uC528\uAC00 \uB208\uCE58\uCC58\uC73C\uBA74 \uC88B\uC558\uACA0\uB124\uC694."
+      sincerity: 4
+    - key: DAY2_PLAYER_SEL_020_77
+      id: 220202
+      day: 2
+      seq: 20
+      speaker: 2
+      type: 2
+      branch: 3C
+      nextKey: DAY2_NPC_REAC_030_87
+      content: "\uADF8\uB798\uB3C4 \uD61C\uC778\uC528\uAC00 \uC7A5\uB840\uC2DD\uC5D4
+        \uC654\uC796\uC544\uC694."
+      sincerity: -10
+    - key: DAY2_NPC_REAC_021_78
+      id: 210213
+      day: 2
+      seq: 21
+      speaker: 1
+      type: 4
+      branch: 3A
+      nextKey: DAY2_PLAYER_REAC_022_79
+      content: "...\uADF8\uB54C\uC694?"
+      sincerity: 0
+    - key: DAY2_PLAYER_REAC_022_79
+      id: 220223
+      day: 2
+      seq: 22
+      speaker: 2
+      type: 4
+      branch: 3A
+      nextKey: DAY2_NPC_REAC_023_80
+      content: "\u2026\u2026"
+      sincerity: 0
+    - key: DAY2_NPC_REAC_023_80
+      id: 210233
+      day: 2
+      seq: 23
+      speaker: 1
+      type: 4
+      branch: 3A
+      nextKey: DAY2_NPC_REAC_024_81
+      content: "\uADF8\uB0E5 \uB204\uAD70\uAC00\uD55C\uD14C \uB9D0\uC744 \uD558\uACE0
+        \uC2F6\uC5C8\uB358 \uAC83 \uAC19\uC544\uC694."
+      sincerity: 0
+    - key: DAY2_NPC_REAC_024_81
+      id: 210243
+      day: 2
+      seq: 24
+      speaker: 1
+      type: 4
+      branch: 3A
+      nextKey: DAY2_NPC_REAC_025_82
+      content: "\uB531 \uD55C \uB9C8\uB514\uB9CC... \uB098 \uC9C0\uAE08 \uC880 \uD798\uB4E4\uC5B4.
+        \uADF8 \uD55C \uB9C8\uB514\uB9CC."
+      sincerity: 0
+    - key: DAY2_NPC_REAC_025_82
+      id: 210253
+      day: 2
+      seq: 25
+      speaker: 1
+      type: 4
+      branch: 3A
+      nextKey: DAY2_NPC_NORM_034_91
+      content: "\uADF8 \uB9D0\uC744 \uAEBC\uB0B4\uBCF8 \uC801\uC774 \uC5C6\uC5B4\uC11C
+        \uADF8\uB7F0\uC9C0 \uB9D0\uD558\uBA74\uC11C\uB3C4 \uC5B4\uC0C9\uD558\uB124\uC694.
+        \uC9C0\uAE08."
+      sincerity: 0
+    - key: DAY2_NPC_REAC_026_83
+      id: 210263
+      day: 2
+      seq: 26
+      speaker: 1
+      type: 4
+      branch: 3B
+      nextKey: DAY2_NPC_REAC_027_84
+      content: "\uB208\uCE58\uCC58\uC73C\uBA74 \uB2EC\uB77C\uC84C\uC744\uAE4C\uC694.
+        \uBAA8\uB974\uACA0\uC5B4\uC694."
+      sincerity: 0
+    - key: DAY2_NPC_REAC_027_84
+      id: 210273
+      day: 2
+      seq: 27
+      speaker: 1
+      type: 4
+      branch: 3B
+      nextKey: DAY2_NPC_REAC_028_85
+      content: "\uADFC\uB370 \uB208\uCE58\uCC44\uAE30\uB97C \uAE30\uB2E4\uB9AC\uB294
+        \uAC83\uB3C4 \uC81C \uC2B5\uAD00\uC778 \uAC83 \uAC19\uAE30\uB3C4 \uD558\uACE0...."
+      sincerity: 0
+    - key: DAY2_NPC_REAC_028_85
+      id: 210283
+      day: 2
+      seq: 28
+      speaker: 1
+      type: 4
+      branch: 3B
+      nextKey: DAY2_PLAYER_REAC_029_86
+      content: "\uC544\uBC84\uC9C0\uD55C\uD14C\uB3C4 \uD56D\uC0C1 \uAD1C\uCC2E\uB2E4\uACE0
+        \uD588\uAC70\uB4E0\uC694. \uBA3C\uC800 \uB9D0\uD558\uB294 \uAC83\uBCF4\uB2E4
+        \uADF8\uAC8C \uB354 \uD3B8\uD558\uB2C8\uAE4C."
+      sincerity: 0
+    - key: DAY2_PLAYER_REAC_029_86
+      id: 220293
+      day: 2
+      seq: 29
+      speaker: 2
+      type: 4
+      branch: 3B
+      nextKey: DAY2_NPC_NORM_034_91
+      content: "\u2026\u2026"
+      sincerity: 0
+    - key: DAY2_NPC_REAC_030_87
+      id: 210303
+      day: 2
+      seq: 30
+      speaker: 1
+      type: 4
+      branch: 3C
+      nextKey: DAY2_PLAYER_REAC_031_88
+      content: "...\uC654\uC8E0. \uB9DE\uC544\uC694."
+      sincerity: 0
+    - key: DAY2_PLAYER_REAC_031_88
+      id: 220313
+      day: 2
+      seq: 31
+      speaker: 2
+      type: 4
+      branch: 3C
+      nextKey: DAY2_NPC_REAC_032_89
+      content: "\u2026\u2026"
+      sincerity: 0
+    - key: DAY2_NPC_REAC_032_89
+      id: 210323
+      day: 2
+      seq: 32
+      speaker: 1
+      type: 4
+      branch: 3C
+      nextKey: DAY2_NPC_REAC_033_90
+      content: "\uADF8\uB0A0 \uC800\uD55C\uD14C \uC65C \uB9D0 \uC548 \uD588\uB0D0\uACE0
+        \uD558\uB294\uB370...."
+      sincerity: 0
+    - key: DAY2_NPC_REAC_033_90
+      id: 210333
+      day: 2
+      seq: 33
+      speaker: 1
+      type: 4
+      branch: 3C
+      nextKey: DAY2_NPC_NORM_034_91
+      content: "\uADF8 \uB9D0\uC774 \uC65C \uADF8\uB807\uAC8C \uD798\uB4E0\uC9C0
+        \uBAA8\uB974\uACA0\uC5B4\uC694. \uB9DE\uB294 \uB9D0\uC778\uB370."
+      sincerity: 0
+    - key: DAY2_NPC_NORM_034_91
+      id: 210341
+      day: 2
+      seq: 34
+      speaker: 1
+      type: 1
+      branch: 
+      nextKey: DAY2_NPC_NORM_035_92
+      content: "\uADFC\uB370 \uB098\uB3C4 \uB9D0\uD588\uC5B4\uC57C \uD588\uC5B4\uC694.
+        \uD61C\uC778\uC774\uAC00 \uB098\uC05C \uAC8C \uC544\uB2C8\uC5D0\uC694."
+      sincerity: 0
+    - key: DAY2_NPC_NORM_035_92
+      id: 210351
+      day: 2
+      seq: 35
+      speaker: 1
+      type: 1
+      branch: 
+      nextKey: DAY2_NPC_NORM_036_93
+      content: "\uADF8\uAC74 \uC54C\uC544\uC694. \uADFC\uB370 \uB098\uB3C4 \uB9D0\uD588\uC5B4\uC57C
+        \uD588\uB294\uB370."
+      sincerity: 0
+    - key: DAY2_NPC_NORM_036_93
+      id: 210361
+      day: 2
+      seq: 36
+      speaker: 1
+      type: 1
+      branch: 
+      nextKey: DAY2_PLAYER_SEL_037_94
+      content: "\uD55C \uBC88\uC774\uB77C\uB3C4 \uBA3C\uC800 \uB9D0\uC744 \uAEBC\uB0B8
+        \uC801\uC774 \uC788\uC5C8\uB098 \uC2F6\uC5B4\uC694. \uC800 \uC790\uC2E0\uC744
+        \uC704\uD574\uC11C."
+      sincerity: 0
+    - key: DAY2_PLAYER_SEL_037_94
+      id: 220372
+      day: 2
+      seq: 37
+      speaker: 2
+      type: 2
+      branch: 4A
+      nextKey: DAY2_NPC_REAC_038_97
+      content: "\uC7A0\uAE50, \uB098 \uBA3C\uC800 \uD560 \uB9D0\uC774 \uC788\uC5B4\u2014
+        \uADF8 \uD55C \uB9C8\uB514\uB97C\uC694."
+      sincerity: 8
+    - key: DAY2_PLAYER_SEL_037_95
+      id: 220372
+      day: 2
+      seq: 37
+      speaker: 2
+      type: 2
+      branch: 4B
+      nextKey: DAY2_NPC_REAC_042_101
+      content: "\uADF8 \uB9D0\uC744 \uD558\uC9C0 \uBABB\uD55C \uAC8C \uC9C0\uAE08\uB3C4
+        \uB9C8\uC74C\uC5D0 \uB0A8\uC544\uC788\uB294 \uAC70\uAD70\uC694."
+      sincerity: 5
+    - key: DAY2_PLAYER_SEL_037_96
+      id: 220372
+      day: 2
+      seq: 37
+      speaker: 2
+      type: 2
+      branch: 4C
+      nextKey: DAY2_NPC_REAC_044_103
+      content: "\uBA3C\uC800 \uB9D0\uD558\uB294 \uAC8C \uC65C \uC5B4\uB835\uAC8C
+        \uB290\uAEF4\uC84C\uC5B4\uC694."
+      sincerity: 3
+    - key: DAY2_NPC_REAC_038_97
+      id: 210383
+      day: 2
+      seq: 38
+      speaker: 1
+      type: 4
+      branch: 4A
+      nextKey: DAY2_PLAYER_REAC_039_98
+      content: "...\uB124. \uADF8 \uD55C \uB9C8\uB514\uC694. \uADF8\uAC70 \uD55C
+        \uBC88\uB9CC \uD588\uC73C\uBA74 \uC5B4\uB560\uC744\uAE4C \uC2F6\uC5B4\uC694."
+      sincerity: 0
+    - key: DAY2_PLAYER_REAC_039_98
+      id: 220393
+      day: 2
+      seq: 39
+      speaker: 2
+      type: 4
+      branch: 4A
+      nextKey: DAY2_NPC_REAC_040_99
+      content: "\u2026\u2026"
+      sincerity: 0
+    - key: DAY2_NPC_REAC_040_99
+      id: 210403
+      day: 2
+      seq: 40
+      speaker: 1
+      type: 4
+      branch: 4A
+      nextKey: DAY2_NPC_REAC_041_100
+      content: "\uD61C\uC778\uC774\uAC00 \uB4E4\uC5B4\uC92C\uC744\uC9C0 \uC5B4\uB5A8\uC9C0\uB294
+        \uBAA8\uB974\uACA0\uC5B4\uC694. \uADF8\uAC8C \uC911\uC694\uD55C \uAC8C \uC544\uB2CC
+        \uAC83 \uAC19\uC544\uC694."
+      sincerity: 0
+    - key: DAY2_NPC_REAC_041_100
+      id: 210413
+      day: 2
+      seq: 41
+      speaker: 1
+      type: 4
+      branch: 4A
+      nextKey: DAY2_NPC_NORM_047_106
+      content: "\uADF8 \uB9D0\uC744 \uAEBC\uB0B8 \uC0AC\uB78C\uC774 \uB410\uC5B4\uC57C
+        \uD588\uB294\uB370... \uADF8\uAC8C \uC548 \uB41C \uAC8C \uB0A8\uC544\uC788\uB294
+        \uAC70\uC608\uC694."
+      sincerity: 0
+    - key: DAY2_NPC_REAC_042_101
+      id: 210423
+      day: 2
+      seq: 42
+      speaker: 1
+      type: 4
+      branch: 4B
+      nextKey: DAY2_PLAYER_REAC_043_102
+      content: "\uB0A8\uC544\uC788\uC5B4\uC694. \uADFC\uB370 \uB0A8\uC544\uC788\uB2E4\uB294
+        \uB9D0\uB3C4 \uC774\uB807\uAC8C \uD558\uAE30 \uC5B4\uB824\uC6B4 \uC904 \uBAB0\uB790\uC5B4\uC694."
+      sincerity: 0
+    - key: DAY2_PLAYER_REAC_043_102
+      id: 220433
+      day: 2
+      seq: 43
+      speaker: 2
+      type: 4
+      branch: 4B
+      nextKey: DAY2_NPC_NORM_047_106
+      content: "\u2026\u2026"
+      sincerity: 0
+    - key: DAY2_NPC_REAC_044_103
+      id: 210443
+      day: 2
+      seq: 44
+      speaker: 1
+      type: 4
+      branch: 4C
+      nextKey: DAY2_NPC_REAC_045_104
+      content: "\uC5B4\uB9B4 \uB54C\uBD80\uD130 \uADF8\uB7AC\uC5B4\uC694."
+      sincerity: 0
+    - key: DAY2_NPC_REAC_045_104
+      id: 210453
+      day: 2
+      seq: 45
+      speaker: 1
+      type: 4
+      branch: 4C
+      nextKey: DAY2_PLAYER_REAC_046_105
+      content: "\"\uB2E4\uC740\uC774\uB294 \uB9D0 \uC548 \uD574\uB3C4 \uC54C\uC544\uC11C
+        \uC798\uD55C\uB2E4.\" \uB77C\uB294 \uB9D0\uC744 \uB4E4\uC73C\uBA74\uC11C
+        \uCEF8\uAC70\uB4E0\uC694."
+      sincerity: 0
+    - key: DAY2_PLAYER_REAC_046_105
+      id: 220463
+      day: 2
+      seq: 46
+      speaker: 2
+      type: 4
+      branch: 4C
+      nextKey: DAY2_NPC_NORM_047_106
+      content: "\u2026\u2026"
+      sincerity: 0
+    - key: DAY2_NPC_NORM_047_106
+      id: 210471
+      day: 2
+      seq: 47
+      speaker: 1
+      type: 1
+      branch: 
+      nextKey: DAY2_NPC_NORM_048_107
+      content: "\uAE30\uC5B5\uC744 \uBC14\uAFB8\uACE0 \uC2F6\uC5B4\uC694. \uADF8\uB0A0
+        \uD61C\uC778\uC774\uAC00 \uBA3C\uC800 \uB9D0\uC744 \uC2DC\uC791\uD588\uC744
+        \uB54C...."
+      sincerity: 0
+    - key: DAY2_NPC_NORM_048_107
+      id: 210481
+      day: 2
+      seq: 48
+      speaker: 1
+      type: 1
+      branch: 
+      nextKey: DAY2_PLAYER_SEL_049_108
+      content: "\uC7A0\uAE50, \uB098 \uBA3C\uC800 \uD560 \uB9D0\uC774 \uC788\uC5B4.
+        \uC774 \uB9D0\uC744 \uD55C \uC0AC\uB78C\uC73C\uB85C \uAE30\uC5B5\uB418\uACE0
+        \uC2F6\uC5B4\uC694."
+      sincerity: 0
+    - key: DAY2_PLAYER_SEL_049_108
+      id: 220492
+      day: 2
+      seq: 49
+      speaker: 2
+      type: 2
+      branch: 5A
+      nextKey: DAY2_NPC_REAC_050_111
+      content: "\uB2E4\uC74C\uC5D0 \uC624\uC2DC\uBA74 \uADF8 \uC548\uC73C\uB85C \uB4E4\uC5B4\uAC00
+        \uBCFC \uC218 \uC788\uC5B4\uC694."
+      sincerity: 2
+    - key: DAY2_PLAYER_SEL_049_109
+      id: 220492
+      day: 2
+      seq: 49
+      speaker: 2
+      type: 2
+      branch: 5B
+      nextKey: DAY2_NPC_REAC_053_114
+      content: "\uC624\uB298 \uC5EC\uAE30 \uC640\uC918\uC11C \uACE0\uB9C8\uC6CC\uC694."
+      sincerity: 3
+    - key: DAY2_PLAYER_SEL_049_110
+      id: 220492
+      day: 2
+      seq: 49
+      speaker: 2
+      type: 2
+      branch: 5C
+      nextKey: DAY2_NPC_REAC_056_117
+      content: "\uACB0\uACFC\uAC00 \uC544\uB2C8\uB77C \uADF8 \uB9D0\uC744 \uAEBC\uB0B8
+        \uC0AC\uB78C\uC774 \uB410\uC5B4\uC57C \uD588\uB358 \uAC70\uAD70\uC694."
+      sincerity: 5
+    - key: DAY2_NPC_REAC_050_111
+      id: 210503
+      day: 2
+      seq: 50
+      speaker: 1
+      type: 4
+      branch: 5A
+      nextKey: DAY2_PLAYER_REAC_051_112
+      content: "\uADF8 \uC548\uC774\uB77C\uB294 \uAC8C\u2014 \uADF8\uB0A0 \uADF8
+        \uC804\uD654 \uD1B5\uD654 \uB9D0\uC500\uC774\uC2E0 \uAC70\uC608\uC694?"
+      sincerity: 0
+    - key: DAY2_PLAYER_REAC_051_112
+      id: 220513
+      day: 2
+      seq: 51
+      speaker: 2
+      type: 4
+      branch: 5A
+      nextKey: DAY2_NPC_REAC_052_113
+      content: "\uB124."
+      sincerity: 0
+    - key: DAY2_NPC_REAC_052_113
+      id: 210523
+      day: 2
+      seq: 52
+      speaker: 1
+      type: 4
+      branch: 5A
+      nextKey: DAY3_NPC_NORM_001_121
+      content: "\uC54C\uACA0\uC5B4\uC694. \uAC08\uAC8C\uC694."
+      sincerity: 0
+    - key: DAY2_NPC_REAC_053_114
+      id: 210533
+      day: 2
+      seq: 53
+      speaker: 1
+      type: 4
+      branch: 5B
+      nextKey: DAY2_PLAYER_REAC_054_115
+      content: "\uC81C\uAC00 \uACE0\uB9D9\uC8E0. \uB9D0\uD55C \uC801 \uC5C6\uB294
+        \uC598\uAE30\uB97C \uD588\uC5B4\uC694. \uC624\uB298."
+      sincerity: 0
+    - key: DAY2_PLAYER_REAC_054_115
+      id: 220543
+      day: 2
+      seq: 54
+      speaker: 2
+      type: 4
+      branch: 5B
+      nextKey: DAY2_NPC_REAC_055_116
+      content: "\u2026\u2026"
+      sincerity: 0
+    - key: DAY2_NPC_REAC_055_116
+      id: 210553
+      day: 2
+      seq: 55
+      speaker: 1
+      type: 4
+      branch: 5B
+      nextKey: DAY3_NPC_NORM_001_121
+      content: "\uB9D0\uD558\uACE0 \uB098\uB2C8\uAE4C \uC870\uAE08 \uAC00\uBCCD\uB124\uC694.
+        \uC870\uAE08\uB9CC\uC774\uC694."
+      sincerity: 0
+    - key: DAY2_NPC_REAC_056_117
+      id: 210563
+      day: 2
+      seq: 56
+      speaker: 1
+      type: 4
+      branch: 5C
+      nextKey: DAY2_NPC_REAC_057_118
+      content: "\uB9DE\uC544\uC694. \uD61C\uC778\uC774\uAC00 \uB4E4\uC5B4\uC92C\uB294\uC9C0
+        \uC5B4\uB5A4\uC9C0\uB294... \uADF8\uAC8C \uC544\uB2C8\uC5D0\uC694."
+      sincerity: 0
+    - key: DAY2_NPC_REAC_057_118
+      id: 210573
+      day: 2
+      seq: 57
+      speaker: 1
+      type: 4
+      branch: 5C
+      nextKey: DAY2_PLAYER_REAC_058_119
+      content: "\uADF8 \uB9D0\uC744 \uD588\uB358 \uC0AC\uB78C\uC774 \uB410\uC5B4\uC57C
+        \uD588\uB294\uB370."
+      sincerity: 0
+    - key: DAY2_PLAYER_REAC_058_119
+      id: 220583
+      day: 2
+      seq: 58
+      speaker: 2
+      type: 4
+      branch: 5C
+      nextKey: DAY2_NPC_REAC_059_120
+      content: "\u2026\u2026"
+      sincerity: 0
+    - key: DAY2_NPC_REAC_059_120
+      id: 210593
+      day: 2
+      seq: 59
+      speaker: 1
+      type: 4
+      branch: 5C
+      nextKey: DAY3_NPC_NORM_001_121
+      content: "\uB2E4\uC74C\uC5D0 \uB610 \uC62C\uAC8C\uC694. \uADF8 \uC548\uC5D0
+        \uB4E4\uC5B4\uAC00 \uBCFC \uC218 \uC788\uB2E4\uACE0 \uD558\uC168\uC796\uC544\uC694."
+      sincerity: 0
+    - key: DAY3_NPC_NORM_001_121
+      id: 310011
+      day: 3
+      seq: 1
+      speaker: 1
+      type: 1
+      branch: 
+      nextKey: DAY3_PLAYER_SEL_001_122
+      content: "\uC654\uC5B4\uC694. \uC654\uC8E0?"
+      sincerity: 0
+    - key: DAY3_PLAYER_SEL_002_122
+      id: 320022
+      day: 3
+      seq: 2
+      speaker: 2
+      type: 2
+      branch: 1A
+      nextKey: DAY3_NPC_REAC_003_125
+      content: "\uAE30\uB2E4\uB9AC\uACE0 \uC788\uC5C8\uC5B4\uC694."
+      sincerity: 2
+    - key: DAY3_PLAYER_SEL_002_123
+      id: 320022
+      day: 3
+      seq: 2
+      speaker: 2
+      type: 2
+      branch: 1B
+      nextKey: DAY3_NPC_REAC_002_126
+      content: "\uC900\uBE44\uB410\uC5B4\uC694?"
+      sincerity: -2
+    - key: DAY3_PLAYER_SEL_002_124
+      id: 320022
+      day: 3
+      seq: 2
+      speaker: 2
+      type: 2
+      branch: 1C
+      nextKey: DAY3_NPC_REAC_003_128
+      content: "\uC624\uB298 \uC624\uAE30 \uC804\uC5D0 \uBB34\uC2A8 \uC0DD\uAC01
+        \uD588\uC5B4\uC694."
+      sincerity: 5
+    - key: DAY3_NPC_REAC_003_125
+      id: 310033
+      day: 3
+      seq: 3
+      speaker: 1
+      type: 4
+      branch: 1A
+      nextKey: DAY3_PLAYER_NORM_005_132
+      content: "\uAE30\uB2E4\uB9AC\uB294 \uC0AC\uB78C\uC774 \uC788\uB2E4\uB294 \uAC8C
+        \uBC1C\uC744 \uC6C0\uC9C1\uC774\uAC8C \uD558\uB354\uB77C\uACE0\uC694."
+      sincerity: 0
+    - key: DAY3_NPC_REAC_004_126
+      id: 310043
+      day: 3
+      seq: 4
+      speaker: 1
+      type: 4
+      branch: 1B
+      nextKey: DAY3_PLAYER_NORM_005_132
+      content: "\uC900\uBE44 \uAC19\uC740 \uAC74 \uC5C6\uB294 \uAC83 \uAC19\uC544\uC694.
+        \uADF8\uB0E5 \uC654\uC5B4\uC694."
+      sincerity: 0
+    - key: DAY3_NPC_REAC_005_127
+      id: 310053
+      day: 3
+      seq: 5
+      speaker: 1
+      type: 4
+      branch: 1C
+      nextKey: DAY3_NPC_REAC_003_128
+      content: "\uC218\uC5C5 \uB05D\uB098\uACE0 \uAD50\uC2E4 \uC815\uB9AC\uD558\uB2E4\uAC00
+        \uC624\uB798\uB41C \uC54C\uB9BC\uC7A5\uC744 \uBC1C\uACAC\uD588\uC5B4\uC694."
+      sincerity: 0
+    - key: DAY3_NPC_REAC_006_128
+      id: 310063
+      day: 3
+      seq: 6
+      speaker: 1
+      type: 4
+      branch: 1C
+      nextKey: DAY3_PLAYER_REAC_005_129
+      content: "\uAC70\uAE30 \uADF8 \uC544\uC774 \uB099\uC11C\uAC00 \uC788\uC5C8\uC5B4\uC694."
+      sincerity: 0
+    - key: DAY3_PLAYER_REAC_007_129
+      id: 320073
+      day: 3
+      seq: 7
+      speaker: 2
+      type: 4
+      branch: 1C
+      nextKey: DAY3_NPC_REAC_004_130
+      content: "\uC120\uC0DD\uB2D8\uC740 \uC65C \uD56D\uC0C1 \uC6C3\uC5B4\uC694\u2014
+        \uADF8 \uB099\uC11C\uC694?"
+      sincerity: 0
+    - key: DAY3_NPC_REAC_008_130
+      id: 310083
+      day: 3
+      seq: 8
+      speaker: 1
+      type: 4
+      branch: 1C
+      nextKey: DAY3_PLAYER_REAC_006_131
+      content: "\uB124. \uADF8\uAC78 \uBCF4\uBA74\uC11C\u2014 \uC624\uACE0 \uC2F6\uC5B4\uC84C\uC5B4\uC694."
+      sincerity: 0
+    - key: DAY3_PLAYER_REAC_009_131
+      id: 320093
+      day: 3
+      seq: 9
+      speaker: 2
+      type: 4
+      branch: 1C
+      nextKey: DAY3_PLAYER_NORM_005_132
+      content: "\u2026\u2026"
+      sincerity: 0
+    - key: DAY3_PLAYER_NORM_010_132
+      id: 320101
+      day: 3
+      seq: 10
+      speaker: 2
+      type: 1
+      branch: 
+      nextKey: DAY3_NPC_NORM_007_133
+      content: "\uADF8 \uAE30\uC5B5\uC774, \uC9C0\uAE08\uBCF4\uB2E4 \uB354 \uBB34\uAC70\uC6CC\uC9C8
+        \uC218\uB3C4 \uC788\uC5B4\uC694."
+      sincerity: 0
+    - key: DAY3_NPC_NORM_011_133
+      id: 310111
+      day: 3
+      seq: 11
+      speaker: 1
+      type: 1
+      branch: 
+      nextKey: DAY3_NPC_NORM_007_133
+      content: "\uAD1C\uCC2E\uC544\uC694. \uC9C0\uAE08\uB3C4 \uCDA9\uBD84\uD788 \uBB34\uAC70\uC6B0\uB2C8\uAE4C\uC694."
+      sincerity: 0
+    - key: DAY3_NPC_NORM_012_134
+      id: 310121
+      day: 3
+      seq: 12
+      speaker: 1
+      type: 1
+      branch: 
+      nextKey: END
+      content: "\uADFC\uB370, \uADF8\uB798\uB3C4 \uB4E4\uC5B4\uAC00 \uBCFC\uB798\uC694."
+      sincerity: 0
+  - sheetName: "\uBC15\uC728"
+    guestType: 3
+    dialogues:
+    - key: DAY1_NPC_NORM_001_1
+      id: 110011
+      day: 1
+      seq: 1
+      speaker: 1
+      type: 1
+      branch: 
+      nextKey: DAY1_PLAYER_SEL_002_2
+      content: "\uC5B4\uB5A4 \uACBD\uB85C\uB85C \uB2F9\uC2E0\uC744 \uC54C\uAC8C \uB410\uB294\uC9C0\uB294
+        \uB9D0 \uBABB \uD569\uB2C8\uB2E4."
+      sincerity: 0
+    - key: DAY1_PLAYER_SEL_002_2
+      id: 120022
+      day: 1
+      seq: 2
+      speaker: 2
+      type: 2
+      branch: 1A
+      nextKey: DAY1_NPC_REAC_003_5
+      content: "\uAD1C\uCC2E\uC544\uC694. \uC5B4\uB5A4 \uAE30\uC5B5\uC744 \uBC14\uAFB8\uACE0
+        \uC2F6\uC73C\uC2E0\uAC00\uC694."
+      sincerity: 3
+    - key: DAY1_PLAYER_SEL_002_3
+      id: 120022
+      day: 1
+      seq: 2
+      speaker: 2
+      type: 2
+      branch: 1B
+      nextKey: DAY1_NPC_REAC_005_7
+      content: "\uC65C \uB9D0 \uBABB \uD558\uB294 \uAC74\uAC00\uC694?"
+      sincerity: -5
+    - key: DAY1_PLAYER_SEL_002_4
+      id: 120022
+      day: 1
+      seq: 2
+      speaker: 2
+      type: 2
+      branch: 1C
+      nextKey: DAY1_NPC_REAC_007_9
+      content: "\uB9D0 \uBABB \uD558\uB294 \uAC8C \uC788\uAD70\uC694."
+      sincerity: 5
+    - key: DAY1_NPC_REAC_003_5
+      id: 110033
+      day: 1
+      seq: 3
+      speaker: 1
+      type: 4
+      branch: 1A
+      nextKey: DAY1_NPC_REAC_004_6
+      content: "\uC774\uB984 \uD558\uB098\uB97C \uB0A8\uAE30\uC9C0 \uBABB\uD55C \uAE30\uC5B5\uC774\uC694."
+      sincerity: 0
+    - key: DAY1_NPC_REAC_004_6
+      id: 110043
+      day: 1
+      seq: 4
+      speaker: 1
+      type: 4
+      branch: 1A
+      nextKey: DAY1_PLAYER_NORM_012_14
+      content: "\uC774\uB984 \uD558\uB098\uB97C \uB0A8\uACA8\uC57C \uD588\uB294\uB370
+        \uBABB \uB0A8\uAE30\uACE0 \uC628 \uAE30\uC5B5\uC774\uC5D0\uC694."
+      sincerity: 0
+    - key: DAY1_NPC_REAC_005_7
+      id: 110053
+      day: 1
+      seq: 5
+      speaker: 1
+      type: 4
+      branch: 1B
+      nextKey: DAY1_PLAYER_REAC_006_8
+      content: "\uB9D0 \uBABB \uD558\uB294 \uAC74 \uB9CE\uC544\uC694. \uC800\uB294."
+      sincerity: 0
+    - key: DAY1_PLAYER_REAC_006_8
+      id: 120063
+      day: 1
+      seq: 6
+      speaker: 2
+      type: 4
+      branch: 1B
+      nextKey: DAY1_PLAYER_NORM_012_14
+      content: "\u2026\u2026"
+      sincerity: 0
+    - key: DAY1_NPC_REAC_007_9
+      id: 110073
+      day: 1
+      seq: 7
+      speaker: 1
+      type: 4
+      branch: 1C
+      nextKey: DAY1_PLAYER_REAC_008_10
+      content: "\uCC44\uB110 \uD53C\uB4DC\uB97C \uBD24\uC5B4\uC694. \uC0AC\uC9C4\uC774
+        \uD558\uB098 \uC788\uB354\uAD70\uC694."
+      sincerity: 0
+    - key: DAY1_PLAYER_REAC_008_10
+      id: 120083
+      day: 1
+      seq: 8
+      speaker: 2
+      type: 4
+      branch: 1C
+      nextKey: DAY1_NPC_REAC_009_11
+      content: "\uC5B4\uB5A4 \uC0AC\uC9C4\uC774\uC694."
+      sincerity: 0
+    - key: DAY1_NPC_REAC_009_11
+      id: 110093
+      day: 1
+      seq: 9
+      speaker: 1
+      type: 4
+      branch: 1C
+      nextKey: DAY1_PLAYER_REAC_010_12
+      content: "\uCEA1\uC158\uC774\uC694. \uB2F9\uC2E0\uC774 \uADF8 \uC774\uB984\uC744
+        \uB0A8\uACBC\uB2E4\uBA74."
+      sincerity: 0
+    - key: DAY1_PLAYER_REAC_010_12
+      id: 120103
+      day: 1
+      seq: 10
+      speaker: 2
+      type: 4
+      branch: 1C
+      nextKey: DAY1_NPC_REAC_011_13
+      content: "\u2026\u2026"
+      sincerity: 0
+    - key: DAY1_NPC_REAC_011_13
+      id: 110113
+      day: 1
+      seq: 11
+      speaker: 1
+      type: 4
+      branch: 1C
+      nextKey: DAY1_PLAYER_NORM_012_14
+      content: "\uADF8\uAC8C \uC800\uD55C\uD14C \uD558\uB294 \uB9D0 \uAC19\uC558\uC5B4\uC694."
+      sincerity: 0
+    - key: DAY1_PLAYER_NORM_012_14
+      id: 120121
+      day: 1
+      seq: 12
+      speaker: 2
+      type: 1
+      branch: 
+      nextKey: DAY1_NPC_NORM_013_15
+      content: "\uC5B4\uB5A4 \uAE30\uC5B5\uC744 \uBC14\uAFB8\uACE0 \uC2F6\uC73C\uC138\uC694."
+      sincerity: 0
+    - key: DAY1_NPC_NORM_013_15
+      id: 110131
+      day: 1
+      seq: 13
+      speaker: 1
+      type: 1
+      branch: 
+      nextKey: DAY1_PLAYER_NORM_014_16
+      content: "\uC774\uB984 \uD558\uB098\uB97C \uB0A8\uAE30\uC9C0 \uBABB\uD55C \uAE30\uC5B5\uC774\uC694."
+      sincerity: 0
+    - key: DAY1_PLAYER_NORM_014_16
+      id: 120141
+      day: 1
+      seq: 14
+      speaker: 2
+      type: 1
+      branch: 
+      nextKey: DAY1_NPC_NORM_015_17
+      content: "\uC774\uB984\uC744 \uB0A8\uAE30\uC9C0 \uBABB\uD55C \uAC8C \uC5B4\uB5A4
+        \uC758\uBBF8\uC608\uC694?"
+      sincerity: 0
+    - key: DAY1_NPC_NORM_015_17
+      id: 110151
+      day: 1
+      seq: 15
+      speaker: 1
+      type: 1
+      branch: 
+      nextKey: DAY1_NPC_NORM_016_18
+      content: "\uC9C0\uAE08 \uC800\uD55C\uD14C \uB9D0\uC500\uD558\uACE0 \uACC4\uC2DC\uB294\uB370\uC694."
+      sincerity: 0
+    - key: DAY1_NPC_NORM_016_18
+      id: 110161
+      day: 1
+      seq: 16
+      speaker: 1
+      type: 1
+      branch: 
+      nextKey: DAY1_NPC_NORM_017_19
+      content: "\uC774\uB984\uC744 \uB9D0\uD55C \uC801\uC774 \uC5C6\uC796\uC544\uC694.
+        \uC544\uC9C1."
+      sincerity: 0
+    - key: DAY1_NPC_NORM_017_19
+      id: 110171
+      day: 1
+      seq: 17
+      speaker: 1
+      type: 1
+      branch: 
+      nextKey: DAY1_PLAYER_SEL_018_20
+      content: "\uC774\uB984\uC774\uC694? \uBB50\uB77C\uACE0 \uBD80\uB974\uB4E0 \uB300\uB2F5\uC740
+        \uD574\uC694."
+      sincerity: 0
+    - key: DAY1_PLAYER_SEL_018_20
+      id: 120182
+      day: 1
+      seq: 18
+      speaker: 2
+      type: 2
+      branch: 2A
+      nextKey: DAY1_NPC_REAC_019_23
+      content: "\uC5B4\uB5A4 \uC774\uB984\uC73C\uB85C \uBD88\uB9AC\uACE0 \uC2F6\uC73C\uC138\uC694."
+      sincerity: -3
+    - key: DAY1_PLAYER_SEL_018_21
+      id: 120182
+      day: 1
+      seq: 18
+      speaker: 2
+      type: 2
+      branch: 2B
+      nextKey: DAY1_NPC_REAC_020_24
+      content: "\uC774\uB984\uC744 \uB0A8\uAE30\uC9C0 \uBABB\uD55C \uAC8C \uC5B4\uB5A4
+        \uC758\uBBF8\uC608\uC694?"
+      sincerity: 3
+    - key: DAY1_PLAYER_SEL_018_22
+      id: 120182
+      day: 1
+      seq: 18
+      speaker: 2
+      type: 2
+      branch: 2C
+      nextKey: DAY1_NPC_REAC_023_27
+      content: "\uC774\uB984 \uD558\uB098\uC694."
+      sincerity: 5
+    - key: DAY1_NPC_REAC_019_23
+      id: 110193
+      day: 1
+      seq: 19
+      speaker: 1
+      type: 4
+      branch: 2A
+      nextKey: DAY1_PLAYER_NORM_026_30
+      content: "...\uADF8 \uC9C8\uBB38\uC740 \uC5B4\uB835\uAD70\uC694. \uC624\uB298\uC740
+        \uB118\uC5B4\uAC00\uB3C4 \uB429\uB2C8\uAE4C."
+      sincerity: 0
+    - key: DAY1_NPC_REAC_020_24
+      id: 110203
+      day: 1
+      seq: 20
+      speaker: 1
+      type: 4
+      branch: 2B
+      nextKey: DAY1_NPC_REAC_020_24
+      content: "\uB204\uAD70\uAC00\uD55C\uD14C\uC694. \uC544\uB294 \uC0AC\uB78C\uD55C\uD14C
+        \uC81C \uC774\uB984\uC744 \uB9D0\uD558\uC9C0 \uBABB\uD558\uACE0 \uB5A0\uB0AC\uC5B4\uC694."
+      sincerity: 0
+    - key: DAY1_PLAYER_REAC_021_25
+      id: 120213
+      day: 1
+      seq: 21
+      speaker: 2
+      type: 4
+      branch: 2B
+      nextKey: DAY1_PLAYER_REAC_021_25
+      content: "\u2026\u2026"
+      sincerity: 0
+    - key: DAY1_NPC_REAC_022_26
+      id: 110223
+      day: 1
+      seq: 22
+      speaker: 1
+      type: 4
+      branch: 2B
+      nextKey: DAY1_PLAYER_NORM_026_30
+      content: "\uADF8 \uC0AC\uB78C\uC740 \uC800\uB97C \uB2E4\uB978 \uC774\uB984\uC73C\uB85C\uB9CC
+        \uC54C\uACE0 \uC788\uC5B4\uC694. \uC9C0\uAE08\uB3C4\uC694."
+      sincerity: 0
+    - key: DAY1_NPC_REAC_023_27
+      id: 110233
+      day: 1
+      seq: 23
+      speaker: 1
+      type: 4
+      branch: 2C
+      nextKey: DAY1_PLAYER_REAC_024_28
+      content: "\uC2A4\uC2A4\uB85C \uC120\uD0DD\uD55C \uAC70\uC608\uC694. \uADF8
+        \uC774\uB984\uC744 \uC548 \uB0A8\uAE34 \uAC8C."
+      sincerity: 0
+    - key: DAY1_PLAYER_REAC_024_28
+      id: 120243
+      day: 1
+      seq: 24
+      speaker: 2
+      type: 4
+      branch: 2C
+      nextKey: DAY1_NPC_REAC_025_29
+      content: "\u2026\u2026"
+      sincerity: 0
+    - key: DAY1_NPC_REAC_025_29
+      id: 110253
+      day: 1
+      seq: 25
+      speaker: 1
+      type: 4
+      branch: 2C
+      nextKey: DAY1_PLAYER_NORM_026_30
+      content: "\uB9D0\uD558\uACE0 \uB098\uB2C8\uAE4C \uADF8\uAC8C \uB354 \uC120\uBA85\uD574\uC9C0\uB294\uAD70\uC694."
+      sincerity: 0
+    - key: DAY1_PLAYER_NORM_026_30
+      id: 120261
+      day: 1
+      seq: 26
+      speaker: 2
+      type: 1
+      branch: 
+      nextKey: DAY1_NPC_NORM_027_31
+      content: "\uADF8 \uC0AC\uB78C\uD55C\uD14C \uC774\uB984\uC744 \uB0A8\uAE30\uACE0
+        \uC2F6\uC5C8\uB358 \uAC74\uAC00\uC694?"
+      sincerity: 0
+    - key: DAY1_NPC_NORM_027_31
+      id: 110271
+      day: 1
+      seq: 27
+      speaker: 1
+      type: 1
+      branch: 
+      nextKey: DAY1_PLAYER_NORM_028_32
+      content: "\uC774\uB984\uB9CC\uC694. \uBA38\uBB3C\uC9C0 \uC54A\uC544\uB3C4 \uB410\uC5B4\uC694.
+        \uC774\uB984 \uD558\uB098\uB9CC."
+      sincerity: 0
+    - key: DAY1_PLAYER_NORM_028_32
+      id: 120281
+      day: 1
+      seq: 28
+      speaker: 2
+      type: 1
+      branch: 
+      nextKey: DAY1_NPC_NORM_029_33
+      content: "\uC65C \uBABB \uC92C\uC5B4\uC694."
+      sincerity: 0
+    - key: DAY1_NPC_NORM_029_33
+      id: 110291
+      day: 1
+      seq: 29
+      speaker: 1
+      type: 1
+      branch: 
+      nextKey: DAY1_PLAYER_SEL_030_34
+      content: "...\uC624\uB298\uC740 \uAC70\uAE30\uAE4C\uC9C0\uB9CC\uC694."
+      sincerity: 0
+    - key: DAY1_PLAYER_SEL_030_34
+      id: 120302
+      day: 1
+      seq: 30
+      speaker: 2
+      type: 2
+      branch: 3A
+      nextKey: DAY1_NPC_REAC_031_37
+      content: "\uC54C\uACA0\uC5B4\uC694."
+      sincerity: 3
+    - key: DAY1_PLAYER_SEL_030_35
+      id: 120302
+      day: 1
+      seq: 30
+      speaker: 2
+      type: 2
+      branch: 3B
+      nextKey: DAY1_NPC_REAC_033_39
+      content: "\uB2E4\uC74C\uC5D0 \uB354 \uB9D0\uC500\uD574 \uC8FC\uC2E4 \uC218
+        \uC788\uC5B4\uC694?"
+      sincerity: 1
+    - key: DAY1_PLAYER_SEL_030_36
+      id: 120302
+      day: 1
+      seq: 30
+      speaker: 2
+      type: 2
+      branch: 3C
+      nextKey: DAY1_NPC_REAC_034_40
+      content: "\uD544\uC694\uD55C \uB9D0\uB9CC \uD558\uBA74 \uB3FC\uC694."
+      sincerity: 5
+    - key: DAY1_NPC_REAC_031_37
+      id: 110313
+      day: 1
+      seq: 31
+      speaker: 1
+      type: 4
+      branch: 3A
+      nextKey: DAY1_PLAYER_REAC_032_38
+      content: "\uC27D\uAC8C \uB118\uC5B4\uAC00\uB294\uAD70\uC694."
+      sincerity: 0
+    - key: DAY1_PLAYER_REAC_032_38
+      id: 120323
+      day: 1
+      seq: 32
+      speaker: 2
+      type: 4
+      branch: 3A
+      nextKey: DAY1_PLAYER_NORM_036_42
+      content: "\uB118\uC5B4\uAC00\uB294 \uAC8C \uC544\uB2C8\uC5D0\uC694."
+      sincerity: 0
+    - key: DAY1_NPC_REAC_033_39
+      id: 110333
+      day: 1
+      seq: 33
+      speaker: 1
+      type: 4
+      branch: 3B
+      nextKey: DAY1_PLAYER_NORM_036_42
+      content: "\uC62C \uAC83 \uAC19\uC2B5\uB2C8\uB2E4. \uC774\uC0C1\uD558\uAC8C."
+      sincerity: 0
+    - key: DAY1_NPC_REAC_034_40
+      id: 110343
+      day: 1
+      seq: 34
+      speaker: 1
+      type: 4
+      branch: 3C
+      nextKey: DAY1_PLAYER_REAC_035_41
+      content: "\uC774 \uCC44\uB110\uC774 \uB9D0\uC744 \uB9CE\uC774 \uC2DC\uD0A4\uC9C0
+        \uC54A\uB294\uAD70\uC694."
+      sincerity: 0
+    - key: DAY1_PLAYER_REAC_035_41
+      id: 120353
+      day: 1
+      seq: 35
+      speaker: 2
+      type: 4
+      branch: 3C
+      nextKey: DAY1_PLAYER_NORM_036_42
+      content: "\uD544\uC694\uD55C \uB9D0\uB9CC \uD558\uBA74 \uB3FC\uC694."
+      sincerity: 0
+    - key: DAY1_PLAYER_NORM_036_42
+      id: 120361
+      day: 1
+      seq: 36
+      speaker: 2
+      type: 1
+      branch: 
+      nextKey: DAY1_NPC_NORM_037_43
+      content: "\uD53C\uB4DC \uCEA1\uC158\uC774 \uB2F9\uC2E0\uD55C\uD14C \uD558\uB294
+        \uB9D0 \uAC19\uC558\uB2E4\uACE0 \uD558\uC168\uC8E0."
+      sincerity: 0
+    - key: DAY1_NPC_NORM_037_43
+      id: 110371
+      day: 1
+      seq: 37
+      speaker: 1
+      type: 1
+      branch: 
+      nextKey: DAY1_PLAYER_NORM_038_44
+      content: "\uB124."
+      sincerity: 0
+    - key: DAY1_PLAYER_NORM_038_44
+      id: 120381
+      day: 1
+      seq: 38
+      speaker: 2
+      type: 1
+      branch: 
+      nextKey: DAY1_NPC_NORM_039_45
+      content: "\uADF8 \uC774\uB984\uC744 \uB0A8\uACBC\uB2E4\uBA74 \uC5B4\uB560\uC744
+        \uAC83 \uAC19\uC544\uC694."
+      sincerity: 0
+    - key: DAY1_NPC_NORM_039_45
+      id: 110391
+      day: 1
+      seq: 39
+      speaker: 1
+      type: 1
+      branch: 
+      nextKey: DAY1_NPC_NORM_040_46
+      content: "\uBAA8\uB974\uACA0\uC5B4\uC694. \uB2EC\uB77C\uC84C\uC744\uC9C0\uB294."
+      sincerity: 0
+    - key: DAY1_NPC_NORM_040_46
+      id: 110401
+      day: 1
+      seq: 40
+      speaker: 1
+      type: 1
+      branch: 
+      nextKey: DAY1_PLAYER_SEL_041_47
+      content: "\uADF8\uB798\uB3C4 \uB0A8\uACBC\uC5B4\uC57C \uD588\uC5B4\uC694. \uB0A8\uAE30\uB824
+        \uD588\uB358 \uC0AC\uB78C\uC774\uB77C\uB3C4 \uB410\uC5B4\uC57C \uD588\uB294\uB370."
+      sincerity: 0
+    - key: DAY1_PLAYER_SEL_041_47
+      id: 120412
+      day: 1
+      seq: 41
+      speaker: 2
+      type: 2
+      branch: 4A
+      nextKey: DAY1_NPC_REAC_042_50
+      content: "\uB2E4\uC74C\uC5D0 \uB610 \uC640\uC694."
+      sincerity: 1
+    - key: DAY1_PLAYER_SEL_041_48
+      id: 120412
+      day: 1
+      seq: 41
+      speaker: 2
+      type: 2
+      branch: 4B
+      nextKey: DAY1_NPC_REAC_045_53
+      content: "\uC624\uB298 \uB9D0\uC500\uD574 \uC8FC\uC154\uC11C \uACE0\uB9C8\uC6CC\uC694."
+      sincerity: 3
+    - key: DAY1_PLAYER_SEL_041_49
+      id: 120412
+      day: 1
+      seq: 41
+      speaker: 2
+      type: 2
+      branch: 4C
+      nextKey: DAY1_NPC_REAC_048_56
+      content: "\uAE30\uB2E4\uB9B4\uAC8C\uC694."
+      sincerity: 5
+    - key: DAY1_NPC_REAC_042_50
+      id: 110423
+      day: 1
+      seq: 42
+      speaker: 1
+      type: 4
+      branch: 4A
+      nextKey: DAY1_PLAYER_REAC_043_51
+      content: "\uADF8\uB7F4 \uAC83 \uAC19\uC2B5\uB2C8\uB2E4."
+      sincerity: 0
+    - key: DAY1_PLAYER_REAC_043_51
+      id: 120433
+      day: 1
+      seq: 43
+      speaker: 2
+      type: 4
+      branch: 4A
+      nextKey: DAY1_NPC_REAC_044_52
+      content: "\u2026\u2026"
+      sincerity: 0
+    - key: DAY1_NPC_REAC_044_52
+      id: 110443
+      day: 1
+      seq: 44
+      speaker: 1
+      type: 4
+      branch: 4A
+      nextKey: END
+      content: "\uC774\uC0C1\uD55C \uCC44\uB110\uC774\uC5D0\uC694. \uC88B\uC740 \uC758\uBBF8\uB85C."
+      sincerity: 0
+    - key: DAY1_NPC_REAC_045_53
+      id: 110453
+      day: 1
+      seq: 45
+      speaker: 1
+      type: 4
+      branch: 4B
+      nextKey: DAY1_PLAYER_REAC_046_54
+      content: "\uB9CE\uC774 \uB9D0\uD55C \uAC83 \uAC19\uC9C0 \uC54A\uC740\uB370\uC694."
+      sincerity: 0
+    - key: DAY1_PLAYER_REAC_046_54
+      id: 120463
+      day: 1
+      seq: 46
+      speaker: 2
+      type: 4
+      branch: 4B
+      nextKey: DAY1_NPC_REAC_047_55
+      content: "\uCDA9\uBD84\uD574\uC694."
+      sincerity: 0
+    - key: DAY1_NPC_REAC_047_55
+      id: 110473
+      day: 1
+      seq: 47
+      speaker: 1
+      type: 4
+      branch: 4B
+      nextKey: END
+      content: "\uCDA9\uBD84\uD558\uB2E4\uB294 \uB9D0\uC744 \uC624\uB798 \uBABB \uB4E4\uC5C8\uC5B4\uC694."
+      sincerity: 0
+    - key: DAY1_NPC_REAC_048_56
+      id: 110483
+      day: 1
+      seq: 48
+      speaker: 1
+      type: 4
+      branch: 4C
+      nextKey: DAY1_PLAYER_REAC_049_57
+      content: "\uB2E4\uC74C\uC5D0 \uC62C\uAC8C\uC694. \uC774\uB984\uC744 \uB9D0\uD560
+        \uC218 \uC788\uC744 \uAC83 \uAC19\uC73C\uBA74\uC694."
+      sincerity: 0
+    - key: DAY1_PLAYER_REAC_049_57
+      id: 120493
+      day: 1
+      seq: 49
+      speaker: 2
+      type: 4
+      branch: 4C
+      nextKey: DAY1_NPC_REAC_050_58
+      content: "\uAE30\uB2E4\uB9B4\uAC8C\uC694."
+      sincerity: 0
+    - key: DAY1_NPC_REAC_050_58
+      id: 110503
+      day: 1
+      seq: 50
+      speaker: 1
+      type: 4
+      branch: 4C
+      nextKey: END
+      content: "\uAE30\uB2E4\uB9AC\uACA0\uB2E4\uB294 \uB9D0\uC774 \uBB34\uAC70\uC6B4
+        \uB9D0\uC778\uB370. \uADF8\uB798\uB3C4 \uB4E4\uC744\uAC8C\uC694. \uC624\uB298\uC740."
+      sincerity: 0
+    - key: DAY2_NPC_NORM_001_59
+      id: 210011
+      day: 2
+      seq: 1
+      speaker: 1
+      type: 1
+      branch: 
+      nextKey: DAY2_PLAYER_SEL_002_60
+      content: "\uC654\uC5B4\uC694."
+      sincerity: 0
+    - key: DAY2_PLAYER_SEL_002_60
+      id: 220022
+      day: 2
+      seq: 2
+      speaker: 2
+      type: 2
+      branch: 1A
+      nextKey: DAY2_NPC_REAC_003_63
+      content: "\uAE30\uB2E4\uB9AC\uACE0 \uC788\uC5C8\uC5B4\uC694."
+      sincerity: 3
+    - key: DAY2_PLAYER_SEL_002_61
+      id: 220022
+      day: 2
+      seq: 2
+      speaker: 2
+      type: 2
+      branch: 1B
+      nextKey: DAY2_NPC_REAC_004_64
+      content: "\uC624\uB298\uC740 \uC5B4\uB5A0\uC138\uC694."
+      sincerity: 1
+    - key: DAY2_PLAYER_SEL_002_62
+      id: 220022
+      day: 2
+      seq: 2
+      speaker: 2
+      type: 2
+      branch: 1C
+      nextKey: DAY2_NPC_REAC_005_65
+      content: "\uC654\uAD70\uC694."
+      sincerity: 5
+    - key: DAY2_NPC_REAC_003_63
+      id: 210033
+      day: 2
+      seq: 3
+      speaker: 1
+      type: 4
+      branch: 1A
+      nextKey: DAY2_NPC_NORM_007_67
+      content: "\uC54C\uC544\uC694. \uADF8\uB798\uC11C \uC654\uC5B4\uC694. \uAE30\uB2E4\uB9AC\uB294
+        \uC0AC\uB78C\uC774 \uC788\uC73C\uBA74 \uAC00\uAC8C \uB418\uB354\uB77C\uACE0\uC694."
+      sincerity: 0
+    - key: DAY2_NPC_REAC_004_64
+      id: 210043
+      day: 2
+      seq: 4
+      speaker: 1
+      type: 4
+      branch: 1B
+      nextKey: DAY2_NPC_NORM_007_67
+      content: "\uAD1C\uCC2E\uC544\uC694. \uD56D\uC0C1 \uAD1C\uCC2E\uC544\uC694.
+        \uADF8\uAC8C \uBAB8\uC5D0 \uBC30\uC5C8\uC5B4\uC694."
+      sincerity: 0
+    - key: DAY2_NPC_REAC_005_65
+      id: 210053
+      day: 2
+      seq: 5
+      speaker: 1
+      type: 4
+      branch: 1C
+      nextKey: DAY2_PLAYER_REAC_006_66
+      content: "\uC774\uB984\uC744 \uB9D0\uD560 \uC218 \uC788\uC744 \uAC83 \uAC19\uB2E4\uACE0
+        \uD588\uC8E0. \uC9C0\uB09C\uBC88\uC5D0."
+      sincerity: 0
+    - key: DAY2_PLAYER_REAC_006_66
+      id: 220063
+      day: 2
+      seq: 6
+      speaker: 2
+      type: 4
+      branch: 1C
+      nextKey: DAY2_NPC_NORM_007_67
+      content: "\uB124."
+      sincerity: 0
+    - key: DAY2_NPC_NORM_007_67
+      id: 210071
+      day: 2
+      seq: 7
+      speaker: 1
+      type: 1
+      branch: 
+      nextKey: DAY2_PLAYER_NORM_008_68
+      content: "\uBC30\uACBD\uC744 \uC880 \uB9D0\uC500\uB4DC\uB824\uC57C \uD560 \uAC83
+        \uAC19\uC544\uC694. \uC774\uD574\uAC00 \uB3FC\uC57C \uD560 \uD14C\uB2C8\uAE4C."
+      sincerity: 0
+    - key: DAY2_PLAYER_NORM_008_68
+      id: 220081
+      day: 2
+      seq: 8
+      speaker: 2
+      type: 1
+      branch: 
+      nextKey: DAY2_NPC_NORM_009_69
+      content: "\uB9D0\uC500\uD558\uC2E4 \uC218 \uC788\uB294 \uB9CC\uD07C\uB9CC\uC694."
+      sincerity: 0
+    - key: DAY2_NPC_NORM_009_69
+      id: 210091
+      day: 2
+      seq: 9
+      speaker: 1
+      type: 1
+      branch: 
+      nextKey: DAY2_PLAYER_NORM_010_70
+      content: "\uD3C9\uC591 \uCD9C\uC2E0\uC774\uC5D0\uC694. \uC2A4\uBB3C\uB450 \uC0B4\uC5D0
+        \uB098\uC654\uB294\uB370\uC694."
+      sincerity: 0
+    - key: DAY2_PLAYER_NORM_010_70
+      id: 220101
+      day: 2
+      seq: 10
+      speaker: 2
+      type: 1
+      branch: 
+      nextKey: DAY2_NPC_NORM_011_71
+      content: "\u2026\u2026"
+      sincerity: 0
+    - key: DAY2_NPC_NORM_011_71
+      id: 210111
+      day: 2
+      seq: 11
+      speaker: 1
+      type: 1
+      branch: 
+      nextKey: DAY2_PLAYER_SEL_012_72
+      content: "\uD0C8\uBD81\uC774\uC5D0\uC694."
+      sincerity: 0
+    - key: DAY2_PLAYER_SEL_012_72
+      id: 220122
+      day: 2
+      seq: 12
+      speaker: 2
+      type: 2
+      branch: 2A
+      nextKey: DAY2_NPC_REAC_013_75
+      content: "\uC5F4\uD55C \uBA85\uC774\uC694."
+      sincerity: 5
+    - key: DAY2_PLAYER_SEL_012_73
+      id: 220122
+      day: 2
+      seq: 12
+      speaker: 2
+      type: 2
+      branch: 2B
+      nextKey: DAY2_NPC_REAC_017_79
+      content: "\uADF8 \uB450 \uC0AC\uB78C\uC774 \uB9C8\uC74C\uC5D0 \uB0A8\uC544\uC788\uAD70\uC694."
+      sincerity: 3
+    - key: DAY2_PLAYER_SEL_012_74
+      id: 220122
+      day: 2
+      seq: 12
+      speaker: 2
+      type: 2
+      branch: 2C
+      nextKey: DAY2_NPC_REAC_019_81
+      content: "\uADF8 \uC77C\uC744 \uC65C \uD558\uC168\uC5B4\uC694."
+      sincerity: -3
+    - key: DAY2_NPC_REAC_013_75
+      id: 210133
+      day: 2
+      seq: 13
+      speaker: 1
+      type: 4
+      branch: 2A
+      nextKey: DAY2_NPC_REAC_014_76
+      content: "\uD558\uC5BC\uBE48\uC5D0\uC11C 6\uB144 \uC788\uC5C8\uC5B4\uC694.
+        \uBE0C\uB85C\uCEE4\uB85C \uC77C\uD588\uB294\uB370 \uD0C8\uBD81\uC790\uB4E4
+        \uB3C4\uC640\uC8FC\uB294 \uC77C\uC774\uC5C8\uC5B4\uC694."
+      sincerity: 0
+    - key: DAY2_NPC_REAC_014_76
+      id: 210143
+      day: 2
+      seq: 14
+      speaker: 1
+      type: 4
+      branch: 2A
+      nextKey: DAY2_PLAYER_REAC_015_77
+      content: "\uC5F4\uD55C \uBA85\uC744 \uB3C4\uC654\uB294\uB370 \uB450 \uBA85\uC774
+        \uCCB4\uD3EC\uB410\uC5B4\uC694."
+      sincerity: 0
+    - key: DAY2_PLAYER_REAC_015_77
+      id: 220153
+      day: 2
+      seq: 15
+      speaker: 2
+      type: 4
+      branch: 2A
+      nextKey: DAY2_NPC_REAC_016_78
+      content: "\u2026\u2026"
+      sincerity: 0
+    - key: DAY2_NPC_REAC_016_78
+      id: 210163
+      day: 2
+      seq: 16
+      speaker: 1
+      type: 4
+      branch: 2A
+      nextKey: DAY2_NPC_NORM_021_83
+      content: "\uADF8 \uB2E4\uC74C\uC5D0 \uBE14\uB77C\uB514\uBCF4\uC2A4\uD1A0\uD06C\uB85C
+        \uAC14\uC5B4\uC694. \uAC70\uAE30\uC11C 7\uB144 \uC788\uC5C8\uC2B5\uB2C8\uB2E4."
+      sincerity: 0
+    - key: DAY2_NPC_REAC_017_79
+      id: 210173
+      day: 2
+      seq: 17
+      speaker: 1
+      type: 4
+      branch: 2B
+      nextKey: DAY2_NPC_REAC_018_80
+      content: "\uB0A8\uC544\uC788\uC8E0."
+      sincerity: 0
+    - key: DAY2_NPC_REAC_018_80
+      id: 210183
+      day: 2
+      seq: 18
+      speaker: 1
+      type: 4
+      branch: 2B
+      nextKey: DAY2_NPC_NORM_021_83
+      content: "\uADFC\uB370 \uC624\uB298 \uB9D0\uD558\uB824\uB294 \uAC74 \uADF8\uAC8C
+        \uC544\uB2C8\uC5D0\uC694. \uADF8\uBCF4\uB2E4 \uB098\uC911 \uC598\uAE30\uC608\uC694."
+      sincerity: 0
+    - key: DAY2_NPC_REAC_019_81
+      id: 210193
+      day: 2
+      seq: 19
+      speaker: 1
+      type: 4
+      branch: 2C
+      nextKey: DAY2_PLAYER_REAC_020_82
+      content: "\uB098\uC654\uC73C\uB2C8\uAE4C\uC694. \uBA3C\uC800. \uADF8\uAC8C
+        \uB2E4\uC608\uC694."
+      sincerity: 0
+    - key: DAY2_PLAYER_REAC_020_82
+      id: 220203
+      day: 2
+      seq: 20
+      speaker: 2
+      type: 4
+      branch: 2C
+      nextKey: DAY2_NPC_NORM_021_83
+      content: "\u2026\u2026"
+      sincerity: 0
+    - key: DAY2_NPC_NORM_021_83
+      id: 210211
+      day: 2
+      seq: 21
+      speaker: 1
+      type: 1
+      branch: 
+      nextKey: DAY2_PLAYER_NORM_022_84
+      content: "\uC62C\uAC00\uB77C\uB294 \uC0AC\uB78C\uC774 \uC788\uC5C8\uC5B4\uC694.
+        \uB7EC\uC2DC\uC544 \uC0AC\uB78C\uC774\uC5D0\uC694."
+      sincerity: 0
+    - key: DAY2_PLAYER_NORM_022_84
+      id: 220221
+      day: 2
+      seq: 22
+      speaker: 2
+      type: 1
+      branch: 
+      nextKey: DAY2_NPC_NORM_023_85
+      content: "\uC62C\uAC00\uC694."
+      sincerity: 0
+    - key: DAY2_NPC_NORM_023_85
+      id: 210231
+      day: 2
+      seq: 23
+      speaker: 1
+      type: 1
+      branch: 
+      nextKey: DAY2_PLAYER_NORM_024_86
+      content: "7\uB144\uC744 \uAC19\uC774 \uC0B4\uC558\uC2B5\uB2C8\uB2E4. \uADF8
+        \uC0AC\uB78C\uC740 \uC800\uB97C \uC54C\uB809\uC138\uC774\uB77C\uACE0 \uBD88\uB800\uC5B4\uC694."
+      sincerity: 0
+    - key: DAY2_PLAYER_NORM_024_86
+      id: 220241
+      day: 2
+      seq: 24
+      speaker: 2
+      type: 1
+      branch: 
+      nextKey: DAY2_NPC_NORM_025_87
+      content: "\uC138 \uBC88\uC9F8\uC694."
+      sincerity: 0
+    - key: DAY2_NPC_NORM_025_87
+      id: 210251
+      day: 2
+      seq: 25
+      speaker: 1
+      type: 1
+      branch: 
+      nextKey: DAY2_NPC_NORM_026_88
+      content: "\uD3C9\uC591\uC5D0\uC11C \uC4F0\uB358 \uC774\uB984\uC774 \uC788\uACE0
+        \uD558\uC5BC\uBE48\uC5D0\uC11C \uC37C\uB358 \uC774\uB984\uC774 \uC788\uACE0"
+      sincerity: 0
+    - key: DAY2_NPC_NORM_026_88
+      id: 210261
+      day: 2
+      seq: 26
+      speaker: 1
+      type: 1
+      branch: 
+      nextKey: DAY2_NPC_NORM_027_89
+      content: "\uBE14\uB77C\uB514\uBCF4\uC2A4\uD1A0\uD06C\uC5D0\uC11C \uC37C\uB358
+        \uC774\uB984\uC774 \uC788\uC5B4\uC694. \uC11C\uC6B8\uC5D0\uC11C \uC4F0\uB294
+        \uC9C0\uAE08 \uC774\uB984\uB3C4 \uC788\uACE0."
+      sincerity: 0
+    - key: DAY2_NPC_NORM_027_89
+      id: 210271
+      day: 2
+      seq: 27
+      speaker: 1
+      type: 1
+      branch: 
+      nextKey: DAY2_PLAYER_NORM_028_90
+      content: "\uC774\uB984\uC774 \uB124 \uAC1C\uC608\uC694. \uADF8\uAC78 \uB2E4
+        \uC544\uB294 \uC0AC\uB78C\uC774 \uC5C6\uC5B4\uC694."
+      sincerity: 0
+    - key: DAY2_PLAYER_NORM_028_90
+      id: 220281
+      day: 2
+      seq: 28
+      speaker: 2
+      type: 1
+      branch: 
+      nextKey: DAY2_NPC_NORM_029_91
+      content: "\uC62C\uAC00\uB294\uC694."
+      sincerity: 0
+    - key: DAY2_NPC_NORM_029_91
+      id: 210291
+      day: 2
+      seq: 29
+      speaker: 1
+      type: 1
+      branch: 
+      nextKey: DAY2_NPC_NORM_030_92
+      content: "\uC62C\uAC00\uB294 \uC54C\uB809\uC138\uC774\uB9CC \uC54C\uC544\uC694."
+      sincerity: 0
+    - key: DAY2_NPC_NORM_030_92
+      id: 210301
+      day: 2
+      seq: 30
+      speaker: 1
+      type: 1
+      branch: 
+      nextKey: DAY2_PLAYER_SEL_031_93
+      content: "7\uB144\uC744 \uAC19\uC774 \uC0B4\uC558\uB294\uB370 \uD55C \uBC88\uB3C4
+        \uC9C4\uC9DC \uC774\uB984\uC744 \uB9D0\uD558\uC9C0 \uC54A\uC558\uC5B4\uC694."
+      sincerity: 0
+    - key: DAY2_PLAYER_SEL_031_93
+      id: 220312
+      day: 2
+      seq: 31
+      speaker: 2
+      type: 2
+      branch: 3A
+      nextKey: DAY2_NPC_REAC_032_96
+      content: "7\uB144\uC774\uC694."
+      sincerity: 0
+    - key: DAY2_PLAYER_SEL_031_94
+      id: 220312
+      day: 2
+      seq: 31
+      speaker: 2
+      type: 2
+      branch: 3B
+      nextKey: DAY2_NPC_REAC_035_99
+      content: "7\uB144 \uB3D9\uC548\uC774\uC694."
+      sincerity: 0
+    - key: DAY2_PLAYER_SEL_031_95
+      id: 220312
+      day: 2
+      seq: 31
+      speaker: 2
+      type: 2
+      branch: 3C
+      nextKey: DAY2_NPC_REAC_038_102
+      content: "\uB9D0\uD560 \uC218 \uC788\uC5C8\uB294\uB370\uC694."
+      sincerity: 5
+    - key: DAY2_NPC_REAC_032_96
+      id: 210323
+      day: 2
+      seq: 32
+      speaker: 1
+      type: 4
+      branch: 3A
+      nextKey: DAY2_PLAYER_REAC_033_97
+      content: "\uC5B4\uB290 \uB0A0 \uC544\uCE68 \uADF8\uB0E5 \uB098\uC654\uC5B4\uC694.
+        \uC544\uBB34 \uD754\uC801 \uC5C6\uC774\uC694."
+      sincerity: 3
+    - key: DAY2_PLAYER_REAC_033_97
+      id: 220333
+      day: 2
+      seq: 33
+      speaker: 2
+      type: 4
+      branch: 3A
+      nextKey: DAY2_NPC_REAC_034_98
+      content: "\u2026\u2026"
+      sincerity: 0
+    - key: DAY2_NPC_REAC_034_98
+      id: 210343
+      day: 2
+      seq: 34
+      speaker: 1
+      type: 4
+      branch: 3A
+      nextKey: DAY2_NPC_NORM_039_103
+      content: "\uC62C\uAC00\uB294 \uC790\uACE0 \uC788\uC5C8\uC2B5\uB2C8\uB2E4. \uC800\uB294
+        \uC2E0\uBC1C \uC2E0\uACE0 \uBB38 \uB2EB\uC558\uC5B4\uC694."
+      sincerity: 0
+    - key: DAY2_NPC_REAC_035_99
+      id: 210353
+      day: 2
+      seq: 35
+      speaker: 1
+      type: 4
+      branch: 3B
+      nextKey: DAY2_NPC_REAC_036_100
+      content: "7\uB144\uC774\uC694."
+      sincerity: 0
+    - key: DAY2_NPC_REAC_036_100
+      id: 210363
+      day: 2
+      seq: 36
+      speaker: 1
+      type: 4
+      branch: 3B
+      nextKey: DAY2_NPC_REAC_037_101
+      content: "\uAC19\uC774 \uBC25 \uBA39\uACE0, \uAC19\uC774 \uC790\uACE0, \uAC19\uC774
+        \uD56D\uAD6C \uBCF4\uB7EC \uAC00\uACE0."
+      sincerity: 0
+    - key: DAY2_NPC_REAC_037_101
+      id: 210373
+      day: 2
+      seq: 37
+      speaker: 1
+      type: 4
+      branch: 3B
+      nextKey: DAY2_NPC_NORM_039_103
+      content: "\uADF8\uB7EC\uBA74\uC11C\uB3C4 \uC774\uB984 \uD558\uB098\uB97C \uBABB
+        \uB9D0\uD588\uC5B4\uC694."
+      sincerity: 0
+    - key: DAY2_NPC_REAC_038_102
+      id: 210383
+      day: 2
+      seq: 38
+      speaker: 1
+      type: 4
+      branch: 3C
+      nextKey: DAY2_NPC_NORM_039_103
+      content: "\uB124. \uB9D0\uD560 \uC218 \uC788\uC5C8\uC5B4\uC694. \uADF8\uB798\uC11C
+        \uB354 \uD798\uB4E0 \uAC70\uC608\uC694."
+      sincerity: 0
+    - key: DAY2_NPC_NORM_039_103
+      id: 210391
+      day: 2
+      seq: 39
+      speaker: 1
+      type: 1
+      branch: 
+      nextKey: DAY2_PLAYER_NORM_040_104
+      content: "\uADF8\uAC8C \uC81C\uAC00 \uC2A4\uC2A4\uB85C \uC120\uD0DD\uD55C \uC720\uC77C\uD55C
+        \uBC30\uC2E0\uC774\uC5D0\uC694."
+      sincerity: 0
+    - key: DAY2_PLAYER_NORM_040_104
+      id: 220401
+      day: 2
+      seq: 40
+      speaker: 2
+      type: 1
+      branch: 
+      nextKey: DAY2_NPC_NORM_041_105
+      content: "\uC720\uC77C\uD55C\uC694."
+      sincerity: 0
+    - key: DAY2_NPC_NORM_041_105
+      id: 210411
+      day: 2
+      seq: 41
+      speaker: 1
+      type: 1
+      branch: 
+      nextKey: DAY2_NPC_NORM_042_106
+      content: "\uB2E4\uB978 \uAC74 \uC5B4\uCA54 \uC218 \uC5C6\uC5C8\uC5B4\uC694.
+        \uC0B4\uB824\uBA74 \uADF8\uB807\uAC8C \uD574\uC57C \uD588\uC73C\uB2C8\uAE4C."
+      sincerity: 0
+    - key: DAY2_NPC_NORM_042_106
+      id: 210421
+      day: 2
+      seq: 42
+      speaker: 1
+      type: 1
+      branch: 
+      nextKey: DAY2_PLAYER_NORM_043_107
+      content: "\uADFC\uB370 \uC62C\uAC00\uD55C\uD14C\uB294 \uB9D0\uD560 \uC218 \uC788\uC5C8\uB294\uB370
+        \uC548 \uD588\uC5B4\uC694. \uADF8\uAC8C \uB2EC\uB77C\uC694."
+      sincerity: 0
+    - key: DAY2_PLAYER_NORM_043_107
+      id: 220431
+      day: 2
+      seq: 43
+      speaker: 2
+      type: 1
+      branch: 
+      nextKey: DAY2_NPC_NORM_044_108
+      content: "\uB9D0\uD560 \uC218 \uC788\uC5C8\uB2E4\uB294 \uAC78 \uC54C\uACE0
+        \uC788\uC5C8\uC5B4\uC694?"
+      sincerity: 0
+    - key: DAY2_NPC_NORM_044_108
+      id: 210441
+      day: 2
+      seq: 44
+      speaker: 1
+      type: 1
+      branch: 
+      nextKey: DAY2_PLAYER_SEL_045_109
+      content: "...\uC54C\uACE0 \uC788\uC5C8\uC2B5\uB2C8\uB2E4. \uADF8\uB798\uC11C
+        \uB354 \uD798\uB4E0 \uAC70\uC608\uC694."
+      sincerity: 0
+    - key: DAY2_PLAYER_SEL_045_109
+      id: 220452
+      day: 2
+      seq: 45
+      speaker: 2
+      type: 2
+      branch: 4A
+      nextKey: 
+      content: "\uC62C\uAC00\uAC00 \uBCF4\uB0B8 \uAC70\uAD70\uC694."
+      sincerity: 3
+    - key: DAY2_PLAYER_SEL_045_110
+      id: 220452
+      day: 2
+      seq: 45
+      speaker: 2
+      type: 2
+      branch: 4B
+      nextKey: 
+      content: "\uC65C \uC774 \uCC44\uB110\uC744\uC694."
+      sincerity: 5
+    - key: DAY2_PLAYER_SEL_045_111
+      id: 220452
+      day: 2
+      seq: 45
+      speaker: 2
+      type: 2
+      branch: 4C
+      nextKey: 
+      content: "\uB124 \uAC1C\uC758 \uC774\uB984\uC774\uC694."
+      sincerity: 0
+    - key: DAY2_NPC_REAC_046_112
+      id: 210463
+      day: 2
+      seq: 46
+      speaker: 1
+      type: 4
+      branch: 4A
+      nextKey: 
+      content: "\uBAA8\uB974\uACA0\uC5B4\uC694. \uADF8\uAC8C \uC800\uD55C\uD14C \uD558\uB294
+        \uB9D0\uC778\uC9C0 \uADF8\uB0E5 \uBCF4\uB0B8 \uAC74\uC9C0."
+      sincerity: 0
+    - key: DAY2_NPC_REAC_047_113
+      id: 210473
+      day: 2
+      seq: 47
+      speaker: 1
+      type: 4
+      branch: 4B
+      nextKey: 
+      content: "\uC62C\uAC00\uD55C\uD14C\uC11C \uD3B8\uC9C0\uAC00 \uC654\uC5B4\uC694.
+        \uC5BC\uB9C8 \uC804\uC5D0\uC694."
+      sincerity: 0
+    - key: DAY2_PLAYER_REAC_048_114
+      id: 220483
+      day: 2
+      seq: 48
+      speaker: 2
+      type: 4
+      branch: 4B
+      nextKey: 
+      content: "\uD3B8\uC9C0\uC694?"
+      sincerity: 0
+    - key: DAY2_NPC_REAC_049_115
+      id: 210493
+      day: 2
+      seq: 49
+      speaker: 1
+      type: 4
+      branch: 4B
+      nextKey: 
+      content: "\uBD09\uD22C \uC548\uC5D0 \uC885\uC774 \uD558\uB098\uB9CC \uC788\uC5C8\uC5B4\uC694.
+        \uC774 \uCC44\uB110 \uD578\uB4E4\uB9CC \uC801\uD600 \uC788\uC5C8\uC2B5\uB2C8\uB2E4."
+      sincerity: 0
+    - key: DAY2_NPC_REAC_050_116
+      id: 210503
+      day: 2
+      seq: 50
+      speaker: 1
+      type: 4
+      branch: 4B
+      nextKey: 
+      content: "\uC62C\uAC00\uAC00 \uC774 \uCC44\uB110\uC744 \uC54C\uACE0 \uC788\uC5C8\uB2E4\uB294
+        \uB73B\uC774\uC796\uC544\uC694."
+      sincerity: 0
+    - key: DAY2_NPC_REAC_051_117
+      id: 210513
+      day: 2
+      seq: 51
+      speaker: 1
+      type: 4
+      branch: 4B
+      nextKey: 
+      content: "\uADF8\uAC8C \uC5B4\uB5A4 \uB73B\uC778\uC9C0\uB294 \uBAA8\uB974\uACA0\uC5B4\uC694.
+        \uC544\uC9C1\uB3C4\uC694."
+      sincerity: 0
+    - key: DAY2_NPC_REAC_052_118
+      id: 210523
+      day: 2
+      seq: 52
+      speaker: 1
+      type: 4
+      branch: 4C
+      nextKey: 
+      content: "\uC62C\uAC00\uD55C\uD14C\uC11C \uD3B8\uC9C0\uAC00 \uC654\uC5B4\uC694."
+      sincerity: 0
+    - key: DAY2_PLAYER_REAC_053_119
+      id: 220533
+      day: 2
+      seq: 53
+      speaker: 2
+      type: 4
+      branch: 4C
+      nextKey: 
+      content: "\u2026\u2026"
+      sincerity: 0
+    - key: DAY2_NPC_REAC_054_120
+      id: 210543
+      day: 2
+      seq: 54
+      speaker: 1
+      type: 4
+      branch: 4C
+      nextKey: 
+      content: "\uBD09\uD22C \uC548\uC5D0 \uC885\uC774 \uD558\uB098\uB9CC \uC788\uC5C8\uC5B4\uC694.
+        \uC774 \uCC44\uB110 \uD578\uB4E4\uB9CC \uC801\uD600 \uC788\uC5C8\uC2B5\uB2C8\uB2E4."
+      sincerity: 0
+    - key: DAY2_PLAYER_REAC_055_121
+      id: 220553
+      day: 2
+      seq: 55
+      speaker: 2
+      type: 4
+      branch: 4C
+      nextKey: 
+      content: "\uC62C\uAC00\uAC00 \uC774 \uCC44\uB110\uC744 \uC54C\uACE0 \uC788\uB2E4\uB294
+        \uB73B\uC774\uAD70\uC694."
+      sincerity: 0
+    - key: DAY2_PLAYER_NORM_056_122
+      id: 220561
+      day: 2
+      seq: 56
+      speaker: 2
+      type: 1
+      branch: 
+      nextKey: 
+      content: "\uC5B4\uB5A4 \uAE30\uC5B5\uC73C\uB85C \uBC14\uAFB8\uACE0 \uC2F6\uC5B4\uC694?"
+      sincerity: 0
+    - key: DAY2_NPC_NORM_057_123
+      id: 210571
+      day: 2
+      seq: 57
+      speaker: 1
+      type: 1
+      branch: 
+      nextKey: 
+      content: "\uB5A0\uB098\uB358 \uC0C8\uBCBD\uC5D0 \uC774\uB984\uC744 \uB0A8\uAE30\uACE0
+        \uAC04 \uC0AC\uB78C\uC73C\uB85C\uC694."
+      sincerity: 0
+    - key: DAY2_PLAYER_NORM_058_124
+      id: 220581
+      day: 2
+      seq: 58
+      speaker: 2
+      type: 1
+      branch: 
+      nextKey: 
+      content: "\uC9C4\uC9DC \uC774\uB984\uC774\uC694?"
+      sincerity: 0
+    - key: DAY2_NPC_NORM_059_125
+      id: 210591
+      day: 2
+      seq: 59
+      speaker: 1
+      type: 1
+      branch: 
+      nextKey: 
+      content: "\uB124."
+      sincerity: 0
+    - key: DAY2_PLAYER_NORM_060_126
+      id: 220601
+      day: 2
+      seq: 60
+      speaker: 2
+      type: 1
+      branch: 
+      nextKey: 
+      content: "\uADF8 \uC774\uB984\uC774 \uBB54\uAC00\uC694."
+      sincerity: 0
+    - key: DAY2_NPC_NORM_061_127
+      id: 210611
+      day: 2
+      seq: 61
+      speaker: 1
+      type: 1
+      branch: 
+      nextKey: 
+      content: "\uBC15\uC728\uC774\uC694."
+      sincerity: 0
+    - key: DAY2_PLAYER_NORM_062_128
+      id: 220621
+      day: 2
+      seq: 62
+      speaker: 2
+      type: 1
+      branch: 
+      nextKey: 
+      content: "\uADF8\uAC8C \uC9C4\uC9DC \uC774\uB984\uC774\uC5D0\uC694?"
+      sincerity: 15
+    - key: DAY2_NPC_NORM_063_129
+      id: 210631
+      day: 2
+      seq: 63
+      speaker: 1
+      type: 1
+      branch: 
+      nextKey: 
+      content: "...\uC544\uB2C8\uC694."
+      sincerity: 6
+    - key: DAY2_PLAYER_SEL_064_130
+      id: 220642
+      day: 2
+      seq: 64
+      speaker: 2
+      type: 2
+      branch: 5A
+      nextKey: 
+      content: "\uB9AC\uCCA0\uBBFC."
+      sincerity: -10
+    - key: DAY2_PLAYER_SEL_064_131
+      id: 220642
+      day: 2
+      seq: 64
+      speaker: 2
+      type: 2
+      branch: 5B
+      nextKey: 
+      content: "\uB9D0\uD574\uC918\uC11C \uACE0\uB9C8\uC6CC\uC694."
+      sincerity: 0
+    - key: DAY2_PLAYER_SEL_064_132
+      id: 220642
+      day: 2
+      seq: 64
+      speaker: 2
+      type: 2
+      branch: 5C
+      nextKey: 
+      content: "\uC65C \uC9C0\uAE08\uAE4C\uC9C0 \uADF8 \uC774\uB984\uC744 \uC228\uACBC\uC5B4\uC694?"
+      sincerity: 0
+    - key: DAY2_NPC_REAC_065_133
+      id: 210653
+      day: 2
+      seq: 65
+      speaker: 1
+      type: 4
+      branch: 5A
+      nextKey: 
+      content: "\uCC98\uC74C\uC774\uC5D0\uC694. \uC774 \uC774\uB984\uC744 \uB2E4\uB978
+        \uC0AC\uB78C\uD55C\uD14C \uB9D0\uD55C \uAC8C."
+      sincerity: 0
+    - key: DAY2_PLAYER_REAC_066_134
+      id: 220663
+      day: 2
+      seq: 66
+      speaker: 2
+      type: 4
+      branch: 5A
+      nextKey: 
+      content: "\u2026\u2026"
+      sincerity: 0
+    - key: DAY2_NPC_REAC_067_135
+      id: 210673
+      day: 2
+      seq: 67
+      speaker: 1
+      type: 4
+      branch: 5A
+      nextKey: 
+      content: "\uC774\uC0C1\uD558\uAD70\uC694. \uBB34\uB108\uC9C8 \uAC83 \uAC19\uC558\uB294\uB370."
+      sincerity: 0
+    - key: DAY2_NPC_REAC_068_136
+      id: 210683
+      day: 2
+      seq: 68
+      speaker: 1
+      type: 4
+      branch: 5A
+      nextKey: 
+      content: "\uC548 \uBB34\uB108\uC9C0\uB124\uC694."
+      sincerity: 0
+    - key: DAY2_NPC_REAC_069_137
+      id: 210693
+      day: 2
+      seq: 69
+      speaker: 1
+      type: 4
+      branch: 5B
+      nextKey: 
+      content: "\uACE0\uB9D9\uB2E4\uB294 \uB9D0\uC744 \uB4E4\uC744 \uC904 \uBAB0\uB790\uC5B4\uC694.
+        \uC774 \uC774\uB984\uC744 \uB9D0\uD558\uACE0\uC694."
+      sincerity: 0
+    - key: DAY2_PLAYER_REAC_070_138
+      id: 220703
+      day: 2
+      seq: 70
+      speaker: 2
+      type: 4
+      branch: 5B
+      nextKey: 
+      content: "\u2026\u2026"
+      sincerity: 0
+    - key: DAY2_NPC_REAC_071_139
+      id: 210713
+      day: 2
+      seq: 71
+      speaker: 1
+      type: 4
+      branch: 5B
+      nextKey: 
+      content: "\uC774\uC0C1\uD558\uAC8C \uAC00\uBCCD\uB124\uC694. \uC870\uAE08."
+      sincerity: 0
+    - key: DAY2_NPC_REAC_072_140
+      id: 210723
+      day: 2
+      seq: 72
+      speaker: 1
+      type: 4
+      branch: 5C
+      nextKey: 
+      content: "...\uADF8 \uC9C8\uBB38\uC740 \uC548 \uB429\uB2C8\uB2E4."
+      sincerity: 0
+    - key: DAY2_NPC_NORM_073_141
+      id: 210731
+      day: 2
+      seq: 73
+      speaker: 1
+      type: 1
+      branch: 
+      nextKey: 
+      content: "\uC62C\uAC00\uB294 \uC774 \uC774\uB984\uC744 \uBAB0\uB77C\uC694.
+        \uC9C0\uAE08\uB3C4\uC694."
+      sincerity: 0
+    - key: DAY2_PLAYER_NORM_074_142
+      id: 220741
+      day: 2
+      seq: 74
+      speaker: 2
+      type: 1
+      branch: 
+      nextKey: 
+      content: "\uB124."
+      sincerity: 2
+    - key: DAY2_NPC_NORM_075_143
+      id: 210751
+      day: 2
+      seq: 75
+      speaker: 1
+      type: 1
+      branch: 
+      nextKey: 
+      content: "\uADF8 \uC0C8\uBCBD\uC5D0 \uBA54\uBAA8\uC9C0\uC5D0 \uC774 \uC774\uB984\uC744
+        \uC37C\uB354\uB77C\uBA74. \uADF8\uAC8C \uC804\uBD80\uC608\uC694."
+      sincerity: 3
+    - key: DAY2_PLAYER_SEL_076_144
+      id: 220762
+      day: 2
+      seq: 76
+      speaker: 2
+      type: 2
+      branch: 6A
+      nextKey: 
+      content: "\uB2E4\uC74C\uC5D0 \uC624\uBA74 \uADF8 \uC0C8\uBCBD\uC73C\uB85C \uB4E4\uC5B4\uAC00
+        \uBCFC \uC218 \uC788\uC5B4\uC694."
+      sincerity: 5
+    - key: DAY2_PLAYER_SEL_076_145
+      id: 220762
+      day: 2
+      seq: 76
+      speaker: 2
+      type: 2
+      branch: 6B
+      nextKey: 
+      content: "\uC624\uB298 \uC5EC\uAE30 \uC640\uC918\uC11C \uACE0\uB9C8\uC6CC\uC694."
+      sincerity: 0
+    - key: DAY2_PLAYER_SEL_076_146
+      id: 220762
+      day: 2
+      seq: 76
+      speaker: 2
+      type: 2
+      branch: 6C
+      nextKey: 
+      content: "\uC62C\uAC00\uD55C\uD14C\uC694."
+      sincerity: 0
+    - key: DAY2_NPC_REAC_077_147
+      id: 210773
+      day: 2
+      seq: 77
+      speaker: 1
+      type: 4
+      branch: 6A
+      nextKey: 
+      content: "\uADF8 \uC544\uD30C\uD2B8\uC694."
+      sincerity: 0
+    - key: DAY2_PLAYER_REAC_078_148
+      id: 220783
+      day: 2
+      seq: 78
+      speaker: 2
+      type: 4
+      branch: 6A
+      nextKey: 
+      content: "\uB124."
+      sincerity: 0
+    - key: DAY2_NPC_REAC_079_149
+      id: 210793
+      day: 2
+      seq: 79
+      speaker: 1
+      type: 4
+      branch: 6A
+      nextKey: 
+      content: "\uC62C\uAC00\uAC00 \uC790\uACE0 \uC788\uACA0\uAD70\uC694. \uAC70\uAE30\uC11C\uB3C4.
+        \uB2E4\uC74C\uC5D0 \uAC00\uACA0\uC2B5\uB2C8\uB2E4."
+      sincerity: 0
+    - key: DAY2_NPC_REAC_080_150
+      id: 210803
+      day: 2
+      seq: 80
+      speaker: 1
+      type: 4
+      branch: 6B
+      nextKey: 
+      content: "\uC81C\uAC00 \uACE0\uB9D9\uC8E0."
+      sincerity: 0
+    - key: DAY2_PLAYER_REAC_081_151
+      id: 220813
+      day: 2
+      seq: 81
+      speaker: 2
+      type: 4
+      branch: 6B
+      nextKey: 
+      content: "\u2026\u2026"
+      sincerity: 0
+    - key: DAY2_NPC_REAC_082_152
+      id: 210823
+      day: 2
+      seq: 82
+      speaker: 1
+      type: 4
+      branch: 6B
+      nextKey: 
+      content: "\uC774\uB984\uC744 \uB9D0\uD558\uACE0 \uC544\uC9C1 \uC5EC\uAE30 \uC788\uB124\uC694.
+        \uC774\uB984\uC744 \uB9D0\uD558\uBA74 \uBB54\uAC00 \uB2EC\uB77C\uC9C8 \uAC83
+        \uAC19\uC558\uB294\uB370"
+      sincerity: 0
+    - key: DAY2_NPC_REAC_083_153
+      id: 210833
+      day: 2
+      seq: 83
+      speaker: 1
+      type: 4
+      branch: 6B
+      nextKey: 
+      content: "\uADF8\uB0E5 \uC5EC\uAE30 \uC788\uB124\uC694."
+      sincerity: 0
+    - key: DAY2_NPC_REAC_084_154
+      id: 210843
+      day: 2
+      seq: 84
+      speaker: 1
+      type: 4
+      branch: 6C
+      nextKey: 
+      content: "\uB9AC\uCCA0\uBBFC."
+      sincerity: 0
+    - key: DAY3_PLAYER_REAC_001_155
+      id: 320013
+      day: 3
+      seq: 1
+      speaker: 2
+      type: 4
+      branch: 6C
+      nextKey: 
+      content: "\u2026\u2026"
+      sincerity: 0
+    - key: DAY3_NPC_REAC_002_156
+      id: 310023
+      day: 3
+      seq: 2
+      speaker: 1
+      type: 4
+      branch: 6C
+      nextKey: 
+      content: "\uB2E4\uC2DC \uD55C\uBC88 \uB9D0\uD574\uBD24\uC5B4\uC694. \uC775\uC219\uD574\uC9C0\uB824\uACE0\uC694."
+      sincerity: 3
+    - key: DAY3_NPC_REAC_003_157
+      id: 310033
+      day: 3
+      seq: 3
+      speaker: 1
+      type: 4
+      branch: 6C
+      nextKey: 
+      content: "\uC624\uB798 \uC548 \uBD88\uB9B0 \uC774\uB984\uC774\uB77C \uC544\uC9C1
+        \uC81C \uC774\uB984 \uAC19\uC9C0\uAC00 \uC54A\uC544\uC694."
+      sincerity: 0
+    - key: DAY3_NPC_NORM_004_158
+      id: 310041
+      day: 3
+      seq: 4
+      speaker: 1
+      type: 1
+      branch: 
+      nextKey: 
+      content: "\uC7A0\uC774 \uC548 \uC640\uC11C\uC694."
+      sincerity: 1
+    - key: DAY3_PLAYER_SEL_005_159
+      id: 320052
+      day: 3
+      seq: 5
+      speaker: 2
+      type: 2
+      branch: 1A
+      nextKey: 
+      content: "\uC654\uAD70\uC694."
+      sincerity: 5
+    - key: DAY3_PLAYER_SEL_005_160
+      id: 320052
+      day: 3
+      seq: 5
+      speaker: 2
+      type: 2
+      branch: 1B
+      nextKey: 
+      content: "\uBB34\uC2A8 \uC0DD\uAC01 \uD558\uC168\uC5B4\uC694?"
+      sincerity: 0
+    - key: DAY3_PLAYER_SEL_005_161
+      id: 320052
+      day: 3
+      seq: 5
+      speaker: 2
+      type: 2
+      branch: 1C
+      nextKey: 
+      content: "\uD56D\uAD6C \uC18C\uB9AC\uC694."
+      sincerity: 0
+    - key: DAY3_NPC_REAC_006_162
+      id: 310063
+      day: 3
+      seq: 6
+      speaker: 1
+      type: 4
+      branch: 1A
+      nextKey: 
+      content: "\uB124. \uC0C8\uBCBD\uC5D0 \uC790\uC8FC \uC7A0\uC774 \uC548 \uC640\uC694.
+        \uC624\uB798\uC804\uBD80\uD130\uC694."
+      sincerity: 0
+    - key: DAY3_NPC_REAC_007_163
+      id: 310073
+      day: 3
+      seq: 7
+      speaker: 1
+      type: 4
+      branch: 1B
+      nextKey: 
+      content: "\uBCC4 \uC0DD\uAC01 \uC5C6\uC5C8\uC5B4\uC694. \uADF8\uB798\uC11C
+        \uB354 \uC7A0\uC774 \uC548 \uC654\uB294\uC9C0\uB3C4 \uBAA8\uB974\uC8E0."
+      sincerity: 0
+    - key: DAY3_NPC_REAC_008_164
+      id: 310083
+      day: 3
+      seq: 8
+      speaker: 1
+      type: 4
+      branch: 1C
+      nextKey: 
+      content: "\uBE14\uB77C\uB514\uBCF4\uC2A4\uD1A0\uD06C\uB3C4 \uD56D\uAD6C \uB3C4\uC2DC\uC600\uC5B4\uC694.
+        \uC0C8\uBCBD\uC5D0 \uD56D\uAD6C \uC18C\uB9AC\uAC00 \uB4E4\uB838\uAC70\uB4E0\uC694."
+      sincerity: 0
+    - key: DAY3_NPC_REAC_009_165
+      id: 310093
+      day: 3
+      seq: 9
+      speaker: 1
+      type: 4
+      branch: 1C
+      nextKey: 
+      content: "\uBC30 \uC18C\uB9AC\uAC00\uC694."
+      sincerity: 0
+    - key: DAY3_PLAYER_REAC_010_166
+      id: 320103
+      day: 3
+      seq: 10
+      speaker: 2
+      type: 4
+      branch: 1C
+      nextKey: 
+      content: "\u2026\u2026"
+      sincerity: 0
+    - key: DAY3_NPC_REAC_011_167
+      id: 310113
+      day: 3
+      seq: 11
+      speaker: 1
+      type: 4
+      branch: 1C
+      nextKey: 
+      content: "\uADF8 \uC0C8\uBCBD\uC5D0 \uB098\uC654\uC73C\uB2C8\uAE4C\uC694. \uD56D\uAD6C
+        \uC18C\uB9AC \uB4E4\uC73C\uBA74 \uC790\uAFB8 \uADF8 \uC544\uD30C\uD2B8\uAC00
+        \uC0DD\uAC01\uB098\uC694."
+      sincerity: 0
+    - key: DAY3_PLAYER_REAC_012_168
+      id: 320123
+      day: 3
+      seq: 12
+      speaker: 2
+      type: 4
+      branch: 1C
+      nextKey: 
+      content: "\u2026\u2026"
+      sincerity: 0
+    - key: DAY3_PLAYER_NORM_013_169
+      id: 320131
+      day: 3
+      seq: 13
+      speaker: 2
+      type: 1
+      branch: 
+      nextKey: 
+      content: "\uADF8 \uC0C8\uBCBD\uC774, \uC9C0\uAE08\uBCF4\uB2E4 \uB354 \uD6C4\uD68C\uC2A4\uB7FD\uAC8C
+        \uB0A8\uC744 \uC218\uB3C4 \uC788\uC5B4\uC694."
+      sincerity: 0
+    - key: DAY3_NPC_NORM_014_170
+      id: 310141
+      day: 3
+      seq: 14
+      speaker: 1
+      type: 1
+      branch: 
+      nextKey: 
+      content: "\uAD1C\uCC2E\uC544\uC694."
+      sincerity: 0
   - sheetName: "\uC724\uC11C\uC544"
     guestType: 4
     dialogues:
@@ -724,8 +4320,8 @@ MonoBehaviour:
       type: 1
       branch: 
       nextKey: DAY1_NPC_NORM_064_70
-      content: "\uD53C\uB4DC \uCEA1\uC158 \uC5C4\uB9C8\uAC00 \uD55C \uBC88\uB9CC
-        \uB3CC\uC544\uBD24\uB2E4\uBA74. \uCC98\uC74C \uBD24\uC744 \uB54C \uC5B4\uB5A4
+      content: "\uD53C\uB4DC \uCEA1\uC158 \"\uC5C4\uB9C8\uAC00 \uD55C \uBC88\uB9CC
+        \uB3CC\uC544\uBD24\uB2E4\uBA74.\" \uCC98\uC74C \uBD24\uC744 \uB54C \uC5B4\uB5A4
         \uB290\uB08C\uC774\uC5C8\uC5B4\uC694?"
       sincerity: 0
     - key: DAY1_NPC_NORM_064_70
@@ -2269,8 +5865,8 @@ MonoBehaviour:
       type: 4
       branch: 6A
       nextKey: DAY2_PLAYER_SEL_126_226
-      content: "\uC5C6\uB294 \uC0AC\uB78C\uD55C\uD14C \uC88B\uC544\uD560 \uAC83 \uAC19\uB2E4\uB294
-        \uB9D0\uC774 \uC81C\uC77C \uD798\uB4E4\uC5B4\uC694."
+      content: "\uC5C6\uB294 \uC0AC\uB78C\uD55C\uD14C \"\uC88B\uC544\uD560 \uAC83
+        \uAC19\uB2E4\"\uB294 \uB9D0\uC774 \uC81C\uC77C \uD798\uB4E4\uC5B4\uC694."
       sincerity: 0
     - key: DAY2_NPC_REAC_119_219
       id: 211193
@@ -2653,4 +6249,395 @@ MonoBehaviour:
       branch: 
       nextKey: END
       content: "\uC870\uAE08\uC758 \uD76C\uB9DD\uC774\uB77C\uB3C4 \uC788\uC796\uC544\uC694?"
+      sincerity: 0
+  - sheetName: "\uCD5C\uBA85\uC9C4"
+    guestType: 5
+    dialogues:
+    - key: DAY1_NPC_NORM_001_1
+      id: 110011
+      day: 1
+      seq: 1
+      speaker: 1
+      type: 1
+      branch: '-'
+      nextKey: DAY1_NPC_NORM_002_2
+      content: "\uCCAB \uBC88\uC9F8 \uD14D\uC2A4\uD2B8\uC785\uB2C8\uB3C4"
+      sincerity: 0
+    - key: DAY1_NPC_NORM_002_2
+      id: 110021
+      day: 1
+      seq: 2
+      speaker: 1
+      type: 1
+      branch: '-'
+      nextKey: DAY1_PLAYER_SEL_003_3
+      content: "\uC774\uAC70 \uB450\uBC88\uC9F8\uBA74\uC11C \uB2E4\uC74C\uC740 \uC120\uD0DD\uC9C0\uC784"
+      sincerity: 0
+    - key: DAY1_PLAYER_SEL_003_3
+      id: 120032
+      day: 1
+      seq: 3
+      speaker: 2
+      type: 2
+      branch: 1A
+      nextKey: DAY1_NPC_REAC_004_6
+      content: "\uC784\uC2B9\uC6D0 \uBC8C\uC138\uC2A4"
+      sincerity: 3
+    - key: DAY1_PLAYER_SEL_003_4
+      id: 120032
+      day: 1
+      seq: 3
+      speaker: 2
+      type: 2
+      branch: 1B
+      nextKey: DAY1_NPC_REAC_005_7
+      content: "\uBC8C\uC138\uC2A4 \uC784\uC2B9\uC6D0"
+      sincerity: 1
+    - key: DAY1_PLAYER_SEL_003_5
+      id: 120032
+      day: 1
+      seq: 3
+      speaker: 2
+      type: 2
+      branch: 1C
+      nextKey: DAY1_NPC_REAC_006_8
+      content: "\uC0BC\uC0BC\uC624\uC624"
+      sincerity: -7
+    - key: DAY1_NPC_REAC_004_6
+      id: 110043
+      day: 1
+      seq: 4
+      speaker: 1
+      type: 4
+      branch: 1A
+      nextKey: DAY1_NPC_NORM_007_9
+      content: "\uC784\uC2B9\uC6D0 \uBC8C\uC138\uC2A4\uB97C \uACE8\uB790\uC744 \uB54C
+        \uB9AC\uC561\uC158"
+      sincerity: 0
+    - key: DAY1_NPC_REAC_005_7
+      id: 110053
+      day: 1
+      seq: 5
+      speaker: 1
+      type: 4
+      branch: 1B
+      nextKey: DAY1_NPC_NORM_007_9
+      content: "\uBC8C\uC138\uC2A4 \uC784\uC2B9\uC6D0\uB97C \uACE8\uB790\uC744 \uB54C
+        \uB9AC\uC561\uC158"
+      sincerity: 0
+    - key: DAY1_NPC_REAC_006_8
+      id: 110063
+      day: 1
+      seq: 6
+      speaker: 1
+      type: 4
+      branch: 1C
+      nextKey: DAY1_NPC_NORM_007_9
+      content: "1C \uB9AC\uC561\uC158"
+      sincerity: 0
+    - key: DAY1_NPC_NORM_007_9
+      id: 110071
+      day: 1
+      seq: 7
+      speaker: 1
+      type: 1
+      branch: '-'
+      nextKey: DAY1_PLAYER_NORM_008_10
+      content: "\uC5B4\uCA4C\uB77C\uACE0\uC548\uBB3C\uC5B4\uBD24\uB294\uB370\uC65C\uADF8\uB7EC\uB294\uB370"
+      sincerity: 0
+    - key: DAY1_PLAYER_NORM_008_10
+      id: 120081
+      day: 1
+      seq: 8
+      speaker: 2
+      type: 1
+      branch: '-'
+      nextKey: DAY1_PLAYER_NORM_009_11
+      content: nui - Recollection
+      sincerity: 0
+    - key: DAY1_PLAYER_NORM_009_11
+      id: 120091
+      day: 1
+      seq: 9
+      speaker: 2
+      type: 1
+      branch: '-'
+      nextKey: DAY1_PLAYER_SEL_010_12
+      content: nui - kardia
+      sincerity: 0
+    - key: DAY1_PLAYER_SEL_010_12
+      id: 120102
+      day: 1
+      seq: 10
+      speaker: 2
+      type: 2
+      branch: 2A
+      nextKey: DAY1_PLAYER_SEL_011_15
+      content: "\uC59C \uB450 \uBC88\uC9F8 \uC120\uD0DD\uC9C0 A"
+      sincerity: -99
+    - key: DAY1_PLAYER_SEL_010_13
+      id: 120102
+      day: 1
+      seq: 10
+      speaker: 2
+      type: 2
+      branch: 2B
+      nextKey: DAY1_PLAYER_SEL_011_15
+      content: "\uC59C B\uC778\uB370\uC694"
+      sincerity: 21
+    - key: DAY1_PLAYER_SEL_010_14
+      id: 120102
+      day: 1
+      seq: 10
+      speaker: 2
+      type: 2
+      branch: 2C
+      nextKey: DAY1_PLAYER_SEL_011_15
+      content: "\uC5F0\uC18D \uC120\uD0DD \uC5D0\uC774"
+      sincerity: 4
+    - key: DAY1_PLAYER_SEL_011_15
+      id: 120112
+      day: 1
+      seq: 11
+      speaker: 2
+      type: 2
+      branch: 3A
+      nextKey: DAY1_NPC_REAC_012_18
+      content: "\uC5F0 \uC120 \uBE44 \uC2B9 \uC6D0"
+      sincerity: 2
+    - key: DAY1_PLAYER_SEL_011_16
+      id: 120112
+      day: 1
+      seq: 11
+      speaker: 2
+      type: 2
+      branch: 3B
+      nextKey: DAY1_NPC_REAC_013_19
+      content: "\uC2E0\uADDC \uC120\uD0DD\uC9C0 \uBE44"
+      sincerity: 5
+    - key: DAY1_PLAYER_SEL_011_17
+      id: 120112
+      day: 1
+      seq: 11
+      speaker: 2
+      type: 2
+      branch: 3C
+      nextKey: DAY1_NPC_REAC_014_20
+      content: "\uC2E0 \uC120 \uC528"
+      sincerity: -1
+    - key: DAY1_NPC_REAC_012_18
+      id: 110123
+      day: 1
+      seq: 12
+      speaker: 1
+      type: 4
+      branch: 3A
+      nextKey: DAY1_NPC_NORM_015_21
+      content: "\uC5F0\uC18D\uC5D0\uB300\uB2F5A"
+      sincerity: 0
+    - key: DAY1_NPC_REAC_013_19
+      id: 110133
+      day: 1
+      seq: 13
+      speaker: 1
+      type: 4
+      branch: 3B
+      nextKey: DAY1_NPC_NORM_015_21
+      content: "B\uC5F0\uC18D\uC5D0\uB300\uB2F5"
+      sincerity: 0
+    - key: DAY1_NPC_REAC_014_20
+      id: 110143
+      day: 1
+      seq: 14
+      speaker: 1
+      type: 4
+      branch: 3C
+      nextKey: DAY1_NPC_NORM_015_21
+      content: "\uC2E0\uADDC \uB9AC\uC561\uC120 \uC528"
+      sincerity: 0
+    - key: DAY1_NPC_NORM_015_21
+      id: 110151
+      day: 1
+      seq: 15
+      speaker: 1
+      type: 1
+      branch: '-'
+      nextKey: DAY1_PLAYER_NORM_016_22
+      content: "\uC774\uD6C4\uC5D0 \uC5EC\uAE30\uB85C \uC640\uC838\uC57C \uC815\uC0C1\uC785\uB2C8\uB2E4"
+      sincerity: 0
+    - key: DAY1_PLAYER_NORM_016_22
+      id: 120161
+      day: 1
+      seq: 16
+      speaker: 2
+      type: 1
+      branch: '-'
+      nextKey: END
+      content: "\uCCAB \uBC88\uC9F8 \uB0A0 \uB300\uD654\uB97C \uB9C8\uBB34\uB9AC\uD558\uB294
+        \uCC44\uD305;"
+      sincerity: 0
+    - key: DAY2_NPC_NORM_001_23
+      id: 210011
+      day: 2
+      seq: 1
+      speaker: 1
+      type: 1
+      branch: '-'
+      nextKey: DAY2_NPC_NORM_002_24
+      content: "\uC774\uAC70\uB294 \uB450 \uBC88\uC9F8 \uB0A0 \uCCAB \uBC88\uC9F8
+        \uCC44\uD305\uC785\uB514\uB098"
+      sincerity: 0
+    - key: DAY2_NPC_NORM_002_24
+      id: 210021
+      day: 2
+      seq: 2
+      speaker: 1
+      type: 1
+      branch: '-'
+      nextKey: DAY2_NPC_NORM_003_25
+      content: "\uAFC8\uC18D\uC5D0\uC11C \uD56D\uC0C1 \uB3C4\uB9DD\uCE58\uACE0 \uC788\uB294,
+        \uC5BC\uBE60\uC9C4 \uB2EC\uB9AC\uB294 \uBAA8\uC2B5"
+      sincerity: 0
+    - key: DAY2_NPC_NORM_003_25
+      id: 210031
+      day: 2
+      seq: 3
+      speaker: 1
+      type: 1
+      branch: '-'
+      nextKey: DAY2_PLAYER_SEL_004_26
+      content: "\uBA54\uD0C0\uC801\uC778 \uCE58\uC0AC\uD55C \uC218\uB2E8\uC73C\uB85C
+        \uB530\uB3CC\uB9AC\uACE0\uC11C, \uC548\uB3C4\uC758 \uC228\uC744 \uB0B4\uC26C\uC5B4"
+      sincerity: 0
+    - key: DAY2_PLAYER_SEL_004_26
+      id: 220042
+      day: 2
+      seq: 4
+      speaker: 2
+      type: 2
+      branch: 1A
+      nextKey: DAY2_NPC_REAC_005_29
+      content: "\uC5C9\uCF1C\uC788\uB294 \uAC74 \uC5B4\uB290 \uC2E4\uC77C\uAE4C"
+      sincerity: 4
+    - key: DAY2_PLAYER_SEL_004_27
+      id: 220042
+      day: 2
+      seq: 4
+      speaker: 2
+      type: 2
+      branch: 1B
+      nextKey: DAY2_NPC_REAC_006_30
+      content: "\uCC3E\uACE0 \uC788\uC5C8\uB354\uB2C8 \uD574\uAC00 \uC800\uBB3C\uC5B4"
+      sincerity: -5
+    - key: DAY2_PLAYER_SEL_004_28
+      id: 220042
+      day: 2
+      seq: 4
+      speaker: 2
+      type: 2
+      branch: 1C
+      nextKey: DAY2_NPC_REAC_007_31
+      content: "\uB3D9\uD574\uBC88\uCA4D\uC11C\uD574\uBC88\uCA4D\uD64D\uAE38\uB3D9"
+      sincerity: 1
+    - key: DAY2_NPC_REAC_005_29
+      id: 210053
+      day: 2
+      seq: 5
+      speaker: 1
+      type: 4
+      branch: 1A
+      nextKey: DAY2_NPC_NORM_008_32
+      content: "\uBD88\uC30D\uD558\uACE0 \uAC00\uB828\uD560 \uBFD0, \uBCC0\uD560
+        \uC218 \uC5C6\uC5B4\uC694"
+      sincerity: 0
+    - key: DAY2_NPC_REAC_006_30
+      id: 210063
+      day: 2
+      seq: 6
+      speaker: 1
+      type: 4
+      branch: 1B
+      nextKey: DAY2_NPC_NORM_008_32
+      content: "\uAC08\uD321\uC9C8\uD321, \uB5A0\uB0B4\uB824\uAC00 \uC885\uC810"
+      sincerity: 0
+    - key: DAY2_NPC_REAC_007_31
+      id: 210073
+      day: 2
+      seq: 7
+      speaker: 1
+      type: 4
+      branch: 1C
+      nextKey: DAY2_NPC_NORM_008_32
+      content: "\uC57C\uC57C\uC57C\uC57C\uC57C\uC57C\uC57C\uC57C\uC57C\uC57C"
+      sincerity: 0
+    - key: DAY2_NPC_NORM_008_32
+      id: 210081
+      day: 2
+      seq: 8
+      speaker: 1
+      type: 1
+      branch: '-'
+      nextKey: DAY2_NPC_NORM_009_33
+      content: "\uB3CC\uACE0 \uB3CC\uC544\uB77C, \uC790\uCC45\uAC10"
+      sincerity: 0
+    - key: DAY2_NPC_NORM_009_33
+      id: 210091
+      day: 2
+      seq: 9
+      speaker: 1
+      type: 1
+      branch: '-'
+      nextKey: DAY2_NPC_NORM_010_34
+      content: "\uC124\uB839 \uBC29\uD669\uD558\uB354\uB77C\uB3C4, \uBE5B \uCABD\uC73C\uB85C"
+      sincerity: 0
+    - key: DAY2_NPC_NORM_010_34
+      id: 210101
+      day: 2
+      seq: 10
+      speaker: 1
+      type: 1
+      branch: '-'
+      nextKey: DAY2_PLAYER_NORM_011_35
+      content: "\uADC0\uC5D0, \uC190\uAC00\uB77D\uC5D0 \uC804\uD574\uC9C0\uB294 \uC704\uC120"
+      sincerity: 0
+    - key: DAY2_PLAYER_NORM_011_35
+      id: 220111
+      day: 2
+      seq: 11
+      speaker: 2
+      type: 1
+      branch: '-'
+      nextKey: DAY2_PLAYER_NORM_012_36
+      content: "\uB9E1\uACA8\uB77C, \uB4DC\uB7EC\uB0B4\uB77C, \uB208\uC0AC\uD0DC\uCC98\uB7FC"
+      sincerity: 0
+    - key: DAY2_PLAYER_NORM_012_36
+      id: 220121
+      day: 2
+      seq: 12
+      speaker: 2
+      type: 1
+      branch: '-'
+      nextKey: DAY2_PLAYER_NORM_013_37
+      content: "\uCC3E\uC544\uB77C, \uC0B4\uD3B4\uB77C, \uB208\uC744 \uB728\uC790"
+      sincerity: 0
+    - key: DAY2_PLAYER_NORM_013_37
+      id: 220131
+      day: 2
+      seq: 13
+      speaker: 2
+      type: 1
+      branch: '-'
+      nextKey: DAY2_NPC_NORM_014_38
+      content: "\uB2E8\uC21C\uD654\uD558\uB294 \uBC84\uB987\uC774 \uBC30\uC5B4\uB4E4\uAE30
+        \uC804\uC5D0"
+      sincerity: 0
+    - key: DAY2_NPC_NORM_014_38
+      id: 210141
+      day: 2
+      seq: 14
+      speaker: 1
+      type: 1
+      branch: '-'
+      nextKey: END
+      content: "\uBFD4\uBFD4\uC774 \uD769\uC5B4\uC838, \uB2FF\uC744 \uC218 \uC5C6\uC5B4\uC694"
       sincerity: 0

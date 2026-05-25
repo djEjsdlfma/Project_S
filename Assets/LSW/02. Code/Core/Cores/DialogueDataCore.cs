@@ -115,6 +115,20 @@ namespace LSW._02._Code.Core.Cores
             return false;
         }
 
+        public int GetFirstDialogueDay(Guest guest)
+        {
+            if (!_initialized)
+                return int.MaxValue;
+
+            DialogueSheet sheet = Database.sheets.Find(s => s.guestType == guest);
+            if (sheet == null || sheet.dialogues.Count == 0)
+                return int.MaxValue;
+
+            return sheet.dialogues.Min(d => d.day);
+        }
+        
+        public void SetDatabase(DialogueDatabaseSo database) => Database = database;
+
         public void LoadScene(SceneType sceneType) { }
 
         public void Reset() { }

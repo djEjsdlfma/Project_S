@@ -420,7 +420,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a588db8003a440e0ac012d75f37913f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LSW._02._Code.UI.GuestProfileSelectBtn
-  bubbleManager: {fileID: 0}
+  parent: {fileID: 1588464310779860495}
+  profileContainer: {fileID: 0}
   guest: 0
 --- !u!1 &2967979240893727097
 GameObject:
@@ -487,7 +488,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uB9C8\uC9C0\uB9C9\uB300\uD654 \uB098\uC624\uB294 \uACF5\uAC04"
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 965f97ffac279bb459c4e11f0d8d27bb, type: 2}
   m_sharedMaterial: {fileID: 6522724985343967260, guid: 965f97ffac279bb459c4e11f0d8d27bb, type: 2}
@@ -593,8 +594,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -287.7, y: 61.200012}
-  m_SizeDelta: {x: 200, y: 31.62}
+  m_AnchoredPosition: {x: -256.63303, y: 61.200012}
+  m_SizeDelta: {x: 137.8762, y: 31.62}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3151968445746632189
 CanvasRenderer:
@@ -658,7 +659,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -782,6 +783,7 @@ GameObject:
   - component: {fileID: 3444582694974068923}
   - component: {fileID: 921074665753177250}
   - component: {fileID: 339865473207506741}
+  - component: {fileID: 1588464310779860495}
   m_Layer: 5
   m_Name: Profil
   m_TagString: Untagged
@@ -855,6 +857,23 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1588464310779860495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5077498093545577174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9b7d5dfc48745db8d18926d3e687d2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LSW._02._Code.UI.GuestProfile
+  currentStatueImage: {fileID: 6913857527519981104}
+  alarmImage: {fileID: 7466243285320306902}
+  lastMessageText: {fileID: 7408054966698943237}
+  lastOnlineText: {fileID: 7716499165625167817}
+  <Guest>k__BackingField: 0
 --- !u!1 &5124834530104387444
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,6 +13,8 @@ namespace LSW._02._Code.Core.Cores
         public Dictionary<Guest, GuestData> GuestsData { get; private set; } = new Dictionary<Guest, GuestData>();
 
         private DialogueDataCore _dialogueDataCore;
+
+        public event Action OnDayChanged;
         
         public void Initialize(CoreHandler coreHandler)
         {
@@ -20,9 +22,12 @@ namespace LSW._02._Code.Core.Cores
             if(_dialogueDataCore == null)
                 return;
             
-            foreach (Guest guestName in Enum.GetValues(typeof(Guest)))
+            foreach (Guest guest in Enum.GetValues(typeof(Guest)))
             {
-                if (!_dialogueDataCore.GetAllDialogueEntry(guestName.ToString(), out _))
+                if (guest == Guest.None) continue;
+
+                // Enum 이름이 아닌 실제 시트가 매핑되어 있는지 확인
+                if (!_dialogueDataCore.GetSheetNameByGuest(guest, out _))
                     continue;
 
                 GuestData newGuestData = new GuestData
@@ -30,9 +35,9 @@ namespace LSW._02._Code.Core.Cores
                     CurrentSincerityAmount = 0
                 };
 
-                GuestsData.TryAdd(guestName, newGuestData);
+                GuestsData.TryAdd(guest, newGuestData);
 
-                Debug.Log($"Added Guest : {guestName}");
+                Debug.Log($"Added Guest : {guest}");
             }
         }
 
@@ -44,7 +49,8 @@ namespace LSW._02._Code.Core.Cores
         public void IncreaseDay(int increaseAmount = 1)
         {
             CurrentDay = Mathf.Clamp(CurrentDay + increaseAmount, 1, maxDay);
-            SceneManager.LoadScene((int)SceneType.DataLoadScene);
+            OnDayChanged?.Invoke();
+            SceneManager.LoadScene((int)SceneType.MainTabletScene);
         }
 
         public void ChangeSincerityAmount(string guestName, int amount)
@@ -52,15 +58,16 @@ namespace LSW._02._Code.Core.Cores
             if(!Enum.TryParse(guestName, out Guest guest))
                 return;
 
-            GuestData guestData = GuestsData[guest];
+            if (!GuestsData.TryGetValue(guest, out GuestData guestData))
+                return;
 
             int realAmount = guestData.CurrentSincerityAmount + amount;
             int finalAmount = Mathf.Clamp(realAmount, 0, 100);
             guestData.CurrentSincerityAmount = finalAmount;
             guestData.RealCurrentSincerityAmount = realAmount;
-            
+        
             GuestsData[guest] = guestData;
-            
+        
             Debug.Log($"{guestName}: {guestData.CurrentSincerityAmount}");
         }
 
@@ -80,7 +87,7 @@ namespace LSW._02._Code.Core.Cores
         Sheet2 = -1,        // 테스트용2임
         None = 0,
         JaeYoonLee,     // 이재윤
-        SoHeeNa,        // 나소희
+        DaEunJung,        // 정다은
         YulPark,        // 박율
         SeoAhYoon,      // 윤서아
         MyeongJinChoi   // 최명진
