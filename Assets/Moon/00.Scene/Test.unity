@@ -2436,7 +2436,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 32
+    m_Bits: 16416
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -2837,10 +2837,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4640435807948915291, guid: e74b32b9a6e707d49b60e8540b50862c, type: 3}
-      propertyPath: <MaxSaveSlot>k__BackingField
-      value: 23
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2968,14 +2964,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 665130911186570134, guid: e14385f0b991d94489b8bdcf6562d93d, type: 3}
-      propertyPath: m_Depth
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4644088827989413342, guid: e14385f0b991d94489b8bdcf6562d93d, type: 3}
-      propertyPath: m_Depth
-      value: -1
-      objectReference: {fileID: 0}
     - target: {fileID: 4771759465311667992, guid: e14385f0b991d94489b8bdcf6562d93d, type: 3}
       propertyPath: target
       value: 
