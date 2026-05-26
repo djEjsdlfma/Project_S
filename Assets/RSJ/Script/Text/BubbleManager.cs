@@ -661,6 +661,9 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
     { 
         ResetData();
     }
+    public void SetCotainer(RectTransform _rect) { _container = _rect; }
+
+    public void SetScrolllRect(ScrollRect _Srect) { scrollRect = _Srect; }
 
     public string GetLastDialogueContent(Guest guest)
     {
