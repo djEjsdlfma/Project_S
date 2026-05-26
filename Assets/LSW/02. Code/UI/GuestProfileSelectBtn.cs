@@ -9,7 +9,11 @@ namespace LSW._02._Code.UI
 {
     public class GuestProfileSelectBtn : MonoBehaviour
     {
+        [SerializeField] private GuestProfile parent;
+        [SerializeField] private ChatProfileContainer profileContainer;
         [SerializeField] private Guest guest;
+
+        public Guest Guest => guest;
         
         private BubbleManager _bubbleManager;
         private Button _button;
@@ -21,7 +25,12 @@ namespace LSW._02._Code.UI
             _button = GetComponent<Button>();
             if (_button != null && guest != Guest.None && _bubbleManager != null)
             {
-                _action = (() => _bubbleManager.ChangeGuestDialogue(guest));
+                _action = (() => 
+                        {
+                            profileContainer.DisableAllProfile(parent);
+                            _bubbleManager.ChangeGuestDialogue(guest);
+                        }
+                );
                 _button.onClick.AddListener(_action);
             }
         }

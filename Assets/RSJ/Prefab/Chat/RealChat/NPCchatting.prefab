@@ -755,8 +755,16 @@ PrefabInstance:
       value: ChatBoundery
       objectReference: {fileID: 0}
     - target: {fileID: 5131153275600885347, guid: 9bc90f267caa6ea439d0c0059868c5d7, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 4.6741
+      objectReference: {fileID: 0}
+    - target: {fileID: 5131153275600885347, guid: 9bc90f267caa6ea439d0c0059868c5d7, type: 3}
       propertyPath: m_SizeDelta.y
       value: -22.3895
+      objectReference: {fileID: 0}
+    - target: {fileID: 5131153275600885347, guid: 9bc90f267caa6ea439d0c0059868c5d7, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 2.337
       objectReference: {fileID: 0}
     - target: {fileID: 5131153275600885347, guid: 9bc90f267caa6ea439d0c0059868c5d7, type: 3}
       propertyPath: m_AnchoredPosition.y

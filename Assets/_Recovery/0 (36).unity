@@ -1552,21 +1552,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LSW._02._Code.Importer.DialogueSheetImporter
   sheets:
-  - guestName: "\uC774\uC7AC\uC724"
-    guest: 1
-    sheetUrl: https://docs.google.com/spreadsheets/d/e/2PACX-1vSVCmLGiKR9IbDKjMrRwxk7GhZTY4UPNeD4kgHQ1r0hdsKIBKh8X7uQ0X--k33W0sohwsgLQTPERFul/pub?gid=1611690076&single=true&output=csv
-  - guestName: "\uC815\uB2E4\uC740"
-    guest: 2
-    sheetUrl: https://docs.google.com/spreadsheets/d/e/2PACX-1vSVCmLGiKR9IbDKjMrRwxk7GhZTY4UPNeD4kgHQ1r0hdsKIBKh8X7uQ0X--k33W0sohwsgLQTPERFul/pub?gid=3299529&single=true&output=csv
-  - guestName: "\uBC15\uC728"
-    guest: 3
-    sheetUrl: https://docs.google.com/spreadsheets/d/e/2PACX-1vSVCmLGiKR9IbDKjMrRwxk7GhZTY4UPNeD4kgHQ1r0hdsKIBKh8X7uQ0X--k33W0sohwsgLQTPERFul/pub?gid=390917563&single=true&output=csv
   - guestName: "\uC724\uC11C\uC544"
     guest: 4
     sheetUrl: https://docs.google.com/spreadsheets/d/e/2PACX-1vSVCmLGiKR9IbDKjMrRwxk7GhZTY4UPNeD4kgHQ1r0hdsKIBKh8X7uQ0X--k33W0sohwsgLQTPERFul/pub?gid=2135690651&single=true&output=csv
-  - guestName: "\uCD5C\uBA85\uC9C4"
-    guest: 5
-    sheetUrl: https://docs.google.com/spreadsheets/d/e/2PACX-1vSVCmLGiKR9IbDKjMrRwxk7GhZTY4UPNeD4kgHQ1r0hdsKIBKh8X7uQ0X--k33W0sohwsgLQTPERFul/pub?gid=1925179016&single=true&output=csv
   savePath: Assets/LSW/05. So/DataBase/DialogueDatabase.asset
 --- !u!1 &1962222845
 GameObject:
@@ -1850,10 +1838,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2843583335443596949, guid: e7a7e20d36b3a2c4783d1560366cb729, type: 3}
-      propertyPath: <Database>k__BackingField
-      value: 
-      objectReference: {fileID: 11400000, guid: 3b6394cb9768e3440bd083842d012064, type: 2}
     - target: {fileID: 6056278855888502359, guid: e7a7e20d36b3a2c4783d1560366cb729, type: 3}
       propertyPath: m_Name
       value: CoreHandler

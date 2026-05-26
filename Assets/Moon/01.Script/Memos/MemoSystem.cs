@@ -10,7 +10,7 @@ namespace Moon._01.Script.Memos
     public enum Human
     {
         LeeJaeYoon,
-        NaSohee,
+        JeongDaeun,
         ParkYul,
         YunSeo,
         ChoiMyungjin,

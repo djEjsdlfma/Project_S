@@ -34,7 +34,15 @@ public class ChoiceBubble : MonoBehaviour
     {
         for (int i = 0; i < _choiceTexts.Count; i++)
         {
-            _choiceTexts[i].SetText(choices[i]);
+            if (i < choices.Length)
+            {
+                _choiceBtns[i].gameObject.SetActive(true);
+                _choiceTexts[i].SetText(choices[i]); 
+            }
+            else
+            {
+                _choiceBtns[i].gameObject.SetActive(false);
+            }
         }
         // _selectionTrm.DOMove(_showTrm.anchoredPosition, 0.2f);
     }
