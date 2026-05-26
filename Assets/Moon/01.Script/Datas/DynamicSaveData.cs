@@ -111,6 +111,12 @@ namespace Moon._01.Script.Datas
     }
     
     [Serializable]
+    public struct ByteArrayWrapper
+    {
+        public byte[] Bytes;
+    }
+    
+    [Serializable]
     public class ImageSaveData : ISerializationCallbackReceiver , IDisposable
     {
         private Dictionary<string, List<Texture2D>> _imageData = new Dictionary<string, List<Texture2D>>();
@@ -122,7 +128,11 @@ namespace Moon._01.Script.Datas
             _imagePairs.Clear();
             foreach (var kvp in _imageData)
             {
-                _imagePairs.Add(new StringImagePair { Key = kvp.Key, Value = kvp.Value.ConvertAll(texture => texture.EncodeToPNG()) });
+                _imagePairs.Add(new StringImagePair 
+                { 
+                    Key = kvp.Key, 
+                    Value = kvp.Value.ConvertAll(texture => new ByteArrayWrapper { Bytes = texture.EncodeToPNG() }) 
+                });
             }
         }
 
@@ -146,10 +156,14 @@ namespace Moon._01.Script.Datas
             
             foreach (var pair in _imagePairs)
             {
-                _imageData[pair.Key] = pair.Value.ConvertAll(bytes =>
+                if (pair.Value == null) continue;
+
+                _imageData[pair.Key] = pair.Value.ConvertAll(wrapper =>
                 {
+                    if (wrapper.Bytes == null || wrapper.Bytes.Length == 0) return null;
+
                     Texture2D texture = new Texture2D(2, 2);
-                    texture.LoadImage(bytes);
+                    texture.LoadImage(wrapper.Bytes);
                     return texture;
                 });
             }
@@ -159,7 +173,7 @@ namespace Moon._01.Script.Datas
         public struct StringImagePair
         {
             public string Key;
-            public List<byte[]> Value;
+            public List<ByteArrayWrapper> Value;
         }
 
         public bool TryGetValue(string key, out List<Texture2D> value) => _imageData.TryGetValue(key, out value);
