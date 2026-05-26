@@ -28,7 +28,7 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
     [SerializeField] private Chatting NPCChatting;
     [SerializeField] private GameObject Empty;
 
-    [SerializeField] private RectTransform _contaner;
+    [SerializeField] private RectTransform _container;
     [SerializeField] private ScrollRect scrollRect;
     
     public event Action onEndChat;
@@ -145,7 +145,7 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
         }
 
         BubbleText prefab = isFirst ? NPCFirstText : NPCText;
-        BubbleText text = Instantiate(prefab, _contaner);
+        BubbleText text = Instantiate(prefab, _container);
         _allDialogueUI.Add(text.gameObject);
 
         if (isFirst)
@@ -178,7 +178,7 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
 
         BubbleText prefab = isFirst ? PlayerFirstText : PlayerText;
 
-        BubbleText text = Instantiate(prefab, _contaner);
+        BubbleText text = Instantiate(prefab, _container);
         _allDialogueUI.Add(text.gameObject);
 
         text.InitBubble(log, 1f);
@@ -193,7 +193,7 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
     {
         if (Empty != null)
         {
-            GameObject emptyObj = Instantiate(Empty, _contaner);
+            GameObject emptyObj = Instantiate(Empty, _container);
             _allDialogueUI.Add(emptyObj);
         }
     }
@@ -210,7 +210,7 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
             _bottomEmptySpace = null;
         }
 
-        _bottomEmptySpace = Instantiate(Empty, _contaner);
+        _bottomEmptySpace = Instantiate(Empty, _container);
         _allDialogueUI.Add(_bottomEmptySpace);
     }
 
@@ -219,7 +219,7 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
         if(targetBubble != null)
             targetBubble.SetActive(false);
     
-        Chatting loading = Instantiate(NPCChatting, _contaner);
+        Chatting loading = Instantiate(NPCChatting, _container);
         loading.SetName(chatterName);
         _allDialogueUI.Add(loading.gameObject);
         
@@ -433,7 +433,7 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
 
             if (prefab != null)
             {
-                BubbleText text = Instantiate(prefab, _contaner);
+                BubbleText text = Instantiate(prefab, _container);
                 text.InitBubble(h.Content, 1f);
                 _allDialogueUI.Add(text.gameObject);
             }
@@ -471,12 +471,16 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
     private IEnumerator UpdateUILayout()
     {
         yield return null; 
-        LayoutRebuilder.ForceRebuildLayoutImmediate(_contaner);
+        LayoutRebuilder.ForceRebuildLayoutImmediate(_container);
         yield return new WaitForEndOfFrame();
         scrollRect.verticalNormalizedPosition = 0f;
     }
 
     public void Reset() { }
+
+    public void SetCotainer(RectTransform _rect) { _container = _rect; }
+
+    public void SetScrolllRect(ScrollRect _Srect) { scrollRect = _Srect; }
 }
 
 public struct SavedDialogueData

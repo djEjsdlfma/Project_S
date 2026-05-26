@@ -1,4 +1,6 @@
 using DG.Tweening;
+using LSW._02._Code.System___Manager;
+using Moon._01.Script.Datas;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Sockets;
@@ -14,8 +16,8 @@ public class TitleManager : MonoBehaviour
     [SerializeField] private Image _fadeImg;
     [SerializeField] private GameObject _candleLight;
 
-    [Header("Calender")]
-    [SerializeField] private GameObject _textsObj;
+    [Header("Day")]
+    [SerializeField] private TextMeshProUGUI _textsObj;
     [SerializeField] private TextMeshProUGUI _gameDayText;
     [SerializeField] private TextMeshProUGUI _canlenderNumberText;
     [SerializeField] private TextMeshProUGUI _canlenderDayText;
@@ -36,15 +38,33 @@ public class TitleManager : MonoBehaviour
 
     private float timer = 0f;
     private GameObject nowGameObjcet;
+    private int _day = 1;
+
+    private BubbleManager endAction;
 
     private void Awake()
     {
+        if (DataManager.Instance.CurrentData.TryGetValue("Day", out int day))
+        {
+           //_day = day;
+        }
+        SetCalender();
         _leftBtn.interactable = false;
         _rightBtn.interactable = false;
+
+        endAction = SystemManager.Instance.GetSystemManager<BubbleManager>();
+    }
+
+    private void Start()
+    {
+        endAction.onEndChat += ActiveBtn;
     }
 
     public void ChangeDay()
     {
+        _day++;
+        _textsObj.SetText($"DAY {_day}");
+        DataManager.Instance.SaveData("Day", _day);
         _candleBtn.interactable = false;
         _candleLight.SetActive(false);
         StartCoroutine(StartFade());
@@ -53,6 +73,18 @@ public class TitleManager : MonoBehaviour
     public void ActiveBtn(Button btn)
     {
         btn.interactable = true;
+    }
+
+    private void ActiveBtn()
+    {
+        if(_day <=10)
+        {
+            _candleBtn.interactable = true;
+        }
+        else
+        {
+            _teaBtn.interactable = true;
+        }
     }
 
     public void ChangeScene()
@@ -86,7 +118,29 @@ public class TitleManager : MonoBehaviour
         yield return new WaitForSeconds(0.35f);
 
         _sceneFadeImg.DOFade(1f, 0.6f)
-            .OnComplete(() => SceneManager.LoadScene("ChoiMyeongJin"));
+            .OnComplete(() => ChangeCorrectScene(_day));
+    }
+
+    private void ChangeCorrectScene(int day)
+    {
+        switch (day % 5)
+        {
+            case 1:
+                SceneManager.LoadScene("LeeJaeYoon");
+                break;
+            case 2:
+                SceneManager.LoadScene("ChoiMyeongJin");
+                break;
+            case 3:
+                SceneManager.LoadScene("ParkYool");
+                break;
+            case 4:
+                SceneManager.LoadScene("YoonSeoAh");
+                break;
+            case 0:
+                SceneManager.LoadScene("ChoiMyeongJin");
+                break;
+        }
     }
 
     private IEnumerator StartFade()
@@ -94,7 +148,7 @@ public class TitleManager : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
 
         _fadeImg.DOFade(1f, 0.4f)
-            .OnComplete(() => _textsObj.SetActive(true));
+            .OnComplete(() => _textsObj.gameObject.SetActive(true));
     }
 
     private void Update()
@@ -106,16 +160,25 @@ public class TitleManager : MonoBehaviour
         if (_nextStack.Count > 0)
             _rightBtn.interactable = true;
 
-        if (_textsObj.activeSelf == false) return;
+        if (_textsObj.gameObject.activeSelf == false) return;
 
         timer += Time.deltaTime;
 
         if (timer > 1f)
         {
+            SetCalender();
             timer = 0f;
-            _textsObj.SetActive(false);
+            _textsObj.gameObject.SetActive(false);
             _fadeImg.color = new Color(0f, 0f, 0f, 0);
         }
+    }
+
+    private void SetCalender()
+    {
+        _gameDayText.SetText($"DAY {_day}");
+        _canlenderNumberText.SetText((_day + 26 % 31) == 0 ? "1" : $"{ (_day + 26 % 31)}");
+        _canlenderDayText.SetText(CalculDay(_day / 7));
+        _canlenderMonthText.SetText(_day < 5 ? "Oct" : "Nov");
     }
 
     public void GotoPrev()
@@ -155,6 +218,29 @@ public class TitleManager : MonoBehaviour
         if (_candleLight.activeSelf != false)
         {
             _candleLight.GetComponent<Light2D>().intensity = 11f + intensityFlicker;
+        }
+    }
+
+    private string CalculDay(int Day)
+    {
+        switch (Day)
+        {
+            case 4:
+                return "MON";
+            case 5:
+                return "THE";
+            case 6:
+                return "WED";
+            case 0:
+                return "THU";
+            case 1:
+                return "FRI";
+            case 2:
+                return "SAT";
+            case 3:
+                return "SUN";
+            default:
+                return null;
         }
     }
 }

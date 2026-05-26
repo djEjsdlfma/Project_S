@@ -44,7 +44,6 @@ namespace LSW._02._Code.Core.Cores
         public void IncreaseDay(int increaseAmount = 1)
         {
             CurrentDay = Mathf.Clamp(CurrentDay + increaseAmount, 1, maxDay);
-            SceneManager.LoadScene((int)SceneType.DataLoadScene);
         }
 
         public void ChangeSincerityAmount(string guestName, int amount)
