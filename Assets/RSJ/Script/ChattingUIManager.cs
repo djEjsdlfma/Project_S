@@ -25,10 +25,10 @@ public class ChattingUIManager : MonoBehaviour
 
     public void BackToMenu()
     {
-        // for(int i = 0; i < _chats.Length; i++)
-        // {
-        //     _chats[i].SetActive(false);
-        // }
+        for(int i = 0; i < _chats.Length; i++)
+        {
+            _chats[i].SetActive(false);
+        }
         // _profilBound.padding = (new Vector4(-1f, -600f, -1000f, -88f));
     }
 
