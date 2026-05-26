@@ -14,8 +14,9 @@ namespace LSW._02._Code.UI
         [SerializeField] private TextMeshProUGUI lastOnlineText;
         
         [field: SerializeField] public Guest Guest { get; private set; }
-
-        private bool _isOpenedChat = false;
+        public bool IsActivable { get; set; } = false;
+        
+        public bool IsOpenedChat { get; private set; } = false;
 
         private void Awake()
         {
@@ -39,7 +40,7 @@ namespace LSW._02._Code.UI
 
         public void OpenChat(bool isOpened = true)
         {
-            _isOpenedChat = true;
+            IsOpenedChat = true;
         }
         
         public void SetProfile(string lastMessage, bool hasAlarm)
@@ -47,7 +48,7 @@ namespace LSW._02._Code.UI
             if (lastMessage != null)
                 lastMessageText.SetText(lastMessage);
             
-            if(!_isOpenedChat)
+            if(!IsOpenedChat)
                 alarmImage.gameObject.SetActive(hasAlarm);
         }
     }

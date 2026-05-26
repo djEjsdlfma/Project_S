@@ -6824,7 +6824,7 @@ MonoBehaviour:
   Empty: {fileID: 2023223998259379088, guid: ac67ec8b252bd554da770661b20dc500, type: 3}
   _container: {fileID: 2097146653}
   scrollRect: {fileID: 1085202866}
-  _chatProfileContainer: {fileID: 1591925678}
+  <ChatProfileContainer>k__BackingField: {fileID: 1591925678}
 --- !u!114 &524758813
 MonoBehaviour:
   m_ObjectHideFlags: 0

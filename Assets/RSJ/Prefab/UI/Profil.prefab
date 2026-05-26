@@ -423,6 +423,7 @@ MonoBehaviour:
   parent: {fileID: 1588464310779860495}
   profileContainer: {fileID: 0}
   guest: 0
+  alarmImage: {fileID: 7466243285320306902}
 --- !u!1 &2967979240893727097
 GameObject:
   m_ObjectHideFlags: 0

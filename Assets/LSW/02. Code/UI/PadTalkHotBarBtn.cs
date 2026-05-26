@@ -27,7 +27,7 @@ namespace LSW._02._Code.UI
             
             _action = () =>
             {
-                chatProfileContainer.EnableAllProfile();
+                chatProfileContainer.EnableCurrentDayProfile();
                 _bubbleManager.EnableInteract();
                 _bubbleManager.ChangeGuestDialogue(Guest.None);
             };
@@ -45,14 +45,20 @@ namespace LSW._02._Code.UI
 
         private void HandleAlarmStateChanged(Guest guest, bool state)
         {
-            UpdateAlarmImage();
+            UpdateAlarmImage(state);
         }
 
-        private void UpdateAlarmImage()
+        private void UpdateAlarmImage(bool state = false)
         {
+            if (chatProfileContainer.IsChatActive())
+            {
+                alarmImage.gameObject.SetActive(false);
+                return;
+            }
+            
             if (alarmImage != null && chatProfileContainer != null && _bubbleManager != null)
             {
-                alarmImage.gameObject.SetActive(chatProfileContainer.HasAnyUnread(_bubbleManager));
+                alarmImage.gameObject.SetActive(state);
             }
         }
 

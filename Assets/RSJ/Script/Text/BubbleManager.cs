@@ -31,7 +31,7 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
 
     [SerializeField] private RectTransform _container;
     [SerializeField] private ScrollRect scrollRect;
-    [SerializeField] private ChatProfileContainer _chatProfileContainer;
+    [field:SerializeField] public ChatProfileContainer ChatProfileContainer { get; private set; }
     
     public event Action onEndChat;
     public event Action<Guest, bool> onAlarmStateChanged;
@@ -75,9 +75,9 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
 
     private void Start()
     {
-        if (_chatProfileContainer != null)
+        if (ChatProfileContainer != null)
         {
-            _chatProfileContainer.InitializeProfiles(this);
+            ChatProfileContainer.InitializeProfiles(this);
         }
     }
 
@@ -131,8 +131,8 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
             ShowNPCText(data.content, wasChatNpc, _currentGuestSheetName, isEnding, isImmediate);
             _currentKey = data.nextKey;
             
-            if (_chatProfileContainer != null)
-                _chatProfileContainer.SetCurrentProfile(data.content, !isImmediate && !isEnding);
+            if (ChatProfileContainer != null)
+                ChatProfileContainer.SetCurrentProfile(data.content, !isImmediate && !isEnding);
 
             if (!isImmediate && !isEnding)
                 onAlarmStateChanged?.Invoke(_currentGuest, true);
@@ -142,8 +142,8 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
             ShowPlayerText(data.content, wasChatNpc);
             _currentKey = data.nextKey;
 
-            if (_chatProfileContainer != null)
-                _chatProfileContainer.SetCurrentProfile(data.content, false);
+            if (ChatProfileContainer != null)
+                ChatProfileContainer.SetCurrentProfile(data.content, false);
 
             if (isEnding)
             {
@@ -314,9 +314,6 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
         DisableInteract(); // 확실하게 잠금
         onEndChat?.Invoke();
         onAlarmStateChanged?.Invoke(_currentGuest, false);
-
-        if (_chatProfileContainer != null)
-            _chatProfileContainer.UpdateAlarmState(false);
     }
 
     private void FindChoice(int seqNum)
@@ -394,7 +391,7 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
     {
         if (_currentGuest == guest && !string.IsNullOrEmpty(_currentKey)) return;
 
-        // 현재 게스트 데이터 저장 (이동하기 전에 수행)
+        // 1. 현재 게스트 데이터 저장
         if (_currentGuest != Guest.None)
         {
             if (!_savedDialogue.ContainsKey(_currentGuest))
@@ -421,6 +418,7 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
 
         if (!_dialogueDataCore.GetSheetNameByGuest(guest, out var sheetName)) return;
 
+        // 2. UI 및 환경 초기화
         _isChoiceActive = false;
         _currentChoiceData.Clear();
 
@@ -431,8 +429,6 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
             _currentLoading = null;
         }
 
-        // 🛠️ 안전 조치: 코루틴 중첩 방지를 위해 멤버 변수로 핸들을 관리하는 것이 좋으나,
-        // 우선 기존 흐름을 유지하며 모든 코루틴을 깔끔하게 중단합니다.
         StopAllCoroutines();
 
         if (nowBubble != null && nowBubble.gameObject != null && !nowBubble.activeSelf)
@@ -453,29 +449,25 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
         }
 
         _allDialogueUI.Clear();
-
         _bottomEmptySpace = null;
-        _currentChoiceData.Clear();
 
         _currentGuest = guest;
         _currentGuestSheetName = sheetName;
         wasEndChat = false;
 
+        // 3. 대화 키 설정
         SavedDialogueData saveData = default;
         bool hasSave = _savedDialogue.TryGetValue(_currentGuest, out saveData);
-
-        bool shouldAutoSpawn = false;
         int currentDay = _gameStatueCore.CurrentDay;
 
-        // 1. 오늘이 이 게스트와 대화하는 날인지 주기 확인 (기존 유지)
         bool isDialogueDay = false;
         switch (guest)
         {
-            case Guest.JaeYoonLee: isDialogueDay = (currentDay % 5 == 1); break; // 1, 6, 11...
-            case Guest.DaEunJung: isDialogueDay = (currentDay % 5 == 2); break; // 2, 7, 12...
-            case Guest.YulPark: isDialogueDay = (currentDay % 5 == 3); break; // 3, 8, 13...
-            case Guest.SeoAhYoon: isDialogueDay = (currentDay % 5 == 4); break; // 4, 9, 14...
-            case Guest.MyeongJinChoi: isDialogueDay = (currentDay % 5 == 0); break; // 5, 10, 15...
+            case Guest.JaeYoonLee: isDialogueDay = (currentDay % 5 == 1); break;
+            case Guest.DaEunJung: isDialogueDay = (currentDay % 5 == 2); break;
+            case Guest.YulPark: isDialogueDay = (currentDay % 5 == 3); break;
+            case Guest.SeoAhYoon: isDialogueDay = (currentDay % 5 == 4); break;
+            case Guest.MyeongJinChoi: isDialogueDay = (currentDay % 5 == 0); break;
         }
 
         if (hasSave && !string.IsNullOrEmpty(saveData.LastDialogueKey))
@@ -483,43 +475,32 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
             _currentKey = saveData.LastDialogueKey;
             wasChatNpc = saveData.WasChatNpc;
         }
-        else
+        else if (isDialogueDay)
         {
-            if (isDialogueDay)
+            int order = ((currentDay - 1) / 5) + 1;
+            if (_dialogueDataCore.GetFirstDialogueByDay(_currentGuestSheetName, order, out var data))
             {
-                // 🛠️ 변경된 핵심 구간: 기획 시트의 Day 컬럼(1, 2, 3...) 순번과 정확히 매칭하는 수식
-                int order = ((currentDay - 1) / 5) + 1;
-
-                if (_dialogueDataCore.GetFirstDialogueByDay(_currentGuestSheetName, order, out var data))
-                {
-                    _currentKey = data.key;
-                    wasChatNpc = false;
-
-                    if (data.speaker == SpeakerType.NPC)
-                    {
-                        shouldAutoSpawn = true;
-                    }
-                }
-                else
-                {
-                    // 디버깅 편의를 위해 로그 확인용 문자열 수정
-                    Debug.LogError($"[{currentDay}일차] {guest}의 시트 내 순번 [{order}] 대화 데이터가 시트에 없습니다!");
-                    _currentKey = string.Empty;
-                    wasChatNpc = false;
-                    wasEndChat = true;
-                    return;
-                }
+                _currentKey = data.key;
+                wasChatNpc = false;
             }
             else
             {
-                // 오늘 대화할 타이밍이 아닌 손님인 경우
+                Debug.LogError($"[{currentDay}일차] {guest}의 시트 데이터 없음!");
                 _currentKey = string.Empty;
                 wasChatNpc = false;
                 wasEndChat = true;
                 return;
             }
         }
+        else
+        {
+            _currentKey = string.Empty;
+            wasChatNpc = false;
+            wasEndChat = true;
+            return;
+        }
 
+        // 4. 히스토리 복구 및 UI 업데이트
         if (hasSave && saveData.History != null)
         {
             RebuildHistory(saveData, isDialogueDay, isDialogueDay);
@@ -528,27 +509,33 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
         StartCoroutine(UpdateUILayout());
         EnableInteract();
 
-        if (_chatProfileContainer != null)
+        SpawnFirstDialogue();
+
+        if (ChatProfileContainer != null)
         {
-            _chatProfileContainer.UpdateAlarmState(false);
             onAlarmStateChanged?.Invoke(_currentGuest, false);
         }
+    }
+    
+    public void SpawnFirstDialogue()
+    {
+        if (_currentGuest == Guest.None || wasEndChat) 
+            return;
 
-        if (shouldAutoSpawn)
+        while (true)
         {
-            while (true)
-            {
-                if (!_dialogueDataCore.GetDialogueDataByKey(_currentGuestSheetName, _currentKey, out var data))
-                    break;
+            if (!_dialogueDataCore.GetDialogueDataByKey(_currentGuestSheetName, _currentKey, out var data))
+                break;
 
-                if (data.speaker != SpeakerType.NPC || data.type == DialogueType.Select)
-                    break;
+            if (data.speaker != SpeakerType.NPC || data.type == DialogueType.Select)
+                break;
 
-                SpawnMessage(true);
+            SpawnMessage(true);
 
-                if (data.nextKey == "END")
-                    break;
-            }
+            if (data.nextKey == "END" || string.IsNullOrEmpty(data.nextKey))
+                break;
+
+            _currentKey = data.nextKey;
         }
     }
     
@@ -605,8 +592,8 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
             }
         }
         
-        if (updateProfile && _chatProfileContainer != null && !string.IsNullOrEmpty(lastContent))
-            _chatProfileContainer.SetCurrentProfile(lastContent, !wasEndChat && isDialogueDay);
+        if (updateProfile && ChatProfileContainer != null && !string.IsNullOrEmpty(lastContent))
+            ChatProfileContainer.SetCurrentProfile(lastContent, !wasEndChat && isDialogueDay);
         
         UpdateBottomEmptySpace();
     

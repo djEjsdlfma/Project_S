@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using LSW._02._Code.Core;
 using LSW._02._Code.Core.Cores;
+using LSW._02._Code.System___Manager;
 using UnityEngine;
 
 namespace LSW._02._Code.UI
@@ -13,10 +14,12 @@ namespace LSW._02._Code.UI
         private GuestProfile _currentProfile;
         
         private GameStatueCore _gameStatueCore;
+        private BubbleManager _bubbleManager;
         
         private void Awake()
         {
             _gameStatueCore = CoreHandler.Instance.GetCore<GameStatueCore>();
+            _bubbleManager = SystemManager.Instance.GetSystemManager<BubbleManager>();
             
             _profiles = GetComponentsInChildren<GuestProfile>().ToList();
         }
@@ -47,40 +50,31 @@ namespace LSW._02._Code.UI
             _currentProfile.SetProfile(lastMessage, hasAlarm);
         }
 
-        public void UpdateAlarmState(bool hasAlarm)
+        public void EnableCurrentDayProfile()
         {
-            if (_currentProfile == null)
-                return;
-
-            _currentProfile.SetProfile(null, hasAlarm); 
+            int currentDay = _gameStatueCore.CurrentDay;
+            EnableProfileOnly((Guest)(currentDay % 5));
+            _currentProfile = null;
         }
-
-        public void EnableAllProfile()
+        
+        public void EnableProfileOnly(Guest guest)
         {
-            _profiles.ForEach(profile =>
-            {
-                if((int)profile.Guest <= _gameStatueCore.CurrentDay)
-                    profile.gameObject.SetActive(true);
-                profile.OpenChat(false);
-            });
+            _profiles.ForEach(profile => profile.gameObject.SetActive(profile.Guest == guest && profile.IsActivable));
             _currentProfile = null;
         }
 
-        public bool HasAnyUnread(BubbleManager bubbleManager)
+        public void ChangeProfileToActivable()
         {
-            if (_profiles == null) return false;
-            
-            foreach (var profile in _profiles)
+            _profiles.ForEach(profile =>
             {
-                if(!profile.isActiveAndEnabled)
-                    continue;
-                
-                if (profile.Guest != Guest.None && bubbleManager.IsDialogueUnread(profile.Guest))
-                {
-                    return true;
-                }
-            }
-            return false;
+                if((Guest)(_gameStatueCore.CurrentDay % 5) == profile.Guest)
+                    profile.IsActivable = true;
+            });
+        }
+
+        public bool IsChatActive()
+        {
+            return _profiles.Exists(p => p.IsOpenedChat);
         }
 
         public void InitializeProfiles(BubbleManager bubbleManager)
@@ -102,9 +96,8 @@ namespace LSW._02._Code.UI
                     continue;
                 
                 string lastMsg = bubbleManager.GetLastDialogueContent(targetGuest);
-                bool isUnread = bubbleManager.IsDialogueUnread(targetGuest);
 
-                profile.SetProfile(lastMsg, isUnread);
+                profile.SetProfile(lastMsg, true);
                 
                 if((int)profile.Guest > _gameStatueCore.CurrentDay)
                     profile.gameObject.SetActive(false);

@@ -12,6 +12,7 @@ namespace LSW._02._Code.UI
         [SerializeField] private GuestProfile parent;
         [SerializeField] private ChatProfileContainer profileContainer;
         [SerializeField] private Guest guest;
+        [SerializeField] private Image alarmImage;
 
         public Guest Guest => guest;
         
@@ -29,6 +30,7 @@ namespace LSW._02._Code.UI
                         {
                             profileContainer.DisableAllProfile(parent);
                             _bubbleManager.ChangeGuestDialogue(guest);
+                            alarmImage.gameObject.SetActive(false);
                         }
                 );
                 _button.onClick.AddListener(_action);
