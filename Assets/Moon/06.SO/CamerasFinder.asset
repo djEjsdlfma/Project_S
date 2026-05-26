@@ -20,8 +20,8 @@ MonoBehaviour:
         Culture=neutral, PublicKeyToken=null
     IsFindChild: 0
   - SType:
-      typeName: CameraScript, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
+      typeName: RSJ.Script.Camera.CameraScript, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
     IsFindChild: 0
   - SType:
       typeName: Moon._01.Script.Cameras.SubmitPhoto, Assembly-CSharp, Version=0.0.0.0,
@@ -41,5 +41,9 @@ MonoBehaviour:
     IsFindChild: 0
   - SType:
       typeName: Moon._01.Script.Cameras.SetCamBlur, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+    IsFindChild: 0
+  - SType:
+      typeName: Moon._01.Script.Cameras.CameraMove, Assembly-CSharp, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
     IsFindChild: 0
