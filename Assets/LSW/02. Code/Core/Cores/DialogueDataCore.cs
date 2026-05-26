@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using LSW._02._Code.So;
@@ -13,6 +14,7 @@ namespace LSW._02._Code.Core.Cores
             _allDialogues = new();
 
         private bool _initialized;
+        private GameStatueCore _gameStatueCore;
 
         public void Initialize(CoreHandler coreHandler)
         {
@@ -47,6 +49,11 @@ namespace LSW._02._Code.Core.Cores
             {
                 Debug.Log($"Dictionary Key : [{pair.Key}]");
             }
+        }
+
+        private void Start()
+        {
+            _gameStatueCore = CoreHandler.Instance.GetCore<GameStatueCore>();
         }
 
         public bool GetDialogueDataByKey(string sheetName, string currentKey, out DialogueEntry entry)
@@ -113,18 +120,6 @@ namespace LSW._02._Code.Core.Cores
             }
 
             return false;
-        }
-
-        public int GetFirstDialogueDay(Guest guest)
-        {
-            if (!_initialized)
-                return int.MaxValue;
-
-            DialogueSheet sheet = Database.sheets.Find(s => s.guestType == guest);
-            if (sheet == null || sheet.dialogues.Count == 0)
-                return int.MaxValue;
-
-            return sheet.dialogues.Min(d => d.day);
         }
         
         public void SetDatabase(DialogueDatabaseSo database) => Database = database;

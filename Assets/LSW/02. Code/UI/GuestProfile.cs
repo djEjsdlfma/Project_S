@@ -1,6 +1,5 @@
 using LSW._02._Code.Core;
 using LSW._02._Code.Core.Cores;
-using LSW._02._Code.System___Manager;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,7 +13,9 @@ namespace LSW._02._Code.UI
         [SerializeField] private TextMeshProUGUI lastMessageText;
         [SerializeField] private TextMeshProUGUI lastOnlineText;
         
-        [field: SerializeField] public Guest Guest { get; set; }
+        [field: SerializeField] public Guest Guest { get; private set; }
+
+        private bool _isOpenedChat = false;
 
         private void Awake()
         {
@@ -30,10 +31,15 @@ namespace LSW._02._Code.UI
             int currentDay = CoreHandler.Instance.GetCore<GameStatueCore>().CurrentDay;
             int targetGuestIndex = currentDay % 5 == 0 ? 5 : currentDay % 5;
             bool isDialogueDay = (targetGuestIndex == (int)Guest);
-            int lastOnlineDay = currentDay - (((currentDay - (int)Guest) % 5 + 5) % 5);
+            int lastOnlineDay = Mathf.Abs(currentDay - (((currentDay - (int)Guest) % 5 + 5) % 5));
             
-            lastOnlineText.SetText(isDialogueDay ? "온라인" : $"최근 접속 {currentDay - lastOnlineDay}일 전");
+            lastOnlineText.SetText(isDialogueDay ? "온라인" : $"최근 접속 {lastOnlineDay}일 전");
             currentStatueImage.color = isDialogueDay ? Color.green : Color.gray;
+        }
+
+        public void OpenChat(bool isOpened = true)
+        {
+            _isOpenedChat = true;
         }
         
         public void SetProfile(string lastMessage, bool hasAlarm)
@@ -41,7 +47,8 @@ namespace LSW._02._Code.UI
             if (lastMessage != null)
                 lastMessageText.SetText(lastMessage);
             
-            alarmImage.gameObject.SetActive(hasAlarm);
+            if(!_isOpenedChat)
+                alarmImage.gameObject.SetActive(hasAlarm);
         }
     }
 }

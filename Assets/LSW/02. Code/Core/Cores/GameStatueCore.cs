@@ -50,7 +50,7 @@ namespace LSW._02._Code.Core.Cores
         {
             CurrentDay = Mathf.Clamp(CurrentDay + increaseAmount, 1, maxDay);
             OnDayChanged?.Invoke();
-            SceneManager.LoadScene((int)SceneType.MainTabletScene);
+            SceneManager.LoadScene((int)SceneType.DataLoadScene);
         }
 
         public void ChangeSincerityAmount(string guestName, int amount)
@@ -65,9 +65,9 @@ namespace LSW._02._Code.Core.Cores
             int finalAmount = Mathf.Clamp(realAmount, 0, 100);
             guestData.CurrentSincerityAmount = finalAmount;
             guestData.RealCurrentSincerityAmount = realAmount;
-        
+            
             GuestsData[guest] = guestData;
-        
+            
             Debug.Log($"{guestName}: {guestData.CurrentSincerityAmount}");
         }
 

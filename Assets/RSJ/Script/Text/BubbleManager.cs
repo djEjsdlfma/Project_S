@@ -71,7 +71,10 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
             _savedDialogue = new Dictionary<Guest, SavedDialogueData>();
         
         DisableInteract();
+    }
 
+    private void Start()
+    {
         if (_chatProfileContainer != null)
         {
             _chatProfileContainer.InitializeProfiles(this);
@@ -129,7 +132,7 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
             _currentKey = data.nextKey;
             
             if (_chatProfileContainer != null)
-                _chatProfileContainer.ChangeCurrentProfile(data.content, !isImmediate && !isEnding);
+                _chatProfileContainer.SetCurrentProfile(data.content, !isImmediate && !isEnding);
 
             if (!isImmediate && !isEnding)
                 onAlarmStateChanged?.Invoke(_currentGuest, true);
@@ -140,7 +143,7 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
             _currentKey = data.nextKey;
 
             if (_chatProfileContainer != null)
-                _chatProfileContainer.ChangeCurrentProfile(data.content, false);
+                _chatProfileContainer.SetCurrentProfile(data.content, false);
 
             if (isEnding)
             {
@@ -399,15 +402,6 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
             _currentGuest = Guest.None;
             _currentGuestSheetName = string.Empty;
             _currentKey = string.Empty;
-            
-            // 모든 UI 클리어
-            foreach (var ui in _allDialogueUI)
-            {
-                if (ui != null) Destroy(ui);
-            }
-            _allDialogueUI.Clear();
-            _bottomEmptySpace = null;
-            
             return;
         }
 
@@ -488,6 +482,7 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
                 _currentKey = string.Empty;
                 wasChatNpc = false;
                 wasEndChat = true;
+                return;
             }
         }
 
@@ -497,15 +492,7 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
         }
 
         StartCoroutine(UpdateUILayout());
-
-        if (isDialogueDay)
-        {
-            EnableInteract();
-        }
-        else
-        {
-            DisableInteract();
-        }
+        EnableInteract();
 
         if (_chatProfileContainer != null)
         {
@@ -513,7 +500,7 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
             onAlarmStateChanged?.Invoke(_currentGuest, false);
         }
 
-        if (shouldAutoSpawn && isDialogueDay)
+        if (shouldAutoSpawn)
         {
             while (true)
             {
@@ -587,7 +574,7 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
         }
         
         if (updateProfile && _chatProfileContainer != null && !string.IsNullOrEmpty(lastContent))
-            _chatProfileContainer.ChangeCurrentProfile(lastContent, !wasEndChat && isDialogueDay);
+            _chatProfileContainer.SetCurrentProfile(lastContent, !wasEndChat && isDialogueDay);
         
         UpdateBottomEmptySpace();
     
@@ -645,10 +632,17 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
 
     public string GetLastDialogueContent(Guest guest)
     {
+        // 현재 대화 타이밍인지 확인
         if (!_dialogueDataCore.GetSheetNameByGuest(guest, out var sheetName))
             return string.Empty;
 
-        // 히스토리가 있는 경우 우선 반환 (날짜 상관 없이)
+        int currentDay = _gameStatueCore.CurrentDay;
+        int targetGuestIndex = currentDay % 5 == 0 ? 5 : currentDay % 5;
+        bool isDialogueDay = (targetGuestIndex == (int)guest);
+
+        if (!isDialogueDay)
+            return string.Empty;
+
         if (_savedDialogue.TryGetValue(guest, out var data))
         {
             if (data.History != null && data.History.Count > 0)
@@ -657,31 +651,13 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
             }
         }
 
-        // 현재 대화 타이밍인지 확인하여 첫 대사 반환 시도
-        int currentDay = _gameStatueCore.CurrentDay;
-        int targetGuestIndex = currentDay % 5 == 0 ? 5 : currentDay % 5;
-        bool isDialogueDay = (targetGuestIndex == (int)guest);
-
-        if (isDialogueDay)
+        // 히스토리가 없는 경우 해당 날짜의 첫 대사를 시도
+        if (_dialogueDataCore.GetFirstDialogueByDay(sheetName, currentDay, out var firstData))
         {
-            int lastDay = currentDay - (((currentDay - (int)guest) % 5 + 5) % 5);
-            int order = ((lastDay - (int)guest) / 5) + 1;
-            if (_dialogueDataCore.GetFirstDialogueByDay(sheetName, order, out var firstData))
-            {
-                return firstData.content;
-            }
+            return firstData.content;
         }
 
         return string.Empty;
-    }
-
-    public bool HasDialogueHistory(Guest guest)
-    {
-        if (_savedDialogue.TryGetValue(guest, out var data))
-        {
-            return data.History != null && data.History.Count > 0;
-        }
-        return false;
     }
 
     public bool IsDialogueUnread(Guest guest)
