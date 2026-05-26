@@ -265,7 +265,7 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
             _currentLoading = null;
         }
 
-        _currentLoading = Instantiate(NPCChatting, _contaner);
+        _currentLoading = Instantiate(NPCChatting, _container);
         _currentLoading.SetName(chatterName);
         _allDialogueUI.Add(_currentLoading.gameObject);
         
@@ -323,14 +323,28 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
     {
         if(!_dialogueDataCore.GetAllDialogueEntry(_currentGuestSheetName, out var allData))
             return;
-
-        SelectionTrm.SetActive(true);
-
+    
+        // 🛠️ 추가: 현재 인게임 진짜 날짜를 기획 시트용 순번(1, 2, 3...)으로 변환
+        int currentDay = _gameStatueCore.CurrentDay;
+        int order = ((currentDay - 1) / 5) + 1;
+    
+        // 🛠️ 수정: x.day 조건을 진짜 날짜(currentDay)가 아니라 변환된 순번(order)으로 검사합니다.
         var choices = allData.Values
-            .Where(x => x.day == _gameStatueCore.CurrentDay && x.seq == seqNum && x.type == DialogueType.Select)
+            .Where(x => x.day == order && x.seq == seqNum && x.type == DialogueType.Select)
             .OrderBy(x => x.id)
             .ToList();
 
+        // 안전장치: 시트 데이터가 꼬여서 선택지를 못 찾아왔을 때 에러 방지
+        if (choices.Count == 0)
+        {
+            Debug.LogError($"[Choice Error] {currentDay}일차(시트순번:{order}), Seq {seqNum}번에 해당하는 선택지 데이터를 시트에서 찾을 수 없습니다!");
+            SelectionTrm.SetActive(false);
+            _isChoiceActive = false;
+            EnableInteract();
+            return;
+        }
+
+        SelectionTrm.SetActive(true);
         _currentChoiceData.Clear(); 
 
         foreach (var c in choices)
@@ -408,8 +422,8 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
         if (!_dialogueDataCore.GetSheetNameByGuest(guest, out var sheetName)) return;
 
         _isChoiceActive = false;
-        _currentChoiceData.Clear(); 
-        
+        _currentChoiceData.Clear();
+
         if (_currentLoading != null)
         {
             _allDialogueUI.Remove(_currentLoading.gameObject);
@@ -417,14 +431,17 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
             _currentLoading = null;
         }
 
+        // 🛠️ 안전 조치: 코루틴 중첩 방지를 위해 멤버 변수로 핸들을 관리하는 것이 좋으나,
+        // 우선 기존 흐름을 유지하며 모든 코루틴을 깔끔하게 중단합니다.
         StopAllCoroutines();
 
         if (nowBubble != null && nowBubble.gameObject != null && !nowBubble.activeSelf)
         {
             nowBubble.SetActive(true);
         }
+
         DisableInteract();
-        
+
         if (SelectionTrm != null)
         {
             SelectionTrm.SetActive(false);
@@ -434,24 +451,32 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
         {
             if (ui != null) Destroy(ui);
         }
+
         _allDialogueUI.Clear();
-        
+
         _bottomEmptySpace = null;
-        
-        _currentChoiceData.Clear(); 
+        _currentChoiceData.Clear();
 
         _currentGuest = guest;
         _currentGuestSheetName = sheetName;
-        wasEndChat = false; 
+        wasEndChat = false;
 
         SavedDialogueData saveData = default;
         bool hasSave = _savedDialogue.TryGetValue(_currentGuest, out saveData);
-    
-        bool shouldAutoSpawn = false;
 
+        bool shouldAutoSpawn = false;
         int currentDay = _gameStatueCore.CurrentDay;
-        int targetGuestIndex = currentDay % 5 == 0 ? 5 : currentDay % 5;
-        bool isDialogueDay = (targetGuestIndex == (int)guest);
+
+        // 1. 오늘이 이 게스트와 대화하는 날인지 주기 확인 (기존 유지)
+        bool isDialogueDay = false;
+        switch (guest)
+        {
+            case Guest.JaeYoonLee: isDialogueDay = (currentDay % 5 == 1); break; // 1, 6, 11...
+            case Guest.DaEunJung: isDialogueDay = (currentDay % 5 == 2); break; // 2, 7, 12...
+            case Guest.YulPark: isDialogueDay = (currentDay % 5 == 3); break; // 3, 8, 13...
+            case Guest.SeoAhYoon: isDialogueDay = (currentDay % 5 == 4); break; // 4, 9, 14...
+            case Guest.MyeongJinChoi: isDialogueDay = (currentDay % 5 == 0); break; // 5, 10, 15...
+        }
 
         if (hasSave && !string.IsNullOrEmpty(saveData.LastDialogueKey))
         {
@@ -462,23 +487,32 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
         {
             if (isDialogueDay)
             {
-                int lastDay = currentDay - (((currentDay - (int)guest) % 5 + 5) % 5);
-                int order = ((lastDay - (int)guest) / 5) + 1;
+                // 🛠️ 변경된 핵심 구간: 기획 시트의 Day 컬럼(1, 2, 3...) 순번과 정확히 매칭하는 수식
+                int order = ((currentDay - 1) / 5) + 1;
+
                 if (_dialogueDataCore.GetFirstDialogueByDay(_currentGuestSheetName, order, out var data))
                 {
                     _currentKey = data.key;
                     wasChatNpc = false;
-                    
-                    // NPC 대사라면 자동 출력 대상
+
                     if (data.speaker == SpeakerType.NPC)
                     {
                         shouldAutoSpawn = true;
                     }
                 }
+                else
+                {
+                    // 디버깅 편의를 위해 로그 확인용 문자열 수정
+                    Debug.LogError($"[{currentDay}일차] {guest}의 시트 내 순번 [{order}] 대화 데이터가 시트에 없습니다!");
+                    _currentKey = string.Empty;
+                    wasChatNpc = false;
+                    wasEndChat = true;
+                    return;
+                }
             }
             else
             {
-                // 대사할 타이밍이 아님
+                // 오늘 대화할 타이밍이 아닌 손님인 경우
                 _currentKey = string.Empty;
                 wasChatNpc = false;
                 wasEndChat = true;
@@ -512,8 +546,6 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
 
                 SpawnMessage(true);
 
-                // SpawnMessage(true) 내부에서 _currentKey가 업데이트됨
-                // 만약 END 라면 루프 종료
                 if (data.nextKey == "END")
                     break;
             }
@@ -632,13 +664,20 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
 
     public string GetLastDialogueContent(Guest guest)
     {
-        // 현재 대화 타이밍인지 확인
         if (!_dialogueDataCore.GetSheetNameByGuest(guest, out var sheetName))
             return string.Empty;
 
         int currentDay = _gameStatueCore.CurrentDay;
-        int targetGuestIndex = currentDay % 5 == 0 ? 5 : currentDay % 5;
-        bool isDialogueDay = (targetGuestIndex == (int)guest);
+    
+        bool isDialogueDay = false;
+        switch (guest)
+        {
+            case Guest.JaeYoonLee:     isDialogueDay = (currentDay % 5 == 1); break;
+            case Guest.DaEunJung:      isDialogueDay = (currentDay % 5 == 2); break;
+            case Guest.YulPark:        isDialogueDay = (currentDay % 5 == 3); break;
+            case Guest.SeoAhYoon:      isDialogueDay = (currentDay % 5 == 4); break;
+            case Guest.MyeongJinChoi:  isDialogueDay = (currentDay % 5 == 0); break;
+        }
 
         if (!isDialogueDay)
             return string.Empty;
@@ -651,8 +690,9 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
             }
         }
 
-        // 히스토리가 없는 경우 해당 날짜의 첫 대사를 시도
-        if (_dialogueDataCore.GetFirstDialogueByDay(sheetName, currentDay, out var firstData))
+        // 🛠️ 수식 단일화 교정 완료
+        int order = ((currentDay - 1) / 5) + 1;
+        if (_dialogueDataCore.GetFirstDialogueByDay(sheetName, order, out var firstData))
         {
             return firstData.content;
         }
@@ -666,8 +706,16 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
             return false;
 
         int currentDay = _gameStatueCore.CurrentDay;
-        int targetGuestIndex = currentDay % 5 == 0 ? 5 : currentDay % 5;
-        bool isDialogueDay = (targetGuestIndex == (int)guest);
+    
+        bool isDialogueDay = false;
+        switch (guest)
+        {
+            case Guest.JaeYoonLee:     isDialogueDay = (currentDay % 5 == 1); break;
+            case Guest.DaEunJung:      isDialogueDay = (currentDay % 5 == 2); break;
+            case Guest.YulPark:        isDialogueDay = (currentDay % 5 == 3); break;
+            case Guest.SeoAhYoon:      isDialogueDay = (currentDay % 5 == 4); break;
+            case Guest.MyeongJinChoi:  isDialogueDay = (currentDay % 5 == 0); break;
+        }
 
         if (!isDialogueDay)
             return false;
@@ -677,7 +725,7 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
             return !data.IsCompleted;
         }
 
-        return false; // 시작 안 했으면 읽지 않은 메시지가 없는 것으로 간주
+        return false;
     }
 }
 
