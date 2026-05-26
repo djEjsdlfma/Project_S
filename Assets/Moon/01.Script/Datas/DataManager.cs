@@ -18,15 +18,25 @@ namespace Moon._01.Script.Datas
         
         public DynamicSaveData CurrentData { get; private set; } = new DynamicSaveData();
 
+        public ImageSaveData CurrentImage { get; private set; } = new ImageSaveData();
+
         public int CurrentSaveSlot { get; private set; } = 0;
         
         private DynamicSaveData _autoSaved = new DynamicSaveData();
+        
+        private ImageSaveData _autoSavedImg = new ImageSaveData();
 
         private List<DynamicSaveData> _allData = new List<DynamicSaveData>();
         
+        private List<ImageSaveData> _allImageData = new List<ImageSaveData>();
+        
         private List<bool> _slotDataExist = new List<bool>();
+        
+        private List<bool> _slotImgDataExist = new List<bool>();
 
         private bool _autoDataExist;
+
+        private bool _autoImgDataExist;
         
         private string _path;
 
@@ -44,6 +54,16 @@ namespace Moon._01.Script.Datas
             {
                 Destroy(gameObject);
             }
+        }
+
+        private void OnDestroy()
+        {
+            foreach (var imageSaveData in _allImageData)
+            {
+                imageSaveData.Dispose();
+            }
+            
+            _autoSavedImg.Dispose();
         }
 
         private void Init()
@@ -73,8 +93,8 @@ namespace Moon._01.Script.Datas
 
                         try
                         {
-                            string realData = Decrypt(jsonData, RealKey.GetKey()); 
-            
+                            string realData = Decrypt(jsonData, RealKey.GetKey());
+
                             if (!string.IsNullOrEmpty(realData))
                             {
                                 data = JsonUtility.FromJson<DynamicSaveData>(realData);
@@ -83,7 +103,8 @@ namespace Moon._01.Script.Datas
                         }
                         catch (Exception e)
                         {
-                            Debug.LogError($"[DataManager] Slot {i} save data is corrupted / Decryption failed : {e.Message}");
+                            Debug.LogError(
+                                $"[DataManager] Slot {i} save data is corrupted / Decryption failed : {e.Message}");
                         }
 
                         if (isDataValid && data != null)
@@ -91,9 +112,9 @@ namespace Moon._01.Script.Datas
                             _allData.Add(data);
                             _slotDataExist.Add(true);
                         }
-                        else 
+                        else
                         {
-                            _slotDataExist.Add(false); 
+                            _slotDataExist.Add(false);
                             _allData.Add(new DynamicSaveData());
                         }
                     }
@@ -101,6 +122,46 @@ namespace Moon._01.Script.Datas
                     {
                         _slotDataExist.Add(false);
                         _allData.Add(new DynamicSaveData());
+                    }
+
+                    filePath = $"{_path}/saveImg_{i}.json";
+                    if (File.Exists(filePath))
+                    {
+                        string jsonData = File.ReadAllText(filePath);
+                        ImageSaveData data = null;
+                        bool isDataValid = false;
+
+                        try
+                        {
+                            string realData = Decrypt(jsonData, RealKey.GetKey());
+
+                            if (!string.IsNullOrEmpty(realData))
+                            {
+                                data = JsonUtility.FromJson<ImageSaveData>(realData);
+                                isDataValid = true;
+                            }
+                        }
+                        catch (Exception e)
+                        {
+                            Debug.LogError(
+                                $"[DataManager] Slot {i} image save data is corrupted / Decryption failed : {e.Message}");
+                        }
+
+                        if (isDataValid && data != null)
+                        {
+                            _allImageData.Add(data);
+                            _slotImgDataExist.Add(true);
+                        }
+                        else
+                        {
+                            _allImageData.Add(new ImageSaveData());
+                            _slotImgDataExist.Add(false);
+                        }
+                    }
+                    else
+                    {
+                        _allImageData.Add(new ImageSaveData());
+                        _slotImgDataExist.Add(false);
                     }
                 }
 
@@ -115,6 +176,19 @@ namespace Moon._01.Script.Datas
                 else
                 {
                     _autoDataExist = false;
+                }
+                
+                autoFilePath = $"{_path}/saveImg_auto.json";
+                if ( File.Exists(autoFilePath))
+                {
+                    string jsonData = File.ReadAllText(autoFilePath);
+                    string realData = Decrypt(jsonData, RealKey.GetKey());
+                    _autoSavedImg = JsonUtility.FromJson<ImageSaveData>(realData);
+                    _autoImgDataExist = true;
+                }
+                else
+                {
+                    _autoImgDataExist = false;
                 }
             }
             catch (Exception e)
@@ -142,7 +216,22 @@ namespace Moon._01.Script.Datas
             return _autoDataExist;
         }
 
-#endregion
+        public bool ImgDataExist(int slot)
+        {
+            if (slot < 0 || slot >= MaxSaveSlot)
+            {
+                Debug.LogError($"[DataManager] Invalid save slot requested: {slot}");
+                return false;
+            }
+            return _slotImgDataExist[slot];
+        }
+
+        public bool AutoImgDataExist()
+        {
+            return _autoImgDataExist;
+        }
+
+        #endregion
 
 #region Save
         public void SlotSave(int slot)
@@ -189,6 +278,50 @@ namespace Moon._01.Script.Datas
             }
         }
 
+        public void SaveImg(int slot)
+        {
+            if (slot < 0 || slot >= MaxSaveSlot)
+            {
+                return;
+            }
+            
+            try
+            {
+                string jsonData = JsonUtility.ToJson(CurrentImage, true);
+                string realData = Encrypt(jsonData, RealKey.GetKey());
+                File.WriteAllText($"{_path}/saveImg_{slot}.json", realData);
+                        
+                _allImageData[slot] = JsonUtility.FromJson<ImageSaveData>(jsonData);
+                _slotImgDataExist[slot] = true;
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"[DataManager] Image save failed: {e.Message}");
+            }
+        }
+        
+        public void AutoImgSave()
+        {
+            try
+            {
+                string jsonData = JsonUtility.ToJson(CurrentImage, true);
+                string realData = Encrypt(jsonData, RealKey.GetKey());
+                File.WriteAllText($"{_path}/saveImg_auto.json", realData);
+                        
+                _autoSavedImg = JsonUtility.FromJson<ImageSaveData>(jsonData);
+                _autoImgDataExist = true;
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"[DataManager] Image save failed: {e.Message}");
+            }
+        }
+        
+        public void AutoImgSavedToCurrent()
+        {
+            SaveImg(CurrentSaveSlot);
+        }
+
 #endregion
 
 #region Load
@@ -225,7 +358,39 @@ namespace Moon._01.Script.Datas
             return list;
         }
 
-#endregion
+        public ImageSaveData LoadImg(int slot)
+        {
+            if(slot < 0 || slot >= MaxSaveSlot)
+            {
+                Debug.LogError($"[DataManager] Invalid save slot requested: {slot}");
+                return null;
+            }
+                    
+            string clonedJson = JsonUtility.ToJson(_allImageData[slot]);
+            CurrentImage = JsonUtility.FromJson<ImageSaveData>(clonedJson);
+            return CurrentImage;
+        }
+
+        public ImageSaveData LoadAutoImgSave()
+        {
+            string clonedJson = JsonUtility.ToJson(_autoSavedImg);
+            CurrentImage = JsonUtility.FromJson<ImageSaveData>(clonedJson);
+            return CurrentImage;
+        }
+
+        public List<ImageSaveData> GetAllImgData()
+        {
+            List<ImageSaveData> list = new List<ImageSaveData>();
+            foreach (var data in _allImageData)
+            {
+                string clonedJson = JsonUtility.ToJson(data);
+                list.Add(JsonUtility.FromJson<ImageSaveData>(clonedJson));
+            }
+
+            return list;
+        }
+
+        #endregion
 
 #region Encryption
 
@@ -288,6 +453,9 @@ namespace Moon._01.Script.Datas
         public bool TryGetValue(string key, out float value) => CurrentData.TryGetValue(key, out value);
         public bool TryGetValue(string key, out string value) => CurrentData.TryGetValue(key, out value);
         public bool TryGetValue(string key, out bool value) => CurrentData.TryGetValue(key, out value);
+        
+        public bool TryGetValue(string key, out List<Texture2D> value) => CurrentImage.TryGetValue(key, out value);
+        
 
 #endregion
 
@@ -297,6 +465,8 @@ namespace Moon._01.Script.Datas
         public void SaveData(string key, float value) => CurrentData.SaveData(key, value);
         public void SaveData(string key, string value) => CurrentData.SaveData(key, value);
         public void SaveData(string key, bool value) => CurrentData.SaveData(key, value);
+        
+        public void SaveData(string key, List<Texture2D> value) => CurrentImage.SaveData(key, value);
 
 #endregion
 

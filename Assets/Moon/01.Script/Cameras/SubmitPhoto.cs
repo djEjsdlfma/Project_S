@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Moon._01.Script.Datas;
 using MoonLib.ScriptFinder_Pro.RunTime.Finder.ListFinder;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -100,6 +101,11 @@ namespace Moon._01.Script.Cameras
                 .Where(p => _photoSelection[p])
                 .SelectMany(p => p.CamObjs)
                 .ToList();
+            
+            var selectedTexture = _photos
+                .Where(p => _photoSelection[p])
+                .Select(p => p.Image)
+                .ToList();
 
             // 2. 정답 리스트를 순회하며 점수 계산
             for (int i = 0; i < answers.Count; i++)
@@ -131,7 +137,7 @@ namespace Moon._01.Script.Cameras
                 }
             }
             score += fakeOrRealScore;
-            camerasFinder.GetTarget<ResultPhoto>().Result(score);
+            camerasFinder.GetTarget<ResultPhoto>().Result(score, selectedTexture);
         }
 
         private void OnDestroy()

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Moon._01.Script.Datas;
 using MoonLib.ScriptFinder_Pro.RunTime.Finder.ListFinder;
 using MoonLib.ScriptFinder_Pro.RunTime.Finder.OneFinder;
@@ -25,10 +26,12 @@ namespace Moon._01.Script.Cameras
 
         private CurrentGuestManager _currentGuestManager;
         
-        public void Result(int score)
+        public void Result(int score, List<Texture2D> selectedTexture)
         {
             _currentGuestManager = guestScriptFinder.GetTarget<CurrentGuestManager>();
             _likeAbility = guestScriptFinder.GetTarget<LikeAbility>();
+            
+            DataManager.Instance.SaveData(_currentGuestManager.CurrentGuest, selectedTexture);
             
             //_currentGuestManager.SetCurrentGuest(_currentGuestManager.C1);
             
@@ -55,6 +58,8 @@ namespace Moon._01.Script.Cameras
                 Debug.Log("What");
                 What();
             }
+            
+            DataManager.Instance.AutoImgSavedToCurrent();
         }
 
         private void Good()

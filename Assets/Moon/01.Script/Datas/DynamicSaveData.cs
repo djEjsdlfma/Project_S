@@ -109,4 +109,95 @@ namespace Moon._01.Script.Datas
         public void SaveData(string key, string value) => _stringData[key] = value;
         public void SaveData(string key, bool value) => _boolData[key] = value;
     }
+    
+    [Serializable]
+    public class ImageSaveData : ISerializationCallbackReceiver , IDisposable
+    {
+        private Dictionary<string, List<Texture2D>> _imageData = new Dictionary<string, List<Texture2D>>();
+        
+        [SerializeField] private List<StringImagePair> _imagePairs = new List<StringImagePair>();
+        
+        public void OnBeforeSerialize()
+        {
+            _imagePairs.Clear();
+            foreach (var kvp in _imageData)
+            {
+                _imagePairs.Add(new StringImagePair { Key = kvp.Key, Value = kvp.Value.ConvertAll(texture => texture.EncodeToPNG()) });
+            }
+        }
+
+        public void OnAfterDeserialize()
+        {
+            foreach (var textureList in _imageData.Values)
+            {
+                if (textureList != null)
+                {
+                    foreach (var tex in textureList)
+                    {
+                        if (tex != null)
+                        {
+                            UnityEngine.Object.Destroy(tex);
+                        }
+                    }
+                }
+            }
+            
+            _imageData.Clear();
+            
+            foreach (var pair in _imagePairs)
+            {
+                _imageData[pair.Key] = pair.Value.ConvertAll(bytes =>
+                {
+                    Texture2D texture = new Texture2D(2, 2);
+                    texture.LoadImage(bytes);
+                    return texture;
+                });
+            }
+        }
+        
+        [Serializable]
+        public struct StringImagePair
+        {
+            public string Key;
+            public List<byte[]> Value;
+        }
+
+        public bool TryGetValue(string key, out List<Texture2D> value) => _imageData.TryGetValue(key, out value);
+
+        public void SaveData(string key, List<Texture2D> value)
+        {
+            if (_imageData.ContainsKey(key))
+            {
+                if (_imageData[key] != null)
+                {
+                    foreach (var tex in _imageData[key])
+                    {
+                        if (tex != null)
+                        {
+                            UnityEngine.Object.Destroy(tex);
+                        }
+                    }
+                }
+            }
+            _imageData[key] = value;
+        }
+
+        public void Dispose()
+        {
+            foreach (var textureList in _imageData.Values)
+            {
+                if (textureList != null)
+                {
+                    foreach (var tex in textureList)
+                    {
+                        if (tex != null)
+                        {
+                            UnityEngine.Object.Destroy(tex);
+                        }
+                    }
+                }
+            }
+            _imageData.Clear();
+        }
+    }
 }
