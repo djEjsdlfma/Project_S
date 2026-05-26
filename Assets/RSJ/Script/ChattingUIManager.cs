@@ -7,6 +7,8 @@ public class ChattingUIManager : MonoBehaviour
     [SerializeField] private RectMask2D _profilBound;
     [SerializeField] private GameObject _chatAlarm;
 
+    [SerializeField] private GameObject[] _chats;
+
     private bool chattingState;
 
     private void Awake()
@@ -23,7 +25,11 @@ public class ChattingUIManager : MonoBehaviour
 
     public void BackToMenu()
     {
-        
+        for(int i = 0; i < _chats.Length; i++)
+        {
+            _chats[i].SetActive(false);
+        }
+        _profilBound.padding = (new Vector4(-1f, -600f, -1000f, -88f));
     }
 
     public void ReadText()
@@ -34,5 +40,11 @@ public class ChattingUIManager : MonoBehaviour
     public void ShowMyText(GameObject texts)
     {
         texts.SetActive(true);
+    }
+
+    public void ShowProfil(GameObject profil)
+    {
+        _chatAlarm.SetActive(true);
+        profil.SetActive(true);
     }
 }

@@ -268,7 +268,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 0
-  m_Spacing: 45
+  m_Spacing: 66.5
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
@@ -421,6 +421,8 @@ MonoBehaviour:
   BookMarkText: {fileID: 6562690072094790227}
   _info: {fileID: 2227897140934091548}
   _btn: {fileID: 8175817009092383801}
+  heart: 71
+  bookmark: 26
 --- !u!1 &3369084762412495652
 GameObject:
   m_ObjectHideFlags: 0
@@ -701,10 +703,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC5C4\uB9C8\uAC00 \uC5B4\uCA4C\uAD6C \uC800\uCA4C\uAD6C..."
+  m_text: "\uB2F9\uC2E0\uC774 \uADF8\uB54C \uB9D0\uD588\uB2E4\uBA74."
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2aab8f5f3454a954fbd6f891a00b1704, type: 2}
-  m_sharedMaterial: {fileID: 7080291413200544153, guid: 2aab8f5f3454a954fbd6f891a00b1704, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0494a77ffa594734f9931f2a2d9380a4, type: 2}
+  m_sharedMaterial: {fileID: -3558238057192847427, guid: 0494a77ffa594734f9931f2a2d9380a4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

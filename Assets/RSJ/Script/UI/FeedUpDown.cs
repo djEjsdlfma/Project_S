@@ -10,10 +10,20 @@ public class FeedUpDown : MonoBehaviour
     private int nowIndex = 0;
     private bool isEnd = true;
 
+    public int feedCount { get; set; } = 0;
+
     private void Start()
     {
         UpBtn.SetActive(false);
+        DownBtn.SetActive(false);
         isEnd = true;
+    }
+
+    public void ChangeFeedwithDay()
+    {
+        feedCount++;
+        if (4 >= feedCount)
+            DownBtn.SetActive(true);
     }
 
     public void UpFeed()
@@ -37,7 +47,7 @@ public class FeedUpDown : MonoBehaviour
         nowIndex++;
         isEnd = false;
 
-        if(nowIndex >= 4) DownBtn.SetActive(false);
+        if(nowIndex >= feedCount) DownBtn.SetActive(false);
         if (UpBtn.activeSelf == false) UpBtn.SetActive(true);
 
         FeedContainer.DOAnchorPosY(FeedContainer.anchoredPosition.y + 907.205f, 0.2f)
