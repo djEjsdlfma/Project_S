@@ -56,7 +56,10 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
     private GameObject _bottomEmptySpace;
     private Chatting _currentLoading;
     private bool wasEndChat = false;
-    
+
+    private string tempTextData;
+    private bool tempAlarmValue;
+
     public bool CanInteract { get; private set; }
     
     public void Initialize(SystemManager _)
@@ -134,6 +137,7 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
             if (_chatProfileContainer != null)
                 _chatProfileContainer.SetCurrentProfile(data.content, !isImmediate && !isEnding);
 
+
             if (!isImmediate && !isEnding)
                 onAlarmStateChanged?.Invoke(_currentGuest, true);
         }
@@ -157,6 +161,7 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
 
         StartCoroutine(UpdateUILayout());
     }
+
 
     private void ShowNPCText(string log, bool wasNPC, string speakerName, bool isEnding, bool isImmediate = false)
     {
