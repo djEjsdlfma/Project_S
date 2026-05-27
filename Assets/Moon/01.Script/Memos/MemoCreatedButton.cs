@@ -20,8 +20,8 @@ namespace Moon._01.Script.Memos
 
        private MemoSystem _memoSystem;
        
-       public void DelOpen(bool close) => delBlack.SetActive(!close);
-       public void SaveOpen(bool close) => saveBlack.SetActive(!close);
+       public void DelOpen(bool open) => delBlack.SetActive(!open);
+       public void SaveOpen(bool open) => saveBlack.SetActive(!open);
            
        public void ChangeCurrentGuest(Human currentGuest)
        {
