@@ -2,23 +2,30 @@ using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.UI;
 
+[DefaultExecutionOrder(10)]
 public class ChattingUIManager : MonoBehaviour
 {
     [SerializeField] private RectMask2D _profilBound;
     [SerializeField] private GameObject _chatAlarm;
 
     [SerializeField] private GameObject[] _chats;
-
-    private bool chattingState;
+    [SerializeField] private GameObject[] _profils;
 
     private void Awake()
     {
         // _profilBound.padding = (new Vector4(-1f, -600f, -1000f, -88f));
     }
 
+    private void Start()
+    {
+        for (int i = 0; i < _profils.Length; i++)
+        {
+            _profils[i].SetActive(false);
+        }
+    }
+
     public void SetChatting(Transform myGameObj)
     {
-        chattingState = true;
         myGameObj.parent.SetAsFirstSibling();
         // _profilBound.padding = (new Vector4(-1f, 65f, -1000f, -60f));
     }
