@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 244e7cd8b26541818a6b6a954357aa7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LSW._02._Code.CSV.Importer.DialogueCSVImporter
-  <Database>k__BackingField: {fileID: 11400000, guid: 2a69aa0411e545e4985267f6957569ef, type: 2}
+  <Database>k__BackingField: {fileID: 11400000, guid: 3b6394cb9768e3440bd083842d012064, type: 2}
 --- !u!1 &7350246232423721497
 GameObject:
   m_ObjectHideFlags: 0

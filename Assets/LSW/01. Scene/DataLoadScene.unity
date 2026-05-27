@@ -1853,7 +1853,7 @@ PrefabInstance:
     - target: {fileID: 2843583335443596949, guid: e7a7e20d36b3a2c4783d1560366cb729, type: 3}
       propertyPath: <Database>k__BackingField
       value: 
-      objectReference: {fileID: 11400000, guid: 3b6394cb9768e3440bd083842d012064, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 6056278855888502359, guid: e7a7e20d36b3a2c4783d1560366cb729, type: 3}
       propertyPath: m_Name
       value: CoreHandler
