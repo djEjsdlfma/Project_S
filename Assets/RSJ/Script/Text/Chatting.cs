@@ -11,7 +11,7 @@ public class Chatting : MonoBehaviour
     {
         timer += Time.deltaTime;
 
-        if(timer > 1f)
+        if(timer > 0.5f)
         {
             Destroy(gameObject);
         }

@@ -25,13 +25,39 @@ namespace Moon._01.Script.Cameras
             // 3. 카메라 강제 렌더링 (최신 프레임 보장)
             photoCamera.Render();
 
-            // 4. 새로운 비어있는 Texture2D 생성 (RenderTexture와 동일한 해상도)
-            Texture2D capture =
-                new Texture2D(renderTexture.width, renderTexture.height, TextureFormat.RGB24, false, true);
+            // =========================================================
+            // 🚨 GPU를 활용한 감마(Gamma) 보정 적용 구역 시작
+            // =========================================================
+
+            // A. sRGB(감마 보정)가 강제로 적용된 '임시 렌더 텍스처' 생성
+            RenderTexture tempRT = RenderTexture.GetTemporary(
+                renderTexture.width, 
+                renderTexture.height, 
+                0, 
+                RenderTextureFormat.ARGB32, 
+                RenderTextureReadWrite.sRGB
+            );
+
+            // B. 원본 텍스처(renderTexture)의 화면을 임시 텍스처(tempRT)로 복사! (이때 밝기가 예쁘게 보정됨)
+            Graphics.Blit(renderTexture, tempRT);
+
+            // C. 픽셀을 읽어오기 위해 활성 렌더 텍스처를 '임시 렌더 텍스처'로 변경
+            RenderTexture.active = tempRT;
+
+            // 4. 새로운 비어있는 Texture2D 생성 
+            // ⚠️ 주의: 맨 마지막 파라미터(linear)를 반드시 'false'로 설정해야 합니다!
+            Texture2D capture = new Texture2D(tempRT.width, tempRT.height, TextureFormat.RGB24, false, false);
 
             // 5. 화면의 픽셀을 읽어와서 Texture2D에 기록
-            capture.ReadPixels(new Rect(0, 0, renderTexture.width, renderTexture.height), 0, 0);
+            capture.ReadPixels(new Rect(0, 0, tempRT.width, tempRT.height), 0, 0);
             capture.Apply(); // 변경사항 적용
+
+            // D. 다 쓴 임시 렌더 텍스처는 메모리에서 해제 (매우 중요)
+            RenderTexture.ReleaseTemporary(tempRT);
+
+            // =========================================================
+            // 🚨 감마 보정 구역 끝
+            // =========================================================
 
             // 6. 원래 렌더 텍스처로 복구
             RenderTexture.active = currentRT;

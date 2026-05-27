@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 namespace Moon._01.Script.Datas
@@ -71,33 +72,37 @@ namespace Moon._01.Script.Datas
             }
         }
 
-        [Serializable]
-        public struct StringIntPair
+        public void Save(string filePath)
         {
-            public string Key;
-            public int Value;
+            string jsonData = JsonUtility.ToJson(this, true);
+            string encryptedData = RealKey.Encrypt(jsonData);
+            File.WriteAllText(filePath, encryptedData);
         }
 
-        [Serializable]
-        public struct StringFloatPair
+        public bool Load(string filePath)
         {
-            public string Key;
-            public float Value;
+            if (!File.Exists(filePath)) return false;
+
+            try
+            {
+                string encryptedData = File.ReadAllText(filePath);
+                string jsonData = RealKey.Decrypt(encryptedData);
+                
+                if (!string.IsNullOrEmpty(jsonData))
+                {
+                    JsonUtility.FromJsonOverwrite(jsonData, this);
+                    return true;
+                }
+            }
+            catch { }
+
+            return false;
         }
 
-        [Serializable]
-        public struct StringStringPair
-        {
-            public string Key;
-            public string Value;
-        }
-
-        [Serializable]
-        public struct StringBoolPair
-        {
-            public string Key;
-            public bool Value;
-        }
+        [Serializable] public struct StringIntPair { public string Key; public int Value; }
+        [Serializable] public struct StringFloatPair { public string Key; public float Value; }
+        [Serializable] public struct StringStringPair { public string Key; public string Value; }
+        [Serializable] public struct StringBoolPair { public string Key; public bool Value; }
 
         public bool TryGetValue(string key, out int value) => _intData.TryGetValue(key, out value);
         public bool TryGetValue(string key, out float value) => _floatData.TryGetValue(key, out value);

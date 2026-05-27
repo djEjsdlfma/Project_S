@@ -32,7 +32,6 @@ public class TitleManager : MonoBehaviour
     [SerializeField] private Button _teaBtn;
     [SerializeField] private Button _leftBtn;
     [SerializeField] private Button _rightBtn;
-    [SerializeField] private Button[] _commonBtns;
 
     private Stack<GameObject> _prevStack = new Stack<GameObject>();
     private Stack<GameObject> _nextStack = new Stack<GameObject>();
@@ -40,7 +39,6 @@ public class TitleManager : MonoBehaviour
     private float timer = 0f;
     private GameObject nowGameObjcet;
     private int _day = 1;
-    private bool _isDayEnd = false;
 
     private BubbleManager endAction;
 
@@ -61,12 +59,10 @@ public class TitleManager : MonoBehaviour
     private void Start()
     {
         endAction.onEndChat += ActiveBtn;
-        endAction.onEndChat += SetButtonActiveTrue;
     }
 
     public void ChangeDay()
     {
-        _isDayEnd = false;
         _day++;
         _textsObj.SetText($"DAY {_day}");
         DataManager.Instance.SaveData("Day", _day);
@@ -227,32 +223,6 @@ public class TitleManager : MonoBehaviour
         }
     }
 
-    public void SetButtonActivefalse()
-    {
-        if (_isDayEnd)
-            return;
-
-        _candleBtn.interactable = false;
-        _teaBtn.interactable = false;
-        _leftBtn.interactable = false;
-        _rightBtn.interactable = false;
-
-        for(int i =0; i < _commonBtns.Length; i++)
-            _commonBtns[i].interactable = false;
-    }
-
-    private void SetButtonActiveTrue()
-    {
-        _isDayEnd = true;
-        _candleBtn.interactable = true;
-        _teaBtn.interactable = true;
-        _leftBtn.interactable = true;
-        _rightBtn.interactable = true;
-
-        for (int i = 0; i < _commonBtns.Length; i++)
-            _commonBtns[i].interactable = true;
-    }
-
     private string CalculDay(int Day)
     {
         switch (Day)
@@ -279,6 +249,5 @@ public class TitleManager : MonoBehaviour
     private void OnDestroy()
     {
         endAction.onEndChat -= ActiveBtn;
-        endAction.onEndChat -= SetButtonActiveTrue;
     }
 }

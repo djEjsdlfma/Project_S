@@ -281,7 +281,7 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
     
     private IEnumerator DelayChat(Chatting loadingObject, GameObject targetBubble, bool isEnding)
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
 
         if (loadingObject != null)
         {
