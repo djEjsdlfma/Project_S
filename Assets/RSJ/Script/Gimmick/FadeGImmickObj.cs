@@ -1,7 +1,7 @@
 using DG.Tweening;
 using UnityEngine;
 
-public class FadeGImmickObj : MonoBehaviour
+public class FadeGimmickObj : MonoBehaviour
 {
     [Range(0f, 10f)] public float FadeTime;
     private SpriteRenderer _spriteRenderer;
