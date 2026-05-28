@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using AYellowpaper.SerializedCollections;
 using Moon._01.Script.Datas;
 using TMPro;
+using Unity.Cinemachine;
 using UnityEngine;
 
 namespace Moon._01.Script.Memos
