@@ -1,6 +1,7 @@
 using DG.Tweening;
 using LSW._02._Code.System___Manager;
 using Moon._01.Script.Datas;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Sockets;
@@ -41,7 +42,7 @@ public class TitleManager : MonoBehaviour
     private int _day = 1;
 
     private BubbleManager endAction;
-
+    private bool _talkEnd;
 
     private void Awake()
     {
@@ -59,6 +60,7 @@ public class TitleManager : MonoBehaviour
     private void Start()
     {
         endAction.onEndChat += ActiveBtn;
+        endAction.onEndChat += EndTalk;
     }
 
     public void ChangeDay()
@@ -68,6 +70,7 @@ public class TitleManager : MonoBehaviour
         DataManager.Instance.SaveData("Day", _day);
         _candleBtn.interactable = false;
         _candleLight.SetActive(false);
+        _talkEnd = false;
         StartCoroutine(StartFade());
     }
 
@@ -219,7 +222,8 @@ public class TitleManager : MonoBehaviour
 
         if (_candleLight.activeSelf != false)
         {
-            _candleLight.GetComponent<Light2D>().intensity = 11f + intensityFlicker;
+            _candleLight.GetComponent<Light2D>().intensity = 
+                (_talkEnd ? 17f : 11f) + intensityFlicker;
         }
     }
 
@@ -246,8 +250,11 @@ public class TitleManager : MonoBehaviour
         }
     }
 
+    private void EndTalk() => _talkEnd = !_talkEnd;
+
     private void OnDestroy()
     {
         endAction.onEndChat -= ActiveBtn;
+        endAction.onEndChat -= EndTalk;
     }
 }

@@ -1,0 +1,537 @@
+fileFormatVersion: 2
+guid: 2a598d6c3d827264691b3cef6375e1b1
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4658361942137152141
+    second: music_note_0
+  - first:
+      213: 3619191099705947536
+    second: music_note_1
+  - first:
+      213: -795821585607250441
+    second: music_note_2
+  - first:
+      213: 8498464848945157846
+    second: music_note_3
+  - first:
+      213: 5625809146767302674
+    second: music_note_4
+  - first:
+      213: 5809984061520234365
+    second: music_note_5
+  - first:
+      213: 6389209269186817930
+    second: music_note_6
+  - first:
+      213: -8670816343375829418
+    second: music_note_7
+  - first:
+      213: -1411125654058564279
+    second: music_note_8
+  - first:
+      213: 5569761785364616489
+    second: music_note_9
+  - first:
+      213: 8530095609882234192
+    second: music_note_10
+  - first:
+      213: 166405115174439805
+    second: music_note_11
+  - first:
+      213: 1837751976255584204
+    second: music_note_12
+  - first:
+      213: 92431047137233171
+    second: music_note_13
+  - first:
+      213: 7412994987821367900
+    second: music_note_14
+  - first:
+      213: -2815966102271466615
+    second: music_note_15
+  - first:
+      213: 7209947579169133602
+    second: music_note_16
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 64
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: music_note_0
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 288
+        width: 42
+        height: 110
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d82a84c5183d5a040800000000000000
+      internalID: 4658361942137152141
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: music_note_1
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 312
+        width: 34
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0957a304123f93230800000000000000
+      internalID: 3619191099705947536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: music_note_2
+      rect:
+        serializedVersion: 2
+        x: 306
+        y: 313
+        width: 30
+        height: 78
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7fdaa4dfb7ca4f4f0800000000000000
+      internalID: -795821585607250441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: music_note_3
+      rect:
+        serializedVersion: 2
+        x: 486
+        y: 314
+        width: 30
+        height: 75
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d61589d0cc90f570800000000000000
+      internalID: 8498464848945157846
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: music_note_4
+      rect:
+        serializedVersion: 2
+        x: 669
+        y: 313
+        width: 51
+        height: 76
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2106537bc93e21e40800000000000000
+      internalID: 5625809146767302674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: music_note_5
+      rect:
+        serializedVersion: 2
+        x: 853
+        y: 312
+        width: 51
+        height: 80
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d774899a8b531a050800000000000000
+      internalID: 5809984061520234365
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: music_note_6
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 176
+        width: 31
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a8f63859af70ba850800000000000000
+      internalID: 6389209269186817930
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: music_note_7
+      rect:
+        serializedVersion: 2
+        x: 223
+        y: 159
+        width: 160
+        height: 81
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 656ae64c9721ba780800000000000000
+      internalID: -8670816343375829418
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: music_note_8
+      rect:
+        serializedVersion: 2
+        x: 592
+        y: 176
+        width: 30
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9450660b1bcaa6ce0800000000000000
+      internalID: -1411125654058564279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: music_note_9
+      rect:
+        serializedVersion: 2
+        x: 673
+        y: 176
+        width: 133
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 925143c75d4cb4d40800000000000000
+      internalID: 5569761785364616489
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: music_note_10
+      rect:
+        serializedVersion: 2
+        x: 819
+        y: 176
+        width: 101
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 05d462743ccf06670800000000000000
+      internalID: 8530095609882234192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: music_note_11
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 50
+        width: 43
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d7bc7c212903f4200800000000000000
+      internalID: 166405115174439805
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: music_note_12
+      rect:
+        serializedVersion: 2
+        x: 297
+        y: 53
+        width: 43
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc77cf18fa1018910800000000000000
+      internalID: 1837751976255584204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: music_note_13
+      rect:
+        serializedVersion: 2
+        x: 490
+        y: 30
+        width: 21
+        height: 52
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 31905d23c81684100800000000000000
+      internalID: 92431047137233171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: music_note_14
+      rect:
+        serializedVersion: 2
+        x: 669
+        y: 35
+        width: 39
+        height: 39
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5208da6aaf30e660800000000000000
+      internalID: 7412994987821367900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: music_note_16
+      rect:
+        serializedVersion: 2
+        x: 840
+        y: 28
+        width: 30
+        height: 52
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 22450919f11ee0460800000000000000
+      internalID: 7209947579169133602
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 4ad7009de1e7dc2449ab6125ff923133
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      music_note_0: 4658361942137152141
+      music_note_1: 3619191099705947536
+      music_note_10: 8530095609882234192
+      music_note_11: 166405115174439805
+      music_note_12: 1837751976255584204
+      music_note_13: 92431047137233171
+      music_note_14: 7412994987821367900
+      music_note_15: -2815966102271466615
+      music_note_16: 7209947579169133602
+      music_note_2: -795821585607250441
+      music_note_3: 8498464848945157846
+      music_note_4: 5625809146767302674
+      music_note_5: 5809984061520234365
+      music_note_6: 6389209269186817930
+      music_note_7: -8670816343375829418
+      music_note_8: -1411125654058564279
+      music_note_9: 5569761785364616489
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
