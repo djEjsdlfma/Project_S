@@ -2,7 +2,9 @@ using System.Collections.Generic;
 using DG.Tweening;
 using LSW._02._Code.Environment.InteractableObject;
 using LSW._02._Code.Environment.Takable;
+using LSW._02._Code.System___Manager;
 using Moon._01.Script.Cameras;
+using Moon._01.Script.Mouses;
 using MoonLib.ScriptFinder_Pro.RunTime.DevLogs;
 using MoonLib.ScriptFinder_Pro.RunTime.Finder.ListFinder;
 using UnityEngine;
@@ -63,6 +65,8 @@ namespace RSJ.Script.Camera
         private UnityEngine.Camera _main;
         private UnityEngine.Camera _camera;
 
+        private MouseManager _mouseManager;
+
         private bool _copying = false;
         private readonly Dictionary<GameObject, InteractTarget> _interactObjs = new();
     
@@ -74,6 +78,7 @@ namespace RSJ.Script.Camera
             _camera = UnityEngine.Camera.main;
             _main = UnityEngine.Camera.main;
             myPosition = GetComponent<RectTransform>();
+            _mouseManager = SystemManager.Instance.GetSystemManager<MouseManager>();
 
             input.OnCaptureAction += HandlePhotoInput;
             input.OnCopyAction += HandleCaptureInput;
@@ -95,7 +100,7 @@ namespace RSJ.Script.Camera
             // 복사 중일 때만 본인 스크립트에서 오브젝트를 이동
             if (_copying)
             {
-                Vector2 worldMousePos = _main.ScreenToWorldPoint(input.MousePos);
+                Vector2 worldMousePos = _mouseManager ? _main.ScreenToWorldPoint(_mouseManager.ExactScreenPos) : input.MousePos;
                 foreach (var target in _interactObjs)
                 {
                     target.Value.ChangeTransform(worldMousePos);
@@ -118,7 +123,7 @@ namespace RSJ.Script.Camera
         {
             if (camerasFinder.GetTarget<SetCamBlur>(false) is var blur && blur && blur.BlurActive)
                 return;
-            HandleActionInput(_main.ScreenToWorldPoint(input.MousePos));
+            HandleActionInput(_mouseManager ? _main.ScreenToWorldPoint(_mouseManager.ExactScreenPos) : input.MousePos);
         }
 
         private void HandleActionInput(Vector2 worldMousePos)
@@ -374,7 +379,7 @@ namespace RSJ.Script.Camera
 
         private void UpdateMouseFollowerUI()
         {
-            Vector2 mousePos = input.MousePos;
+            Vector2 mousePos = _mouseManager.ExactScreenPos;
             _position = new Vector3(
                 mousePos.x - (myPosition.sizeDelta.x / 2),
                 mousePos.y - (myPosition.sizeDelta.y / 2),

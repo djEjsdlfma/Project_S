@@ -1,8 +1,8 @@
-using System;
+using LSW._02._Code.System___Manager;
 using Moon._01.Script.Cameras;
 using MoonLib.ScriptFinder_Pro.RunTime.Finder.ListFinder;
+using Moon._01.Script.Mouses;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Moon._01.Script.Gimmick
 {
@@ -10,41 +10,94 @@ namespace Moon._01.Script.Gimmick
     {
         [SerializeField] private ScriptListFinderSO camerasFinder;
         [SerializeField] private float worldMoveSpeed = 5f;
-    
-        private Camera _mainCam;
+        [SerializeField] private float mouseSpeedPer = 0.25f;
+        [SerializeField] private float stopDistance = 0.05f;
+        [SerializeField] private float destroyTime = 2.5f;
+        [SerializeField] private float attentionDistance = 7.5f;
         
-        private Vector2 _exactScreenPos; 
-        private bool _isInitialized = false;
+        private float _timer = 0f;
+        
+        private Camera _mainCam;
+
+        private MouseManager _mouse;
+        private bool _isMouseNotNull;
+        
+        private bool _isCatched =false;
+
+        private void Start()
+        {
+            _isMouseNotNull = _mouse != null;
+        }
 
         private void Awake()
         {
             _mainCam = Camera.main;
-            camerasFinder.GetTarget<CameraMove>();
+            _mouse = SystemManager.Instance.GetSystemManager<MouseManager>();
+        }
+        
+        private void OnDestroy()
+        {
+            if (_isMouseNotNull)
+            {
+                _mouse.SpeedMultiplier = 1f;
+            }
         }
 
         private void Update()
         {
-            if (Mouse.current == null || _mainCam == null) return;
+            if (_mainCam == null || _mouse == null) return;
+            
+            _timer += Time.deltaTime;
+            
+            Vector2 currentExactPos = _mouse.ExactScreenPos;
 
-            if (!_isInitialized)
+            Vector2 distance = transform.position - _mainCam.ScreenToWorldPoint(currentExactPos);
+            
+            if (distance.sqrMagnitude > attentionDistance * attentionDistance)
             {
-                _exactScreenPos = Mouse.current.position.value;
-                _isInitialized = true;
+                if (_timer >= destroyTime)
+                {
+                    Destroy(gameObject);
+                }
+                if (_isMouseNotNull)
+                {
+                    _mouse.SpeedMultiplier = 1;
+                }
+                return;
             }
 
-            float targetDepth = _mainCam.WorldToScreenPoint(transform.position).z;
+            if (_isCatched)
+            {
+                if (_timer >= destroyTime)
+                {
+                    Destroy(gameObject);
+                }
+                return;
+            }
             
-            Vector2 currentMouseWorldPos = _mainCam.ScreenToWorldPoint(new Vector3(_exactScreenPos.x, _exactScreenPos.y, targetDepth));
-
+            if (_isMouseNotNull)
+            {
+                _mouse.SpeedMultiplier = mouseSpeedPer;
+            }
+            
+            float targetDepth = _mainCam.WorldToScreenPoint(transform.position).z;
+            Vector2 currentMouseWorldPos = _mainCam.ScreenToWorldPoint(new Vector3(currentExactPos.x, currentExactPos.y, targetDepth));
+            
             Vector2 nextWorldPos = Vector2.MoveTowards(currentMouseWorldPos, transform.position, worldMoveSpeed * Time.deltaTime);
 
-            _exactScreenPos = _mainCam.WorldToScreenPoint(new Vector3(nextWorldPos.x, nextWorldPos.y, targetDepth));
+            Vector3 nextScreenPos3D = _mainCam.WorldToScreenPoint(new Vector3(nextWorldPos.x, nextWorldPos.y, targetDepth));
+            Vector2 finalScreenPos = new Vector2(nextScreenPos3D.x, nextScreenPos3D.y);
 
-            Mouse.current.WarpCursorPosition(_exactScreenPos);
+            _mouse.WarpToScreenPosition(finalScreenPos);
 
-            if (Vector2.Distance(currentMouseWorldPos, transform.position) <= 0.05f)
+            if ((nextWorldPos - (Vector2)transform.position).sqrMagnitude <= stopDistance * stopDistance)
             {
-                Debug.Log("마우스 이동 완료! (World Unit 기준, 완벽한 직선)");
+                _mouse.StopToMove(destroyTime - _timer);
+                _isCatched = true;
+            }
+           
+            if (_timer >= destroyTime)
+            {
                 Destroy(gameObject);
             }
         }
