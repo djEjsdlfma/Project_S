@@ -59,7 +59,10 @@ namespace LSW._02._Code.UI
         
         public void EnableProfileOnly(Guest guest)
         {
-            _profiles.ForEach(profile => profile.gameObject.SetActive(profile.Guest == guest && profile.IsActivable));
+            _profiles.ForEach(profile =>
+            {
+                profile.gameObject.SetActive(profile.Guest == guest && profile.IsActivable);
+            });
             _currentProfile = null;
         }
 
@@ -102,6 +105,11 @@ namespace LSW._02._Code.UI
                 if((int)profile.Guest > _gameStatueCore.CurrentDay)
                     profile.gameObject.SetActive(false);
             }
+        }
+
+        public void SetAllProfileClosed()
+        {
+            _profiles.ForEach(profile => profile.OpenChat(false));
         }
     }
 }

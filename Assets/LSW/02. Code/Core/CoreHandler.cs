@@ -61,11 +61,20 @@ namespace LSW._02._Code.Core
 
             return dataLoadManagers;
         }
+
+        public void ResetCoreAllData()
+        {
+            for (int i = 0; i < _coreList.Count; i++)
+            {
+                _coreList[i].Reset();
+            }
+        }
         
         protected override void OnDestroy()
         {
             base.OnDestroy();
             SceneManager.sceneUnloaded -= LoadScene;
+            ResetCoreAllData();
         }
     }
     
@@ -73,6 +82,7 @@ namespace LSW._02._Code.Core
     {
         None = -1,
         DataLoadScene = 0,
-        MainTabletScene = 1
+        MainTabletScene = 1,
+        TutorialScene = 2
     }
 }

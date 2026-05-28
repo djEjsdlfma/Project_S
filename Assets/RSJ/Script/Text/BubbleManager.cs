@@ -33,6 +33,7 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
     [SerializeField] private ScrollRect scrollRect;
     [field:SerializeField] public ChatProfileContainer ChatProfileContainer { get; private set; }
     
+    public event Action onSpawnMessage;
     public event Action onEndChat;
     public event Action<Guest, bool> onAlarmStateChanged;
     
@@ -206,6 +207,7 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
         {
             ShowBubbleDelay(nowBubble, speakerName, isEnding);
         }
+        onSpawnMessage?.Invoke();
     }
 
     private void ShowPlayerText(string log, bool wasNPC = true)
@@ -231,6 +233,8 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
         AddHistory(recordingGuest, SpeakerType.PLAYER, log, isFirst);
         
         UpdateBottomEmptySpace();
+        
+        onSpawnMessage?.Invoke();
     }
     
     private void ShowEmptySpace()

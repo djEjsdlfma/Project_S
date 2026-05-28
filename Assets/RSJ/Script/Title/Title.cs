@@ -1,12 +1,13 @@
 using DG.Tweening;
 using System.Runtime.InteropServices.ComTypes;
+using LSW._02._Code.System___Manager;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class Title : MonoBehaviour
+public class Title : MonoBehaviour, ISystemManager
 {
     [SerializeField] private GameObject[] etcBackground;
     [SerializeField] private RectTransform _titleImg;
@@ -30,7 +31,11 @@ public class Title : MonoBehaviour
     private static bool isStarted = false;
     private int inputTry;
     private bool moving = false;
+    
+    public bool canEnterPassword = true;
 
+    public void Initialize(SystemManager systemManager) { }
+    
     private void Start()
     {
         if (isStarted) return;
@@ -60,7 +65,7 @@ public class Title : MonoBehaviour
 
         if (!_titleImg.gameObject.activeSelf || moving) return;
 
-        if (Keyboard.current.anyKey.wasPressedThisFrame)
+        if (Keyboard.current.anyKey.wasPressedThisFrame && canEnterPassword)
         {
             RectTransform nowImgPos;
             _passWord[inputTry].color = Color.gray3;
@@ -107,4 +112,6 @@ public class Title : MonoBehaviour
                 });
             });
     }
+
+    public void Reset() { }
 }

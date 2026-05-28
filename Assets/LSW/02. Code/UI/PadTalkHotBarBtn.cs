@@ -28,6 +28,7 @@ namespace LSW._02._Code.UI
             _action = () =>
             {
                 chatProfileContainer.EnableCurrentDayProfile();
+                chatProfileContainer.SetAllProfileClosed();
                 _bubbleManager.EnableInteract();
                 _bubbleManager.ChangeGuestDialogue(Guest.None);
             };

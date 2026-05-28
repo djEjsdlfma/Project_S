@@ -7,6 +7,7 @@ namespace LSW._02._Code.Core.Cores
 {
     public class GameStatueCore : MonoBehaviour, ICore
     {
+        // [SerializeField] private 
         [SerializeField] private int maxDay;
 
         public int CurrentDay { get; private set; } = 1;
@@ -71,7 +72,11 @@ namespace LSW._02._Code.Core.Cores
             Debug.Log($"{guestName}: {guestData.CurrentSincerityAmount}");
         }
 
-        public void Reset() { }
+        public void Reset()
+        {
+            CurrentDay = 1;
+            GuestsData.Clear();
+        }
         
     }
 
@@ -90,6 +95,7 @@ namespace LSW._02._Code.Core.Cores
         DaEunJung,        // 정다은
         YulPark,        // 박율
         SeoAhYoon,      // 윤서아
-        MyeongJinChoi   // 최명진
+        MyeongJinChoi,   // 최명진
+        Tutorial        // 튜토리얼용 캐릭
     }
 }
