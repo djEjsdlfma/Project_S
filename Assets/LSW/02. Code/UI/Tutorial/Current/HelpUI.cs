@@ -67,7 +67,7 @@ namespace LSW._02._Code.UI.Tutorial.Current
             var data = _currentHelpDataList[_currentHelpIndex];
             helpImage.sprite = data.helpImage;
             helpText.text = data.helpText;
-            pageText.SetText($"{_currentHelpIndex + 1} / {_currentHelpDataList.Count}");
+            pageText.SetText($"{_currentHelpIndex + 1} / {_currentHelpDataList.Count} page");
         }
     }
 

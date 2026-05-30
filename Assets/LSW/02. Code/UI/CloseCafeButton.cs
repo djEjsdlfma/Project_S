@@ -17,11 +17,14 @@ namespace LSW._02._Code.UI
         
         private void Awake()
         {
-            if(_gameStatueCore == null)
-                _gameStatueCore = CoreHandler.Instance.GetCore<GameStatueCore>();
-            
             _closeBtn = GetComponent<Button>();
             _closeBtn.interactable = false;
+        }
+
+        private void Start()
+        {
+            if(_gameStatueCore == null)
+                _gameStatueCore = CoreHandler.Instance.GetCore<GameStatueCore>();
             _dayChangeAction = (() => _gameStatueCore.IncreaseDay());
         }
 

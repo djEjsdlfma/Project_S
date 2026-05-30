@@ -211,11 +211,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1481912407758987299, guid: c4bbbada4345b05418a5bfd1e6e138dc, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 678.20496
+      value: 695
       objectReference: {fileID: 0}
     - target: {fileID: 1481912407758987299, guid: c4bbbada4345b05418a5bfd1e6e138dc, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -28.5
+      value: -7
       objectReference: {fileID: 0}
     - target: {fileID: 1481912407758987299, guid: c4bbbada4345b05418a5bfd1e6e138dc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -247,7 +247,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5544578863068704339, guid: c4bbbada4345b05418a5bfd1e6e138dc, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 13.59
+      value: 18.0057
       objectReference: {fileID: 0}
     - target: {fileID: 5544578863068704339, guid: c4bbbada4345b05418a5bfd1e6e138dc, type: 3}
       propertyPath: m_SizeDelta.y
@@ -270,8 +270,20 @@ PrefabInstance:
       value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 6213212266128803390, guid: c4bbbada4345b05418a5bfd1e6e138dc, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 0494a77ffa594734f9931f2a2d9380a4, type: 2}
+    - target: {fileID: 6213212266128803390, guid: c4bbbada4345b05418a5bfd1e6e138dc, type: 3}
       propertyPath: m_fontSizeBase
       value: 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 6213212266128803390, guid: c4bbbada4345b05418a5bfd1e6e138dc, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -3558238057192847427, guid: 0494a77ffa594734f9931f2a2d9380a4, type: 2}
+    - target: {fileID: 6213212266128803390, guid: c4bbbada4345b05418a5bfd1e6e138dc, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4888861384136391004, guid: c4bbbada4345b05418a5bfd1e6e138dc, type: 3}

@@ -67,9 +67,6 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
     {
         _interactDelayCoroutine = new WaitForSecondsRealtime(0.2f);
         
-        _dialogueDataCore = CoreHandler.Instance.GetCore<DialogueDataCore>();
-        
-        _gameStatueCore = CoreHandler.Instance.GetCore<GameStatueCore>();
 
         if (_savedDialogue == null)
             _savedDialogue = new Dictionary<Guest, SavedDialogueData>();
@@ -79,9 +76,13 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
 
     private void Start()
     {
+        _dialogueDataCore = CoreHandler.Instance.GetCore<DialogueDataCore>();
+        
+        _gameStatueCore = CoreHandler.Instance.GetCore<GameStatueCore>();
+        
         if (ChatProfileContainer != null)
         {
-            ChatProfileContainer.InitializeProfiles(this);
+            ChatProfileContainer.InitializeProfiles(this, _gameStatueCore);
         }
     }
 

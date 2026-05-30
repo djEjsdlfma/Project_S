@@ -712,7 +712,7 @@ MonoBehaviour:
       speaker: 1
       type: 4
       branch: 1A
-      nextKey: DAY2_NPC_REAC_003_66
+      nextKey: DAY2_PLAYER_REAC_004_67
       content: "\uADF8\uB7F0 \uB9D0\uC744 \uB4E4\uC744 \uC904 \uBAB0\uB790\uC2B5\uB2C8\uB2E4."
       sincerity: 0
     - key: DAY2_PLAYER_REAC_004_67
@@ -722,7 +722,7 @@ MonoBehaviour:
       speaker: 2
       type: 4
       branch: 1A
-      nextKey: DAY2_PLAYER_REAC_004_67
+      nextKey: DAY2_NPC_REAC_005_68
       content: "\uC65C\uC694."
       sincerity: 0
     - key: DAY2_NPC_REAC_005_68
