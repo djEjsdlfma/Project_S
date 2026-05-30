@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: d96e272f3d9719245b594c2036c1b160
+guid: 49b4b7d6cc795624c8f0f5903c67ef88
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4238830726978664285
-    second: 526663-phone-499991_0
+      213: 1973223213735912064
+    second: Feed_Yoon_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 526663-phone-499991_0
+      name: Feed_Yoon_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 4288
-        height: 2848
+        width: 4032
+        height: 3024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d57f290861a53da30800000000000000
-      internalID: 4238830726978664285
+      spriteID: 082a84dee0c426b10800000000000000
+      internalID: 1973223213735912064
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      526663-phone-499991_0: 4238830726978664285
+      Feed_Yoon_0: 1973223213735912064
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

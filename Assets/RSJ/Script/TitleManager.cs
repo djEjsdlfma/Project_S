@@ -44,6 +44,8 @@ public class TitleManager : MonoBehaviour
     private BubbleManager endAction;
     private bool _talkEnd;
 
+    private static bool _textAgain;
+
     private void Awake()
     {
         if (DataManager.Instance.CurrentData.TryGetValue("Day", out int day))
@@ -67,6 +69,7 @@ public class TitleManager : MonoBehaviour
     {
         _day++;
         _textsObj.SetText($"DAY {_day}");
+        _textAgain = false;
         DataManager.Instance.SaveData("Day", _day);
         _candleBtn.interactable = false;
         _candleLight.SetActive(false);
@@ -81,12 +84,13 @@ public class TitleManager : MonoBehaviour
 
     private void ActiveBtn()
     {
-        if(_day <=10)
+        if(_day <= 10 || _textAgain)
         {
             _candleBtn.interactable = true;
         }
         else
         {
+            _textAgain = true;
             _teaBtn.interactable = true;
         }
     }
