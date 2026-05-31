@@ -79,18 +79,6 @@ public class TitleManager : MonoBehaviour
         endAction.onEndChat += EndTalk;
     }
 
-    public void ChangeDay()
-    {
-        _day++;
-        _textsObj.SetText($"DAY {_day}");
-        _textAgain = false;
-        DataManager.Instance.SaveData("Day", _day);
-        _candleBtn.interactable = false;
-        _candleLight.SetActive(false);
-        _talkEnd = false;
-        StartCoroutine(StartFade());
-    }
-
     public void ActiveBtn(Button btn)
     {
         btn.interactable = true;
