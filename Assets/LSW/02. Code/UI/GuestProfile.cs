@@ -1,3 +1,4 @@
+using System;
 using LSW._02._Code.Core;
 using LSW._02._Code.Core.Cores;
 using TMPro;
@@ -30,7 +31,10 @@ namespace LSW._02._Code.UI
                     Guest = btn.Guest;
                 }
             }
-            
+        }
+
+        private void Start()
+        {
             int currentDay = CoreHandler.Instance.GetCore<GameStatueCore>().CurrentDay;
             int targetGuestIndex = currentDay % 5 == 0 ? 5 : currentDay % 5;
             bool isDialogueDay = (targetGuestIndex == (int)Guest);

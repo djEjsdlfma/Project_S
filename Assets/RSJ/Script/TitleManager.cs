@@ -5,6 +5,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Sockets;
+using LSW._02._Code.Core;
+using LSW._02._Code.Core.Cores;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
@@ -14,11 +16,9 @@ using UnityEngine.UI;
 public class TitleManager : MonoBehaviour
 {
     [Header("Candle")]
-    [SerializeField] private Image _fadeImg;
     [SerializeField] private GameObject _candleLight;
 
     [Header("Day")]
-    [SerializeField] private TextMeshProUGUI _textsObj;
     [SerializeField] private TextMeshProUGUI _gameDayText;
     [SerializeField] private TextMeshProUGUI _canlenderNumberText;
     [SerializeField] private TextMeshProUGUI _canlenderDayText;
@@ -26,7 +26,6 @@ public class TitleManager : MonoBehaviour
 
     [Header("tea")]
     [SerializeField] private RectTransform _teaImg;
-    [SerializeField] private Image _sceneFadeImg;
 
     [Header("button")]
     [SerializeField] private Button _candleBtn;
@@ -37,10 +36,11 @@ public class TitleManager : MonoBehaviour
     private Stack<GameObject> _prevStack = new Stack<GameObject>();
     private Stack<GameObject> _nextStack = new Stack<GameObject>();
 
+    private int _currentDay;
     private float timer = 0f;
     private GameObject nowGameObjcet;
-    private int _day = 1;
 
+    private GameStatueCore _gameStatueCore;
     private BubbleManager endAction;
     private bool _talkEnd;
 
@@ -58,9 +58,23 @@ public class TitleManager : MonoBehaviour
 
         endAction = SystemManager.Instance.GetSystemManager<BubbleManager>();
     }
+    
+    private void OnCoreDayChanged()
+    {
+        // ÏΩîÏñ¥Ïùò ÌòÑÏû¨Í∞íÏúºÎ°ú ÎèôÍ∏∞Ìôî
+        _currentDay = _gameStatueCore.CurrentDay;
+        SetCalender();
+    }
 
     private void Start()
     {
+        _gameStatueCore = CoreHandler.Instance.GetCore<GameStatueCore>();
+        if (_gameStatueCore != null)
+        {
+            _currentDay = _gameStatueCore.CurrentDay;
+            _gameStatueCore.OnDayChanged += OnCoreDayChanged; // Íµ¨ÎèÖ
+        }
+        
         endAction.onEndChat += ActiveBtn;
         endAction.onEndChat += EndTalk;
     }
@@ -84,7 +98,7 @@ public class TitleManager : MonoBehaviour
 
     private void ActiveBtn()
     {
-        if(_day <= 10 || _textAgain)
+        if(_currentDay <=10)
         {
             _candleBtn.interactable = true;
         }
@@ -93,13 +107,6 @@ public class TitleManager : MonoBehaviour
             _textAgain = true;
             _teaBtn.interactable = true;
         }
-    }
-
-    public void ChangeScene()
-    {
-        _teaBtn.interactable = false;
-        _teaImg.DOSizeDelta(new Vector2(12000f, 12000f), 0.95f);
-        StartCoroutine(StartChangeScene());
     }
 
     public void TurnOnPart(GameObject part)
@@ -120,45 +127,7 @@ public class TitleManager : MonoBehaviour
         nowGameObjcet = part;
         part.SetActive(true);
     }
-
-    private IEnumerator StartChangeScene()
-    {
-        yield return new WaitForSeconds(0.35f);
-
-        _sceneFadeImg.DOFade(1f, 0.6f)
-            .OnComplete(() => ChangeCorrectScene(_day));
-    }
-
-    private void ChangeCorrectScene(int day)
-    {
-        switch (day % 5)
-        {
-            case 1:
-                SceneManager.LoadScene("LeeJaeYoon");
-                break;
-            case 2:
-                SceneManager.LoadScene("ChoiMyeongJin");
-                break;
-            case 3:
-                SceneManager.LoadScene("ParkYool");
-                break;
-            case 4:
-                SceneManager.LoadScene("YoonSeoAh");
-                break;
-            case 0:
-                SceneManager.LoadScene("ChoiMyeongJin");
-                break;
-        }
-    }
-
-    private IEnumerator StartFade()
-    {
-        yield return new WaitForSeconds(0.2f);
-
-        _fadeImg.DOFade(1f, 0.4f)
-            .OnComplete(() => _textsObj.gameObject.SetActive(true));
-    }
-
+    
     private void Update()
     {
         FlickCandle();
@@ -167,9 +136,7 @@ public class TitleManager : MonoBehaviour
             _leftBtn.interactable = true;
         if (_nextStack.Count > 0)
             _rightBtn.interactable = true;
-
-        if (_textsObj.gameObject.activeSelf == false) return;
-
+        
         timer += Time.deltaTime;
 
         if (timer > 1f)
@@ -177,17 +144,23 @@ public class TitleManager : MonoBehaviour
             _candleLight.SetActive(true);
             SetCalender();
             timer = 0f;
-            _textsObj.gameObject.SetActive(false);
-            _fadeImg.color = new Color(0f, 0f, 0f, 0);
         }
+        Debug.Log(_currentDay = _gameStatueCore.CurrentDay);
     }
 
     private void SetCalender()
     {
-        _gameDayText.SetText($"DAY {_day}");
-        _canlenderNumberText.SetText((_day + 26 % 31) == 0 ? "1" : $"{ (_day + 26 % 31)}");
-        _canlenderDayText.SetText(CalculDay(_day / 7));
-        _canlenderMonthText.SetText(_day < 5 ? "Oct" : "Nov");
+        int day = _gameStatueCore != null ? _gameStatueCore.CurrentDay : _currentDay;
+
+        _gameDayText.SetText($"DAY {day}");
+        
+        int calNum = (day + 26) % 31;
+        if (calNum == 0) 
+            calNum = 1;
+
+        _canlenderNumberText.SetText(calNum.ToString());
+        _canlenderDayText.SetText(CalculDay(day % 7));
+        _canlenderMonthText.SetText(day < 5 ? "Oct" : "Nov");
     }
 
     public void GotoPrev()
@@ -221,7 +194,7 @@ public class TitleManager : MonoBehaviour
     {
         float noise = Mathf.PerlinNoise(Time.time * 0.7f, 0f);
 
-        // ≥Î¿Ã¡Ó ∞™¿ª -1.0 ~ 1.0 ªÁ¿Ã∑Œ ¡§±‘»≠«— µ⁄ ¿œ∑∑¿” π¸¿ß∏¶ ∞ˆ«’¥œ¥Ÿ.
+        // ÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ ÔøΩÔøΩÔøΩÔøΩ -1.0 ~ 1.0 ÔøΩÔøΩÔøΩÃ∑ÔøΩ ÔøΩÔøΩÔøΩÔøΩ»≠ÔøΩÔøΩ ÔøΩÔøΩ ÔøΩœ∑ÔøΩÔøΩÔøΩ ÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ ÔøΩÔøΩÔøΩ’¥œ¥ÔøΩ.
         float intensityFlicker = (noise - 0.5f) * 2f * 2.7f;
 
         if (_candleLight.activeSelf != false)
@@ -258,7 +231,12 @@ public class TitleManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        endAction.onEndChat -= ActiveBtn;
-        endAction.onEndChat -= EndTalk;
+        if (endAction != null)
+        {
+            endAction.onEndChat -= ActiveBtn;
+            endAction.onEndChat -= EndTalk;
+        }
+        if (_gameStatueCore != null)
+            _gameStatueCore.OnDayChanged -= OnCoreDayChanged;
     }
 }

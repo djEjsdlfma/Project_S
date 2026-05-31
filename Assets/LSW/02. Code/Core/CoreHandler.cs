@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using LSW._02._Code.Data;
 using LSW._02._Code.System___Manager;
@@ -14,9 +15,15 @@ namespace LSW._02._Code.Core
         protected override void Awake()
         {
             base.Awake();
+            
+            if (Instance != this)
+            {
+                Destroy(gameObject);
+            }
+            
             DontDestroyOnLoad(gameObject);
-            Initialize();
             SceneManager.sceneUnloaded += LoadScene;
+            Initialize();
         }
 
         private void Initialize()
@@ -28,8 +35,9 @@ namespace LSW._02._Code.Core
                     continue;
                 
                 _coreList.Add(managers[i]);
-                managers[i].Initialize(this);
             }
+            
+            _coreList.ForEach(core => core.Initialize(this));
             LoadScene(SceneManager.GetActiveScene());
         }
         
@@ -83,6 +91,10 @@ namespace LSW._02._Code.Core
         None = -1,
         DataLoadScene = 0,
         MainTabletScene = 1,
-        TutorialScene = 2
+        LeeJaeYoonScene = 2,
+        DaEunJungScene = 3,
+        YulParkScene = 4,
+        SeoAhYoonScene = 5,
+        ChoiMyeongJinScene = 6
     }
 }

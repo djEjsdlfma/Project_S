@@ -1,7 +1,6 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using LSW._02._Code.Core;
 using LSW._02._Code.Core.Cores;
 using LSW._02._Code.System___Manager;
 using UnityEngine;
@@ -14,13 +13,9 @@ namespace LSW._02._Code.UI
         private GuestProfile _currentProfile;
         
         private GameStatueCore _gameStatueCore;
-        private BubbleManager _bubbleManager;
         
         private void Awake()
         {
-            _gameStatueCore = CoreHandler.Instance.GetCore<GameStatueCore>();
-            _bubbleManager = SystemManager.Instance.GetSystemManager<BubbleManager>();
-            
             _profiles = GetComponentsInChildren<GuestProfile>().ToList();
         }
 
@@ -80,8 +75,11 @@ namespace LSW._02._Code.UI
             return _profiles.Exists(p => p.IsOpenedChat);
         }
 
-        public void InitializeProfiles(BubbleManager bubbleManager)
+        public void InitializeProfiles(BubbleManager bubbleManager, GameStatueCore gameStatueCore)
         {
+            if(_gameStatueCore == null)
+                _gameStatueCore = gameStatueCore;
+            
             if (_profiles == null || _profiles.Count == 0)
                 _profiles = GetComponentsInChildren<GuestProfile>(true).ToList();
 
@@ -102,7 +100,7 @@ namespace LSW._02._Code.UI
 
                 profile.SetProfile(lastMsg, true);
                 
-                if((int)profile.Guest > _gameStatueCore.CurrentDay)
+                if((int)profile.Guest > gameStatueCore.CurrentDay)
                     profile.gameObject.SetActive(false);
             }
         }

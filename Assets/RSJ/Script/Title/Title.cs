@@ -35,7 +35,7 @@ public class Title : MonoBehaviour, ISystemManager
     public bool canEnterPassword = true;
 
     public void Initialize(SystemManager systemManager) { }
-    
+
     private void Start()
     {
         if (isStarted) return;

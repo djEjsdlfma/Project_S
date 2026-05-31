@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using CSILib.SoundManager.RunTime;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,7 +9,7 @@ namespace LSW._02._Code.Core.Cores
     public class GameStatueCore : MonoBehaviour, ICore
     {
         // [SerializeField] private 
-        [SerializeField] private int maxDay;
+        [field:SerializeField] public int maxDay { get; private set;} = 15;
 
         public int CurrentDay { get; private set; } = 1;
         public Dictionary<Guest, GuestData> GuestsData { get; private set; } = new Dictionary<Guest, GuestData>();
@@ -17,9 +18,12 @@ namespace LSW._02._Code.Core.Cores
 
         public event Action OnDayChanged;
         
+        private Transition _transition;
+        
         public void Initialize(CoreHandler coreHandler)
         {
-            _dialogueDataCore = CoreHandler.Instance.GetCore<DialogueDataCore>();
+            _transition = coreHandler.GetCore<Transition>();
+            _dialogueDataCore = coreHandler.GetCore<DialogueDataCore>();
             if(_dialogueDataCore == null)
                 return;
             
@@ -47,11 +51,12 @@ namespace LSW._02._Code.Core.Cores
         [ContextMenu("Increase Day Debug")]
         public void IncreaseDayDebug() => IncreaseDay();
         
-        public void IncreaseDay(int increaseAmount = 1)
+        public void IncreaseDay(int increaseAmount = 5)
         {
             CurrentDay = Mathf.Clamp(CurrentDay + increaseAmount, 1, maxDay);
+            Debug.Log($"Current Day : {CurrentDay}");
             OnDayChanged?.Invoke();
-            //SceneManager.LoadScene((int)SceneType.MainTabletScene);
+            _transition.TransitionScene(SceneType.MainTabletScene, TransitionType.DayChange);
         }
 
         public void ChangeSincerityAmount(string guestName, int amount)
@@ -74,7 +79,6 @@ namespace LSW._02._Code.Core.Cores
 
         public void Reset()
         {
-            CurrentDay = 1;
             GuestsData.Clear();
         }
         
