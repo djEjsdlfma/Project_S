@@ -23,13 +23,13 @@ namespace LSW._02._Code.UI
         {
             _profiles.ForEach(profile =>
             {
-                profile.gameObject.SetActive(false);
+                // profile.gameObject.SetActive(false);
                 profile.OpenChat(false);
             });
 
             if (excludedProfile != null)
             {
-                excludedProfile.gameObject.SetActive(true);
+                // excludedProfile.gameObject.SetActive(true);
                 excludedProfile.transform.SetAsFirstSibling();
                 excludedProfile.OpenChat();
             }
@@ -56,7 +56,7 @@ namespace LSW._02._Code.UI
         {
             _profiles.ForEach(profile =>
             {
-                profile.gameObject.SetActive(profile.Guest == guest && profile.IsActivable);
+                // profile.gameObject.SetActive(profile.Guest == guest && profile.IsActivable);
             });
             _currentProfile = null;
         }

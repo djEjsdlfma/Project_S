@@ -3020,7 +3020,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3444582694974068923, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -286.5
+      value: -280.5
       objectReference: {fileID: 0}
     - target: {fileID: 3444582694974068923, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3325,7 +3325,7 @@ PrefabInstance:
     - target: {fileID: 7248145771852674068, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: profileContainer
       value: 
-      objectReference: {fileID: 1591925678}
+      objectReference: {fileID: 0}
     - target: {fileID: 7716499165625167817, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_text
       value: "\uCD5C\uADFC \uC811\uC18D 4\uC77C \uC804"
@@ -3605,7 +3605,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e3bd7d8d1ca43fea81509f9302db865, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LSW._02._Code.UI.PadTalkHotBarBtn
-  chatProfileContainer: {fileID: 1591925678}
   alarmImage: {fileID: 1146956532}
 --- !u!1 &260741745
 GameObject:
@@ -17619,7 +17618,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3444582694974068923, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -1.5
+      value: -94.5
       objectReference: {fileID: 0}
     - target: {fileID: 3444582694974068923, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -17928,7 +17927,7 @@ PrefabInstance:
     - target: {fileID: 7248145771852674068, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: profileContainer
       value: 
-      objectReference: {fileID: 1591925678}
+      objectReference: {fileID: 0}
     - target: {fileID: 7716499165625167817, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_text
       value: "\uCD5C\uADFC \uC811\uC18D 2\uC77C \uC804"
@@ -18156,7 +18155,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 0
-  m_Spacing: 92
+  m_Spacing: 90
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
@@ -18741,7 +18740,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3444582694974068923, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -191.5
+      value: -187.5
       objectReference: {fileID: 0}
     - target: {fileID: 3444582694974068923, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -19050,7 +19049,7 @@ PrefabInstance:
     - target: {fileID: 7248145771852674068, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: profileContainer
       value: 
-      objectReference: {fileID: 1591925678}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -22209,7 +22208,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3444582694974068923, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -381.5
+      value: -373.5
       objectReference: {fileID: 0}
     - target: {fileID: 3444582694974068923, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -22514,7 +22513,7 @@ PrefabInstance:
     - target: {fileID: 7248145771852674068, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: profileContainer
       value: 
-      objectReference: {fileID: 1591925678}
+      objectReference: {fileID: 0}
     - target: {fileID: 7716499165625167817, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_text
       value: "\uCD5C\uADFC \uC811\uC18D 5\uC77C \uC804"
@@ -28032,7 +28031,7 @@ PrefabInstance:
     - target: {fileID: 7248145771852674068, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: profileContainer
       value: 
-      objectReference: {fileID: 1591925678}
+      objectReference: {fileID: 0}
     - target: {fileID: 7408054966698943237, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_RaycastTarget
       value: 0

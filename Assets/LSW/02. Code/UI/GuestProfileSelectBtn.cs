@@ -10,25 +10,27 @@ namespace LSW._02._Code.UI
     public class GuestProfileSelectBtn : MonoBehaviour
     {
         [SerializeField] private GuestProfile parent;
-        [SerializeField] private ChatProfileContainer profileContainer;
         [SerializeField] private Guest guest;
         [SerializeField] private Image alarmImage;
 
         public Guest Guest => guest;
         
         private BubbleManager _bubbleManager;
+        private ChatProfileContainer _profileContainer;
         private Button _button;
         private UnityAction _action;
 
         private void Awake()
         {
-            _bubbleManager = SystemManager.Instance.GetSystemManager<BubbleManager>();
             _button = GetComponent<Button>();
+            _bubbleManager = SystemManager.Instance.GetSystemManager<BubbleManager>();
+            _profileContainer = _bubbleManager.ChatProfileContainer;
+            
             if (_button != null && guest != Guest.None && _bubbleManager != null)
             {
                 _action = (() => 
                         {
-                            profileContainer.DisableAllProfile(parent);
+                            _profileContainer.DisableAllProfile(parent);
                             _bubbleManager.ChangeGuestDialogue(guest);
                             alarmImage.gameObject.SetActive(false);
                         }

@@ -23,16 +23,15 @@ public class Feed : MonoBehaviour
     
     private void Awake()
     {
-        _bubbleManager = SystemManager.Instance.GetSystemManager<BubbleManager>();
-        if(_bubbleManager == null)
-            return;
-
-        _onUpload = () =>
-        {
-            Upload();
-            _bubbleManager.ChatProfileContainer.ChangeProfileToActivable();
-        };
-        _btn.onClick.AddListener(_onUpload);
+        // _bubbleManager = SystemManager.Instance.GetSystemManager<BubbleManager>();
+        // if(_bubbleManager == null)
+        //     return;
+        // 
+        // _onUpload = () =>
+        // {
+        //     _bubbleManager.ChatProfileContainer.ChangeProfileToActivable();
+        // };
+        // _btn.onClick.AddListener(_onUpload);
     }
 
     private void Start()
@@ -58,8 +57,8 @@ public class Feed : MonoBehaviour
 
     private void OnDisable()
     {
-        if(_bubbleManager == null)
-            return;
-        _btn.onClick.RemoveListener(_onUpload);
+        // if(_bubbleManager == null)
+        //     return;
+        // _btn.onClick.RemoveListener(_onUpload);
     }
 }
