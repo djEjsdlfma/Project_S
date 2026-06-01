@@ -9,7 +9,7 @@ namespace LSW._02._Code.UI
 {
     public class ChatProfileContainer : MonoBehaviour
     {
-        private List<GuestProfile> _profiles;
+        private List<GuestProfile> _profiles = new List<GuestProfile>();
         private GuestProfile _currentProfile;
         
         private GameStatueCore _gameStatueCore;
@@ -72,6 +72,8 @@ namespace LSW._02._Code.UI
 
         public bool IsChatActive()
         {
+            if (_profiles.Count <= 0)
+                return false;
             return _profiles.Exists(p => p.IsOpenedChat);
         }
 

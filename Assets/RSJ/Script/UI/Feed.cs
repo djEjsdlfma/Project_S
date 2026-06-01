@@ -46,6 +46,12 @@ public class Feed : MonoBehaviour
         _btn.interactable = false;
     }
 
+    public void OnUploadClickImmediately()
+    {
+        _btn.onClick.Invoke();
+        Upload();
+    }
+
     public void OnEnable()
     {
         if (_btn.interactable == false)

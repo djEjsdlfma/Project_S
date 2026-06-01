@@ -58,13 +58,6 @@ public class TitleManager : MonoBehaviour
 
         endAction = SystemManager.Instance.GetSystemManager<BubbleManager>();
     }
-    
-    private void OnCoreDayChanged()
-    {
-        // 코어의 현재값으로 동기화
-        _currentDay = _gameStatueCore.CurrentDay;
-        SetCalender();
-    }
 
     private void Start()
     {
@@ -72,7 +65,6 @@ public class TitleManager : MonoBehaviour
         if (_gameStatueCore != null)
         {
             _currentDay = _gameStatueCore.CurrentDay;
-            _gameStatueCore.OnDayChanged += OnCoreDayChanged; // 구독
         }
         
         endAction.onEndChat += ActiveBtn;
@@ -86,7 +78,7 @@ public class TitleManager : MonoBehaviour
 
     private void ActiveBtn()
     {
-        if(_currentDay <=10)
+        if(_currentDay < 11)
         {
             _candleBtn.interactable = true;
         }
@@ -224,7 +216,5 @@ public class TitleManager : MonoBehaviour
             endAction.onEndChat -= ActiveBtn;
             endAction.onEndChat -= EndTalk;
         }
-        if (_gameStatueCore != null)
-            _gameStatueCore.OnDayChanged -= OnCoreDayChanged;
     }
 }

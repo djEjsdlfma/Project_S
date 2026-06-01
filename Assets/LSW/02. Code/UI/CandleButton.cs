@@ -21,7 +21,10 @@ namespace LSW._02._Code.UI
         private void Start()
         {
             _gameStatueCore = CoreHandler.Instance.GetCore<GameStatueCore>();
-            _button.onClick.AddListener(_gameStatueCore.IncreaseDayDebug);
+            _button.onClick.AddListener(() =>
+            {
+                _gameStatueCore.IncreaseDayDebug();
+            });
         }
 
         private void OnDestroy()
