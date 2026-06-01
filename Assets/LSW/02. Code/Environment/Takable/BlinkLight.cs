@@ -78,5 +78,10 @@ namespace LSW._02._Code.Environment.Takable
         {
             return false;
         }
+
+        public bool CanBeTaken()
+        {
+            return !_wasTaken;
+        }
     }
 }

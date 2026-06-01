@@ -121,5 +121,10 @@ namespace LSW._02._Code.Player
             
             return Mathf.Max(0f, (stat.moveSpeed + _speedModifier) * _trapSpeedMultiplier);
         }
+
+        public void SetStop(bool stop)
+        {
+            InputCompo.EnableAllInput(!stop);
+        }
     }
 }

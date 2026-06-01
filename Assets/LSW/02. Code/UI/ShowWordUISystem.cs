@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
@@ -16,6 +17,8 @@ namespace LSW._02._Code.UI
         
         private bool _canShowWord = true;
         private WaitForSeconds _mainTainSec;
+        
+        public event Action<bool> OnEndShowWord;
 
         public void Initialize(SystemManager systemManager)
         {
@@ -44,7 +47,8 @@ namespace LSW._02._Code.UI
                 yield return _mainTainSec;
                 yield return wordUIText.DOFade(0, textHideDuration).WaitForCompletion();
             }
-    
+            
+            OnEndShowWord?.Invoke(true);
             _canShowWord = true;
         }
 

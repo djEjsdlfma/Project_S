@@ -89,7 +89,7 @@ namespace Moon._01.Script.Cameras
                     if (IsMoreThanHalfInside(hit, cameraBounds, camObj))
                     {
                         camObjs.Add(camObj.Name);
-                        if(camObj.TryGetComponent(out ITakable takable))
+                        if(camObj.TryGetComponent(out ITakable takable) && takable.CanBeTaken())
                         {
                             takable.Take();
                         }

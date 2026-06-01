@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using CSILib.SoundManager.RunTime;
+using Moon._01.Script.Datas;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -54,7 +55,6 @@ namespace LSW._02._Code.Core.Cores
         public void IncreaseDay(int increaseAmount = 5)
         {
             CurrentDay = Mathf.Clamp(CurrentDay + increaseAmount, 1, maxDay);
-            Debug.Log($"Current Day : {CurrentDay}");
             OnDayChanged?.Invoke();
             _transition.TransitionScene(SceneType.MainTabletScene, TransitionType.DayChange);
         }

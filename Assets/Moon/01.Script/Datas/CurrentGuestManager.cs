@@ -8,7 +8,7 @@ namespace Moon._01.Script.Datas
     {
         public string CurrentGuest { get; private set; }
         
-        public readonly string[] C = { "Character_1" , "Character_2" , "Character_3" , "Character_4" , "Character_5" };
+        public static readonly string[] C = { "LeeJaeYun" , "NaSohee" , "ParkYul" , "ChoiMyeongJin" , "JungDaEun" };
 
         private void Awake()
         {

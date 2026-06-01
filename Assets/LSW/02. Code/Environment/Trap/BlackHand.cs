@@ -38,5 +38,10 @@ namespace LSW._02._Code.Environment.Trap
         {
             return false;
         }
+
+        public bool CanBeTaken()
+        {
+            return !_isTaken;
+        }
     }
 }

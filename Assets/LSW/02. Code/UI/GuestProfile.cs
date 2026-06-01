@@ -1,4 +1,3 @@
-using System;
 using LSW._02._Code.Core;
 using LSW._02._Code.Core.Cores;
 using TMPro;

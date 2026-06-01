@@ -21,6 +21,7 @@ namespace Moon._01.Script.Cameras.Puzzle.Weight
         private ContactFilter2D _contactFilter;
 
         private int LSWCORE = 0;
+        private bool balanced = false;
 
         private void Start()
         {
@@ -35,8 +36,9 @@ namespace Moon._01.Script.Cameras.Puzzle.Weight
                 _timer = 0f;
                 int currentWeight = CalculateStackedWeight();
                 LSWCORE = currentWeight;
-                if (currentWeight == balancedWeight)
+                if (currentWeight == balancedWeight && !balanced)
                 {
+                    balanced = true;
                     balancedEvent?.Invoke();
                 }
             }

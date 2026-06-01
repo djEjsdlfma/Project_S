@@ -35,7 +35,7 @@ namespace Moon._01.Script.Datas
         
         private void Awake()
         {
-            string[] C = guestScriptFinder.GetTarget<CurrentGuestManager>().C;
+            string[] C = CurrentGuestManager.C;
 
             foreach (var key in C)
             {

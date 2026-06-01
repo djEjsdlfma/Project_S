@@ -125,7 +125,6 @@ public class TitleManager : MonoBehaviour
             SetCalender();
             timer = 0f;
         }
-        Debug.Log(_currentDay = _gameStatueCore.CurrentDay);
     }
 
     private void SetCalender()

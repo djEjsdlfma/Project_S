@@ -71,8 +71,9 @@ namespace Moon._01.Script.Cameras
                 coloredObject
             );
 
-            if (items == null || items.Length == 0) return;
-
+            if (items == null || items.Length == 0)
+                return;
+            
             foreach (var item in items)
             {
                 if (item == null) continue;

@@ -54,6 +54,21 @@ namespace LSW._02._Code.System___Manager.PlayerSystem
         {
             OnJumpingAction?.Invoke();
         }
+        
+        public void EnableAllInput(bool enable)
+        {
+            if (inputReader == null)
+                return;
+
+            if (enable)
+            {
+                SubscribeInputEvents();
+            }
+            else
+            {
+                OnDisable();
+            }
+        }
 
         private void OnDisable()
         {

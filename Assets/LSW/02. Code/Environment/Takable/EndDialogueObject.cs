@@ -22,12 +22,6 @@ namespace LSW._02._Code.Environment.Takable
 
         public void Take()
         {
-            if(IsAlreadyTook)
-                return;
-            
-            if(!_showWordUISystem.StartShowWord(wordList))
-                return;
-            
             IsAlreadyTook = true;
             takePictureEvent?.Invoke(this, wordList);
         }
@@ -36,6 +30,9 @@ namespace LSW._02._Code.Environment.Takable
         {
             return true;
         }
+        
+        public bool CanBeTaken()
+            => !IsAlreadyTook && _showWordUISystem.StartShowWord(wordList);
 
         private void OnDestroy()
         {
