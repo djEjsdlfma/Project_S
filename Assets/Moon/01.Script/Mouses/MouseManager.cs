@@ -7,8 +7,6 @@ namespace Moon._01.Script.Mouses
 {
     public class MouseManager : MonoBehaviour , ISystemManager
     {
-        // [SerializeField] private Image mouseImg;
-        // [SerializeField] private bool mouseVisible = true;
         
         [field:SerializeField]public float MouseSensitivity { get; set; } = 1f;
         
@@ -30,7 +28,6 @@ namespace Moon._01.Script.Mouses
             
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Confined;
-            // mouseImg.gameObject.SetActive(mouseVisible);
         }
         
         public void Reset()
@@ -76,14 +73,8 @@ namespace Moon._01.Script.Mouses
             
             Mouse.current.WarpCursorPosition(ExactScreenPos);
             _lastWarpedPos = ExactScreenPos;
-
-            // if (mouseImg != null && mouseVisible)
-            // {
-            //     mouseImg.transform.position = ExactScreenPos;
-            // }
         }
         
-        //마우스 이동
         public void WarpToScreenPosition(Vector2 screenPos)
         {
             if(!_isNoStoped)
@@ -95,7 +86,6 @@ namespace Moon._01.Script.Mouses
             ExactScreenPos = screenPos;
         }
         
-        //마우스 이동량 (스크린 좌표)
         public Vector2 GetRealMouseDelta()
         {
             if (Mouse.current == null || !_isInitialized) return Vector2.zero;
