@@ -10,9 +10,9 @@ namespace LSW._02._Code.UI
 {
     public class PadTalkHotBarBtn : MonoBehaviour
     {
-        [SerializeField] private ChatProfileContainer chatProfileContainer;
         [SerializeField] private Image alarmImage;
         
+        private ChatProfileContainer chatProfileContainer;
         private Button _button;
         private BubbleManager _bubbleManager;
         private UnityAction _action;
@@ -20,6 +20,7 @@ namespace LSW._02._Code.UI
         private void Awake()
         {
             _bubbleManager = SystemManager.Instance.GetSystemManager<BubbleManager>();
+            chatProfileContainer = _bubbleManager.ChatProfileContainer;
             _button = GetComponent<Button>();
             
             if(_button == null || chatProfileContainer == null || _bubbleManager == null)
@@ -28,6 +29,7 @@ namespace LSW._02._Code.UI
             _action = () =>
             {
                 chatProfileContainer.EnableCurrentDayProfile();
+                chatProfileContainer.SetAllProfileClosed();
                 _bubbleManager.EnableInteract();
                 _bubbleManager.ChangeGuestDialogue(Guest.None);
             };

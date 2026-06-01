@@ -33,6 +33,7 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
     [SerializeField] private ScrollRect scrollRect;
     [field:SerializeField] public ChatProfileContainer ChatProfileContainer { get; private set; }
     
+    public event Action onSpawnMessage;
     public event Action onEndChat;
     public event Action<Guest, bool> onAlarmStateChanged;
     
@@ -66,9 +67,6 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
     {
         _interactDelayCoroutine = new WaitForSecondsRealtime(0.2f);
         
-        _dialogueDataCore = CoreHandler.Instance.GetCore<DialogueDataCore>();
-        
-        _gameStatueCore = CoreHandler.Instance.GetCore<GameStatueCore>();
 
         if (_savedDialogue == null)
             _savedDialogue = new Dictionary<Guest, SavedDialogueData>();
@@ -78,9 +76,13 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
 
     private void Start()
     {
+        _dialogueDataCore = CoreHandler.Instance.GetCore<DialogueDataCore>();
+        
+        _gameStatueCore = CoreHandler.Instance.GetCore<GameStatueCore>();
+        
         if (ChatProfileContainer != null)
         {
-            ChatProfileContainer.InitializeProfiles(this);
+            ChatProfileContainer.InitializeProfiles(this, _gameStatueCore);
         }
     }
 
@@ -206,6 +208,7 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
         {
             ShowBubbleDelay(nowBubble, speakerName, isEnding);
         }
+        onSpawnMessage?.Invoke();
     }
 
     private void ShowPlayerText(string log, bool wasNPC = true)
@@ -231,6 +234,8 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
         AddHistory(recordingGuest, SpeakerType.PLAYER, log, isFirst);
         
         UpdateBottomEmptySpace();
+        
+        onSpawnMessage?.Invoke();
     }
     
     private void ShowEmptySpace()

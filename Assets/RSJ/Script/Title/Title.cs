@@ -1,12 +1,15 @@
+using System.Globalization;
 using DG.Tweening;
 using System.Runtime.InteropServices.ComTypes;
+using LSW._02._Code.System___Manager;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class Title : MonoBehaviour
+public class Title : MonoBehaviour, ISystemManager
 {
     [SerializeField] private GameObject[] etcBackground;
     [SerializeField] private RectTransform _titleImg;
@@ -30,6 +33,24 @@ public class Title : MonoBehaviour
     private static bool isStarted = false;
     private int inputTry;
     private bool moving = false;
+
+    private readonly KeyControl[] _digitkeys = new KeyControl[10]
+    {
+        Keyboard.current.digit0Key,
+        Keyboard.current.digit1Key,
+        Keyboard.current.digit2Key,
+        Keyboard.current.digit3Key,
+        Keyboard.current.digit4Key,
+        Keyboard.current.digit5Key,
+        Keyboard.current.digit6Key,
+        Keyboard.current.digit7Key,
+        Keyboard.current.digit8Key,
+        Keyboard.current.digit9Key
+    };
+    
+    public bool canEnterPassword = true;
+
+    public void Initialize(SystemManager systemManager) { }
 
     private void Start()
     {
@@ -60,7 +81,7 @@ public class Title : MonoBehaviour
 
         if (!_titleImg.gameObject.activeSelf || moving) return;
 
-        if (Keyboard.current.anyKey.wasPressedThisFrame)
+        if (WaNumberKeyPressed() && canEnterPassword)
         {
             RectTransform nowImgPos;
             _passWord[inputTry].color = Color.gray3;
@@ -86,6 +107,23 @@ public class Title : MonoBehaviour
         }
     }
 
+    private bool WaNumberKeyPressed()
+    {
+        var keyboard = Keyboard.current;
+        if (keyboard == null) 
+            return false;
+        
+        for (int i = 0; i < 10; i++)
+        {
+            if (_digitkeys[i].wasPressedThisFrame)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     private void BlinkText(bool isTurntonInvisible)
     {
         _guidText.DOFade(isTurntonInvisible ? 0.5f : 1f, 2.5f)
@@ -107,4 +145,6 @@ public class Title : MonoBehaviour
                 });
             });
     }
+
+    public void Reset() { }
 }

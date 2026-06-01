@@ -1,3 +1,4 @@
+using System;
 using LSW._02._Code.Core;
 using LSW._02._Code.Core.Cores;
 using TMPro;
@@ -11,6 +12,7 @@ namespace LSW._02._Code.UI
         [SerializeField] private Image currentStatueImage;
         [SerializeField] private Image alarmImage;
         [SerializeField] private TextMeshProUGUI lastMessageText;
+        [SerializeField] private TextMeshProUGUI onlineOpenedText;
         [SerializeField] private TextMeshProUGUI lastOnlineText;
         
         [field: SerializeField] public Guest Guest { get; private set; }
@@ -20,6 +22,7 @@ namespace LSW._02._Code.UI
 
         private void Awake()
         {
+            onlineOpenedText.SetText("온라인");
             if (Guest == Guest.None)
             {
                 var btn = GetComponentInChildren<GuestProfileSelectBtn>();
@@ -28,7 +31,10 @@ namespace LSW._02._Code.UI
                     Guest = btn.Guest;
                 }
             }
-            
+        }
+
+        private void Start()
+        {
             int currentDay = CoreHandler.Instance.GetCore<GameStatueCore>().CurrentDay;
             int targetGuestIndex = currentDay % 5 == 0 ? 5 : currentDay % 5;
             bool isDialogueDay = (targetGuestIndex == (int)Guest);
@@ -41,6 +47,9 @@ namespace LSW._02._Code.UI
         public void OpenChat(bool isOpened = true)
         {
             IsOpenedChat = true;
+            lastMessageText.gameObject.SetActive(!isOpened);
+            onlineOpenedText.gameObject.SetActive(isOpened);
+            lastOnlineText.gameObject.SetActive(!isOpened);
         }
         
         public void SetProfile(string lastMessage, bool hasAlarm)
