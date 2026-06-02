@@ -1,5 +1,6 @@
-using Moon._01.Script.Datas;
-using Unity.XR.GoogleVr;
+using LSW._02._Code.Core;
+using LSW._02._Code.Core.Cores;
+using LSW._02._Code.UI;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,10 +8,14 @@ public class PhotoUI : MonoBehaviour
 {
     [SerializeField] private Button[] _folders;
     [SerializeField] private GameObject _text;
-    [SerializeField] private GameObject _photo;
+    [SerializeField] private PhotoContainer photo;
 
+    private GameStatueCore _gameStatueCore;
+    
     private void Start()
     {
+        _gameStatueCore = CoreHandler.Instance.GetCore<GameStatueCore>();
+        
         for(int i = 0; i < _folders.Length; i++)
         {
             _folders[i].gameObject.SetActive(false);
@@ -19,14 +24,12 @@ public class PhotoUI : MonoBehaviour
 
     public void ActiveFolder()
     {
-        if (DataManager.Instance.CurrentData.TryGetValue("Day", out int day))
+        for (int i = 0; i <= _gameStatueCore.CurrentDay - 2 && i < 6; i++)
         {
-            if (day - 2 >= 5) return;
-
-            for (int i = 0; i <= day - 2; i++)
-            {
-                _folders[i].gameObject.SetActive(true);
-            }
+            if(_folders[i] == null)
+                continue;
+            
+            _folders[i].gameObject.SetActive(true);
         }
     }
 
@@ -36,8 +39,8 @@ public class PhotoUI : MonoBehaviour
         {
             _folders[i].gameObject.SetActive(false);
         }
-
-        _text.SetActive(true);
-        _photo.SetActive(true);
+        
+        _text.SetActive(photo.PhotoCount == 0);
+        photo.gameObject.SetActive(true);
     }
 }

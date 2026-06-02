@@ -4,5 +4,6 @@ namespace LSW._02._Code.Environment.Takable
     {
         public void Take();
         public bool IsDisableCapture();
+        public bool CanBeTaken();
     }
 }

@@ -3,6 +3,7 @@ using DG.Tweening;
 using LSW._02._Code.Environment.InteractableObject;
 using LSW._02._Code.Environment.Takable;
 using LSW._02._Code.System___Manager;
+using LSW._02._Code.UI;
 using Moon._01.Script.Cameras;
 using Moon._01.Script.Mouses;
 using MoonLib.ScriptFinder_Pro.RunTime.DevLogs;
@@ -65,6 +66,9 @@ namespace RSJ.Script.Camera
         private UnityEngine.Camera _main;
         private UnityEngine.Camera _camera;
 
+        private MouseManager _mouseManager;
+        private ShowWordUISystem _showWordUISystem;
+
         private bool _copying = false;
         private readonly Dictionary<GameObject, InteractTarget> _interactObjs = new();
     
@@ -76,6 +80,8 @@ namespace RSJ.Script.Camera
             _camera = UnityEngine.Camera.main;
             _main = UnityEngine.Camera.main;
             myPosition = GetComponent<RectTransform>();
+            _mouseManager = SystemManager.Instance.GetSystemManager<MouseManager>();
+            _showWordUISystem = SystemManager.Instance.GetSystemManager<ShowWordUISystem>();
 
             input.OnCaptureAction += HandlePhotoInput;
             input.OnCopyAction += HandleCaptureInput;
@@ -302,12 +308,13 @@ namespace RSJ.Script.Camera
         {
             if (camerasFinder.GetTarget<SetCamBlur>(false) is var blur && blur && blur.BlurActive)
                 return;
+            
             if(!CanCapture)
                 return;
-        
+
             if (CheckAndTakeObject())
                 return; 
-        
+
             if (!camerasFinder.GetTarget<PhotoStorage>().CanPhoto())
                 return;
         
@@ -337,10 +344,13 @@ namespace RSJ.Script.Camera
             {
                 if (item == null) continue;
             
-                if (item.TryGetComponent(out ITakable takable))
+                if (item.TryGetComponent(out ITakable takable) && takable.CanBeTaken())
                 {
                     if (takable.IsDisableCapture())
+                    {
+                        _showWordUISystem.OnEndShowWord += SetCanCapture;
                         CanCapture = false;
+                    }
                     takable.Take();
                     return true;
                 }
@@ -759,6 +769,7 @@ namespace RSJ.Script.Camera
         public void SetCanCapture(bool b)
         {
             CanCapture = b;
+            _showWordUISystem.OnEndShowWord -= SetCanCapture;
         }
 
         private void OnDrawGizmosSelected()
