@@ -281,6 +281,7 @@ GameObject:
   - component: {fileID: 8099547867320642592}
   - component: {fileID: 2583914252639114476}
   - component: {fileID: 6650893368154736002}
+  - component: {fileID: 697971243837452932}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -369,6 +370,19 @@ MonoBehaviour:
   camerasFinder: {fileID: 11400000, guid: 51fc18d6fb6fed540bea9fce565207ec, type: 2}
   input: {fileID: 11400000, guid: 115a39429ad911340b5e5aa94a8ec03f, type: 2}
   _cameraMove: {fileID: 0}
+--- !u!114 &697971243837452932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5146406807659811186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4c7c43b4c8fd15429b4c1a2abe320bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Moon._01.Script.Mouses.MouseVisible
+  visible: 0
 --- !u!1 &7492650314901606977
 GameObject:
   m_ObjectHideFlags: 0
