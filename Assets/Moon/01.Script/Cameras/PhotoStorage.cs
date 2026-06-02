@@ -43,13 +43,6 @@ namespace Moon._01.Script.Cameras
         private void Awake()
         {
             Reset();
-            if(DataManager.Instance.CurrentData.TryGetValue("PhotoUpgrade", out int value))
-            {
-                if (value >= 1)
-                {
-                    MaxPhoto = 6;
-                }
-            }
         }
 
         public void Reset()
