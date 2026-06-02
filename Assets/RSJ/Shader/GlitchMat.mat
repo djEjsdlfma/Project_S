@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: GlitchMat
-  m_Shader: {fileID: 4800000, guid: 21f24928f65ec644ea35cffc8266370c, type: 3}
+  m_Shader: {fileID: 4800000, guid: 52811bf673ebf3744b61985d424fe33e, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
