@@ -114,6 +114,12 @@ namespace LSW._02._Code.Player
             _trapSpeedMultiplier = multiplier;
         }
 
+        public void AddSpeedModifier(float amount)
+        {
+            if((_speedModifier + amount) > 0.6f)
+                _speedModifier += amount;
+        }
+
         public float GetCurrentMoveSpeed()
         {
             if (stat == null)

@@ -103,7 +103,7 @@ namespace RSJ.Script.Camera
             // 복사 중일 때만 본인 스크립트에서 오브젝트를 이동
             if (_copying)
             {
-                Vector2 worldMousePos = _mouseManager ? _main.ScreenToWorldPoint(_mouseManager.ExactScreenPos) : input.MousePos;
+                Vector2 worldMousePos = input.MousePos;
                 foreach (var target in _interactObjs)
                 {
                     target.Value.ChangeTransform(worldMousePos);
@@ -126,7 +126,7 @@ namespace RSJ.Script.Camera
         {
             if (camerasFinder.GetTarget<SetCamBlur>(false) is var blur && blur && blur.BlurActive)
                 return;
-            HandleActionInput(_mouseManager ? _main.ScreenToWorldPoint(_mouseManager.ExactScreenPos) : input.MousePos);
+            HandleActionInput(input.MousePos);
         }
 
         private void HandleActionInput(Vector2 worldMousePos)
@@ -386,7 +386,7 @@ namespace RSJ.Script.Camera
 
         private void UpdateMouseFollowerUI()
         {
-            Vector2 mousePos = _mouseManager.ExactScreenPos;
+            Vector2 mousePos = input.MousePos;
             _position = new Vector3(
                 mousePos.x - (myPosition.sizeDelta.x / 2),
                 mousePos.y - (myPosition.sizeDelta.y / 2),
