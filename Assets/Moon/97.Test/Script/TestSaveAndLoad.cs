@@ -15,6 +15,7 @@ namespace Moon._97.Test.Script
         private void Awake()
         {
             DataManager.Instance.LoadSlot(slot);
+            DataManager.Instance.LoadImg(slot);
         }
 
         [ContextMenu("Save")]

@@ -8,6 +8,8 @@ namespace LSW._02._Code.UI
 {
     public class PhotoContainer : MonoBehaviour
     {
+        public int PhotoCount { get; private set; }
+        
         private Image[] _photoImages;
 
         private void Start()
@@ -15,8 +17,10 @@ namespace LSW._02._Code.UI
             _photoImages = GetComponentsInChildren<Image>();
             if (DataManager.Instance.TryGetValue(CurrentGuestManager.C[0], out List<Texture2D> photo))
             {
+                PhotoCount = photo.Count;
                 SetPhoto(photo.ToArray());
             }
+            gameObject.SetActive(false);
         }
 
         public void SetPhoto(Texture2D[] photo)
@@ -26,12 +30,15 @@ namespace LSW._02._Code.UI
             
             for (int i = 0; i < _photoImages.Length; i++)
             {
-                _photoImages[i].sprite = Sprite.Create(photo[i], new Rect(0, 0, photo[i].width, photo[i].height), Vector2.zero);
+                _photoImages[i].sprite = Sprite.Create(photo[i], new Rect(0, 0, photo[i].width, photo[i].height), new Vector2(0.5f, 0.5f));
             }
         }
 
         private void OnDestroy()
         {
+            if (_photoImages.Length <= 0) 
+                return;
+            
             for (int i = _photoImages.Length - 1; i >= 0; i--)
             {
                 Destroy(_photoImages[i].sprite);
