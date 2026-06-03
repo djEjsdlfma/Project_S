@@ -138,18 +138,18 @@ namespace Moon._01.Script.Datas
 
         #region Load
 
-        public DynamicSaveData LoadSlot(int slot)
+        public void LoadSlot(int slot)
         {
-            if(slot < 0 || slot >= MaxSaveSlot) return null;
+            if(slot < 0 || slot >= MaxSaveSlot) return;
             CurrentData.Load($"{_path}/save_{slot}.json");
+            CurrentImage.Load($"{_path}/saveImg_{slot}.json", $"{_imgPath}/saveImgFolder_{slot}");
             CurrentSaveSlot = slot;
-            return CurrentData;
         }
         
-        public DynamicSaveData LoadAutoSave()
+        public void LoadAutoSave()
         {
             CurrentData.Load($"{_path}/save_auto.json");
-            return CurrentData;
+            CurrentImage.Load($"{_path}/saveImg_auto.json", $"{_imgPath}/saveImgFolder_auto");
         }
                 
         public List<DynamicSaveData> GetAllData()
@@ -163,20 +163,7 @@ namespace Moon._01.Script.Datas
             }
             return list;
         }
-
-        public ImageSaveData LoadImg(int slot)
-        {
-            if(slot < 0 || slot >= MaxSaveSlot) return null;
-            CurrentImage.Load($"{_path}/saveImg_{slot}.json", $"{_imgPath}/saveImgFolder_{slot}");
-            return CurrentImage;
-        }
-
-        public ImageSaveData LoadAutoImgSave()
-        {
-            CurrentImage.Load($"{_path}/saveImg_auto.json", $"{_imgPath}/saveImgFolder_auto");
-            return CurrentImage;
-        }
-
+        
         public List<ImageSaveData> GetAllImgData()
         {
             List<ImageSaveData> list = new List<ImageSaveData>();

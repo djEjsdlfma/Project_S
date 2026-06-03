@@ -34,21 +34,11 @@ namespace Moon._01.Script.Cameras
     }
     public class PhotoStorage : MonoBehaviour
     {
-        private List<Photo> _photos = new List<Photo>();
+        private static List<Photo> _photos = new List<Photo>();
         
         public int PhotoMany => _photos.Count;
 
         public int MaxPhoto { get; private set; } = 5;
-
-        private void Awake()
-        {
-            Reset();
-        }
-
-        public void Reset()
-        {
-            _photos.Clear();
-        }
         
         public void AddPhoto(Photo photo)
         {
@@ -68,7 +58,14 @@ namespace Moon._01.Script.Cameras
                 {
                     Destroy(photo.Image);
                 }
+                photo.CamObjs?.Clear();
             }
+            _photos.Clear();
+        }
+
+        public void OnApplicationQuit()
+        {
+            Destroyed();
         }
 
         public bool CanPhoto()
