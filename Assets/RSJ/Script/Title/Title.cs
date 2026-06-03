@@ -34,23 +34,26 @@ public class Title : MonoBehaviour, ISystemManager
     private int inputTry;
     private bool moving = false;
 
-    private readonly KeyControl[] _digitkeys = new KeyControl[10]
-    {
-        Keyboard.current.digit0Key,
-        Keyboard.current.digit1Key,
-        Keyboard.current.digit2Key,
-        Keyboard.current.digit3Key,
-        Keyboard.current.digit4Key,
-        Keyboard.current.digit5Key,
-        Keyboard.current.digit6Key,
-        Keyboard.current.digit7Key,
-        Keyboard.current.digit8Key,
-        Keyboard.current.digit9Key
-    };
+    private KeyControl[] _digitkeys;
     
     public bool canEnterPassword = true;
 
-    public void Initialize(SystemManager systemManager) { }
+    public void Initialize(SystemManager systemManager)
+    {
+        _digitkeys = new KeyControl[10]
+        {
+            Keyboard.current.digit0Key,
+            Keyboard.current.digit1Key,
+            Keyboard.current.digit2Key,
+            Keyboard.current.digit3Key,
+            Keyboard.current.digit4Key,
+            Keyboard.current.digit5Key,
+            Keyboard.current.digit6Key,
+            Keyboard.current.digit7Key,
+            Keyboard.current.digit8Key,
+            Keyboard.current.digit9Key
+        };
+    }
 
     private void Start()
     {

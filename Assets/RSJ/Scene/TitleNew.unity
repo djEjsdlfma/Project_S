@@ -8233,6 +8233,7 @@ MonoBehaviour:
   SelectionTrm: {fileID: 1311137864}
   NPCChatting: {fileID: 164034508108199199, guid: 7404b72f9a7138f4c942fcca0d6f5044, type: 3}
   Empty: {fileID: 2023223998259379088, guid: ac67ec8b252bd554da770661b20dc500, type: 3}
+  imageSelectionUI: {fileID: 2029456491}
   _container: {fileID: 2097146653}
   scrollRect: {fileID: 1085202866}
   <ChatProfileContainer>k__BackingField: {fileID: 1591925678}
@@ -9004,6 +9005,7 @@ GameObject:
   - component: {fileID: 609706997}
   - component: {fileID: 609706998}
   - component: {fileID: 609706999}
+  - component: {fileID: 609707000}
   m_Layer: 5
   m_Name: Content
   m_TagString: Untagged
@@ -9075,6 +9077,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.ContentSizeFitter
   m_HorizontalFit: 1
   m_VerticalFit: 0
+--- !u!114 &609707000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 609706996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85176a634c064c57a7b5d3a8c9141ad2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LSW._02._Code.UI.PhotoSelectionUI
+  maxSelectedPhoto: 3
+  uploadPhotosButton: {fileID: 20833077}
+  uploadPhotosBtnEnableColor: {r: 1, g: 1, b: 1, a: 1}
+  uploadPhotosBtnDisableColor: {r: 0.6745098, g: 0.6745098, b: 0.6745098, a: 1}
 --- !u!1 &613201492
 GameObject:
   m_ObjectHideFlags: 0
@@ -29858,6 +29876,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 609706997}
     m_Modifications:
+    - target: {fileID: 1365652489781006191, guid: 6bff314f1785ab941b8808370f7b80d5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4450753985602339765, guid: 6bff314f1785ab941b8808370f7b80d5, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

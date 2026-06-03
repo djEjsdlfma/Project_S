@@ -122,6 +122,12 @@ namespace LSW._02._Code.Core.Cores
 
             return false;
         }
+
+        public Guest GetGuestByDay()
+        {
+            int day = _gameStatueCore.CurrentDay;
+            return (Guest)(day % 5);
+        }
         
         public void SetDatabase(DialogueDatabaseSo database) => Database = database;
 

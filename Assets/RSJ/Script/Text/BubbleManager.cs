@@ -9,12 +9,10 @@ using LSW._02._Code.System___Manager;
 using LSW._02._Code.UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
 {
-    //ó??
     [SerializeField] private BubbleText NPCFirstText;
     [SerializeField] private BubbleText PlayerFirstText;
 
@@ -28,6 +26,8 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
     //???? ??? ??
     [SerializeField] private Chatting NPCChatting;
     [SerializeField] private GameObject Empty;
+    
+    [SerializeField] private RectTransform imageSelectionUI;
 
     [SerializeField] private RectTransform _container;
     [SerializeField] private ScrollRect scrollRect;
@@ -45,7 +45,7 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
     private bool wasChatNpc;
     private GameObject nowBubble;
 
-    private readonly List<ChoiceBubbleData> _currentChoiceData = new List<ChoiceBubbleData>();
+    private List<DialogueEntry> _currentChoiceEntries = new List<DialogueEntry>();
     
     private List<GameObject> _allDialogueUI = new List<GameObject>();
     private Guest _currentGuest;
@@ -58,16 +58,12 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
     private Chatting _currentLoading;
     private bool wasEndChat = false;
 
-    private string tempTextData;
-    private bool tempAlarmValue;
-
     public bool CanInteract { get; private set; }
     
     public void Initialize(SystemManager _)
     {
         _interactDelayCoroutine = new WaitForSecondsRealtime(0.2f);
         
-
         if (_savedDialogue == null)
             _savedDialogue = new Dictionary<Guest, SavedDialogueData>();
         
@@ -139,7 +135,6 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
             if (ChatProfileContainer != null)
                 ChatProfileContainer.SetCurrentProfile(data.content, !isImmediate && !isEnding);
 
-
             if (!isImmediate && !isEnding)
                 onAlarmStateChanged?.Invoke(_currentGuest, true);
         }
@@ -163,7 +158,6 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
 
         StartCoroutine(UpdateUILayout());
     }
-
 
     private void ShowNPCText(string log, bool wasNPC, string speakerName, bool isEnding, bool isImmediate = false)
     {
@@ -190,7 +184,7 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
         }
 
         nowBubble = text.gameObject;
-        AddHistory(recordingGuest, SpeakerType.NPC, log, isFirst);
+        AddHistory(recordingGuest, log);
         
         if (isImmediate)
         {
@@ -213,7 +207,7 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
 
     private void ShowPlayerText(string log, bool wasNPC = true)
     {
-        Guest recordingGuest = _currentGuest; // 현재 시점의 게스트 기록
+        Guest recordingGuest = _currentGuest;
         bool isFirst = wasNPC;
 
         if (isFirst && _allDialogueUI.Count > 0)
@@ -224,14 +218,13 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
         wasChatNpc = false;
 
         BubbleText prefab = isFirst ? PlayerFirstText : PlayerText;
-
         BubbleText text = Instantiate(prefab, _container);
         _allDialogueUI.Add(text.gameObject);
 
         text.InitBubble(log, 1f);
         text.InitScale();
 
-        AddHistory(recordingGuest, SpeakerType.PLAYER, log, isFirst);
+        AddHistory(recordingGuest, log);
         
         UpdateBottomEmptySpace();
         
@@ -321,7 +314,7 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
         }
 
         wasEndChat = true;
-        DisableInteract(); // 확실하게 잠금
+        DisableInteract();
         onEndChat?.Invoke();
         onAlarmStateChanged?.Invoke(_currentGuest, false);
     }
@@ -331,17 +324,14 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
         if(!_dialogueDataCore.GetAllDialogueEntry(_currentGuestSheetName, out var allData))
             return;
     
-        // 🛠️ 추가: 현재 인게임 진짜 날짜를 기획 시트용 순번(1, 2, 3...)으로 변환
         int currentDay = _gameStatueCore.CurrentDay;
         int order = ((currentDay - 1) / 5) + 1;
     
-        // 🛠️ 수정: x.day 조건을 진짜 날짜(currentDay)가 아니라 변환된 순번(order)으로 검사합니다.
         var choices = allData.Values
             .Where(x => x.day == order && x.seq == seqNum && x.type == DialogueType.Select)
             .OrderBy(x => x.id)
             .ToList();
 
-        // 안전장치: 시트 데이터가 꼬여서 선택지를 못 찾아왔을 때 에러 방지
         if (choices.Count == 0)
         {
             Debug.LogError($"[Choice Error] {currentDay}일차(시트순번:{order}), Seq {seqNum}번에 해당하는 선택지 데이터를 시트에서 찾을 수 없습니다!");
@@ -352,18 +342,9 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
         }
 
         SelectionTrm.SetActive(true);
-        _currentChoiceData.Clear(); 
-
-        foreach (var c in choices)
-        {
-            _currentChoiceData.Add(new ChoiceBubbleData
-            {
-                ChoiceText = c.content,
-                NextKey = c.nextKey,
-                ChoiceSincerity = c.sincerity
-            });
-        }
-    
+        _currentChoiceEntries.Clear();
+        _currentChoiceEntries.AddRange(choices);
+        
         PlayerChoice.ChoiceInit(choices.Select(x => x.content).ToArray());
     }
 
@@ -372,21 +353,21 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
         if (target == null) 
             return;
         
-        if (num < 0 || num >= _currentChoiceData.Count) 
+        if (num < 0 || num >= _currentChoiceEntries.Count) 
             return;
 
-        var selectedChoice = _currentChoiceData[num];
-        _gameStatueCore.ChangeSincerityAmount(_currentGuestSheetName, selectedChoice.ChoiceSincerity);
+        var selectedChoice = _currentChoiceEntries[num];
+        _gameStatueCore.ChangeSincerityAmount(_currentGuestSheetName, selectedChoice.sincerity);
     
         PlayerChoice.Hide();
-        ShowPlayerText(selectedChoice.ChoiceText, wasChatNpc);
+        ShowPlayerText(selectedChoice.content, wasChatNpc);
 
-        _currentKey = selectedChoice.NextKey;
+        _currentKey = selectedChoice.nextKey;
         _isChoiceActive = false;
         
         SelectionTrm.SetActive(false); 
 
-        _currentChoiceData.Clear();
+        _currentChoiceEntries.Clear();
         StartCoroutine(NextStepAfterChoice());
     }
     
@@ -401,12 +382,11 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
     {
         if (_currentGuest == guest && !string.IsNullOrEmpty(_currentKey)) return;
 
-        // 1. 현재 게스트 데이터 저장
         if (_currentGuest != Guest.None)
         {
             if (!_savedDialogue.ContainsKey(_currentGuest))
             {
-                _savedDialogue[_currentGuest] = new SavedDialogueData { History = new List<DialogueHistoryData>() };
+                _savedDialogue[_currentGuest] = new SavedDialogueData { HistoryContents = new List<string>() };
             }
 
             var currentData = _savedDialogue[_currentGuest];
@@ -428,9 +408,8 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
 
         if (!_dialogueDataCore.GetSheetNameByGuest(guest, out var sheetName)) return;
 
-        // 2. UI 및 환경 초기화
         _isChoiceActive = false;
-        _currentChoiceData.Clear();
+        _currentChoiceEntries.Clear();
 
         if (_currentLoading != null)
         {
@@ -465,7 +444,6 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
         _currentGuestSheetName = sheetName;
         wasEndChat = false;
 
-        // 3. 대화 키 설정
         SavedDialogueData saveData = default;
         bool hasSave = _savedDialogue.TryGetValue(_currentGuest, out saveData);
         int currentDay = _gameStatueCore.CurrentDay;
@@ -510,8 +488,7 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
             return;
         }
 
-        // 4. 히스토리 복구 및 UI 업데이트
-        if (hasSave && saveData.History != null)
+        if (hasSave && saveData.HistoryContents != null)
         {
             RebuildHistory(saveData, isDialogueDay, isDialogueDay);
         }
@@ -548,8 +525,34 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
             _currentKey = data.nextKey;
         }
     }
+
+    [ContextMenu("Debug Spawn All Dialogue")]
+    public void SpawnAllDialogue(bool isSpawnImageSelection)
+    {
+        Guest guest = _dialogueDataCore.GetGuestByDay();
+        _currentGuest = guest;
+
+        while (true)
+        {
+            if (!_dialogueDataCore.GetDialogueDataByKey(_currentGuestSheetName, _currentKey, out var data))
+                break;
+            
+            SpawnMessage(true);
+
+            if (data.nextKey == "END" || string.IsNullOrEmpty(data.nextKey))
+            {
+                wasEndChat = true;
+                break;
+            }
+
+            _currentKey = data.nextKey;
+        }
+        
+        if(isSpawnImageSelection)
+            imageSelectionUI.gameObject.SetActive(true);
+    }
     
-    private void AddHistory(Guest targetGuest, SpeakerType speaker, string content, bool isFirst)
+    private void AddHistory(Guest targetGuest, string content)
     {
         if (targetGuest == Guest.None) return;
 
@@ -557,49 +560,48 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
         {
             _savedDialogue[targetGuest] = new SavedDialogueData
             {
-                History = new List<DialogueHistoryData>()
+                HistoryContents = new List<string>()
             };
         }
 
         var data = _savedDialogue[targetGuest];
-        data.History ??= new List<DialogueHistoryData>();
-
-        data.History.Add(new DialogueHistoryData
-        {
-            Speaker = speaker,
-            Content = content,
-            IsFirst = isFirst
-        });
+        data.HistoryContents ??= new List<string>();
+        data.HistoryContents.Add(content);
 
         _savedDialogue[targetGuest] = data;
     }
     
     private void RebuildHistory(SavedDialogueData data, bool isDialogueDay, bool updateProfile = true)
     {
-        if (data.History == null) return;
+        if (data.HistoryContents == null) return;
 
         string lastContent = string.Empty;
+        bool isFirst = true;
 
-        foreach (var h in data.History)
+        foreach (var content in data.HistoryContents)
         {
-            if (h.IsFirst && _allDialogueUI.Count > 0)
+            if (isFirst && _allDialogueUI.Count > 0)
             {
                 ShowEmptySpace();
             }
 
-            BubbleText prefab = null;
-            if (h.Speaker == SpeakerType.NPC)
-                prefab = h.IsFirst ? NPCFirstText : NPCText;
-            else
-                prefab = h.IsFirst ? PlayerFirstText : PlayerText;
+            // 간단한 패턴: NPC 메시지는 짝수 인덱스, Player는 홀수 인덱스
+            // 또는 저장된 타입 정보가 필요하면 HistoryContents를 더 확장해야 함
+            // 여기서는 wasChatNpc 상태를 기반으로 처리
+            BubbleText prefab = isFirst ? NPCFirstText : NPCText;
+            if (!wasChatNpc)
+                prefab = isFirst ? PlayerFirstText : PlayerText;
 
             if (prefab != null)
             {
                 BubbleText text = Instantiate(prefab, _container);
-                text.InitBubble(h.Content, 1f);
+                text.InitBubble(content, 1f);
                 _allDialogueUI.Add(text.gameObject);
-                lastContent = h.Content;
+                lastContent = content;
             }
+
+            isFirst = false;
+            wasChatNpc = !wasChatNpc;
         }
         
         if (updateProfile && ChatProfileContainer != null && !string.IsNullOrEmpty(lastContent))
@@ -658,8 +660,8 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
     { 
         ResetData();
     }
-    public void SetCotainer(RectTransform _rect) { _container = _rect; }
 
+    public void SetCotainer(RectTransform _rect) { _container = _rect; }
     public void SetScrolllRect(ScrollRect _Srect) { scrollRect = _Srect; }
 
     public string GetLastDialogueContent(Guest guest)
@@ -684,13 +686,12 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
 
         if (_savedDialogue.TryGetValue(guest, out var data))
         {
-            if (data.History != null && data.History.Count > 0)
+            if (data.HistoryContents != null && data.HistoryContents.Count > 0)
             {
-                return data.History.Last().Content;
+                return data.HistoryContents.Last();
             }
         }
 
-        // 🛠️ 수식 단일화 교정 완료
         int order = ((currentDay - 1) / 5) + 1;
         if (_dialogueDataCore.GetFirstDialogueByDay(sheetName, order, out var firstData))
         {
@@ -699,64 +700,17 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
 
         return string.Empty;
     }
-
-    public bool IsDialogueUnread(Guest guest)
-    {
-        if (!_dialogueDataCore.GetSheetNameByGuest(guest, out _))
-            return false;
-
-        int currentDay = _gameStatueCore.CurrentDay;
-    
-        bool isDialogueDay = false;
-        switch (guest)
-        {
-            case Guest.JaeYoonLee:     isDialogueDay = (currentDay % 5 == 1); break;
-            case Guest.DaEunJung:      isDialogueDay = (currentDay % 5 == 2); break;
-            case Guest.YulPark:        isDialogueDay = (currentDay % 5 == 3); break;
-            case Guest.SeoAhYoon:      isDialogueDay = (currentDay % 5 == 4); break;
-            case Guest.MyeongJinChoi:  isDialogueDay = (currentDay % 5 == 0); break;
-        }
-
-        if (!isDialogueDay)
-            return false;
-
-        if (_savedDialogue.TryGetValue(guest, out var data))
-        {
-            return !data.IsCompleted;
-        }
-
-        return false;
-    }
 }
 
 public struct SavedDialogueData
 {
     public string LastDialogueKey;
     public bool WasChatNpc;
-    public List<DialogueHistoryData> History;
+    public List<string> HistoryContents;
     
     public bool HasActiveChoice;
     public int ChoiceSeq;
     public bool IsCompleted;
-}
-
-public struct DialogueHistoryData
-{
-    public SpeakerType Speaker;
-    public string Content;
-
-    public bool IsFirst;
-    public bool IsChoice;
-            
-    public bool IsChoiceGroup;
-    public int ChoiceSeq;
-}
-
-public struct ChoiceBubbleData
-{
-    public string ChoiceText;
-    public string NextKey;
-    public int ChoiceSincerity;
 }
 
 public enum DialogueEventType

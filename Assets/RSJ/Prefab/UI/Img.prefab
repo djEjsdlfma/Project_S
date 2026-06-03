@@ -163,6 +163,7 @@ GameObject:
   - component: {fileID: 7178211646587606156}
   - component: {fileID: 7692110861861998106}
   - component: {fileID: 1491344726319099214}
+  - component: {fileID: 3558201907475384535}
   m_Layer: 5
   m_Name: Img
   m_TagString: Untagged
@@ -272,3 +273,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3558201907475384535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4706978883713891398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65a7c89048564e319e7f9978accc6365, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LSW._02._Code.UI.PhotoSelector
+  photoImage: {fileID: 7692110861861998106}
+  selectBtn: {fileID: 1491344726319099214}
+  markImage: {fileID: 1082054591522740564}
+  selectColor: {r: 0.38039216, g: 0.38039216, b: 0.38039216, a: 1}
+  unselectColor: {r: 0.65882355, g: 0.65882355, b: 0.65882355, a: 1}

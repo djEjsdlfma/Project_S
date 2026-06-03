@@ -1,6 +1,7 @@
 using System.Collections;
 using CSILib.SoundManager.RunTime;
 using DG.Tweening;
+using LSW._02._Code.System___Manager;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -17,6 +18,7 @@ namespace LSW._02._Code.Core.Cores
         [SerializeField] private CanvasGroup leaveToPlatformTransition;
 
         private GameStatueCore _gameStatueCore;
+        private SceneType _currentSceneType;
         
         public void Initialize(CoreHandler coreHandler)
         {
@@ -28,7 +30,20 @@ namespace LSW._02._Code.Core.Cores
             int buildIndex = (int)sceneType;
             if(buildIndex < 0)
                 return;
+
+            bool wasPlatformerScene = _currentSceneType == SceneType.ChoiMyeongJinScene || _currentSceneType == SceneType.DaEunJungScene || 
+                                      _currentSceneType == SceneType.LeeJaeYoonScene || _currentSceneType == SceneType.SeoAhYoonScene ||
+                                      _currentSceneType == SceneType.YulParkScene;
+            if (wasPlatformerScene && sceneType == SceneType.MainTabletScene)
+            {
+                BubbleManager bubbleManager = SystemManager.Instance.GetSystemManager<BubbleManager>();
+                if (bubbleManager != null)
+                {
+                    bubbleManager.SpawnAllDialogue(true);
+                }
+            }
             
+            _currentSceneType = sceneType;
             TransitionScene(buildIndex, transitionType);
         }
         

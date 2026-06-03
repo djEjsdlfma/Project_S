@@ -36,6 +36,9 @@ namespace LSW._02._Code.UI
 
         private void OnDestroy()
         {
+            if(_photoImages == null)
+                return;
+            
             if (_photoImages.Length <= 0) 
                 return;
             
