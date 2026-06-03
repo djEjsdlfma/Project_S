@@ -1,4 +1,5 @@
 
+using System;
 using System.Collections.Generic;
 using Moon._01.Script.Datas;
 using UnityEngine;
@@ -12,15 +13,16 @@ namespace LSW._02._Code.UI
         
         private Image[] _photoImages;
 
-        private void Start()
+        private void OnEnable()
         {
-            _photoImages = GetComponentsInChildren<Image>();
+            if(_photoImages == null)
+                _photoImages = GetComponentsInChildren<Image>();
+            
             if (DataManager.Instance.TryGetValue(CurrentGuestManager.C[0], out List<Texture2D> photo))
             {
                 PhotoCount = photo.Count;
                 SetPhoto(photo.ToArray());
             }
-            gameObject.SetActive(false);
         }
 
         public void SetPhoto(Texture2D[] photo)

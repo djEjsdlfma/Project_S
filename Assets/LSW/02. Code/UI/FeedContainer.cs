@@ -10,13 +10,17 @@ namespace LSW._02._Code.UI
     {
         private Feed[] _feeds;
         private GameStatueCore _gameStatueCore;
-        
+
         private void Awake()
         {
-            _feeds = GetComponentsInChildren<Feed>();
+            if(_feeds == null)
+                _feeds = GetComponentsInChildren<Feed>();
+            
+            Initialize();
+            gameObject.SetActive(false);
         }
 
-        private void Start()
+        private void Initialize()
         {
             _gameStatueCore = CoreHandler.Instance.GetCore<GameStatueCore>();
             
@@ -28,8 +32,6 @@ namespace LSW._02._Code.UI
                 _feeds[0].OnUploadClickImmediately();
                 // 이거 수정 예정(일단 이재윤만 하는 걸로)
             }
-            
-            gameObject.SetActive(false);
         }
     }
 }
