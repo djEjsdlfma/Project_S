@@ -37,7 +37,9 @@ namespace Moon._01.Script.Cameras
         {
             if (_moving && IsActive)
             {
-                Vector2 worldMousePos = _main.ScreenToWorldPoint(input.MousePos);
+                Vector3 screenPos = new Vector3(input.MousePos.x, input.MousePos.y, 0f);
+                Vector2 worldMousePos = _camera.ScreenToWorldPoint(screenPos);
+        
                 foreach (var target in _interactObjs)
                 {
                     target.Value.ChangeTransform(worldMousePos);
@@ -73,33 +75,37 @@ namespace Moon._01.Script.Cameras
 
             if (items == null || items.Length == 0)
                 return;
-            
+    
+            // ✅ pos를 world 좌표로 변환 (Z값 명시)
+            Vector3 screenPosVec3 = new Vector3(pos.x, pos.y, 0f);
+            Vector2 worldPos = _camera.ScreenToWorldPoint(screenPosVec3);
+    
             foreach (var item in items)
             {
                 if (item == null) continue;
-            
+    
                 if (item.TryGetComponent(out ITakable _))
                 {
                     continue;
                 }
-            
+    
                 GameObject obj = item.gameObject;
                 Vector2 realCenter = obj.transform.position;
 
                 if (obj.TryGetComponent(out Collider2D col))
                     col.enabled = false;
-            
+    
                 float gravityScale = 0f;
                 if (obj.TryGetComponent(out Rigidbody2D rb))
                 {
                     gravityScale = rb.gravityScale;
                     rb.gravityScale = 0;
-                    rb.linearVelocity = Vector2.zero; // 이동 전 물리 속도 초기화
+                    rb.linearVelocity = Vector2.zero;
                 }
 
                 if (!_interactObjs.ContainsKey(obj))
                 {
-                    _interactObjs.Add(obj, new InteractTarget(realCenter - pos, obj, gravityScale));
+                    _interactObjs.Add(obj, new InteractTarget(realCenter - worldPos, obj, gravityScale));
                 }
             }
 

@@ -103,7 +103,7 @@ namespace RSJ.Script.Camera
             // 복사 중일 때만 본인 스크립트에서 오브젝트를 이동
             if (_copying)
             {
-                Vector2 worldMousePos = input.MousePos;
+                Vector2 worldMousePos = _camera.ScreenToWorldPoint(input.MousePos);
                 foreach (var target in _interactObjs)
                 {
                     target.Value.ChangeTransform(worldMousePos);
