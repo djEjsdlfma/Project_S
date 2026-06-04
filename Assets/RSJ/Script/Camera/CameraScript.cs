@@ -126,7 +126,7 @@ namespace RSJ.Script.Camera
         {
             if (camerasFinder.GetTarget<SetCamBlur>(false) is var blur && blur && blur.BlurActive)
                 return;
-            HandleActionInput(input.MousePos);
+            HandleActionInput(_camera.ScreenToWorldPoint(input.MousePos));
         }
 
         private void HandleActionInput(Vector2 worldMousePos)
@@ -747,8 +747,8 @@ namespace RSJ.Script.Camera
                 source.width,
                 source.height,
                 0,
-                RenderTextureFormat.Default,
-                RenderTextureReadWrite.Linear
+                RenderTextureFormat.ARGB32, 
+                RenderTextureReadWrite.sRGB 
             );
 
             Graphics.Blit(source, rt);
@@ -756,7 +756,7 @@ namespace RSJ.Script.Camera
             RenderTexture prev = RenderTexture.active;
             RenderTexture.active = rt;
 
-            Texture2D readable = new Texture2D(source.width, source.height);
+            Texture2D readable = new Texture2D(source.width, source.height, TextureFormat.RGBA32, false);
             readable.ReadPixels(new Rect(0, 0, source.width, source.height), 0, 0);
             readable.Apply();
 
