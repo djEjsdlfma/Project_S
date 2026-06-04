@@ -26,6 +26,9 @@ public class TitleManager : MonoBehaviour
 
     [Header("tea")]
     [SerializeField] private RectTransform _teaImg;
+    [SerializeField] private Sprite[] _FillSprite;
+    [SerializeField] private Image _teaFillImg;
+    [SerializeField] private RectTransform _teaFillImgSize;
 
     [Header("button")]
     [SerializeField] private Button _candleBtn;
@@ -86,6 +89,7 @@ public class TitleManager : MonoBehaviour
         {
             _textAgain = true;
             _teaBtn.interactable = true;
+            FillTeaCup(_currentDay);
         }
     }
 
@@ -215,5 +219,11 @@ public class TitleManager : MonoBehaviour
             endAction.onEndChat -= ActiveBtn;
             endAction.onEndChat -= EndTalk;
         }
+    }
+
+    public void FillTeaCup(int day)
+    {
+        _teaFillImg.sprite = _FillSprite[day % 11];
+        _teaFillImgSize.DOSizeDelta(new Vector2(100f, 100f), 0.5f);
     }
 }
