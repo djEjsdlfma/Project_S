@@ -36,6 +36,8 @@ public class TitleManager : MonoBehaviour
     [SerializeField] private Button _leftBtn;
     [SerializeField] private Button _rightBtn;
 
+    [SerializeField] private TextMeshProUGUI _flickText;
+
     private Stack<GameObject> _prevStack = new Stack<GameObject>();
     private Stack<GameObject> _nextStack = new Stack<GameObject>();
 
@@ -55,21 +57,23 @@ public class TitleManager : MonoBehaviour
         {
            //_day = day;
         }
-        SetCalender();
+
+
         _leftBtn.interactable = false;
         _rightBtn.interactable = false;
 
         endAction = SystemManager.Instance.GetSystemManager<BubbleManager>();
-    }
-
-    private void Start()
-    {
         _gameStatueCore = CoreHandler.Instance.GetCore<GameStatueCore>();
+
         if (_gameStatueCore != null)
         {
             _currentDay = _gameStatueCore.CurrentDay;
         }
-        
+        SetCalender();
+    }
+
+    private void Start()
+    {     
         endAction.onEndChat += ActiveBtn;
         endAction.onEndChat += EndTalk;
     }
@@ -84,9 +88,11 @@ public class TitleManager : MonoBehaviour
         if(_currentDay < 11)
         {
             _candleBtn.interactable = true;
+            FlickText("촛불");
         }
         else
         {
+            FlickText("찻잔");
             _textAgain = true;
             _teaBtn.interactable = true;
             FillTeaCup(_currentDay);
@@ -120,15 +126,7 @@ public class TitleManager : MonoBehaviour
             _leftBtn.interactable = true;
         if (_nextStack.Count > 0)
             _rightBtn.interactable = true;
-        
-        timer += Time.deltaTime;
-
-        if (timer > 1f)
-        {
-            _candleLight.SetActive(true);
-            SetCalender();
-            timer = 0f;
-        }
+       
     }
 
     private void SetCalender()
@@ -221,9 +219,29 @@ public class TitleManager : MonoBehaviour
         }
     }
 
+    private void FlickText(string objName, int value = 0)
+    {
+        if (objName == "촛불")
+            _flickText.text = $"{objName}이 켜졌습니다.";
+        else
+            _flickText.text = $"{objName}이 채워졌습니다.";
+
+        _flickText.DOFade(value % 2 == 0 ? 0.8f : 0f, 0.8f)
+            .OnComplete(() => 
+            { 
+                if (value <= 4)
+                    FlickText(objName, ++value); 
+            });
+    }
+
     public void FillTeaCup(int day)
     {
         _teaFillImg.sprite = _FillSprite[day % 11];
         _teaFillImgSize.DOSizeDelta(new Vector2(100f, 100f), 0.5f);
+    }
+
+    public void CandleOff()
+    {
+        _candleLight.gameObject.SetActive(false);
     }
 }
