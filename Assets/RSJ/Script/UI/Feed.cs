@@ -23,6 +23,9 @@ public class Feed : MonoBehaviour
     
     private void Awake()
     {
+        DontDestroyOnLoad(HeartText);
+        DontDestroyOnLoad(BookMarkText);
+
         // _bubbleManager = SystemManager.Instance.GetSystemManager<BubbleManager>();
         // if(_bubbleManager == null)
         //     return;
