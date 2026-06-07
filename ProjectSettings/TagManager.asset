@@ -37,11 +37,6 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
   m_SortingLayers:
   - name: BackGround
     uniqueID: 528487353
@@ -52,6 +47,9 @@ TagManager:
   - name: Struct
     uniqueID: 1061587037
     locked: 0
+  - name: Object
+    uniqueID: 2028985973
+    locked: 0
   - name: Character
     uniqueID: 2260954249
     locked: 0
@@ -60,6 +58,9 @@ TagManager:
     locked: 0
   - name: CaptureUI
     uniqueID: 1047465369
+    locked: 0
+  - name: UI_Top
+    uniqueID: 3149018935
     locked: 0
   m_RenderingLayers:
   - Default

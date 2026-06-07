@@ -78,7 +78,7 @@ namespace Moon._01.Script.Cameras
     
             // ✅ pos를 world 좌표로 변환 (Z값 명시)
             Vector3 screenPosVec3 = new Vector3(pos.x, pos.y, 0f);
-            Vector2 worldPos = _camera.ScreenToWorldPoint(screenPosVec3);
+            Vector2 worldPos = screenPosVec3;
     
             foreach (var item in items)
             {
