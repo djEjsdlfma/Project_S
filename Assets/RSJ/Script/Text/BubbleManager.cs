@@ -28,12 +28,13 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
     [SerializeField] private GameObject Empty;
     
     [SerializeField] private RectTransform imageSelectionUI;
-
+    [SerializeField] private RectTransform uploadPhotoUI;
+    
     [SerializeField] private RectTransform _container;
     [SerializeField] private ScrollRect scrollRect;
     [field:SerializeField] public ChatProfileContainer ChatProfileContainer { get; private set; }
     
-    public event Action onSpawnMessage;
+    public event Action<LastDialogueData> onSpawnMessage;
     public event Action onEndChat;
     public event Action<Guest, bool> onAlarmStateChanged;
     
@@ -59,7 +60,8 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
     private bool wasEndChat = false;
 
     public bool CanInteract { get; private set; }
-    
+    public List<LastDialogueData> ReplayList { get; set; } = new List<LastDialogueData>();
+
     public void Initialize(SystemManager _)
     {
         _interactDelayCoroutine = new WaitForSecondsRealtime(0.2f);
@@ -159,7 +161,7 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
         StartCoroutine(UpdateUILayout());
     }
 
-    private void ShowNPCText(string log, bool wasNPC, string speakerName, bool isEnding, bool isImmediate = false)
+    private void ShowNPCText(string log, bool wasNPC, string speakerName, bool isEnding, bool isImmediate = false, bool triggerEvent = true)
     {
         Guest recordingGuest = _currentGuest;
         bool isFirst = !wasNPC;
@@ -202,10 +204,17 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
         {
             ShowBubbleDelay(nowBubble, speakerName, isEnding);
         }
-        onSpawnMessage?.Invoke();
+
+        if (triggerEvent)
+        {
+            onSpawnMessage?.Invoke(new LastDialogueData{
+                key = _currentKey,
+                wasChatNpc = wasChatNpc,
+            });
+        }
     }
 
-    private void ShowPlayerText(string log, bool wasNPC = true)
+    private void ShowPlayerText(string log, bool wasNPC = true, bool triggerEvent = true)
     {
         Guest recordingGuest = _currentGuest;
         bool isFirst = wasNPC;
@@ -227,8 +236,14 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
         AddHistory(recordingGuest, log);
         
         UpdateBottomEmptySpace();
-        
-        onSpawnMessage?.Invoke();
+
+        if (triggerEvent)
+        {
+            onSpawnMessage?.Invoke(new LastDialogueData{
+                key = _currentKey,
+                wasChatNpc = wasChatNpc,
+            });
+        }
     }
     
     private void ShowEmptySpace()
@@ -434,9 +449,10 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
 
         foreach (var ui in _allDialogueUI)
         {
-            if (ui != null) Destroy(ui);
+            if (ui != null)
+                Destroy(ui);
         }
-
+        
         _allDialogueUI.Clear();
         _bottomEmptySpace = null;
 
@@ -502,6 +518,13 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
         {
             onAlarmStateChanged?.Invoke(_currentGuest, false);
         }
+
+        if (ReplayList.Count > 0)
+        {
+            SpawnAllDialogue(true);
+            wasEndChat = true;
+            CanInteract = false;
+        }
     }
     
     public void SpawnFirstDialogue()
@@ -525,29 +548,61 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
             _currentKey = data.nextKey;
         }
     }
-
-    [ContextMenu("Debug Spawn All Dialogue")]
+    
     public void SpawnAllDialogue(bool isSpawnImageSelection)
     {
-        Guest guest = _dialogueDataCore.GetGuestByDay();
-        _currentGuest = guest;
-
-        while (true)
+        foreach (var ui in _allDialogueUI)
         {
-            if (!_dialogueDataCore.GetDialogueDataByKey(_currentGuestSheetName, _currentKey, out var data))
-                break;
-            
-            SpawnMessage(true);
+            if (ui != null) Destroy(ui);
+        }
+        _allDialogueUI.Clear();
+        _bottomEmptySpace = null;
 
-            if (data.nextKey == "END" || string.IsNullOrEmpty(data.nextKey))
+        Guest currenGuest = _dialogueDataCore.GetGuestByDay();
+        ChangeGuestDialogue(currenGuest);
+    
+        SpeakerType lastSpeaker = SpeakerType.None; 
+
+        foreach(var data in ReplayList)
+        {
+            if (!_dialogueDataCore.GetDialogueDataByKey(_currentGuestSheetName, data.key, out DialogueEntry entry))
+                continue;
+
+            if (lastSpeaker != SpeakerType.None && lastSpeaker != entry.speaker)
             {
-                wasEndChat = true;
-                break;
+                ShowEmptySpace();
             }
 
-            _currentKey = data.nextKey;
+            bool isFirst = (lastSpeaker != entry.speaker);
+
+            if (entry.speaker == SpeakerType.NPC)
+            {
+                BubbleText prefab = isFirst ? NPCFirstText : NPCText;
+                BubbleText text = Instantiate(prefab, _container);
+                _allDialogueUI.Add(text.gameObject);
+            
+                if (isFirst) text.InitBubble(entry.content, 1f, _currentGuestSheetName);
+                else text.InitBubble(entry.content, 1f);
+            
+                nowBubble = text.gameObject;
+            }
+            else
+            {
+                BubbleText prefab = isFirst ? PlayerFirstText : PlayerText;
+                BubbleText text = Instantiate(prefab, _container);
+                _allDialogueUI.Add(text.gameObject);
+            
+                text.InitBubble(entry.content, 1f);
+                text.InitScale();
+            }
+
+            lastSpeaker = entry.speaker;
+            wasChatNpc = (entry.speaker == SpeakerType.NPC);
         }
-        
+
+        UpdateBottomEmptySpace();
+        StartCoroutine(UpdateUILayout());
+    
         if(isSpawnImageSelection)
             imageSelectionUI.gameObject.SetActive(true);
     }
@@ -699,6 +754,13 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
         }
 
         return string.Empty;
+    }
+
+    public void SpawnPhotoMessage()
+    {
+        Instantiate(uploadPhotoUI, _container);
+        imageSelectionUI.gameObject.SetActive(false);
+        StartCoroutine(UpdateUILayout());
     }
 }
 

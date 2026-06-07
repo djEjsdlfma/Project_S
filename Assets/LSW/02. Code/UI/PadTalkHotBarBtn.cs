@@ -20,6 +20,8 @@ namespace LSW._02._Code.UI
         private void Awake()
         {
             _bubbleManager = SystemManager.Instance.GetSystemManager<BubbleManager>();
+            if(_bubbleManager == null)
+                return;
             chatProfileContainer = _bubbleManager.ChatProfileContainer;
             _button = GetComponent<Button>();
             

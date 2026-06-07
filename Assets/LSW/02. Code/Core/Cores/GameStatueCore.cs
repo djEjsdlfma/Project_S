@@ -1,25 +1,27 @@
 using System;
 using System.Collections.Generic;
-using CSILib.SoundManager.RunTime;
-using Moon._01.Script.Datas;
+using System.Linq;
+using LSW._02._Code.System___Manager;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace LSW._02._Code.Core.Cores
 {
     public class GameStatueCore : MonoBehaviour, ICore
     {
-        // [SerializeField] private 
-        [field:SerializeField] public int maxDay { get; private set;} = 15;
+        [field:SerializeField] public int MaxDay { get; private set;} = 15;
 
         public int CurrentDay { get; private set; } = 1;
         public Dictionary<Guest, GuestData> GuestsData { get; private set; } = new Dictionary<Guest, GuestData>();
-
+        public Queue<LastDialogueData> SavedLastDialogueData { get; private set; } = new Queue<LastDialogueData>();
+        
         private DialogueDataCore _dialogueDataCore;
 
         public event Action OnDayChanged;
         
         private Transition _transition;
+        
+        private SceneType _currentSceneType = SceneType.None;
+        private SceneType _lastSceneType = SceneType.None;
         
         public void Initialize(CoreHandler coreHandler)
         {
@@ -47,14 +49,56 @@ namespace LSW._02._Code.Core.Cores
             }
         }
 
-        public void LoadScene(SceneType sceneType) { }
+        public void LoadScene(SceneType sceneType)
+        {
+            UnsubscribeBubbleManager();
+
+            if (sceneType == SceneType.MainTabletScene && _currentSceneType == SceneType.MainTabletScene)
+                SavedLastDialogueData.Clear();
+            
+            if(sceneType == SceneType.MainTabletScene)
+                SubscribeBubbleManager();
+    
+            _lastSceneType = _currentSceneType;
+            _currentSceneType = sceneType;
+        }
+
+        private void SubscribeBubbleManager()
+        {
+            BubbleManager bubbleManager = SystemManager.Instance.GetSystemManager<BubbleManager>();
+            if (bubbleManager != null)
+            {
+                bubbleManager.onSpawnMessage += SaveLastDialogueData;
+            }
+        }
+
+        private void UnsubscribeBubbleManager()
+        {
+            BubbleManager bubbleManager = SystemManager.Instance.GetSystemManager<BubbleManager>();
+            if (bubbleManager != null)
+            {
+                bubbleManager.onSpawnMessage -= SaveLastDialogueData;
+            }
+        }
+
+        private bool IsPlatformerScene(SceneType sceneType)
+        {
+            return sceneType == SceneType.ChoiMyeongJinScene || sceneType == SceneType.DaEunJungScene || 
+                   sceneType == SceneType.LeeJaeYoonScene || sceneType == SceneType.SeoAhYoonScene ||
+                   sceneType == SceneType.YulParkScene;
+        }
+
+        private void SaveLastDialogueData(LastDialogueData data)
+        {
+            SavedLastDialogueData.Enqueue(data);
+        }
 
         [ContextMenu("Increase Day Debug")]
         public void IncreaseDayDebug() => IncreaseDay();
         
         public void IncreaseDay(int increaseAmount = 5)
         {
-            CurrentDay = Mathf.Clamp(CurrentDay + increaseAmount, 1, maxDay);
+            CurrentDay = Mathf.Clamp(CurrentDay + increaseAmount, 1, MaxDay);
             OnDayChanged?.Invoke();
             _transition.TransitionScene(SceneType.MainTabletScene, TransitionType.DayChange);
         }
@@ -73,13 +117,16 @@ namespace LSW._02._Code.Core.Cores
             guestData.RealCurrentSincerityAmount = realAmount;
             
             GuestsData[guest] = guestData;
-            
-            Debug.Log($"{guestName}: {guestData.CurrentSincerityAmount}");
         }
 
         public void Reset()
         {
             GuestsData.Clear();
+        }
+        
+        private void OnDestroy()
+        {
+            UnsubscribeBubbleManager();
         }
         
     }
@@ -101,5 +148,12 @@ namespace LSW._02._Code.Core.Cores
         SeoAhYoon,      // 윤서아
         MyeongJinChoi,   // 최명진
         Tutorial        // 튜토리얼용 캐릭
+    }
+    
+    [Serializable]
+    public struct LastDialogueData
+    {
+        public string key;
+        public bool wasChatNpc;
     }
 }

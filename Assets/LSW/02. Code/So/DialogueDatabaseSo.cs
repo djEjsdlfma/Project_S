@@ -19,7 +19,7 @@ namespace LSW._02._Code.So
     }
 
     [Serializable]
-    public class DialogueEntry
+    public struct DialogueEntry
     {
         public string key;
 

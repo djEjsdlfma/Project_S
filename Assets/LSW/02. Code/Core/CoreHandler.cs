@@ -1,6 +1,5 @@
-using System;
+
 using System.Collections.Generic;
-using LSW._02._Code.Data;
 using LSW._02._Code.System___Manager;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -19,10 +18,11 @@ namespace LSW._02._Code.Core
             if (Instance != this)
             {
                 Destroy(gameObject);
+                return;
             }
             
             DontDestroyOnLoad(gameObject);
-            SceneManager.sceneUnloaded += LoadScene;
+            SceneManager.sceneLoaded += LoadScene;
             Initialize();
         }
 
@@ -38,10 +38,10 @@ namespace LSW._02._Code.Core
             }
             
             _coreList.ForEach(core => core.Initialize(this));
-            LoadScene(SceneManager.GetActiveScene());
+            LoadScene(SceneManager.GetActiveScene(), LoadSceneMode.Single);
         }
         
-        private void LoadScene(Scene scene)
+        private void LoadScene(Scene scene, LoadSceneMode _)
         {
             SceneType sceneType = (SceneType)scene.buildIndex;
                 
@@ -55,20 +55,6 @@ namespace LSW._02._Code.Core
         {
             return _coreList.Find(x => x is T) as T;
         }
-        
-        public List<IDataLoadManager> GetDataLoadManagers()
-        {
-            List<IDataLoadManager> dataLoadManagers = new List<IDataLoadManager>();
-            foreach (var manager in _coreList)
-            {
-                if (manager is IDataLoadManager)
-                {
-                    dataLoadManagers.Add(manager as IDataLoadManager);
-                }
-            }
-
-            return dataLoadManagers;
-        }
 
         public void ResetCoreAllData()
         {
@@ -81,7 +67,7 @@ namespace LSW._02._Code.Core
         protected override void OnDestroy()
         {
             base.OnDestroy();
-            SceneManager.sceneUnloaded -= LoadScene;
+            SceneManager.sceneLoaded -= LoadScene;
             ResetCoreAllData();
         }
     }

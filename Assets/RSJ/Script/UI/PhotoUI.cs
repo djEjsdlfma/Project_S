@@ -26,7 +26,7 @@ public class PhotoUI : MonoBehaviour
     {
         for (int i = 0; i <= _gameStatueCore.CurrentDay - 2 && i < 6; i++)
         {
-            if(_folders[i] == null)
+            if(i >= _folders.Length || _folders[i] == null)
                 continue;
             
             _folders[i].gameObject.SetActive(true);

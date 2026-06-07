@@ -1,5 +1,6 @@
 using System.Collections;
-using CSILib.SoundManager.RunTime;
+using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using LSW._02._Code.System___Manager;
 using TMPro;
@@ -19,6 +20,7 @@ namespace LSW._02._Code.Core.Cores
 
         private GameStatueCore _gameStatueCore;
         private SceneType _currentSceneType;
+        private SceneType _lastSceneType;
         
         public void Initialize(CoreHandler coreHandler)
         {
@@ -28,21 +30,10 @@ namespace LSW._02._Code.Core.Cores
         public void TransitionScene(SceneType sceneType, TransitionType transitionType)
         {
             int buildIndex = (int)sceneType;
-            if(buildIndex < 0)
+            if (buildIndex < 0)
                 return;
-
-            bool wasPlatformerScene = _currentSceneType == SceneType.ChoiMyeongJinScene || _currentSceneType == SceneType.DaEunJungScene || 
-                                      _currentSceneType == SceneType.LeeJaeYoonScene || _currentSceneType == SceneType.SeoAhYoonScene ||
-                                      _currentSceneType == SceneType.YulParkScene;
-            if (wasPlatformerScene && sceneType == SceneType.MainTabletScene)
-            {
-                BubbleManager bubbleManager = SystemManager.Instance.GetSystemManager<BubbleManager>();
-                if (bubbleManager != null)
-                {
-                    bubbleManager.SpawnAllDialogue(true);
-                }
-            }
             
+            _lastSceneType = _currentSceneType;
             _currentSceneType = sceneType;
             TransitionScene(buildIndex, transitionType);
         }
@@ -72,9 +63,12 @@ namespace LSW._02._Code.Core.Cores
             target.DOFade(1, 0.5f).OnComplete(() =>
             {
                 var op = SceneManager.LoadSceneAsync(buildIndex);
-                op.allowSceneActivation = false;
-                
-                StartCoroutine(WaitLoad(op, target));
+                if (op != null)
+                {
+                    op.allowSceneActivation = false;
+
+                    StartCoroutine(WaitLoad(op, target));
+                }
             });
         }
         
@@ -93,6 +87,21 @@ namespace LSW._02._Code.Core.Cores
             {
                 target.blocksRaycasts = false;
             });
+            
+            bool wasPlatformerScene = _lastSceneType == SceneType.ChoiMyeongJinScene || _lastSceneType == SceneType.DaEunJungScene || 
+                                      _lastSceneType == SceneType.LeeJaeYoonScene || _lastSceneType == SceneType.SeoAhYoonScene ||
+                                      _lastSceneType == SceneType.YulParkScene;
+            
+            if (wasPlatformerScene && _currentSceneType == SceneType.MainTabletScene)
+            {
+                BubbleManager bubbleManager = SystemManager.Instance.GetSystemManager<BubbleManager>();
+                if (bubbleManager != null)
+                {
+                    var dataToReplay = new Queue<LastDialogueData>(_gameStatueCore.SavedLastDialogueData);
+                    _gameStatueCore.SavedLastDialogueData.Clear();
+                    bubbleManager.ReplayList = dataToReplay.ToList();
+                }
+            }
         }
 
         public void LoadScene(SceneType sceneType) { }

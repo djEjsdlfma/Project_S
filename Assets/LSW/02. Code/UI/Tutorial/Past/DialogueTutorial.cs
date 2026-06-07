@@ -1,7 +1,7 @@
 using LSW._02._Code.Core.Cores;
 using LSW._02._Code.System___Manager;
 
-namespace LSW._02._Code.UI.Tutorial
+namespace LSW._02._Code.UI.Tutorial.Past
 {
     public class DialogueTutorial : TutorialUI
     {
@@ -23,7 +23,7 @@ namespace LSW._02._Code.UI.Tutorial
             return true;
         }
 
-        private void EndSpawnMessage()
+        private void EndSpawnMessage(LastDialogueData _)
         {
             _bubbleManager.onSpawnMessage -= EndSpawnMessage;
             TutorialEnd.Invoke();

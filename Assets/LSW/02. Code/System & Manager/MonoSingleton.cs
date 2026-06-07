@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace LSW._02._Code.System___Manager
@@ -26,20 +27,34 @@ namespace LSW._02._Code.System___Manager
 
         protected virtual void Awake()
         {
-            if (_instance == null)
+            try
             {
-                _instance = this as T;
-                //DontDestroyOnLoad(gameObject);
+                if (_instance != null)
+                {
+                    if (_instance != this)
+                    {
+                        Destroy(_instance.gameObject);
+                        _instance = this as T;
+                        return;
+                    }
+                }
+                else
+                {
+                    _instance = this as T;
+                }
             }
-            else if (_instance != this)
+            catch (Exception e)
             {
-                Destroy(gameObject);
+                Debug.Log(e);
             }
         }
 
         protected virtual void OnDestroy()
         {
-            _instance = null;
+            if (_instance == this)
+            {
+                _instance = null;
+            }
         }
 
         protected MonoSingleton() { }

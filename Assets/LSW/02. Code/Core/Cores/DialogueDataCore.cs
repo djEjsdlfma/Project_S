@@ -59,11 +59,14 @@ namespace LSW._02._Code.Core.Cores
 
         public bool GetDialogueDataByKey(string sheetName, string currentKey, out DialogueEntry entry)
         {
-            entry = null;
+            entry = new DialogueEntry();
 
             if (!_initialized)
                 return false;
 
+            if (_allDialogues == null || sheetName == null || currentKey == null)
+                return false;
+            
             if (_allDialogues.TryGetValue(sheetName, out var sheet))
             {
                 return sheet.TryGetValue(currentKey, out entry);
@@ -90,20 +93,26 @@ namespace LSW._02._Code.Core.Cores
 
         public bool GetFirstDialogueByDay(string sheetName, int day, out DialogueEntry entry)
         {
-            entry = null;
-
+            entry = default; 
+    
             if (!_initialized)
                 return false;
 
             if (!_allDialogues.TryGetValue(sheetName, out var sheet))
                 return false;
-
-            entry = sheet.Values
+            
+            DialogueEntry foundEntry = sheet.Values
                 .Where(x => x.day == day)
                 .OrderBy(x => x.seq)
                 .FirstOrDefault();
+            
+            if (foundEntry.id != 0)
+            {
+                entry = foundEntry;
+                return true;
+            }
 
-            return entry != null;
+            return false;
         }
 
         public bool GetSheetNameByGuest(Guest guest, out string sheetName)

@@ -1,6 +1,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using LSW._02._Code.System___Manager;
 using Moon._01.Script.Datas;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,9 +16,9 @@ namespace LSW._02._Code.UI
         [SerializeField] private Color uploadPhotosBtnDisableColor;
         
         private Image _uploadPhotosImage;
-        private List<PhotoSelector> _photoSelector;
-        
-        public List<PhotoSelector> SelectedPhotoSelector { get; private set; }
+        private List<PhotoSelector> _photoSelector = new List<PhotoSelector>();
+
+        private List<PhotoSelector> _selectedPhotoSelector = new List<PhotoSelector>();
         public bool CanChoose { get; private set; } = true;
 
         private void Start()
@@ -39,25 +40,38 @@ namespace LSW._02._Code.UI
                 }
             }
             
+            uploadPhotosButton.onClick.AddListener(UploadPhotos);
             _uploadPhotosImage = uploadPhotosButton.GetComponent<Image>();
+            
+            uploadPhotosButton.interactable = false;
+            _uploadPhotosImage.color = uploadPhotosBtnDisableColor;
+        }
+
+        private void UploadPhotos()
+        {
+            BubbleManager bubbleManager = SystemManager.Instance.GetSystemManager<BubbleManager>();
+            if (bubbleManager != null)
+            {
+                bubbleManager.SpawnPhotoMessage();
+            }
         }
 
         private void SelectedPhoto(PhotoSelector photoSelector, bool isSelected)
         {
-            if (isSelected && SelectedPhotoSelector.Count < maxSelectedPhoto 
-                && !_photoSelector.Contains(photoSelector))
+            if (isSelected && _selectedPhotoSelector.Count < maxSelectedPhoto 
+                && !_selectedPhotoSelector.Contains(photoSelector))
             {
-                _photoSelector.Add(photoSelector);
-                if (SelectedPhotoSelector.Count == maxSelectedPhoto)
+                _selectedPhotoSelector.Add(photoSelector);
+                if (_selectedPhotoSelector.Count == maxSelectedPhoto)
                 {
                     uploadPhotosButton.interactable = true;
                     _uploadPhotosImage.color = uploadPhotosBtnEnableColor;
                     CanChoose = false;
                 }
             }
-            else if(!isSelected && _photoSelector.Contains(photoSelector))
+            else if(!isSelected && _selectedPhotoSelector.Contains(photoSelector))
             {
-                _photoSelector.Remove(photoSelector);
+                _selectedPhotoSelector.Remove(photoSelector);
                 uploadPhotosButton.interactable = false;
                 _uploadPhotosImage.color = uploadPhotosBtnDisableColor;
                 CanChoose = true;
@@ -70,6 +84,7 @@ namespace LSW._02._Code.UI
             {
                 photoSelector.OnSelected -= SelectedPhoto;
             }
+            uploadPhotosButton.onClick.RemoveListener(UploadPhotos);
         }
     }
 }
