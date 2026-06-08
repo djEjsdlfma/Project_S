@@ -461,7 +461,7 @@ GameObject:
   - component: {fileID: 625050278603458962}
   - component: {fileID: 4796104485881718197}
   m_Layer: 5
-  m_Name: MapCanva
+  m_Name: CameraInfo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
