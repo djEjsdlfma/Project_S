@@ -4516,10 +4516,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Moon._01.Script.Gimmick.LiminalSpaceController
   startPoint: {fileID: 1544459381}
   endPoint: {fileID: 1772042625}
-  requiredMoveTime: 150
+  requiredMoveTimes: 10
   player: {fileID: 196159643}
   playerRb: {fileID: 196159645}
-  isLooping: 1
 --- !u!4 &1586287396
 Transform:
   m_ObjectHideFlags: 0
@@ -5137,7 +5136,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1735809446
 Transform:
   m_ObjectHideFlags: 0
