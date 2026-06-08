@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using LSW._02._Code.Core;
 using Moon._01.Script.Datas;
+using MoonLib.ScriptFinder_Pro.RunTime.Finder.ListFinder;
 using UnityEngine;
 
 namespace Moon._01.Script.Cameras
@@ -32,13 +34,17 @@ namespace Moon._01.Script.Cameras
             return HashCode.Combine(Image, CamObjs);
         }
     }
-    public class PhotoStorage : MonoBehaviour
+    public class PhotoStorage : MonoBehaviour, ICore
     {
-        private static List<Photo> _photos = new List<Photo>();
+        private List<Photo> _photos = new List<Photo>();
+        
+        [SerializeField] private ScriptListFinderSO _photoListFinder;
         
         public int PhotoMany => _photos.Count;
 
         public int MaxPhoto { get; private set; } = 5;
+        
+        public void Initialize(CoreHandler coreHandler) { }
         
         public void AddPhoto(Photo photo)
         {
@@ -72,5 +78,21 @@ namespace Moon._01.Script.Cameras
         {
             return _photos.Count < MaxPhoto;
         }
+        
+        public void LoadScene(SceneType sceneType)
+        {
+            if (IsPlatformerScene(sceneType))
+            {
+                Destroyed();
+                _photoListFinder.AddTarget(this, true);
+            }
+        }
+
+        private bool IsPlatformerScene(SceneType sceneType)
+            => sceneType == SceneType.ChoiMyeongJinScene || sceneType == SceneType.DaEunJungScene
+               || sceneType == SceneType.LeeJaeYoonScene || sceneType == SceneType.SeoAhYoonScene
+               || sceneType == SceneType.YulParkScene;
+
+        public void Reset() { }
     }
 }

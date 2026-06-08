@@ -5224,7 +5224,8 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 592444185}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4084436748965959214, guid: e14385f0b991d94489b8bdcf6562d93d, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 5800166738284915372, guid: e14385f0b991d94489b8bdcf6562d93d, type: 3}
       insertIndex: -1
@@ -6629,7 +6630,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -2034013047
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 2142925228, guid: 17f089b5e25dec8438dffd4ba931f931, type: 3}

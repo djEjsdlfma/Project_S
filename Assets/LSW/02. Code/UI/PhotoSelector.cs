@@ -1,5 +1,6 @@
 
 using System;
+using Moon._01.Script.Cameras;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,13 +26,10 @@ namespace LSW._02._Code.UI
             markImage.gameObject.SetActive(false);
         }
 
-        public void SetImage(Texture2D texture)
+        public void SetImage(Photo photo)
         {
-            if (texture == null)
-            {
-                photoImage.sprite = null;
-                return;
-            }
+            Texture2D texture = photo.Image;
+            
             photoImage.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
             selectBtn.onClick.AddListener(Selected);
         }
@@ -43,6 +41,9 @@ namespace LSW._02._Code.UI
             photoImage.color = _isSelected ? selectColor : unselectColor;
             OnSelected?.Invoke(this, _isSelected);
         }
+        
+        public Texture2D GetTexture()
+            => photoImage.sprite.texture;
 
         private void OnDestroy()
         {

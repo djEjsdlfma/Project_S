@@ -1,8 +1,12 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using LSW._02._Code.Core;
+using LSW._02._Code.Core.Cores;
 using LSW._02._Code.System___Manager;
+using Moon._01.Script.Cameras;
 using Moon._01.Script.Datas;
+using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,25 +23,29 @@ namespace LSW._02._Code.UI
         private List<PhotoSelector> _photoSelector = new List<PhotoSelector>();
 
         private List<PhotoSelector> _selectedPhotoSelector = new List<PhotoSelector>();
+        private List<Texture2D> _selectedPhotos = new List<Texture2D>();
+        private PhotoStorage _photoStorage;
         public bool CanChoose { get; private set; } = true;
 
         private void Start()
         {
+            _photoStorage = CoreHandler.Instance.GetCore<PhotoStorage>();
+            if(_photoStorage == null)
+                return;
+            
             _photoSelector = GetComponentsInChildren<PhotoSelector>().ToList();
             _photoSelector.ForEach(ps =>
             {
-                ps.SetImage(null);
                 ps.gameObject.SetActive(false);
             });
-            if (DataManager.Instance.TryGetValue(CurrentGuestManager.C[0], out List<Texture2D> photo))
+
+            List<Photo> photoList = _photoStorage.GetPhotos();
+            bool photoCountMore = photoList.Count > _photoSelector.Count;
+            for (int i = 0; i < (photoCountMore ? _photoSelector.Count : photoList.Count); i++)
             {
-                bool photoCountMore = photo.Count > _photoSelector.Count;
-                for (int i = 0; i < (photoCountMore ? _photoSelector.Count : photo.Count); i++)
-                {
-                    _photoSelector[i].gameObject.SetActive(true);
-                    _photoSelector[i].SetImage(photo[i]);
-                    _photoSelector[i].OnSelected += SelectedPhoto;
-                }
+                _photoSelector[i].gameObject.SetActive(true);
+                _photoSelector[i].SetImage(photoList[i]);
+                _photoSelector[i].OnSelected += SelectedPhoto;
             }
             
             uploadPhotosButton.onClick.AddListener(UploadPhotos);
@@ -49,6 +57,9 @@ namespace LSW._02._Code.UI
 
         private void UploadPhotos()
         {
+            DataManager.Instance.SaveData(CurrentGuestManager.C[0], _selectedPhotos);
+            DataManager.Instance.AutoImgSavedToCurrent();
+            
             BubbleManager bubbleManager = SystemManager.Instance.GetSystemManager<BubbleManager>();
             if (bubbleManager != null)
             {
@@ -62,6 +73,7 @@ namespace LSW._02._Code.UI
                 && !_selectedPhotoSelector.Contains(photoSelector))
             {
                 _selectedPhotoSelector.Add(photoSelector);
+                _selectedPhotos.Add(photoSelector.GetTexture());
                 if (_selectedPhotoSelector.Count == maxSelectedPhoto)
                 {
                     uploadPhotosButton.interactable = true;
@@ -72,6 +84,7 @@ namespace LSW._02._Code.UI
             else if(!isSelected && _selectedPhotoSelector.Contains(photoSelector))
             {
                 _selectedPhotoSelector.Remove(photoSelector);
+                _selectedPhotos.Remove(photoSelector.GetTexture());
                 uploadPhotosButton.interactable = false;
                 _uploadPhotosImage.color = uploadPhotosBtnDisableColor;
                 CanChoose = true;

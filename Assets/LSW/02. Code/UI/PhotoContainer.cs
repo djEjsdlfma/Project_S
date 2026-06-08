@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using Moon._01.Script.Datas;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,8 @@ namespace LSW._02._Code.UI
 {
     public class PhotoContainer : MonoBehaviour
     {
+        [SerializeField] private TextMeshProUGUI noPhotoText;
+        
         public int PhotoCount { get; private set; }
         
         private Image[] _photoImages;
@@ -27,11 +30,17 @@ namespace LSW._02._Code.UI
 
         public void SetPhoto(Texture2D[] photo)
         {
-            if (_photoImages.Length <= 0) 
-                return;
-            
-            for (int i = 0; i < _photoImages.Length; i++)
+            if (_photoImages.Length <= 0)
             {
+                noPhotoText.gameObject.SetActive(true);
+                return;
+            }
+            
+            for (int i = 0; i < photo.Length; i++)
+            {
+                if(i >= _photoImages.Length)
+                    break;
+                
                 _photoImages[i].sprite = Sprite.Create(photo[i], new Rect(0, 0, photo[i].width, photo[i].height), new Vector2(0.5f, 0.5f));
             }
         }

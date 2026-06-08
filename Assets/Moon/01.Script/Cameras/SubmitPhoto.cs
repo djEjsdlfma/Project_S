@@ -147,7 +147,7 @@ namespace Moon._01.Script.Cameras
 
         public void EndAndDelete()
         {
-            camerasFinder.GetTarget<PhotoStorage>().Destroyed();
+            //camerasFinder.GetTarget<PhotoStorage>().Destroyed();
             foreach (var polaroid in polaroids)
             {
                 polaroid.Init();
