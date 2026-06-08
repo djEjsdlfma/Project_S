@@ -21,7 +21,9 @@ public class Title : MonoBehaviour, ISystemManager
 
     [Header("Objs")]
     [SerializeField] private RectTransform Pad;
+    [SerializeField] private Image PadShadow;
     [SerializeField] private RectTransform Calendar;
+    [SerializeField] private Image CalendarShadow;
     [SerializeField] private RectTransform Candle;
     [SerializeField] private RectTransform Tea;
 
@@ -140,6 +142,8 @@ public class Title : MonoBehaviour, ISystemManager
             {
                 Calendar.DOAnchorPosX(188f,0.45f).SetEase(Ease.OutCirc).OnComplete(() => 
                 {
+                            ShadowFade(PadShadow, 0.25f);
+                            ShadowFade(CalendarShadow, 0.25f);
                     Candle.DOAnchorPosX(677f, 0.45f).SetEase(Ease.OutCirc)
                         .OnComplete(() =>
                         {
@@ -147,6 +151,11 @@ public class Title : MonoBehaviour, ISystemManager
                         });
                 });
             });
+    }
+
+    private void ShadowFade(Image shadow,float value)
+    {
+        shadow.DOFade(value, 0.25f);
     }
 
     public void Reset() { }
