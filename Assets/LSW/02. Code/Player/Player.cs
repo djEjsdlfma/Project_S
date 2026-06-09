@@ -21,6 +21,9 @@ namespace LSW._02._Code.Player
         private bool _isSprinting;
         private float _speedModifier;
         private float _trapSpeedMultiplier = 1f;
+        private float _trapGravityMultiplier = 1f;
+
+        private float _firstGravityScale = 1f;
         
         private EntityHealth _health;
         
@@ -32,6 +35,7 @@ namespace LSW._02._Code.Player
         {
             base.Awake();            
             _health = GetCompo<EntityHealth>();
+            _firstGravityScale = Rig.gravityScale;
             // _staminaCompo = GetCompo<StaminaSystemCompo>();
         }
         
@@ -114,6 +118,27 @@ namespace LSW._02._Code.Player
             _trapSpeedMultiplier = multiplier;
         }
 
+        public void SetTrapSpeedToMin(float multiplier, float min)
+        {
+            _trapSpeedMultiplier = Mathf.Max(multiplier, min);
+        }
+        
+        public void SetGravityScaleToMax(float multiplier, float max)
+        {
+            _trapGravityMultiplier = multiplier;
+            Rig.gravityScale = Mathf.Min(_trapGravityMultiplier * _firstGravityScale, max);
+        }
+        
+        public float GetTrapSpeedMultiplier()
+        {
+            return _trapSpeedMultiplier;
+        }
+        
+        public float GetTrapGravityMultiplier()
+        {
+            return _trapGravityMultiplier;
+        }
+
         public void AddSpeedModifier(float amount)
         {
             if((_speedModifier + amount) > 0.6f)
@@ -131,6 +156,13 @@ namespace LSW._02._Code.Player
         public void SetStop(bool stop)
         {
             InputCompo.EnableAllInput(!stop);
+        }
+
+        public void ResetSpeeds()
+        {
+            _trapSpeedMultiplier = 1f;
+            _trapGravityMultiplier = 1f;
+            Rig.gravityScale = _firstGravityScale;
         }
     }
 }
