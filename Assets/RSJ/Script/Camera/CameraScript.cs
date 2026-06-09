@@ -349,7 +349,6 @@ namespace RSJ.Script.Camera
                     if (takable.IsDisableCapture())
                     {
                         _showWordUISystem.OnEndShowWord += SetCanCapture;
-                        CanCapture = false;
                     }
                     takable.Take();
                     return true;
