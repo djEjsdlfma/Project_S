@@ -78,7 +78,7 @@ public class PlayerJumpState : State
 
     private void HandleJump()
     {
-        _rigidbody.linearVelocity = new Vector2(_moveInput.x * Info.moveSpeed, _rigidbody.linearVelocity.y);
+        _rigidbody.linearVelocity = new Vector2(_moveInput.x * Info.moveSpeed * _player.GetTrapSpeedMultiplier(), _rigidbody.linearVelocity.y);
     }
 
     private void HandleMoveInput(Vector2 moveInput)

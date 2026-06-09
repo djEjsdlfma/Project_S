@@ -24,15 +24,7 @@ MonoBehaviour:
         Culture=neutral, PublicKeyToken=null
     IsFindChild: 0
   - SType:
-      typeName: Moon._01.Script.Cameras.SubmitPhoto, Assembly-CSharp, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    IsFindChild: 0
-  - SType:
       typeName: Moon._01.Script.Cameras.PhotoStorage, Assembly-CSharp, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    IsFindChild: 0
-  - SType:
-      typeName: Moon._01.Script.Cameras.ResultPhoto, Assembly-CSharp, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
     IsFindChild: 0
   - SType:
