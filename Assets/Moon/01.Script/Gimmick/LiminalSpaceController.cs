@@ -1,3 +1,4 @@
+using System;
 using Unity.Cinemachine;
 using UnityEngine;
 
@@ -16,7 +17,7 @@ namespace Moon._01.Script.Gimmick
 
         private int _currentMoveTimes = 0;
         private bool _isLooping = true;
-        private bool _isEffectActive = true;
+        private bool _isEffectActive = false;
 
         private Vector3 _warpVector;
         private CinemachineBrain _brain;
@@ -71,9 +72,18 @@ namespace Moon._01.Script.Gimmick
                 }
                 else
                 {
-                    _isEffectActive = false;
                     _isLooping = false;
                 }
+            }
+        }
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if(other.CompareTag("Player"))
+            {
+                _currentMoveTimes = 0;
+                _isEffectActive = true;
+                _isLooping = true;
             }
         }
     }
