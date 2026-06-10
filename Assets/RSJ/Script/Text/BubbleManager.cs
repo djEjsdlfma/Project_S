@@ -628,23 +628,35 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
     
     private void RebuildHistory(SavedDialogueData data, bool isDialogueDay, bool updateProfile = true)
     {
-        if (data.HistoryContents == null) return;
+        if (data.HistoryContents == null || data.HistoryContents.Count == 0) return;
 
         string lastContent = string.Empty;
-        bool isFirst = true;
+    
+        // 이전에 대화하던 화자가 누구였는지 추적합니다.
+        // 데이터 저장 시점의 wasChatNpc 상태를 활용해야 합니다.
+        bool currentWasNpc = !data.WasChatNpc; 
 
-        foreach (var content in data.HistoryContents)
+        for (int i = 0; i < data.HistoryContents.Count; i++)
         {
-            if (isFirst && _allDialogueUI.Count > 0)
+            string content = data.HistoryContents[i];
+        
+            // --- 핵심 수정: 이전 화자와 다르면 isFirst(새로운 말풍선 그룹의 시작)로 간주 ---
+            bool isFirst = (i == 0) || (currentWasNpc == wasChatNpc);
+        
+            // 화자가 바뀔 때마다 빈 공간 추가 (이전 로직과 동일)
+            if (i > 0 && currentWasNpc != wasChatNpc)
             {
                 ShowEmptySpace();
             }
 
-            // 간단한 패턴: NPC 메시지는 짝수 인덱스, Player는 홀수 인덱스
-            // 또는 저장된 타입 정보가 필요하면 HistoryContents를 더 확장해야 함
-            // 여기서는 wasChatNpc 상태를 기반으로 처리
-            BubbleText prefab = isFirst ? NPCFirstText : NPCText;
-            if (!wasChatNpc)
+            // 현재 메시지의 화자 타입 결정
+            bool isCurrentNpc = !currentWasNpc; 
+        
+            // 프리팹 선택: 화자가 바뀌는 시점(isFirst)이면 First 프리팹 사용
+            BubbleText prefab;
+            if (isCurrentNpc)
+                prefab = isFirst ? NPCFirstText : NPCText;
+            else
                 prefab = isFirst ? PlayerFirstText : PlayerText;
 
             if (prefab != null)
@@ -655,15 +667,17 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
                 lastContent = content;
             }
 
-            isFirst = false;
-            wasChatNpc = !wasChatNpc;
+            // 상태 업데이트
+            wasChatNpc = isCurrentNpc;
+            currentWasNpc = isCurrentNpc;
         }
-        
+    
+        // ... 이하 나머지 로직 (프로필 업데이트 및 선택지 복구)
         if (updateProfile && ChatProfileContainer != null && !string.IsNullOrEmpty(lastContent))
             ChatProfileContainer.SetCurrentProfile(lastContent, !wasEndChat && isDialogueDay);
-        
-        UpdateBottomEmptySpace();
     
+        UpdateBottomEmptySpace();
+
         if (data.HasActiveChoice)
         {
             _isChoiceActive = true; 

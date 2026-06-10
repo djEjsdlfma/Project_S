@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/RSJ/Scene/TitleNew.unity
     guid: 607bc32623a839947bfe4df9645380c5
   - enabled: 1
-    path: Assets/LSW/01. Scene/LeeJaeYoon.unity
-    guid: e5c3c777cea551643a16c82f451956d2
+    path: Assets/LSW/01. Scene/ChoiMyeongJin.unity
+    guid: cacacf932ba06c74eaf3fddc03751e73
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
