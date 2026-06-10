@@ -987,7 +987,7 @@ CompositeCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_GeometryType: 0
+  m_GeometryType: 1
   m_GenerationType: 0
   m_EdgeRadius: 0
   m_ColliderPaths:
@@ -1001,26 +1001,6 @@ CompositeCollider2D:
         Y: -94758032
       - X: 502009664
         Y: -94758032
-  - m_Collider: {fileID: 1672660341}
-    m_ColliderPaths:
-    - - X: 898354752
-        Y: -42851992
-      - X: 732603904
-        Y: -42851992
-      - X: 732603904
-        Y: -94165192
-      - X: 898354752
-        Y: -94165192
-  - m_Collider: {fileID: 426909896}
-    m_ColliderPaths:
-    - - X: 1318857728
-        Y: -78196000
-      - X: 330097184
-        Y: -78196000
-      - X: 330097184
-        Y: -90196000
-      - X: 1318857728
-        Y: -90196000
   - m_Collider: {fileID: 1253978848}
     m_ColliderPaths:
     - - X: 1312252160
@@ -1031,6 +1011,26 @@ CompositeCollider2D:
         Y: -78298800
       - X: 1312252160
         Y: -78298800
+  - m_Collider: {fileID: 426909896}
+    m_ColliderPaths:
+    - - X: 1318857728
+        Y: -78196000
+      - X: 330097184
+        Y: -78196000
+      - X: 330097184
+        Y: -90196000
+      - X: 1318857728
+        Y: -90196000
+  - m_Collider: {fileID: 1672660341}
+    m_ColliderPaths:
+    - - X: 898354752
+        Y: -42851992
+      - X: 732603904
+        Y: -42851992
+      - X: 732603904
+        Y: -94165192
+      - X: 898354752
+        Y: -94165192
   m_CompositePaths:
     m_Paths:
     - - {x: 50.20094, y: -9.475803}
@@ -1054,7 +1054,7 @@ CompositeCollider2D:
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
   m_UseDelaunayMesh: 0
-  m_CompositeGameObject: {fileID: 712439667}
+  m_CompositeGameObject: {fileID: 324396566}
 --- !u!50 &324396571
 Rigidbody2D:
   serializedVersion: 5
@@ -2505,6 +2505,9 @@ MonoBehaviour:
   takePictureEvent:
     m_PersistentCalls:
       m_Calls: []
+  endDialogueEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!61 &627061685
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3379,65 +3382,15 @@ CompositeCollider2D:
   m_GenerationType: 0
   m_EdgeRadius: 0
   m_ColliderPaths:
-  - m_Collider: {fileID: 419043292}
+  - m_Collider: {fileID: 1898825552}
     m_ColliderPaths:
-    - - X: 228316992
+    - - X: -331683008
         Y: -62665300
-      - X: 211683008
+      - X: -348316992
         Y: -62665300
-      - X: 211683008
+      - X: -348316992
         Y: -90012704
-      - X: 228316992
-        Y: -90012704
-  - m_Collider: {fileID: 424121032}
-    m_ColliderPaths:
-    - - X: -11683006
-        Y: -62665300
-      - X: -28316994
-        Y: -62665300
-      - X: -28316994
-        Y: -90012704
-      - X: -11683006
-        Y: -90012704
-  - m_Collider: {fileID: 1059812897}
-    m_ColliderPaths:
-    - - X: 308316992
-        Y: -62665300
-      - X: 291683008
-        Y: -62665300
-      - X: 291683008
-        Y: -90012704
-      - X: 308316992
-        Y: -90012704
-  - m_Collider: {fileID: 1083284639}
-    m_ColliderPaths:
-    - - X: -171683008
-        Y: -62665300
-      - X: -188316992
-        Y: -62665300
-      - X: -188316992
-        Y: -90012704
-      - X: -171683008
-        Y: -90012704
-  - m_Collider: {fileID: 1337411580}
-    m_ColliderPaths:
-    - - X: 148035056
-        Y: -62524332
-      - X: 131964944
-        Y: -62524332
-      - X: 131964944
-        Y: -90153664
-      - X: 148035056
-        Y: -90153664
-  - m_Collider: {fileID: 1372261102}
-    m_ColliderPaths:
-    - - X: -91683008
-        Y: -62665300
-      - X: -108316992
-        Y: -62665300
-      - X: -108316992
-        Y: -90012704
-      - X: -91683008
+      - X: -331683008
         Y: -90012704
   - m_Collider: {fileID: 1669446699}
     m_ColliderPaths:
@@ -3449,15 +3402,35 @@ CompositeCollider2D:
         Y: -90012704
       - X: -251683008
         Y: -90012704
-  - m_Collider: {fileID: 1898825552}
+  - m_Collider: {fileID: 1083284639}
     m_ColliderPaths:
-    - - X: -331683008
+    - - X: -171683008
         Y: -62665300
-      - X: -348316992
+      - X: -188316992
         Y: -62665300
-      - X: -348316992
+      - X: -188316992
         Y: -90012704
-      - X: -331683008
+      - X: -171683008
+        Y: -90012704
+  - m_Collider: {fileID: 1372261102}
+    m_ColliderPaths:
+    - - X: -91683008
+        Y: -62665300
+      - X: -108316992
+        Y: -62665300
+      - X: -108316992
+        Y: -90012704
+      - X: -91683008
+        Y: -90012704
+  - m_Collider: {fileID: 424121032}
+    m_ColliderPaths:
+    - - X: -11683006
+        Y: -62665300
+      - X: -28316994
+        Y: -62665300
+      - X: -28316994
+        Y: -90012704
+      - X: -11683006
         Y: -90012704
   - m_Collider: {fileID: 1947309282}
     m_ColliderPaths:
@@ -3469,6 +3442,36 @@ CompositeCollider2D:
         Y: -90153664
       - X: 68035064
         Y: -90153664
+  - m_Collider: {fileID: 1337411580}
+    m_ColliderPaths:
+    - - X: 148035056
+        Y: -62524332
+      - X: 131964944
+        Y: -62524332
+      - X: 131964944
+        Y: -90153664
+      - X: 148035056
+        Y: -90153664
+  - m_Collider: {fileID: 419043292}
+    m_ColliderPaths:
+    - - X: 228316992
+        Y: -62665300
+      - X: 211683008
+        Y: -62665300
+      - X: 211683008
+        Y: -90012704
+      - X: 228316992
+        Y: -90012704
+  - m_Collider: {fileID: 1059812897}
+    m_ColliderPaths:
+    - - X: 308316992
+        Y: -62665300
+      - X: 291683008
+        Y: -62665300
+      - X: 291683008
+        Y: -90012704
+      - X: 308316992
+        Y: -90012704
   m_CompositePaths:
     m_Paths:
     - - {x: 14.803477, y: -9.015367}
@@ -3906,6 +3909,9 @@ MonoBehaviour:
     \uADF8\uB9AC\uACE0 \u2014 \uC6B8\uC74C\uC18C\uB9AC."
   - "\uC190\uC7A1\uC774\uC5D0 \uC190\uC774 \uAC04\uB2E4."
   takePictureEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  endDialogueEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1431282228}
@@ -5911,6 +5917,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LSW._02._Code.Environment.Trap.Teleport
   playerFinder: {fileID: 11400000, guid: d0cd58a8765f43a478f21e9ec88d332c, type: 2}
+  camera: {fileID: 2000586790}
   teleportPoint: {fileID: 64979983}
   teleportFadeCanvas: {fileID: 1066162832}
 --- !u!1001 &1433442805
@@ -6022,8 +6029,12 @@ PrefabInstance:
       value: 1.14
       objectReference: {fileID: 0}
     - target: {fileID: 8455903049549274777, guid: 47df938eb0d1b444a8d7a86ca9696ed3, type: 3}
+      propertyPath: m_PointLightInnerAngle
+      value: 174.71
+      objectReference: {fileID: 0}
+    - target: {fileID: 8455903049549274777, guid: 47df938eb0d1b444a8d7a86ca9696ed3, type: 3}
       propertyPath: m_PointLightOuterAngle
-      value: 351.3369
+      value: 254.74
       objectReference: {fileID: 0}
     - target: {fileID: 8455903049549274777, guid: 47df938eb0d1b444a8d7a86ca9696ed3, type: 3}
       propertyPath: m_PointLightOuterRadius
@@ -6479,6 +6490,9 @@ MonoBehaviour:
   takePictureEvent:
     m_PersistentCalls:
       m_Calls: []
+  endDialogueEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!61 &1600442992
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6549,6 +6563,9 @@ MonoBehaviour:
   - "\uC774\uB807\uAC8C \uAC00\uAE4C\uC774\uC11C \uBCF4\uBA74 \u2014 \uC190\uC774
     \uB354 \uC791\uC544 \uBCF4\uC774\uB294\uAD70\uC694."
   takePictureEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  endDialogueEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &1602491572
