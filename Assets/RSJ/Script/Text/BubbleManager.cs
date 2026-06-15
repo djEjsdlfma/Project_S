@@ -185,6 +185,7 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
             text.InitBubble(log, 1f);
         }
 
+        text.SetProfil(speakerName);
         nowBubble = text.gameObject;
         AddHistory(recordingGuest, log);
         
