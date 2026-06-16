@@ -43,4 +43,10 @@ public class PhotoUI : MonoBehaviour
         _text.SetActive(photo.PhotoCount == 0);
         photo.gameObject.SetActive(true);
     }
+
+    public void BackSelectFolder()
+    {
+        ActiveFolder();
+        photo.gameObject.SetActive(false);
+    }
 }

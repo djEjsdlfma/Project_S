@@ -179,13 +179,13 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
         {
             wasChatNpc = true;
             text.InitBubble(log, 1f, speakerName);
+            text.SetProfil(speakerName);
         }
         else
         {
             text.InitBubble(log, 1f);
         }
 
-        text.SetProfil(speakerName);
         nowBubble = text.gameObject;
         AddHistory(recordingGuest, log);
         
@@ -286,6 +286,7 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
 
         _currentLoading = Instantiate(NPCChatting, _container);
         _currentLoading.SetName(chatterName);
+        _currentLoading.SetProfil(chatterName);
         _allDialogueUI.Add(_currentLoading.gameObject);
         
         UpdateBottomEmptySpace();

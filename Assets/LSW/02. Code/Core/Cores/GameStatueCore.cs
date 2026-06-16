@@ -22,6 +22,8 @@ namespace LSW._02._Code.Core.Cores
         
         private SceneType _currentSceneType = SceneType.None;
         private SceneType _lastSceneType = SceneType.None;
+
+        private BubbleManager _bubbleManager;
         
         public void Initialize(CoreHandler coreHandler)
         {
@@ -65,27 +67,24 @@ namespace LSW._02._Code.Core.Cores
 
         private void SubscribeBubbleManager()
         {
-            BubbleManager bubbleManager = SystemManager.Instance.GetSystemManager<BubbleManager>();
-            if (bubbleManager != null)
+            _bubbleManager = SystemManager.Instance.GetSystemManager<BubbleManager>();
+            if (_bubbleManager != null)
             {
-                bubbleManager.onSpawnMessage += SaveLastDialogueData;
+                _bubbleManager.onSpawnMessage += SaveLastDialogueData;
             }
         }
 
         private void UnsubscribeBubbleManager()
         {
-            BubbleManager bubbleManager = SystemManager.Instance.GetSystemManager<BubbleManager>();
-            if (bubbleManager != null)
+            if (_bubbleManager != null)
             {
-                bubbleManager.onSpawnMessage -= SaveLastDialogueData;
+                _bubbleManager.onSpawnMessage -= SaveLastDialogueData;
             }
         }
 
         private bool IsPlatformerScene(SceneType sceneType)
         {
-            return sceneType == SceneType.ChoiMyeongJinScene || sceneType == SceneType.DaEunJungScene || 
-                   sceneType == SceneType.LeeJaeYoonScene || sceneType == SceneType.SeoAhYoonScene ||
-                   sceneType == SceneType.YulParkScene;
+            return sceneType is SceneType.ChoiMyeongJinScene or SceneType.DaEunJungScene or SceneType.LeeJaeYoonScene or SceneType.SeoAhYoonScene or SceneType.YulParkScene;
         }
 
         private void SaveLastDialogueData(LastDialogueData data)

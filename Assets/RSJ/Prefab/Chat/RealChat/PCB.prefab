@@ -82,6 +82,9 @@ MonoBehaviour:
   _name: {fileID: 0}
   _Boundery: {fileID: 4224852475598688954}
   myChatBound: {fileID: 7478818311491981334}
+  _profil: {fileID: 0}
+  ProfilPictures:
+    _serializedList: []
   maxWidth: 565
 --- !u!114 &4415605399059766047
 MonoBehaviour:
@@ -211,11 +214,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1481912407758987299, guid: c4bbbada4345b05418a5bfd1e6e138dc, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 695
+      value: 675.9972
       objectReference: {fileID: 0}
     - target: {fileID: 1481912407758987299, guid: c4bbbada4345b05418a5bfd1e6e138dc, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -7
+      value: -28.5
       objectReference: {fileID: 0}
     - target: {fileID: 1481912407758987299, guid: c4bbbada4345b05418a5bfd1e6e138dc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

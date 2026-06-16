@@ -107,7 +107,9 @@ public class TitleManager : MonoBehaviour
     {
         if (nowGameObjcet != null)
         {
-            _prevStack.Push(nowGameObjcet);
+            if(part != nowGameObjcet)
+                _prevStack.Push(nowGameObjcet);
+            
             _leftBtn.interactable = true;
             nowGameObjcet.SetActive(false);
         }
