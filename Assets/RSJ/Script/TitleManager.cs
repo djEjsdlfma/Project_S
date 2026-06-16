@@ -17,6 +17,7 @@ public class TitleManager : MonoBehaviour
 {
     [Header("Candle")]
     [SerializeField] private GameObject _candleLight;
+    [SerializeField] private GameObject _candleFire;
 
     [Header("Day")]
     [SerializeField] private TextMeshProUGUI _gameDayText;
@@ -51,6 +52,8 @@ public class TitleManager : MonoBehaviour
 
     private static bool _textAgain;
 
+    private RectTransform _candleFireSize;
+
     private void Awake()
     {
         if (DataManager.Instance.CurrentData.TryGetValue("Day", out int day))
@@ -64,6 +67,7 @@ public class TitleManager : MonoBehaviour
 
         endAction = SystemManager.Instance.GetSystemManager<BubbleManager>();
         _gameStatueCore = CoreHandler.Instance.GetCore<GameStatueCore>();
+        _candleFireSize = _candleFire.GetComponent<RectTransform>();
 
         if (_gameStatueCore != null)
         {
@@ -182,6 +186,8 @@ public class TitleManager : MonoBehaviour
         {
             _candleLight.GetComponent<Light2D>().intensity = 
                 (_talkEnd ? 17f : 11f) + intensityFlicker;
+
+            _candleFireSize.sizeDelta = new Vector2(_candleFireSize.sizeDelta.x, (intensityFlicker * 2) + 80f);
         }
     }
 
@@ -243,5 +249,6 @@ public class TitleManager : MonoBehaviour
     public void CandleOff()
     {
         _candleLight.gameObject.SetActive(false);
+        _candleFire.gameObject.SetActive(false);
     }
 }
