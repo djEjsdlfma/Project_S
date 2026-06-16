@@ -88,6 +88,8 @@ namespace Moon._01.Script.Cameras
                 {
                     continue;
                 }
+                
+                if (item.TryGetComponent(out CamObject cmObj) && !cmObj.CanCopyOrMove) continue;
     
                 GameObject obj = item.gameObject;
                 Vector2 realCenter = obj.transform.position;

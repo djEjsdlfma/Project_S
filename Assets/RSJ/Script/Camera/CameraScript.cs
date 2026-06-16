@@ -222,6 +222,8 @@ namespace RSJ.Script.Camera
                 if (item == null) continue;
             
                 if (item.TryGetComponent(out ITakable _)) continue;
+                
+                if (item.TryGetComponent(out CamObject cmObj) && !cmObj.CanCopyOrMove) continue;
             
                 Vector2 itemMin = item.bounds.min;
                 Vector2 itemMax = item.bounds.max;
