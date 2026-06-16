@@ -35,27 +35,17 @@ public class Title : MonoBehaviour, ISystemManager
     private static bool isStarted = false;
     private int inputTry;
     private bool moving = false;
-
-    private KeyControl[] _digitkeys;
+    private Key[] numberKeys = new Key[]
+    {
+        Key.Digit0, Key.Digit1, Key.Digit2, Key.Digit3, Key.Digit4, 
+        Key.Digit5, Key.Digit6, Key.Digit7, Key.Digit8, Key.Digit9,
+        Key.Numpad0, Key.Numpad1, Key.Numpad2, Key.Numpad3, Key.Numpad4, 
+        Key.Numpad5, Key.Numpad6, Key.Numpad7, Key.Numpad8, Key.Numpad9
+    };
     
     public bool canEnterPassword = true;
 
-    public void Initialize(SystemManager systemManager)
-    {
-        _digitkeys = new KeyControl[10]
-        {
-            Keyboard.current.digit0Key,
-            Keyboard.current.digit1Key,
-            Keyboard.current.digit2Key,
-            Keyboard.current.digit3Key,
-            Keyboard.current.digit4Key,
-            Keyboard.current.digit5Key,
-            Keyboard.current.digit6Key,
-            Keyboard.current.digit7Key,
-            Keyboard.current.digit8Key,
-            Keyboard.current.digit9Key
-        };
-    }
+    public void Initialize(SystemManager systemManager) { }
 
     private void Start()
     {
@@ -123,9 +113,9 @@ public class Title : MonoBehaviour, ISystemManager
         if (keyboard == null) 
             return false;
         
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < numberKeys.Length; i++)
         {
-            if (_digitkeys[i].wasPressedThisFrame)
+            if (keyboard[numberKeys[i]].wasPressedThisFrame)
             {
                 return true;
             }
