@@ -23,6 +23,7 @@ namespace Moon._01.Script.Memos
     {
         public Human human;
         public string text;
+        public int day;
         [NonSerialized]public int num;
     }
     
@@ -66,7 +67,7 @@ namespace Moon._01.Script.Memos
                 memo.memos.ForEach(m => m.num = n++);
                 foreach (var m in memo.memos)
                 {
-                    CreateMemo(m.human, m.text , m.num);
+                    CreateMemo(m.human, m.text, m.day, m.num);
                 }
             }
             createdButton.SetMemoSystem(this);
@@ -78,11 +79,11 @@ namespace Moon._01.Script.Memos
             createdButton.SetMemoSystem(this);
         }
         
-        private void CreateMemo(Human human, string text, int mNum)
+        private void CreateMemo(Human human, string text,int day , int mNum)
         {
             GameObject go = Instantiate(prefab, tParent);
             MemoUI memoUI = go.GetComponent<MemoUI>();
-            memoUI.SetMemo(human, text, this);
+            memoUI.SetMemo(human, text, day , this);
             memoUI.Num = mNum;
             memoUI.clicked.AddListener(StartFix);
         }
@@ -119,7 +120,7 @@ namespace Moon._01.Script.Memos
         {
             if (_currentFix)
             {
-                _currentFix.SetMemo(createdButton.CurrentGuest, _currentText, this);
+                _currentFix.SetMemo(createdButton.CurrentGuest, _currentText, -100 , this);
                 int num = memo.memos.FindIndex(m => m.num == _currentFix.Num);
                 Memo me = memo.memos[num];
                 me.human = createdButton.CurrentGuest;
@@ -131,8 +132,20 @@ namespace Moon._01.Script.Memos
             }
             else
             {
-                memo.memos.Add(new Memo(){human = createdButton.CurrentGuest, text = _currentText, num = n});
-                CreateMemo(createdButton.CurrentGuest, _currentText, n++);
+                int day = 1;
+                if(DataManager.Instance.TryGetValue("Day", out int d))
+                {
+                    day = d;
+                }
+                
+                memo.memos.Add(new Memo()
+                    {
+                        human = createdButton.CurrentGuest, 
+                        text = _currentText, 
+                        day = day, 
+                        num = n
+                    });
+                CreateMemo(createdButton.CurrentGuest, _currentText, day ,n++);
                 createText.text = string.Empty;
                 createPanel.SetActive(false);
             }

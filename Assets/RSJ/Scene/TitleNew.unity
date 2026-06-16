@@ -1388,8 +1388,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u200B"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0494a77ffa594734f9931f2a2d9380a4, type: 2}
-  m_sharedMaterial: {fileID: -3558238057192847427, guid: 0494a77ffa594734f9931f2a2d9380a4, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ea9926c8f2b4e674ab8b5f091ea6e029, type: 2}
+  m_sharedMaterial: {fileID: 6524427173825193254, guid: ea9926c8f2b4e674ab8b5f091ea6e029, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4562,7 +4562,7 @@ MonoBehaviour:
   m_CaretWidth: 1
   m_ReadOnly: 0
   m_RichText: 1
-  m_GlobalFontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_GlobalFontAsset: {fileID: 11400000, guid: ea9926c8f2b4e674ab8b5f091ea6e029, type: 2}
   m_OnFocusSelectAll: 1
   m_ResetOnDeActivation: 1
   m_KeepTextSelectionVisible: 0
@@ -12898,8 +12898,6 @@ Transform:
   - {fileID: 524758810}
   - {fileID: 1254328375}
   - {fileID: 787227344}
-  - {fileID: 1358330887}
-  - {fileID: 1150817071}
   - {fileID: 490261335}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -15391,53 +15389,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1146956530}
   m_CullTransparentMesh: 1
---- !u!1 &1150817069
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1150817071}
-  - component: {fileID: 1150817070}
-  m_Layer: 0
-  m_Name: Test
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1150817070
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1150817069}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8125cabbc85241098a83d2bd52954be9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Moon._97.Test.Script.TestSaveAndLoad
-  slot: 0
-  h: 0
-  memo: {fileID: 787227345}
---- !u!4 &1150817071
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1150817069}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.66602, y: -0.73715, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 931664903}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1155523207
 GameObject:
   m_ObjectHideFlags: 0
@@ -17325,51 +17276,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1353146490}
   m_CullTransparentMesh: 1
---- !u!1 &1358330886
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1358330887}
-  - component: {fileID: 1358330888}
-  m_Layer: 0
-  m_Name: Data
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1358330887
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1358330886}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 931664903}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1358330888
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1358330886}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aca9c20e7f504f4dbdee32fb732d7c23, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Moon._01.Script.Datas.DataManager
-  <MaxSaveSlot>k__BackingField: 3
 --- !u!1 &1362116596
 GameObject:
   m_ObjectHideFlags: 0
@@ -28356,8 +28262,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uC5EC\uAE30\uC5D0 \uC785\uB825\uD558\uC138\uC694."
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0494a77ffa594734f9931f2a2d9380a4, type: 2}
-  m_sharedMaterial: {fileID: -3558238057192847427, guid: 0494a77ffa594734f9931f2a2d9380a4, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ea9926c8f2b4e674ab8b5f091ea6e029, type: 2}
+  m_sharedMaterial: {fileID: 6524427173825193254, guid: ea9926c8f2b4e674ab8b5f091ea6e029, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
