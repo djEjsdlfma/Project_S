@@ -148,6 +148,7 @@ GameObject:
   - component: {fileID: 2273640468188564491}
   - component: {fileID: 5732006238036670833}
   - component: {fileID: 2827889157249358732}
+  - component: {fileID: 1531331621990454132}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -212,6 +213,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1531331621990454132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5225397033141089592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Mask
+  m_ShowMaskGraphic: 1
 --- !u!1 &6643849529346532321
 GameObject:
   m_ObjectHideFlags: 0
@@ -359,6 +373,19 @@ MonoBehaviour:
   _name: {fileID: 1984589705113312405}
   _Boundery: {fileID: 5145691940378506335}
   myChatBound: {fileID: 6834431975802066601}
+  _profil: {fileID: 2827889157249358732}
+  ProfilPictures:
+    _serializedList:
+    - Key: "\uC774\uC7AC\uC724"
+      Value: {fileID: -3792164748830228942, guid: 1fea7f54e4cb2514eb086fb449389370, type: 3}
+    - Key: "\uC815\uB2E4\uC740"
+      Value: {fileID: 0}
+    - Key: "\uBC15\uC728"
+      Value: {fileID: 0}
+    - Key: "\uC724\uC11C\uC544"
+      Value: {fileID: 0}
+    - Key: "\uCD5C\uBA85\uC9C4"
+      Value: {fileID: 0}
   maxWidth: 565
 --- !u!114 &6510726279892616995
 MonoBehaviour:

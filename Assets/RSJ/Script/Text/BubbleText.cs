@@ -1,5 +1,5 @@
+using AYellowpaper.SerializedCollections;
 using DG.Tweening;
-using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,6 +10,10 @@ public class BubbleText : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _name;
     [SerializeField] private RectTransform _Boundery;
     [SerializeField] private RectTransform myChatBound;
+    [SerializeField] private Image _profil;
+
+    [SerializeField] private SerializedDictionary<string, Sprite> ProfilPictures;
+
     
     public float maxWidth = 600f;
     
@@ -44,6 +48,11 @@ public class BubbleText : MonoBehaviour
             _name.text = name;
 
         SetChatText(log);
+    }
+
+    public void SetProfil(string charName)
+    {
+        _profil.sprite = ProfilPictures[charName];
     }
     
     public void SetChatText(string newText)
