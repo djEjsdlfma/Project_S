@@ -30,14 +30,25 @@ namespace LSW._02._Code.UI
             if (!_canShowWord) 
                 return false;
     
+            Debug.Log("Start Show Word:");
+            
             _canShowWord = false;
             StartCoroutine(ShowWordsSequence(words));
             wordUIText.SetText(string.Empty);
             return true;
         }
+        
+        public bool CanShowWord() => _canShowWord;
 
         private IEnumerator ShowWordsSequence(List<string> words)
         {
+            if (words.Count == 0)
+            {
+                OnEndShowWord?.Invoke(false);
+                _canShowWord = true;
+                yield break;
+            }
+            
             foreach (string word in words)
             {
                 wordUIText.SetText(word);

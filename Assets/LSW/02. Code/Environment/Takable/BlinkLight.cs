@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Rendering.Universal;
 
 namespace LSW._02._Code.Environment.Takable
@@ -21,6 +22,8 @@ namespace LSW._02._Code.Environment.Takable
         private bool _wasTaken = false;
         private Coroutine _blinkCoroutine;
         private Coroutine _resumeCoroutine;
+
+        [SerializeField] private UnityEvent onTake;
         
         private void Start()
         {
@@ -50,6 +53,7 @@ namespace LSW._02._Code.Environment.Takable
             if(_wasTaken)
                 return;
             
+            onTake.Invoke();
             _wasTaken = true;
             
             if (_blinkCoroutine != null)

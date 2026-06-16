@@ -13,7 +13,8 @@ namespace LSW._02._Code.Environment.Takable
         [SerializeField] private UnityEvent<EndDialogueObject, List<string>> takePictureEvent;
         [SerializeField] private UnityEvent endDialogueEvent;
         
-        private bool IsAlreadyTook { get; set; } = false;
+        [field:SerializeField] private bool IsAlreadyTook { get; set; } = false;
+        
         private ShowWordUISystem _showWordUISystem;
 
         private void Start()
@@ -23,10 +24,16 @@ namespace LSW._02._Code.Environment.Takable
 
         public void Take()
         {
-            IsAlreadyTook = true;
             takePictureEvent?.Invoke(this, wordList);
+
+            if (IsAlreadyTook)
+            {
+                EndDialogue(true);
+                return;
+            }
             
-            if(_showWordUISystem != null)
+            IsAlreadyTook = true;
+            if(_showWordUISystem.StartShowWord(wordList))
             {
                 _showWordUISystem.OnEndShowWord += EndDialogue;
             }
@@ -38,7 +45,7 @@ namespace LSW._02._Code.Environment.Takable
         }
         
         public bool CanBeTaken()
-            => !IsAlreadyTook && _showWordUISystem.StartShowWord(wordList);
+            => _showWordUISystem.CanShowWord();
 
         private void EndDialogue(bool _)
         {

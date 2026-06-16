@@ -44,6 +44,7 @@ namespace LSW._02._Code.Player
         public void OnMove(InputAction.CallbackContext context)
         {
             Vector2 move = context.ReadValue<Vector2>();
+            move.y = 0;
             OnMovementInput?.Invoke(move);
         }
 

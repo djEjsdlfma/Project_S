@@ -22,16 +22,25 @@ namespace LSW._02._Code.Environment.Trap
     
             _teleportTween = () =>
             {
+                var charController = _player.GetComponent<CharacterController>();
+                if (charController != null) charController.enabled = false;
+                
                 _player.transform.position = teleportPoint.position;
+    
+                if (charController != null) 
+                    charController.enabled = true;
                 
                 camera.PreviousStateIsValid = false;
                 camera.OnTargetObjectWarped(_player.transform, teleportPoint.position - _player.transform.position);
+                
+                Vector3 targetCamPos = teleportPoint.position + new Vector3(0, 1.85f, -10f);
+                camera.ForceCameraPosition(targetCamPos, Quaternion.identity);
 
                 EndFade();
             };
             
         }
-
+        
         public void TeleportTo()
         {
             teleportFadeCanvas.DOFade(1f, 0.75f).OnComplete(
