@@ -1,0 +1,876 @@
+fileFormatVersion: 2
+guid: feb430246ba342f4b954d42cca810dfd
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5487795865408288409
+    second: Map_YoonSeoAh_0
+  - first:
+      213: 2676550909246057989
+    second: Map_YoonSeoAh_1
+  - first:
+      213: 8904875676062173497
+    second: Map_YoonSeoAh_2
+  - first:
+      213: -1170048624537011926
+    second: Map_YoonSeoAh_3
+  - first:
+      213: -483847057883270830
+    second: Map_YoonSeoAh_4
+  - first:
+      213: 4948281279159941300
+    second: Map_YoonSeoAh_5
+  - first:
+      213: 8918637293315073056
+    second: Map_YoonSeoAh_6
+  - first:
+      213: -3177784933142214904
+    second: Map_YoonSeoAh_7
+  - first:
+      213: 2504300794025977543
+    second: Map_YoonSeoAh_8
+  - first:
+      213: 5201142023073418588
+    second: Map_YoonSeoAh_9
+  - first:
+      213: -1592825332190574508
+    second: Map_YoonSeoAh_10
+  - first:
+      213: 9211576541570978583
+    second: Map_YoonSeoAh_11
+  - first:
+      213: -1845988687388519096
+    second: Map_YoonSeoAh_12
+  - first:
+      213: -2640518219312298849
+    second: Map_YoonSeoAh_13
+  - first:
+      213: -5793082600145523781
+    second: Map_YoonSeoAh_14
+  - first:
+      213: -7702187195516961029
+    second: Map_YoonSeoAh_15
+  - first:
+      213: 3723631406672646793
+    second: Map_YoonSeoAh_16
+  - first:
+      213: -1275851182718880866
+    second: Map_YoonSeoAh_17
+  - first:
+      213: -4742506388895559750
+    second: Map_YoonSeoAh_18
+  - first:
+      213: -8932347251098182918
+    second: Map_YoonSeoAh_19
+  - first:
+      213: 7038451411170804596
+    second: Map_YoonSeoAh_20
+  - first:
+      213: 590598366272129790
+    second: Map_YoonSeoAh_21
+  - first:
+      213: 117487561663073500
+    second: Map_YoonSeoAh_22
+  - first:
+      213: 6895891281888987157
+    second: Map_YoonSeoAh_23
+  - first:
+      213: 4165811971951856312
+    second: Map_YoonSeoAh_24
+  - first:
+      213: 1475956629149267070
+    second: Map_YoonSeoAh_25
+  - first:
+      213: 6858515455244097125
+    second: Map_YoonSeoAh_26
+  - first:
+      213: -763217496301913348
+    second: Map_YoonSeoAh_27
+  - first:
+      213: -3670577879217914903
+    second: Map_YoonSeoAh_28
+  - first:
+      213: 2989650024430764144
+    second: Map_YoonSeoAh_29
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Map_YoonSeoAh_0
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 550
+        width: 391
+        height: 167
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 996b4859341982c40800000000000000
+      internalID: 5487795865408288409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Map_YoonSeoAh_1
+      rect:
+        serializedVersion: 2
+        x: 451
+        y: 546
+        width: 121
+        height: 173
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50e2cd8fed4052520800000000000000
+      internalID: 2676550909246057989
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Map_YoonSeoAh_2
+      rect:
+        serializedVersion: 2
+        x: 584
+        y: 550
+        width: 190
+        height: 170
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 939c3b05f39749b70800000000000000
+      internalID: 8904875676062173497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Map_YoonSeoAh_3
+      rect:
+        serializedVersion: 2
+        x: 778
+        y: 551
+        width: 125
+        height: 127
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a297984a9f623cfe0800000000000000
+      internalID: -1170048624537011926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Map_YoonSeoAh_4
+      rect:
+        serializedVersion: 2
+        x: 922
+        y: 553
+        width: 72
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 251ff351aa70949f0800000000000000
+      internalID: -483847057883270830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Map_YoonSeoAh_5
+      rect:
+        serializedVersion: 2
+        x: 1015
+        y: 553
+        width: 117
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b83b053b93dba440800000000000000
+      internalID: 4948281279159941300
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Map_YoonSeoAh_6
+      rect:
+        serializedVersion: 2
+        x: 1179
+        y: 662
+        width: 174
+        height: 47
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 024a8948d5d55cb70800000000000000
+      internalID: 8918637293315073056
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Map_YoonSeoAh_7
+      rect:
+        serializedVersion: 2
+        x: 1179
+        y: 594
+        width: 174
+        height: 47
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 807487f907d36e3d0800000000000000
+      internalID: -3177784933142214904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Map_YoonSeoAh_8
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 303
+        width: 200
+        height: 220
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c6a5a6cd4011c220800000000000000
+      internalID: 2504300794025977543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Map_YoonSeoAh_9
+      rect:
+        serializedVersion: 2
+        x: 857
+        y: 407
+        width: 140
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5dc5a7fc1b2e2840800000000000000
+      internalID: 5201142023073418588
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Map_YoonSeoAh_10
+      rect:
+        serializedVersion: 2
+        x: 1003
+        y: 409
+        width: 135
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 458898dacc525e9e0800000000000000
+      internalID: -1592825332190574508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Map_YoonSeoAh_11
+      rect:
+        serializedVersion: 2
+        x: 1179
+        y: 509
+        width: 174
+        height: 47
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 713d8ad3f0816df70800000000000000
+      internalID: 9211576541570978583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Map_YoonSeoAh_12
+      rect:
+        serializedVersion: 2
+        x: 220
+        y: 302
+        width: 201
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84551dcb11bb166e0800000000000000
+      internalID: -1845988687388519096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Map_YoonSeoAh_13
+      rect:
+        serializedVersion: 2
+        x: 443
+        y: 322
+        width: 300
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9481fa6baefa5bd0800000000000000
+      internalID: -2640518219312298849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Map_YoonSeoAh_14
+      rect:
+        serializedVersion: 2
+        x: 863
+        y: 268
+        width: 142
+        height: 130
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bbb64d77116da9fa0800000000000000
+      internalID: -5793082600145523781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Map_YoonSeoAh_15
+      rect:
+        serializedVersion: 2
+        x: 1009
+        y: 267
+        width: 130
+        height: 130
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bfe36a9bd855c1590800000000000000
+      internalID: -7702187195516961029
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Map_YoonSeoAh_16
+      rect:
+        serializedVersion: 2
+        x: 1149
+        y: 275
+        width: 42
+        height: 209
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9821635290ffca330800000000000000
+      internalID: 3723631406672646793
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Map_YoonSeoAh_17
+      rect:
+        serializedVersion: 2
+        x: 1306
+        y: 324
+        width: 58
+        height: 112
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e9377cbeb144b4ee0800000000000000
+      internalID: -1275851182718880866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Map_YoonSeoAh_18
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 163
+        width: 375
+        height: 131
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: abf0cd0f09b3f2eb0800000000000000
+      internalID: -4742506388895559750
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Map_YoonSeoAh_19
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 20
+        width: 603
+        height: 287
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: afa1bdf208de90480800000000000000
+      internalID: -8932347251098182918
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Map_YoonSeoAh_20
+      rect:
+        serializedVersion: 2
+        x: 878
+        y: 121
+        width: 147
+        height: 91
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 473cea3644a9da160800000000000000
+      internalID: 7038451411170804596
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Map_YoonSeoAh_21
+      rect:
+        serializedVersion: 2
+        x: 1036
+        y: 126
+        width: 160
+        height: 98
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: efa8392c51a323800800000000000000
+      internalID: 590598366272129790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Map_YoonSeoAh_22
+      rect:
+        serializedVersion: 2
+        x: 1218
+        y: 142
+        width: 58
+        height: 58
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cdc447a905661a100800000000000000
+      internalID: 117487561663073500
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Map_YoonSeoAh_23
+      rect:
+        serializedVersion: 2
+        x: 1292
+        y: 154
+        width: 60
+        height: 51
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 518c4bab59023bf50800000000000000
+      internalID: 6895891281888987157
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Map_YoonSeoAh_24
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 23
+        width: 189
+        height: 136
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ba8245caefefc930800000000000000
+      internalID: 4165811971951856312
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Map_YoonSeoAh_25
+      rect:
+        serializedVersion: 2
+        x: 1006
+        y: 20
+        width: 114
+        height: 106
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e743358fbb6ab7410800000000000000
+      internalID: 1475956629149267070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Map_YoonSeoAh_26
+      rect:
+        serializedVersion: 2
+        x: 1123
+        y: 38
+        width: 146
+        height: 70
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 566d954f7775e2f50800000000000000
+      internalID: 6858515455244097125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Map_YoonSeoAh_27
+      rect:
+        serializedVersion: 2
+        x: 1274
+        y: 103
+        width: 77
+        height: 43
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cfabf861bb18865f0800000000000000
+      internalID: -763217496301913348
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Map_YoonSeoAh_28
+      rect:
+        serializedVersion: 2
+        x: 874
+        y: 46
+        width: 91
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9eb3fcccddc7f0dc0800000000000000
+      internalID: -3670577879217914903
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: f9e271c5553799e4e8fa951908c11d31
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      Map_YoonSeoAh_0: 5487795865408288409
+      Map_YoonSeoAh_1: 2676550909246057989
+      Map_YoonSeoAh_10: -1592825332190574508
+      Map_YoonSeoAh_11: 9211576541570978583
+      Map_YoonSeoAh_12: -1845988687388519096
+      Map_YoonSeoAh_13: -2640518219312298849
+      Map_YoonSeoAh_14: -5793082600145523781
+      Map_YoonSeoAh_15: -7702187195516961029
+      Map_YoonSeoAh_16: 3723631406672646793
+      Map_YoonSeoAh_17: -1275851182718880866
+      Map_YoonSeoAh_18: -4742506388895559750
+      Map_YoonSeoAh_19: -8932347251098182918
+      Map_YoonSeoAh_2: 8904875676062173497
+      Map_YoonSeoAh_20: 7038451411170804596
+      Map_YoonSeoAh_21: 590598366272129790
+      Map_YoonSeoAh_22: 117487561663073500
+      Map_YoonSeoAh_23: 6895891281888987157
+      Map_YoonSeoAh_24: 4165811971951856312
+      Map_YoonSeoAh_25: 1475956629149267070
+      Map_YoonSeoAh_26: 6858515455244097125
+      Map_YoonSeoAh_27: -763217496301913348
+      Map_YoonSeoAh_28: -3670577879217914903
+      Map_YoonSeoAh_3: -1170048624537011926
+      Map_YoonSeoAh_4: -483847057883270830
+      Map_YoonSeoAh_5: 4948281279159941300
+      Map_YoonSeoAh_6: 8918637293315073056
+      Map_YoonSeoAh_7: -3177784933142214904
+      Map_YoonSeoAh_8: 2504300794025977543
+      Map_YoonSeoAh_9: 5201142023073418588
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
