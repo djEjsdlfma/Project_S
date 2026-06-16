@@ -59,6 +59,12 @@ public class Title : MonoBehaviour, ISystemManager
 
     private void Start()
     {
+        if(isStarted)
+        {
+            ShadowFade(PadShadow, 0f);
+            ShadowFade(CalendarShadow, 0f);
+        }
+
         if (isStarted) return;
 
         Pad.anchoredPosition = new Vector3(90f, 0f);
@@ -71,7 +77,6 @@ public class Title : MonoBehaviour, ISystemManager
         _start.SetActive(true);
 
         DOTween.SetTweensCapacity(500, 50);
-        if (isStarted) return;
 
         for(int i = 0; i < etcBackground.Length; i++)
         {
@@ -155,7 +160,7 @@ public class Title : MonoBehaviour, ISystemManager
 
     private void ShadowFade(Image shadow,float value)
     {
-        shadow.DOFade(value, 0.25f);
+        shadow.DOFade(0.25f, value);
     }
 
     public void Reset() { }
