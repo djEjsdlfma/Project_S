@@ -1,5 +1,6 @@
 using System;
 using AYellowpaper.SerializedCollections;
+using Moon._01.Script.Datas;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -23,13 +24,21 @@ namespace Moon._01.Script.Memos
         public int Num { get; set; }
 
         public UnityEvent<MemoUI> clicked;
-        
-        public void SetMemo(Human human, string mText, MemoSystem memoSystem)
+
+        private bool _isDays = false;
+
+        public void SetMemo(Human human, string mText,int day , MemoSystem memoSystem)
         {
             _memoSystem = memoSystem;
             humanText.text = _memoSystem.memoDict[human];
             _human = human;
             memoText.text = mText;
+
+            if (!_isDays)
+            {
+                dayText.text = $"Day : {day}";
+                _isDays = true;
+            }
         }
 
         public void Click()

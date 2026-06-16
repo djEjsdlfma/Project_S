@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using LSW._02._Code.System___Manager;
+using Moon._01.Script.Datas;
 using UnityEngine;
 
 namespace LSW._02._Code.Core.Cores
@@ -98,6 +99,7 @@ namespace LSW._02._Code.Core.Cores
         public void IncreaseDay(int increaseAmount = 5)
         {
             CurrentDay = Mathf.Clamp(CurrentDay + increaseAmount, 1, MaxDay);
+            DataManager.Instance.SaveData("Day", CurrentDay);
             OnDayChanged?.Invoke();
             _transition.TransitionScene(SceneType.MainTabletScene, TransitionType.DayChange);
         }
