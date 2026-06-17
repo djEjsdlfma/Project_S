@@ -94,6 +94,10 @@ namespace LSW._02._Code.Environment.Trap
                         SpawnHand(spawnPosition, hit.normal);
                         break;
                     }
+                    else
+                    {
+                        Debug.Log($"부딪힌 대상: {hit.collider.name}, 거리: {hit.distance}");
+                    }
                 }
             }
         }

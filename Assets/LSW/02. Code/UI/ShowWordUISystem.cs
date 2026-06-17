@@ -29,8 +29,6 @@ namespace LSW._02._Code.UI
         {
             if (!_canShowWord) 
                 return false;
-    
-            Debug.Log("Start Show Word:");
             
             _canShowWord = false;
             StartCoroutine(ShowWordsSequence(words));
