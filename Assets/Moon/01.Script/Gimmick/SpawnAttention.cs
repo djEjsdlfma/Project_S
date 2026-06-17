@@ -47,7 +47,6 @@ namespace Moon._01.Script.Gimmick
 
             Vector2 playerPos = playerFinder.GetTransform().position;
             Vector2 cameraPos = _main.ScreenToWorldPoint(_mouse.ExactScreenPos);
-            ;
 
             Vector2 toPlayer = randomPos - playerPos;
             if (toPlayer.sqrMagnitude < playerMinDistance * playerMinDistance)
