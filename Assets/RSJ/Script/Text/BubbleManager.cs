@@ -561,51 +561,73 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
         _bottomEmptySpace = null;
 
         Guest currenGuest = _dialogueDataCore.GetGuestByDay();
-        ChangeGuestDialogue(currenGuest);
-    
-        SpeakerType lastSpeaker = SpeakerType.None; 
+        if (!_dialogueDataCore.GetSheetNameByGuest(currenGuest, out var sheetName)) return;
+        
+        _currentGuest = currenGuest;
+        _currentGuestSheetName = sheetName;
+        
+        bool localWasChatNpc = false; 
+        bool isFirstMessage = true;
 
-        foreach(var data in ReplayList)
+        foreach (var data in ReplayList)
         {
             if (!_dialogueDataCore.GetDialogueDataByKey(_currentGuestSheetName, data.key, out DialogueEntry entry))
                 continue;
 
-            if (lastSpeaker != SpeakerType.None && lastSpeaker != entry.speaker)
-            {
-                ShowEmptySpace();
-            }
-
-            bool isFirst = (lastSpeaker != entry.speaker);
-
             if (entry.speaker == SpeakerType.NPC)
             {
+                bool isFirst = isFirstMessage || !localWasChatNpc;
+
+                if (isFirst && _allDialogueUI.Count > 0)
+                {
+                    ShowEmptySpace();
+                }
+
                 BubbleText prefab = isFirst ? NPCFirstText : NPCText;
                 BubbleText text = Instantiate(prefab, _container);
                 _allDialogueUI.Add(text.gameObject);
-            
-                if (isFirst) text.InitBubble(entry.content, 1f, _currentGuestSheetName);
-                else text.InitBubble(entry.content, 1f);
-            
+
+                if (isFirst)
+                {
+                    localWasChatNpc = true;
+                    text.InitBubble(entry.content, 1f, _currentGuestSheetName);
+                    text.SetProfil(_currentGuestSheetName);
+                }
+                else
+                {
+                    text.InitBubble(entry.content, 1f);
+                }
+
                 nowBubble = text.gameObject;
             }
-            else
+            else 
             {
+                bool isFirst = isFirstMessage || localWasChatNpc;
+
+                if (isFirst && _allDialogueUI.Count > 0)
+                {
+                    ShowEmptySpace();
+                }
+
+                localWasChatNpc = false;
+
                 BubbleText prefab = isFirst ? PlayerFirstText : PlayerText;
                 BubbleText text = Instantiate(prefab, _container);
                 _allDialogueUI.Add(text.gameObject);
-            
+
                 text.InitBubble(entry.content, 1f);
                 text.InitScale();
             }
 
-            lastSpeaker = entry.speaker;
-            wasChatNpc = (entry.speaker == SpeakerType.NPC);
+            isFirstMessage = false;
         }
+        
+        wasChatNpc = localWasChatNpc;
 
         UpdateBottomEmptySpace();
         StartCoroutine(UpdateUILayout());
-    
-        if(isSpawnImageSelection)
+
+        if (isSpawnImageSelection && imageSelectionUI != null)
             imageSelectionUI.gameObject.SetActive(true);
     }
     
@@ -630,54 +652,73 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
     
     private void RebuildHistory(SavedDialogueData data, bool isDialogueDay, bool updateProfile = true)
     {
-        if (data.HistoryContents == null || data.HistoryContents.Count == 0) return;
+        if (data.HistoryContents == null || data.HistoryContents.Count == 0) 
+            return;
 
         string lastContent = string.Empty;
-    
-        // 이전에 대화하던 화자가 누구였는지 추적합니다.
-        // 데이터 저장 시점의 wasChatNpc 상태를 활용해야 합니다.
-        bool currentWasNpc = !data.WasChatNpc; 
+        
+        bool isFirstMessage = true;
+        bool localWasChatNpc = false; // false: Player, true: NPC
 
         for (int i = 0; i < data.HistoryContents.Count; i++)
         {
             string content = data.HistoryContents[i];
-        
-            // --- 핵심 수정: 이전 화자와 다르면 isFirst(새로운 말풍선 그룹의 시작)로 간주 ---
-            bool isFirst = (i == 0) || (currentWasNpc == wasChatNpc);
-        
-            // 화자가 바뀔 때마다 빈 공간 추가 (이전 로직과 동일)
-            if (i > 0 && currentWasNpc != wasChatNpc)
-            {
-                ShowEmptySpace();
-            }
-
-            // 현재 메시지의 화자 타입 결정
-            bool isCurrentNpc = !currentWasNpc; 
-        
-            // 프리팹 선택: 화자가 바뀌는 시점(isFirst)이면 First 프리팹 사용
-            BubbleText prefab;
+            
+            bool isCurrentNpc = (i == 0) ? data.WasChatNpc : !localWasChatNpc; 
+            
             if (isCurrentNpc)
-                prefab = isFirst ? NPCFirstText : NPCText;
-            else
-                prefab = isFirst ? PlayerFirstText : PlayerText;
-
-            if (prefab != null)
             {
-                BubbleText text = Instantiate(prefab, _container);
-                text.InitBubble(content, 1f);
-                _allDialogueUI.Add(text.gameObject);
-                lastContent = content;
+                bool isFirst = isFirstMessage || !localWasChatNpc;
+
+                if (isFirst && _allDialogueUI.Count > 0)
+                {
+                    ShowEmptySpace();
+                }
+
+                BubbleText prefab = isFirst ? NPCFirstText : NPCText;
+                if (prefab != null)
+                {
+                    BubbleText text = Instantiate(prefab, _container);
+                    if (isFirst) text.InitBubble(content, 1f, _currentGuestSheetName);
+                    else text.InitBubble(content, 1f);
+                    
+                    _allDialogueUI.Add(text.gameObject);
+                    lastContent = content;
+                }
+
+                localWasChatNpc = true;
+            }
+            else // Player 텍스트 복구 시
+            {
+                bool isFirst = isFirstMessage || localWasChatNpc;
+
+                if (isFirst && _allDialogueUI.Count > 0)
+                {
+                    ShowEmptySpace();
+                }
+
+                BubbleText prefab = isFirst ? PlayerFirstText : PlayerText;
+                if (prefab != null)
+                {
+                    BubbleText text = Instantiate(prefab, _container);
+                    text.InitBubble(content, 1f);
+                    if (isFirst) text.InitScale();
+                    
+                    _allDialogueUI.Add(text.gameObject);
+                    lastContent = content;
+                }
+
+                localWasChatNpc = false;
             }
 
-            // 상태 업데이트
-            wasChatNpc = isCurrentNpc;
-            currentWasNpc = isCurrentNpc;
+            isFirstMessage = false;
         }
-    
-        // ... 이하 나머지 로직 (프로필 업데이트 및 선택지 복구)
+        
+        wasChatNpc = localWasChatNpc;
+
         if (updateProfile && ChatProfileContainer != null && !string.IsNullOrEmpty(lastContent))
             ChatProfileContainer.SetCurrentProfile(lastContent, !wasEndChat && isDialogueDay);
-    
+        
         UpdateBottomEmptySpace();
 
         if (data.HasActiveChoice)
