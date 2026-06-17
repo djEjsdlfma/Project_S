@@ -9,6 +9,7 @@ using Moon._01.Script.Mouses;
 using MoonLib.ScriptFinder_Pro.RunTime.DevLogs;
 using MoonLib.ScriptFinder_Pro.RunTime.Finder.ListFinder;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 namespace RSJ.Script.Camera
@@ -103,7 +104,7 @@ namespace RSJ.Script.Camera
             // 복사 중일 때만 본인 스크립트에서 오브젝트를 이동
             if (_copying)
             {
-                Vector2 worldMousePos = _camera.ScreenToWorldPoint(input.MousePos);
+                Vector2 worldMousePos = _camera.ScreenToWorldPoint(_mouseManager ? _mouseManager.ExactScreenPos : input.MousePos);
                 foreach (var target in _interactObjs)
                 {
                     target.Value.ChangeTransform(worldMousePos);
@@ -387,7 +388,7 @@ namespace RSJ.Script.Camera
 
         private void UpdateMouseFollowerUI()
         {
-            Vector2 mousePos = input.MousePos;
+            Vector2 mousePos = _mouseManager ? _mouseManager.ExactScreenPos : input.MousePos;
             _position = new Vector3(
                 mousePos.x - (myPosition.sizeDelta.x / 2),
                 mousePos.y - (myPosition.sizeDelta.y / 2),
