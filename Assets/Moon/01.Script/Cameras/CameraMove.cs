@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using DG.Tweening;
 using LSW._02._Code.Environment.Takable;
+using Moon._01.Script.Mouses;
 using RSJ.Script.Camera;
 using UnityEngine;
 using UnityEngine.UI;
@@ -25,6 +26,8 @@ namespace Moon._01.Script.Cameras
         public bool IsActive { get; set; } = true;
 
         private readonly Dictionary<GameObject, InteractTarget> _interactObjs = new();
+        
+        private MouseManager _mouseManager;
 
         private void Awake()
         {
@@ -37,9 +40,8 @@ namespace Moon._01.Script.Cameras
         {
             if (_moving && IsActive)
             {
-                Vector3 screenPos = new Vector3(input.MousePos.x, input.MousePos.y, 0f);
-                Vector2 worldMousePos = _camera.ScreenToWorldPoint(screenPos);
-        
+                Vector2 worldMousePos = _camera.ScreenToWorldPoint(_mouseManager ? _mouseManager.ExactScreenPos : input.MousePos);
+                
                 foreach (var target in _interactObjs)
                 {
                     target.Value.ChangeTransform(worldMousePos);

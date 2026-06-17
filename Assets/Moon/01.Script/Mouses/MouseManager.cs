@@ -27,13 +27,11 @@ namespace Moon._01.Script.Mouses
             _mainCam = Camera.main;
             
             Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Confined;
         }
         
         public void Reset()
         {
             Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
         }
 
         private void Update()

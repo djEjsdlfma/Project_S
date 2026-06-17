@@ -48,9 +48,8 @@ MonoBehaviour:
   camerasFinder: {fileID: 11400000, guid: 51fc18d6fb6fed540bea9fce565207ec, type: 2}
   worldMoveSpeed: 5
   mouseSpeedPer: 0.065
-  stopDistance: 0.05
+  stopDistance: 0.1
   destroyTime: 2.5
-  stopTime: 2
   attentionDistance: 7.5
 --- !u!1 &4761830581432250619
 GameObject:
