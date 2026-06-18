@@ -23,8 +23,21 @@ namespace LSW._02._Code.UI
             
             if (DataManager.Instance.TryGetValue(CurrentGuestManager.C[0], out List<Texture2D> photo))
             {
+                foreach (var photoImage in _photoImages)
+                {
+                    photoImage.gameObject.SetActive(true);
+                }
+                    Debug.Log($"LSW CORE");
                 PhotoCount = photo.Count;
                 SetPhoto(photo.ToArray());
+            }
+            else
+            {
+                Debug.Log("LSW");
+                foreach (var photoImage in _photoImages)
+                {
+                    photoImage.gameObject.SetActive(false);
+                }
             }
         }
 

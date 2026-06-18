@@ -20,9 +20,6 @@ namespace RSJ.Script.Camera
         Move
     }
 
-    /// <summary>
-    /// 화면에 복사된 오브젝트를 원본 기준 오프셋으로 따라다니게 하는 정보 구조체.
-    /// </summary>
     public readonly struct InteractTarget
     {
         private readonly Vector2 _camToPos;
@@ -60,7 +57,7 @@ namespace RSJ.Script.Camera
         [SerializeField] private CameraInputSO input;
     
         [Header("Components")]
-        [SerializeField] private CameraMove _cameraMove; // 분리된 Move 로직 참조
+        [SerializeField] private CameraMove _cameraMove;
 
         private RectTransform myPosition;
         private Vector3 _position;
@@ -73,7 +70,6 @@ namespace RSJ.Script.Camera
         private bool _copying = false;
         private readonly Dictionary<GameObject, InteractTarget> _interactObjs = new();
     
-        // 외부 클래스(CameraMove)에서 접근 가능하도록 public 설정
         public const float CHECK_BOX_SCALE = 0.009f;
 
         private void Awake()
@@ -92,6 +88,11 @@ namespace RSJ.Script.Camera
         {
             input.OnCaptureAction -= HandlePhotoInput;
             input.OnCopyAction -= HandleCaptureInput;
+
+            if (_mouseManager)
+            {
+                _mouseManager.ScreenPadding = Vector2.zero;
+            }
         }
 
         private void Update()
@@ -101,10 +102,9 @@ namespace RSJ.Script.Camera
 
         private void FixedUpdate()
         {
-            // 복사 중일 때만 본인 스크립트에서 오브젝트를 이동
             if (_copying)
             {
-                Vector2 worldMousePos = _camera.ScreenToWorldPoint(_mouseManager ? _mouseManager.ExactScreenPos : input.MousePos);
+                Vector2 worldMousePos = _camera.ScreenToWorldPoint(GetCurrentMousePos());
                 foreach (var target in _interactObjs)
                 {
                     target.Value.ChangeTransform(worldMousePos);
@@ -127,7 +127,7 @@ namespace RSJ.Script.Camera
         {
             if (camerasFinder.GetTarget<SetCamBlur>(false) is var blur && blur && blur.BlurActive)
                 return;
-            HandleActionInput(_camera.ScreenToWorldPoint(input.MousePos));
+            HandleActionInput(_camera.ScreenToWorldPoint(GetCurrentMousePos()));
         }
 
         private void HandleActionInput(Vector2 worldMousePos)
@@ -388,7 +388,12 @@ namespace RSJ.Script.Camera
 
         private void UpdateMouseFollowerUI()
         {
-            Vector2 mousePos = _mouseManager ? _mouseManager.ExactScreenPos : input.MousePos;
+            if (_mouseManager)
+            {
+                _mouseManager.ScreenPadding = new Vector2(myPosition.sizeDelta.x * 0.5f, myPosition.sizeDelta.y * 0.5f);
+            }
+
+            Vector2 mousePos = GetCurrentMousePos();
             _position = new Vector3(
                 mousePos.x - (myPosition.sizeDelta.x / 2),
                 mousePos.y - (myPosition.sizeDelta.y / 2),
@@ -396,6 +401,19 @@ namespace RSJ.Script.Camera
             );
 
             myPosition.anchoredPosition = _position;
+        }
+
+        private Vector2 GetCurrentMousePos()
+        {
+            if (_mouseManager) return _mouseManager.ExactScreenPos;
+
+            float halfWidth = myPosition.sizeDelta.x * 0.5f;
+            float halfHeight = myPosition.sizeDelta.y * 0.5f;
+
+            return new Vector2(
+                Mathf.Clamp(input.MousePos.x, halfWidth, Screen.width - halfWidth),
+                Mathf.Clamp(input.MousePos.y, halfHeight, Screen.height - halfHeight)
+            );
         }
         #endregion
 
@@ -463,10 +481,10 @@ namespace RSJ.Script.Camera
 
         private List<Vector2> ClipPolygonAgainstAABB(List<Vector2> poly, Vector2 min, Vector2 max)
         {
-            poly = ClipEdge(poly, 0, min.x); // Left
-            poly = ClipEdge(poly, 1, max.x); // Right
-            poly = ClipEdge(poly, 2, min.y); // Bottom
-            poly = ClipEdge(poly, 3, max.y); // Top
+            poly = ClipEdge(poly, 0, min.x);
+            poly = ClipEdge(poly, 1, max.x);
+            poly = ClipEdge(poly, 2, min.y);
+            poly = ClipEdge(poly, 3, max.y);
             return poly;
         }
 
@@ -500,10 +518,10 @@ namespace RSJ.Script.Camera
         {
             return edge switch
             {
-                0 => p.x >= value, // Left
-                1 => p.x <= value, // Right
-                2 => p.y >= value, // Bottom
-                3 => p.y <= value, // Top
+                0 => p.x >= value,
+                1 => p.x <= value,
+                2 => p.y >= value,
+                3 => p.y <= value,
                 _ => false
             };
         }
