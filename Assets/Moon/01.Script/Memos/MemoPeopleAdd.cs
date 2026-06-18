@@ -5,18 +5,37 @@ namespace Moon._01.Script.Memos
 {
     public class MemoPeopleAdd : MonoBehaviour
     {
-        [SerializeField] private ScriptFinderSO memoSystemFinder;
 
-        private MemoSystem _memoSystem;
+        [SerializeField]private MemoSystem memoSystem;
 
-        private void Start()
+        public void FindLeeJaeYoon()
         {
-            _memoSystem = memoSystemFinder.GetTarget<MemoSystem>();
+            FindNewPeople(Human.LeeJaeYoon);
+        }
+        
+        public void FindJeongDaeun()
+        {
+            FindNewPeople(Human.JeongDaeun);
+        }
+        
+        public void FindParkYul()
+        {
+            FindNewPeople(Human.ParkYul);
+        }
+        
+        public void FindYunSeo()
+        {
+            FindNewPeople(Human.YunSeo);
+        }
+        
+        public void FindChoiMyungjin()
+        {
+            FindNewPeople(Human.ChoiMyungjin);
         }
 
-        public void FindNewPeople(Human people)
+        private void FindNewPeople(Human people)
         {
-            _memoSystem.NewCharacter(people);
+            memoSystem.NewCharacter(people);
         }
     }
 }

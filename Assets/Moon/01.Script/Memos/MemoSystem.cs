@@ -44,7 +44,6 @@ namespace Moon._01.Script.Memos
         [SerializeField] private GameObject createPanel;
         [SerializeField] private TMP_InputField createText;
         [SerializeField] private MemoCreatedButton createdButton;
-        [SerializeField] private ScriptFinderSO memoSystemFinder;
 
         private int n = 0;
 
@@ -72,7 +71,6 @@ namespace Moon._01.Script.Memos
                     CreateMemo(m.human, m.text, m.day, m.num);
                 }
             }
-            memoSystemFinder.SetTarget(this);
             createdButton.SetMemoSystem(this);
         }
         

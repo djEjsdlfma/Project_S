@@ -3445,7 +3445,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5305410179973146239, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5305410179973146239, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -3473,7 +3473,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5305410179973146239, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[6].m_Mode
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5305410179973146239, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[7].m_Mode
@@ -3510,7 +3510,7 @@ PrefabInstance:
     - target: {fileID: 5305410179973146239, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[6].m_Target
       value: 
-      objectReference: {fileID: 695714988}
+      objectReference: {fileID: 787227347}
     - target: {fileID: 5305410179973146239, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[7].m_Target
       value: 
@@ -3581,7 +3581,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5305410179973146239, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[6].m_MethodName
-      value: SetActive
+      value: FindYunSeo
       objectReference: {fileID: 0}
     - target: {fileID: 5305410179973146239, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[7].m_MethodName
@@ -3617,7 +3617,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5305410179973146239, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[6].m_TargetAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
+      value: Moon._01.Script.Memos.MemoPeopleAdd, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 5305410179973146239, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[7].m_TargetAssemblyTypeName
@@ -11534,6 +11534,7 @@ GameObject:
   - component: {fileID: 787227344}
   - component: {fileID: 787227346}
   - component: {fileID: 787227345}
+  - component: {fileID: 787227347}
   m_Layer: 0
   m_Name: Memo
   m_TagString: Untagged
@@ -11609,6 +11610,19 @@ MonoBehaviour:
   - {fileID: 1907617040}
   delBlack: {fileID: 291251131}
   saveBlack: {fileID: 1685778874}
+--- !u!114 &787227347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 787227343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bcfe618a6c24c0abab048a32f1f292e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Moon._01.Script.Memos.MemoPeopleAdd
+  memoSystem: {fileID: 787227345}
 --- !u!1 &790825580
 GameObject:
   m_ObjectHideFlags: 0
@@ -19840,7 +19854,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5305410179973146239, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5305410179973146239, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -19868,7 +19882,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5305410179973146239, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[6].m_Mode
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5305410179973146239, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[7].m_Mode
@@ -19905,7 +19919,7 @@ PrefabInstance:
     - target: {fileID: 5305410179973146239, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[6].m_Target
       value: 
-      objectReference: {fileID: 695714988}
+      objectReference: {fileID: 787227347}
     - target: {fileID: 5305410179973146239, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[7].m_Target
       value: 
@@ -19976,7 +19990,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5305410179973146239, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[6].m_MethodName
-      value: SetActive
+      value: FindJeongDaeun
       objectReference: {fileID: 0}
     - target: {fileID: 5305410179973146239, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[7].m_MethodName
@@ -20012,7 +20026,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5305410179973146239, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[6].m_TargetAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
+      value: Moon._01.Script.Memos.MemoPeopleAdd, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 5305410179973146239, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[7].m_TargetAssemblyTypeName
@@ -21032,7 +21046,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5305410179973146239, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5305410179973146239, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -21060,7 +21074,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5305410179973146239, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[6].m_Mode
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5305410179973146239, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[7].m_Mode
@@ -21097,7 +21111,7 @@ PrefabInstance:
     - target: {fileID: 5305410179973146239, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[6].m_Target
       value: 
-      objectReference: {fileID: 695714988}
+      objectReference: {fileID: 787227347}
     - target: {fileID: 5305410179973146239, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[7].m_Target
       value: 
@@ -21168,7 +21182,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5305410179973146239, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[6].m_MethodName
-      value: SetActive
+      value: FindParkYul
       objectReference: {fileID: 0}
     - target: {fileID: 5305410179973146239, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[7].m_MethodName
@@ -21204,7 +21218,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5305410179973146239, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[6].m_TargetAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
+      value: Moon._01.Script.Memos.MemoPeopleAdd, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 5305410179973146239, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[7].m_TargetAssemblyTypeName
@@ -24642,7 +24656,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5305410179973146239, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5305410179973146239, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -24670,7 +24684,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5305410179973146239, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[6].m_Mode
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5305410179973146239, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[7].m_Mode
@@ -24707,7 +24721,7 @@ PrefabInstance:
     - target: {fileID: 5305410179973146239, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[6].m_Target
       value: 
-      objectReference: {fileID: 695714988}
+      objectReference: {fileID: 787227347}
     - target: {fileID: 5305410179973146239, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[7].m_Target
       value: 
@@ -24778,7 +24792,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5305410179973146239, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[6].m_MethodName
-      value: SetActive
+      value: FindChoiMyungjin
       objectReference: {fileID: 0}
     - target: {fileID: 5305410179973146239, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[7].m_MethodName
@@ -24814,7 +24828,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5305410179973146239, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[6].m_TargetAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
+      value: Moon._01.Script.Memos.MemoPeopleAdd, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 5305410179973146239, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[7].m_TargetAssemblyTypeName
@@ -30813,7 +30827,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5305410179973146239, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5305410179973146239, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -30841,7 +30855,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5305410179973146239, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[6].m_Mode
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5305410179973146239, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[7].m_Mode
@@ -30874,7 +30888,7 @@ PrefabInstance:
     - target: {fileID: 5305410179973146239, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[6].m_Target
       value: 
-      objectReference: {fileID: 695714988}
+      objectReference: {fileID: 787227347}
     - target: {fileID: 5305410179973146239, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[7].m_Target
       value: 
@@ -30937,7 +30951,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5305410179973146239, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[6].m_MethodName
-      value: SetActive
+      value: FindLeeJaeYoon
       objectReference: {fileID: 0}
     - target: {fileID: 5305410179973146239, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[7].m_MethodName
@@ -30969,7 +30983,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5305410179973146239, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[6].m_TargetAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
+      value: Moon._01.Script.Memos.MemoPeopleAdd, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 5305410179973146239, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[7].m_TargetAssemblyTypeName
