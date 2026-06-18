@@ -1,4 +1,5 @@
 using System;
+using csiimnida.CSILib.SoundManager.RunTime;
 using LSW._02._Code.System___Manager;
 using TMPro;
 using UnityEngine;
@@ -15,6 +16,7 @@ public class Feed : MonoBehaviour
     [SerializeField] private GameObject _info;
     [SerializeField] private Button _btn;
 
+    private static bool _isUploaded;
     public int heart;
     public int bookmark;
 
@@ -39,11 +41,14 @@ public class Feed : MonoBehaviour
 
     private void Start()
     {
-        _info.SetActive(false);
+        if(_isUploaded == false)
+            _info.SetActive(false);
     }
 
     public void Upload()
     {
+        SoundManager.Instance.PlaySound("FeedUp");
+        _isUploaded = true;
         _info.SetActive(true);
         btnText.text = "게시 됨";
         _btn.interactable = false;

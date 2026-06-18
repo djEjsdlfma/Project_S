@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections.Generic;
 using TMPro;
@@ -14,6 +15,9 @@ namespace LSW._02._Code.UI.Tutorial.Current
         [SerializeField] private TextMeshProUGUI helpText;
         [SerializeField] private TextMeshProUGUI pageText;
         [SerializeField] private List<HelpData> helpDataList;
+
+        [SerializeField] private Image[] leftBtn;
+        [SerializeField] private Image[] rightBtn;
 
         private List<HelpUIData> _currentHelpDataList;
         private List<HelpListButton> _helpListButtons = new List<HelpListButton>();
@@ -38,6 +42,8 @@ namespace LSW._02._Code.UI.Tutorial.Current
                 MoveToIndex(_currentHelpIndex - 1);
             if (Input.GetKeyDown(KeyCode.E))
                 MoveToIndex(_currentHelpIndex + 1);
+
+            
         }
 
         public void SetHelpUI(List<HelpUIData> helpUIData)
@@ -64,6 +70,17 @@ namespace LSW._02._Code.UI.Tutorial.Current
 
         private void UpdateDisplay()
         {
+            if(_currentHelpIndex == 0)
+                for (int i = 0; i < 2; i++) leftBtn[i].DOFade(0.75f, 0f);
+            else
+                for (int i = 0; i < 2; i++) leftBtn[i].DOFade(1f, 0f);
+
+            if (_currentHelpIndex >= _currentHelpDataList.Count - 1)
+                for (int i = 0; i < 2; i++) rightBtn[i].DOFade(0.75f, 0f);
+            else
+                for (int i = 0; i < 2; i++) rightBtn[i].DOFade(1f, 0f);
+
+
             var data = _currentHelpDataList[_currentHelpIndex];
             helpImage.sprite = data.helpImage;
             helpImage.preserveAspect = true;
@@ -83,6 +100,7 @@ namespace LSW._02._Code.UI.Tutorial.Current
     public struct HelpUIData
     {
         public Sprite helpImage;
+        [TextArea]
         public string helpText;
     }
 }

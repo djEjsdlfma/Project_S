@@ -12,6 +12,7 @@ using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using csiimnida.CSILib.SoundManager.RunTime;
 
 public class TitleManager : MonoBehaviour
 {
@@ -38,6 +39,7 @@ public class TitleManager : MonoBehaviour
     [SerializeField] private Button _rightBtn;
 
     [SerializeField] private TextMeshProUGUI _flickText;
+    [SerializeField] private GameObject _BlackImg;
 
     private Stack<GameObject> _prevStack = new Stack<GameObject>();
     private Stack<GameObject> _nextStack = new Stack<GameObject>();
@@ -229,6 +231,7 @@ public class TitleManager : MonoBehaviour
 
     private void FlickText(string objName, int value = 0)
     {
+        _BlackImg.SetActive(true);
         if (objName == "촛불")
             _flickText.text = $"{objName}이 켜졌습니다.";
         else
@@ -236,20 +239,24 @@ public class TitleManager : MonoBehaviour
 
         _flickText.DOFade(value % 2 == 0 ? 0.8f : 0f, 0.8f)
             .OnComplete(() => 
-            { 
+            {
                 if (value <= 4)
-                    FlickText(objName, ++value); 
+                    FlickText(objName, ++value);
+                else
+                    _BlackImg.SetActive(false);
             });
     }
 
     public void FillTeaCup(int day)
     {
+        SoundManager.Instance.PlaySound("CupFill");
         _teaFillImg.sprite = _FillSprite[day % 11];
         _teaFillImgSize.DOSizeDelta(new Vector2(100f, 100f), 0.5f);
     }
 
     public void CandleOff()
     {
+        SoundManager.Instance.PlaySound("CandleOff");
         _candleLight.gameObject.SetActive(false);
         _candleFire.gameObject.SetActive(false);
     }

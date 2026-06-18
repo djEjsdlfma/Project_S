@@ -1,4 +1,5 @@
 using JetBrains.Annotations;
+using Moon._01.Script.Datas;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +14,14 @@ public class ChattingUIManager : MonoBehaviour
     private void Awake()
     {
         // _profilBound.padding = (new Vector4(-1f, -600f, -1000f, -88f));
+    }
+
+    private void Start()
+    {
+        if (DataManager.Instance.CurrentData.TryGetValue("Day", out int day) || day >= 6)
+        {
+            _chatAlarm.SetActive(true);
+        }
     }
 
     public void SetChatting(Transform myGameObj)
