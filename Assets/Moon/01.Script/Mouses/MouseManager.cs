@@ -1,16 +1,16 @@
 using LSW._02._Code.System___Manager;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 
 namespace Moon._01.Script.Mouses
 {
     public class MouseManager : MonoBehaviour , ISystemManager
     {
-        
         [field:SerializeField]public float MouseSensitivity { get; set; } = 1f;
         
         public float SpeedMultiplier { get; set; } = 1f;
+
+        public Vector2 ScreenPadding { get; set; } = Vector2.zero;
 
         private Camera _mainCam;
         public Vector2 ExactScreenPos { get; private set; }
@@ -25,7 +25,6 @@ namespace Moon._01.Script.Mouses
         public void Initialize(SystemManager systemManager)
         {
             _mainCam = Camera.main;
-            
             Cursor.visible = false;
         }
         
@@ -78,8 +77,8 @@ namespace Moon._01.Script.Mouses
             if(!_isNoStoped)
                 return;
             
-            screenPos.x = Mathf.Clamp(screenPos.x, 0f, Screen.width);
-            screenPos.y = Mathf.Clamp(screenPos.y, 0f, Screen.height);
+            screenPos.x = Mathf.Clamp(screenPos.x, ScreenPadding.x, Screen.width - ScreenPadding.x);
+            screenPos.y = Mathf.Clamp(screenPos.y, ScreenPadding.y, Screen.height - ScreenPadding.y);
             
             ExactScreenPos = screenPos;
         }

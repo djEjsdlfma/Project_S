@@ -17,8 +17,8 @@ namespace Moon._01.Script.Cameras
         [SerializeField] private CameraInputSO input;
 
         private RectTransform _myPosition;
-        private Camera _main;
-        private Camera _camera;
+        private UnityEngine.Camera _main;
+        private UnityEngine.Camera _camera;
 
         private bool _moving = false;
         public bool IsMoving => _moving;
@@ -31,8 +31,8 @@ namespace Moon._01.Script.Cameras
 
         private void Awake()
         {
-            _camera = Camera.main;
-            _main = Camera.main;
+            _camera = UnityEngine.Camera.main;
+            _main = UnityEngine.Camera.main;
             _myPosition = GetComponent<RectTransform>();
         }
 
@@ -40,7 +40,7 @@ namespace Moon._01.Script.Cameras
         {
             if (_moving && IsActive)
             {
-                Vector2 worldMousePos = _camera.ScreenToWorldPoint(_mouseManager ? _mouseManager.ExactScreenPos : input.MousePos);
+                Vector2 worldMousePos = _camera.ScreenToWorldPoint(GetCurrentMousePos());
                 
                 foreach (var target in _interactObjs)
                 {
@@ -49,9 +49,6 @@ namespace Moon._01.Script.Cameras
             }
         }
 
-        /// <summary>
-        /// CameraScript에서 이동 모드(G키 입력 등)일 때 호출
-        /// </summary>
         public void HandleMoveMode(Vector2 worldMousePos)
         {
             if (_moving)
@@ -78,7 +75,6 @@ namespace Moon._01.Script.Cameras
             if (items == null || items.Length == 0)
                 return;
     
-            // ✅ pos를 world 좌표로 변환 (Z값 명시)
             Vector3 screenPosVec3 = new Vector3(pos.x, pos.y, 0f);
             Vector2 worldPos = screenPosVec3;
     
@@ -125,7 +121,6 @@ namespace Moon._01.Script.Cameras
             {
                 if (target.Value.TargetObj)
                 {
-                    // 충돌 및 물리 다시 활성화
                     if (target.Value.TargetObj.TryGetComponent(out Collider2D col))
                         col.enabled = true;
                 
@@ -135,6 +130,19 @@ namespace Moon._01.Script.Cameras
             }
 
             _interactObjs.Clear();
+        }
+
+        private Vector2 GetCurrentMousePos()
+        {
+            if (_mouseManager) return _mouseManager.ExactScreenPos;
+
+            float halfWidth = _myPosition.sizeDelta.x * 0.5f;
+            float halfHeight = _myPosition.sizeDelta.y * 0.5f;
+
+            return new Vector2(
+                Mathf.Clamp(input.MousePos.x, halfWidth, Screen.width - halfWidth),
+                Mathf.Clamp(input.MousePos.y, halfHeight, Screen.height - halfHeight)
+            );
         }
     }
 }
