@@ -12,6 +12,7 @@ using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using csiimnida.CSILib.SoundManager.RunTime;
 
 public class TitleManager : MonoBehaviour
 {
@@ -244,6 +245,7 @@ public class TitleManager : MonoBehaviour
 
     public void FillTeaCup(int day)
     {
+        SoundManager.Instance.PlaySound("CupFill");
         _teaFillImg.sprite = _FillSprite[day % 11];
         _teaFillImgSize.DOSizeDelta(new Vector2(100f, 100f), 0.5f);
     }

@@ -23,9 +23,9 @@ public class DarkWhiteMode : ScriptableObject
 
 public enum ThemeColor
 {
-    Background,
-    Text,
-    Button,
-    Accent,
+    Background, // 진한보라 - 흰
+    Text, // 검-흰
+    Button, // 진한보라 - 아이보리?
+    Accent, // 
     Sub
 }
