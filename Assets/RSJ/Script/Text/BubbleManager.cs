@@ -187,7 +187,7 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
         }
 
         nowBubble = text.gameObject;
-        AddHistory(recordingGuest, log);
+        AddHistory(recordingGuest, log, DialogueEventType.NPC);
         
         if (isImmediate)
         {
@@ -234,7 +234,7 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
         text.InitBubble(log, 1f);
         text.InitScale();
 
-        AddHistory(recordingGuest, log);
+        AddHistory(recordingGuest, log, DialogueEventType.PLAYER);
         
         UpdateBottomEmptySpace();
 
@@ -403,7 +403,7 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
         {
             if (!_savedDialogue.ContainsKey(_currentGuest))
             {
-                _savedDialogue[_currentGuest] = new SavedDialogueData { HistoryContents = new List<string>() };
+                _savedDialogue[_currentGuest] = new SavedDialogueData();
             }
 
             var currentData = _savedDialogue[_currentGuest];
@@ -523,7 +523,7 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
 
         if (ReplayList.Count > 0)
         {
-            SpawnAllDialogue(true);
+            SpawnAllDialogue(saveData.IsPhotoUploaded);
             wasEndChat = true;
             CanInteract = false;
         }
@@ -551,7 +551,7 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
         }
     }
     
-    public void SpawnAllDialogue(bool isSpawnImageSelection)
+    public void SpawnAllDialogue(bool isAlreadyUploadImage)
     {
         foreach (var ui in _allDialogueUI)
         {
@@ -624,14 +624,34 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
         
         wasChatNpc = localWasChatNpc;
 
+        if (isAlreadyUploadImage)
+        {
+            if (_savedDialogue.TryGetValue(_currentGuest, out var dataSave) && dataSave.IsPhotoUploaded &&
+                uploadPhotoUI != null)
+            {
+                if (wasChatNpc && _allDialogueUI.Count > 0)
+                {
+                    ShowEmptySpace();
+                }
+
+                RectTransform photoUI = Instantiate(uploadPhotoUI, _container);
+                _allDialogueUI.Add(photoUI.gameObject);
+
+                wasChatNpc = false;
+            }
+
+            imageSelectionUI.gameObject.SetActive(false);
+        }
+        else
+        {
+            imageSelectionUI.gameObject.SetActive(true);
+        }
+
         UpdateBottomEmptySpace();
         StartCoroutine(UpdateUILayout());
-
-        if (isSpawnImageSelection && imageSelectionUI != null)
-            imageSelectionUI.gameObject.SetActive(true);
     }
     
-    private void AddHistory(Guest targetGuest, string content)
+    private void AddHistory(Guest targetGuest, string content, DialogueEventType type)
     {
         if (targetGuest == Guest.None) return;
 
@@ -649,23 +669,26 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
 
         _savedDialogue[targetGuest] = data;
     }
-    
+
     private void RebuildHistory(SavedDialogueData data, bool isDialogueDay, bool updateProfile = true)
     {
         if (data.HistoryContents == null || data.HistoryContents.Count == 0) 
-            return;
+                return;
 
         string lastContent = string.Empty;
-        
         bool isFirstMessage = true;
-        bool localWasChatNpc = false; // false: Player, true: NPC
+        bool localWasChatNpc = false; 
 
         for (int i = 0; i < data.HistoryContents.Count; i++)
         {
             string content = data.HistoryContents[i];
             
-            bool isCurrentNpc = (i == 0) ? data.WasChatNpc : !localWasChatNpc; 
-            
+            bool isCurrentNpc = false;
+            if (_dialogueDataCore.GetAllDialogueEntry(_currentGuestSheetName, out var allData))
+            {
+                isCurrentNpc = allData.Values.Any(x => x.content == content && x.speaker == SpeakerType.NPC);
+            }
+
             if (isCurrentNpc)
             {
                 bool isFirst = isFirstMessage || !localWasChatNpc;
@@ -679,16 +702,24 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
                 if (prefab != null)
                 {
                     BubbleText text = Instantiate(prefab, _container);
-                    if (isFirst) text.InitBubble(content, 1f, _currentGuestSheetName);
-                    else text.InitBubble(content, 1f);
-                    
                     _allDialogueUI.Add(text.gameObject);
+                    
+                    if (isFirst) 
+                    {
+                        text.InitBubble(content, 1f, _currentGuestSheetName);
+                        text.SetProfil(_currentGuestSheetName);
+                    }
+                    else 
+                    {
+                        text.InitBubble(content, 1f);
+                    }
+                    
                     lastContent = content;
                 }
 
                 localWasChatNpc = true;
             }
-            else // Player 텍스트 복구 시
+            else 
             {
                 bool isFirst = isFirstMessage || localWasChatNpc;
 
@@ -701,10 +732,11 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
                 if (prefab != null)
                 {
                     BubbleText text = Instantiate(prefab, _container);
+                    _allDialogueUI.Add(text.gameObject);
+                    
                     text.InitBubble(content, 1f);
                     if (isFirst) text.InitScale();
                     
-                    _allDialogueUI.Add(text.gameObject);
                     lastContent = content;
                 }
 
@@ -712,6 +744,24 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
             }
 
             isFirstMessage = false;
+        }
+
+        if (data.IsPhotoUploaded && uploadPhotoUI != null)
+        {
+            if (localWasChatNpc && _allDialogueUI.Count > 0)
+            {
+                ShowEmptySpace();
+            }
+
+            RectTransform photoUI = Instantiate(uploadPhotoUI, _container);
+            Debug.Log(uploadPhotoUI.gameObject.name);
+            _allDialogueUI.Add(photoUI.gameObject);
+            
+            localWasChatNpc = false;
+        }
+        else
+        {
+            Debug.Log("IsPhotoUploaded : " + data.IsPhotoUploaded + " UploadPhotoUI : " + uploadPhotoUI);
         }
         
         wasChatNpc = localWasChatNpc;
@@ -815,8 +865,33 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
 
     public void SpawnPhotoMessage()
     {
-        Instantiate(uploadPhotoUI, _container);
-        imageSelectionUI.gameObject.SetActive(false);
+        if (uploadPhotoUI == null) return;
+        
+        if (wasChatNpc && _allDialogueUI.Count > 0)
+        {
+            ShowEmptySpace();
+        }
+        
+        wasChatNpc = false;
+        
+        GameObject photoObj = Instantiate(uploadPhotoUI, _container).gameObject;
+        _allDialogueUI.Add(photoObj);
+        
+        if (_savedDialogue.ContainsKey(_currentGuest))
+        {
+            var data = _savedDialogue[_currentGuest];
+            data.IsPhotoUploaded = true;
+            _savedDialogue[_currentGuest] = data;
+        }
+        else
+        {
+            Debug.Log("_savedDialogue is not contain Key : " + _currentGuest);
+        }
+
+        if (imageSelectionUI != null)
+            imageSelectionUI.gameObject.SetActive(false);
+
+        UpdateBottomEmptySpace();
         StartCoroutine(UpdateUILayout());
     }
 }
@@ -827,6 +902,7 @@ public struct SavedDialogueData
     public bool WasChatNpc;
     public List<string> HistoryContents;
     
+    public bool IsPhotoUploaded;
     public bool HasActiveChoice;
     public int ChoiceSeq;
     public bool IsCompleted;
@@ -836,5 +912,6 @@ public enum DialogueEventType
 {
     NPC,
     PLAYER,
-    CHOICE
+    CHOICE,
+    PHOTO
 }
