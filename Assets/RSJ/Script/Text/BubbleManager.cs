@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using csiimnida.CSILib.SoundManager.RunTime;
 using LSW._02._Code.Core;
 using LSW._02._Code.Core.Cores;
 using LSW._02._Code.So;
@@ -321,8 +322,9 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
             if (_currentLoading == loadingObject)
                 _currentLoading = null;
         }
+        SoundManager.Instance.PlaySound("Message");
 
-        if(targetBubble != null && targetBubble.gameObject != null)
+        if (targetBubble != null && targetBubble.gameObject != null)
             targetBubble.SetActive(true);
 
         if (isEnding)
@@ -736,7 +738,7 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
                     {
                         text.InitBubble(content, 1f);
                     }
-                    
+
                     lastContent = content;
                 }
 
