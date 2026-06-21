@@ -1075,13 +1075,13 @@ CompositeCollider2D:
         Y: -78298800
   - m_Collider: {fileID: 426909896}
     m_ColliderPaths:
-    - - X: 1318857728
+    - - X: 1323810432
         Y: -78196000
-      - X: 330097184
+      - X: 335049984
         Y: -78196000
-      - X: 330097184
+      - X: 335049984
         Y: -90196000
-      - X: 1318857728
+      - X: 1323810432
         Y: -90196000
   - m_Collider: {fileID: 1672660341}
     m_ColliderPaths:
@@ -1111,8 +1111,8 @@ CompositeCollider2D:
       - {x: 73.26042, y: -9.416519}
       - {x: 89.83548, y: -9.41649}
       - {x: 89.83551, y: -9.0196}
-      - {x: 131.88577, y: -9.01957}
-      - {x: 131.88574, y: -7.8196}
+      - {x: 132.38104, y: -9.01957}
+      - {x: 132.38101, y: -7.8196}
       - {x: 131.22522, y: -7.8195705}
       - {x: 131.22519, y: -4.8021207}
       - {x: 89.83548, y: -4.802091}
@@ -1734,7 +1734,7 @@ Transform:
   m_GameObject: {fileID: 426909894}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.964, y: -8.4196, z: 0}
+  m_LocalPosition: {x: 7.9, y: -8.4196, z: 0}
   m_LocalScale: {x: 30, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3740,7 +3740,7 @@ Transform:
   m_GameObject: {fileID: 880718360}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.8303, y: -8.4196, z: 0}
+  m_LocalPosition: {x: 3.8874, y: -8.4196, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3800,7 +3800,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 18.326172, y: 0.2379597}
+  m_Size: {x: 18.348999, y: 0.2379597}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
