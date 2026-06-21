@@ -8,6 +8,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using csiimnida.CSILib.SoundManager.RunTime;
 
 public class Title : MonoBehaviour, ISystemManager
 {
@@ -55,8 +56,13 @@ public class Title : MonoBehaviour, ISystemManager
             ShadowFade(CalendarShadow, 0f);
         }
 
-        if (isStarted) return;
+        for(int i = 0; i < etcBackground.Length; i++)
+        {
+            etcBackground[i].SetActive(false);
+        }
+        MainBgmPlayer.Instance.Play();
 
+        if (isStarted) return;
         Pad.anchoredPosition = new Vector3(90f, 0f);
         Calendar.anchoredPosition = new Vector3(Screen.width + 15f, 368f);
         Candle.anchoredPosition = new Vector3(Screen.width + 15f, 175f);
@@ -67,11 +73,6 @@ public class Title : MonoBehaviour, ISystemManager
         _start.SetActive(true);
 
         DOTween.SetTweensCapacity(500, 50);
-
-        for(int i = 0; i < etcBackground.Length; i++)
-        {
-            etcBackground[i].SetActive(false);
-        }
         _titleImg.gameObject.SetActive(true);
     }
 
@@ -95,6 +96,7 @@ public class Title : MonoBehaviour, ISystemManager
 
         if(inputTry >= 4)
         {
+            MainBgmPlayer.Instance.Play();
             moving = true;
             isStarted = true;
             _titleImg.DOAnchorPosY(980f, 0.5f)
@@ -132,16 +134,20 @@ public class Title : MonoBehaviour, ISystemManager
 
     private void SetObjects()
     {
+        SoundManager.Instance.PlaySound("TitleObjMove");
         Pad.DOAnchorPosX(-430f, 0.6f).SetEase(Ease.OutCirc)
             .OnComplete(() =>
             {
+                SoundManager.Instance.PlaySound("TitleObjMove");
                 Calendar.DOAnchorPosX(188f,0.45f).SetEase(Ease.OutCirc).OnComplete(() => 
                 {
-                            ShadowFade(PadShadow, 0.25f);
-                            ShadowFade(CalendarShadow, 0.25f);
+                    SoundManager.Instance.PlaySound("TitleObjMove");
+                    ShadowFade(PadShadow, 0.25f);
+                    ShadowFade(CalendarShadow, 0.25f);
                     Candle.DOAnchorPosX(677f, 0.45f).SetEase(Ease.OutCirc)
                         .OnComplete(() =>
                         {
+                            SoundManager.Instance.PlaySound("TitleObjMove");
                             Tea.DOAnchorPosX(540f, 0.45f).SetEase(Ease.OutCirc);
                         });
                 });

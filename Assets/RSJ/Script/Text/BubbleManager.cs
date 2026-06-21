@@ -2,11 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using csiimnida.CSILib.SoundManager.RunTime;
 using LSW._02._Code.Core;
 using LSW._02._Code.Core.Cores;
 using LSW._02._Code.So;
 using LSW._02._Code.System___Manager;
 using LSW._02._Code.UI;
+using Moon._01.Script.Datas;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -54,11 +56,13 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
     private Dictionary<Guest, SavedDialogueData> _savedDialogue = new Dictionary<Guest, SavedDialogueData>();
     private bool _isChoiceActive;
     private int _currentChoiceSeq;
+    private float timer;
     
     private GameObject _bottomEmptySpace;
     private Chatting _currentLoading;
     private bool wasEndChat = false;
 
+    public float timerTreshold { get; set; }
     public bool CanInteract { get; private set; }
     public List<LastDialogueData> ReplayList { get; set; } = new List<LastDialogueData>();
 
@@ -82,15 +86,28 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
         {
             ChatProfileContainer.InitializeProfiles(this, _gameStatueCore);
         }
+
+        if (DataManager.Instance.CurrentData.TryGetValue("TextSpeed", out float speed))
+        {
+            Debug.Log("NowSpeed : " + speed);
+            timerTreshold = speed;
+        }
+        else
+            timerTreshold = 4f;
     }
 
     private void Update()
     {
         if(!CanInteract)
             return;
-        
-        if(Keyboard.current.dKey.wasPressedThisFrame)
+
+        if(_isChoiceActive == false)
+            timer -= Time.deltaTime;
+
+        if (Keyboard.current.dKey.wasPressedThisFrame || timer <= 0f)
         {
+            Debug.Log(timerTreshold);
+            timer = timerTreshold;
             SpawnMessage();
         }
     }
@@ -305,8 +322,9 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
             if (_currentLoading == loadingObject)
                 _currentLoading = null;
         }
+        SoundManager.Instance.PlaySound("Message");
 
-        if(targetBubble != null && targetBubble.gameObject != null)
+        if (targetBubble != null && targetBubble.gameObject != null)
             targetBubble.SetActive(true);
 
         if (isEnding)
@@ -702,6 +720,13 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
                 if (prefab != null)
                 {
                     BubbleText text = Instantiate(prefab, _container);
+                    if (isFirst)
+                    {
+                        text.InitBubble(content, 1f, _currentGuestSheetName);
+                        text.SetProfil(_currentGuestSheetName);
+                    }
+                    else text.InitBubble(content, 1f);
+                    
                     _allDialogueUI.Add(text.gameObject);
                     
                     if (isFirst) 
@@ -713,7 +738,7 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
                     {
                         text.InitBubble(content, 1f);
                     }
-                    
+
                     lastContent = content;
                 }
 

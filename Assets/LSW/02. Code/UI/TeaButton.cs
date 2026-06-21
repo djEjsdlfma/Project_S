@@ -1,5 +1,6 @@
 
 using System;
+using csiimnida.CSILib.SoundManager.RunTime;
 using LSW._02._Code.Core;
 using LSW._02._Code.Core.Cores;
 using LSW._02._Code.System___Manager;
@@ -23,7 +24,12 @@ namespace LSW._02._Code.UI
             _bubbleManager = SystemManager.Instance.GetSystemManager<BubbleManager>();
             _button = GetComponent<Button>();
             
-            _button.onClick.AddListener(() => _transition.TransitionScene(GetPlatformScene(), TransitionType.LeaveToPlatform));
+            _button.onClick.AddListener(() =>
+            {
+                _transition.TransitionScene(GetPlatformScene(), TransitionType.LeaveToPlatform);
+                MainBgmPlayer.Instance.Stop();
+                SoundManager.Instance.PlaySound("Tea");
+            });
         }
         
         private void Start()

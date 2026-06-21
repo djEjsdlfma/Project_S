@@ -1,9 +1,6 @@
 using System.Collections.Generic;
-using System.Linq;
 using Moon._01.Script.Datas;
-using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Moon._01.Script.Memos
@@ -38,7 +35,8 @@ namespace Moon._01.Script.Memos
            {
                if(v.Key == Human.None)
                    continue;
-               buttons[i].GetComponentInChildren<TextMeshProUGUI>().text = v.Value;
+               //buttons[i].GetComponentInChildren<TextMeshProUGUI>().text = v.Value;
+               buttons[i].onClick.RemoveAllListeners();
                buttons[i].onClick.AddListener(() => ChangeCurrentGuest(v.Key));
                if (DataManager.Instance.TryGetValue(v.Key + "IsFind", out bool b))
                {
