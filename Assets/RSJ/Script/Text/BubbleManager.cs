@@ -93,7 +93,7 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
             timerTreshold = speed;
         }
         else
-            timerTreshold = 4f;
+            timerTreshold = 3f;
     }
 
     private void Update()
@@ -106,7 +106,6 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
 
         if (Keyboard.current.dKey.wasPressedThisFrame || timer <= 0f)
         {
-            Debug.Log(timerTreshold);
             timer = timerTreshold;
             SpawnMessage();
         }

@@ -16,15 +16,9 @@ public class SettingManager : MonoBehaviour
         _bubbleManager = SystemManager.Instance.GetSystemManager<BubbleManager>();
     }
 
-    public void SetScreenSize(Object textObj)
+    public void SetScreenSize(TextMeshProUGUI textObj)
     {
-        if(_canScreenChangeState == false)
-        {
-            _canScreenChangeState = true;
-            return;
-        }
-
-        string text = textObj.GetComponent<TextMeshProUGUI>().text;
+        string text = textObj.text;
 
         if(text == "전체 화면")
         {
@@ -36,8 +30,6 @@ public class SettingManager : MonoBehaviour
             Debug.Log("창");
             Screen.SetResolution(1920, 1080, false);
         }
-
-        _canScreenChangeState = false;
     }
 
     public void SetThema(Object textObj)
@@ -64,30 +56,22 @@ public class SettingManager : MonoBehaviour
     
     public void SetTextSpeed(TextMeshProUGUI textObj)
     {
-        if (_canSpeedChangeState == false)
-        {
-            _canSpeedChangeState = true;
-            return;
-        }
-
         string text = textObj.text;
 
         if (text == "보통")
         {
-            DataManager.Instance.SaveData("TextSpeed", 4f);
-            _bubbleManager.timerTreshold = 4f;
-        }
-        else if(text == "빠르게")
-        {
             DataManager.Instance.SaveData("TextSpeed", 3f);
             _bubbleManager.timerTreshold = 3f;
         }
+        else if(text == "빠르게")
+        {
+            DataManager.Instance.SaveData("TextSpeed", 2f);
+            _bubbleManager.timerTreshold = 2f;
+        }
         else
         {
-            DataManager.Instance.SaveData("TextSpeed", 5f);
-            _bubbleManager.timerTreshold = 5f;
+            DataManager.Instance.SaveData("TextSpeed", 4f);
+            _bubbleManager.timerTreshold = 4f;
         }
-
-        _canSpeedChangeState = false;
     }
 }
