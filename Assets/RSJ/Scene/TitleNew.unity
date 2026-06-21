@@ -6144,6 +6144,7 @@ GameObject:
   - component: {fileID: 372985084}
   - component: {fileID: 372985083}
   - component: {fileID: 372985085}
+  - component: {fileID: 372985086}
   m_Layer: 5
   m_Name: Image (2)
   m_TagString: Untagged
@@ -6252,19 +6253,21 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 372985083}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 490261336}
-        m_TargetAssemblyTypeName: PhotoUI, Assembly-CSharp
-        m_MethodName: ShowMyPhoto
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
+--- !u!114 &372985086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 372985081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7beadd10740140df897793c3315acb13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LSW._02._Code.UI.Folder
+  photoUI: {fileID: 490261336}
+  guest: 3
 --- !u!1 &373426726
 GameObject:
   m_ObjectHideFlags: 0
@@ -6566,6 +6569,7 @@ GameObject:
   - component: {fileID: 392822458}
   - component: {fileID: 392822457}
   - component: {fileID: 392822459}
+  - component: {fileID: 392822460}
   m_Layer: 5
   m_Name: Image (1)
   m_TagString: Untagged
@@ -6674,19 +6678,21 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 392822457}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 490261336}
-        m_TargetAssemblyTypeName: PhotoUI, Assembly-CSharp
-        m_MethodName: ShowMyPhoto
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
+--- !u!114 &392822460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 392822455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7beadd10740140df897793c3315acb13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LSW._02._Code.UI.Folder
+  photoUI: {fileID: 490261336}
+  guest: 2
 --- !u!1 &408285636
 GameObject:
   m_ObjectHideFlags: 0
@@ -8797,6 +8803,7 @@ GameObject:
   - component: {fileID: 539591464}
   - component: {fileID: 539591463}
   - component: {fileID: 539591465}
+  - component: {fileID: 539591466}
   m_Layer: 5
   m_Name: Image (3)
   m_TagString: Untagged
@@ -8905,19 +8912,21 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 539591463}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 490261336}
-        m_TargetAssemblyTypeName: PhotoUI, Assembly-CSharp
-        m_MethodName: ShowMyPhoto
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
+--- !u!114 &539591466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 539591461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7beadd10740140df897793c3315acb13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LSW._02._Code.UI.Folder
+  photoUI: {fileID: 490261336}
+  guest: 4
 --- !u!1 &558506405
 GameObject:
   m_ObjectHideFlags: 0
@@ -9312,6 +9321,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LSW._02._Code.UI.PhotoContainer
   noPhotoText: {fileID: 1274926320}
+  photoImages:
+  - {fileID: 1075815862}
+  - {fileID: 408285638}
+  - {fileID: 1362116598}
 --- !u!1 &602611276
 GameObject:
   m_ObjectHideFlags: 0
@@ -16069,6 +16082,7 @@ GameObject:
   - component: {fileID: 1272011709}
   - component: {fileID: 1272011708}
   - component: {fileID: 1272011710}
+  - component: {fileID: 1272011711}
   m_Layer: 5
   m_Name: Image (4)
   m_TagString: Untagged
@@ -16177,19 +16191,21 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1272011708}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 490261336}
-        m_TargetAssemblyTypeName: PhotoUI, Assembly-CSharp
-        m_MethodName: ShowMyPhoto
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
+--- !u!114 &1272011711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1272011706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7beadd10740140df897793c3315acb13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LSW._02._Code.UI.Folder
+  photoUI: {fileID: 490261336}
+  guest: 5
 --- !u!1 &1274425160
 GameObject:
   m_ObjectHideFlags: 0
@@ -25629,13 +25645,14 @@ GameObject:
   - component: {fileID: 1904040650}
   - component: {fileID: 1904040649}
   - component: {fileID: 1904040651}
+  - component: {fileID: 1904040652}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1904040648
 RectTransform:
   m_ObjectHideFlags: 0
@@ -25737,19 +25754,21 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1904040649}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 490261336}
-        m_TargetAssemblyTypeName: PhotoUI, Assembly-CSharp
-        m_MethodName: ShowMyPhoto
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
+--- !u!114 &1904040652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1904040647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7beadd10740140df897793c3315acb13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LSW._02._Code.UI.Folder
+  photoUI: {fileID: 490261336}
+  guest: 1
 --- !u!224 &1905604903 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6549357240269765602, guid: 380038d01722e8047b7dd8edb834fbc1, type: 3}

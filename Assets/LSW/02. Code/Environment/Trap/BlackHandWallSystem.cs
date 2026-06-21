@@ -77,29 +77,16 @@ namespace LSW._02._Code.Environment.Trap
         {
             if (_playerTransform == null) 
                 return;
-    
-            for (int i = 0; i < 25; i++)
-            {
-                float randomAngle = Random.Range(0f, 360f);
-                Vector2 direction = new Vector2(Mathf.Cos(randomAngle * Mathf.Deg2Rad), Mathf.Sin(randomAngle * Mathf.Deg2Rad));
-                
-                RaycastHit2D hit = Physics2D.Raycast(_playerTransform.position, direction, maxDistance, surfaceLayer);
-        
-                if (hit.collider != null)
-                {
-                    if (hit.distance >= minDistance)
-                    {
-                        Vector2 spawnPosition = hit.point + (hit.normal * handRadius);
+            
+            float randomAngle = Random.Range(0f, 360f);
+            float randomDistance = Random.Range(minDistance, maxDistance);
+            
+            Vector2 offset = new Vector2(Mathf.Cos(randomAngle * Mathf.Deg2Rad), Mathf.Sin(randomAngle * Mathf.Deg2Rad)) * randomDistance;
+            Vector2 spawnPosition = (Vector2)_playerTransform.position + offset;
+            
+            Vector2 surfaceNormal = Vector2.up;
 
-                        SpawnHand(spawnPosition, hit.normal);
-                        break;
-                    }
-                    else
-                    {
-                        Debug.Log($"부딪힌 대상: {hit.collider.name}, 거리: {hit.distance}");
-                    }
-                }
-            }
+            SpawnHand(spawnPosition, surfaceNormal);
         }
 
         private void SpawnHand(Vector2 spawnPosition, Vector2 surfaceNormal)

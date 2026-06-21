@@ -33,7 +33,7 @@ public class PhotoUI : MonoBehaviour
         }
     }
 
-    public void ShowMyPhoto()
+    public void ShowMyPhoto(Guest guest)
     {
         for (int i = 0; i < _folders.Length; i++)
         {
@@ -42,6 +42,7 @@ public class PhotoUI : MonoBehaviour
         
         _text.SetActive(photo.PhotoCount == 0);
         photo.gameObject.SetActive(true);
+        photo.SetPhoto(guest);
     }
 
     public void BackSelectFolder()

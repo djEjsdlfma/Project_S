@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7304670736657141906}
   - component: {fileID: 1311709787791516856}
   - component: {fileID: 3696553234542803503}
+  - component: {fileID: 6712628118746128255}
   m_Layer: 0
   m_Name: Sheet Music
   m_TagString: Untagged
@@ -166,3 +167,35 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &6712628118746128255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7184127994227212549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5742a23d45d46f8b150403335783789, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LSW._02._Code.Environment.Takable.EndDialogueObject
+  wordList:
+  - "\uC870\uAC01\uC744 \uC9D1\uC5B4\uB4E0\uB2E4. \uC74C\uD45C\uB4E4\uC774 \uBCF4\uC778\uB2E4
+    \u2014 \uC900\uBE44\uD588\uB358 \uC1FC\uD33D\uC774 \uC544\uB2C8\uB2E4. \uC989\uD765\uC73C\uB85C
+    \uCCE4\uB358 \uC120\uC728\uB4E4. \uC5B4\uB518\uAC00\uC5D0\uC11C \uAE30\uC5B5\uC774
+    \uB09C\uB2E4."
+  - "\uBC1F\uC73C\uBA74 \uC18C\uB9AC\uAC00 \uB4E4\uB9B0\uB2E4. \uC544\uC8FC \uD76C\uBBF8\uD558\uAC8C."
+  - "(\uC724\uC11C\uC544\uC758 \uBAA9\uC18C\uB9AC)"
+  - "\uBC1F\uC73C\uBA74 \uC18C\uB9AC\uAC00 \uB4E4\uB9B0\uB2E4. \uC544\uC8FC \uD76C\uBBF8\uD558\uAC8C."
+  - "\uAE30\uC5B5 \uC218\uC120\uC18C: \uC989\uD765\uACE1\uC774\uC694?"
+  - "\uC724\uC11C\uC544: \uB124. \uC545\uBCF4\uB85C \uC4F4 \uC801 \uC5C6\uC5C8\uB294\uB370
+    \u2014 \uC5EC\uAE30 \uC788\uB124\uC694."
+  - "(\uCE68\uBB35)"
+  - "\uAE30\uC5B5\uC774 \uB098\uC694. \uC9C0\uAE08\uB3C4."
+  takePictureEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  endDialogueEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  <IsAlreadyTook>k__BackingField: 0

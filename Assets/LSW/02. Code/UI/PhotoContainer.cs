@@ -1,6 +1,7 @@
 
-using System;
 using System.Collections.Generic;
+using LSW._02._Code.Core;
+using LSW._02._Code.Core.Cores;
 using Moon._01.Script.Datas;
 using TMPro;
 using UnityEngine;
@@ -11,64 +12,62 @@ namespace LSW._02._Code.UI
     public class PhotoContainer : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI noPhotoText;
+        [SerializeField] private List<Image> photoImages; 
         
         public int PhotoCount { get; private set; }
-        
-        private Image[] _photoImages;
+        private GameStatueCore _gameStatueCore;
 
         private void OnEnable()
         {
-            if(_photoImages == null)
-                _photoImages = GetComponentsInChildren<Image>();
+            if(_gameStatueCore == null)
+                _gameStatueCore = CoreHandler.Instance.GetCore<GameStatueCore>();
             
-            if (DataManager.Instance.TryGetValue(CurrentGuestManager.C[0], out List<Texture2D> photo))
+            ClearGeneratedSprites();
+        }
+
+        public void SetPhoto(Guest guest)
+        {
+            string guestKey = CurrentGuestManager.C[(int)guest];
+            if (DataManager.Instance.TryGetValue(guestKey, out List<Texture2D> photoList) && photoList.Count > 0)
             {
-                foreach (var photoImage in _photoImages)
+                for (int i = 0; i < photoImages.Count; i++)
                 {
-                    photoImage.gameObject.SetActive(true);
-                }
-                    Debug.Log($"LSW CORE");
-                PhotoCount = photo.Count;
-                SetPhoto(photo.ToArray());
-            }
-            else
-            {
-                Debug.Log("LSW");
-                foreach (var photoImage in _photoImages)
-                {
-                    photoImage.gameObject.SetActive(false);
+                    if (i < photoList.Count)
+                    {
+                        photoImages[i].gameObject.SetActive(true);
+                        photoImages[i].sprite = Sprite.Create(photoList[i], new Rect(0, 0, photoList[i].width, photoList[i].height),
+                            new Vector2(0.5f, 0.5f));
+                    }
+                    else
+                    {
+                        photoImages[i].gameObject.SetActive(false);
+                    }
                 }
             }
         }
 
-        public void SetPhoto(Texture2D[] photo)
+        private void OnDisable()
         {
-            if (_photoImages.Length <= 0)
-            {
-                noPhotoText.gameObject.SetActive(true);
-                return;
-            }
-            
-            for (int i = 0; i < photo.Length; i++)
-            {
-                if(i >= _photoImages.Length)
-                    break;
-                
-                _photoImages[i].sprite = Sprite.Create(photo[i], new Rect(0, 0, photo[i].width, photo[i].height), new Vector2(0.5f, 0.5f));
-            }
+            ClearGeneratedSprites();
+            noPhotoText.gameObject.SetActive(false);
         }
 
         private void OnDestroy()
         {
-            if(_photoImages == null)
-                return;
-            
-            if (_photoImages.Length <= 0) 
-                return;
-            
-            for (int i = _photoImages.Length - 1; i >= 0; i--)
+            ClearGeneratedSprites();
+        }
+        
+        private void ClearGeneratedSprites()
+        {
+            if (photoImages == null) return;
+
+            foreach (var img in photoImages)
             {
-                Destroy(_photoImages[i].sprite);
+                if (img != null && img.sprite != null)
+                {
+                    Destroy(img.sprite);
+                    img.sprite = null;
+                }
             }
         }
     }

@@ -138,6 +138,7 @@ namespace LSW._02._Code.Core.Cores
         public int RealCurrentSincerityAmount { get; set; }     // 진짜 호감도 (0 ~ )(혹시 제한없는 게 필요한 경우)
     }
     
+    [Serializable]
     public enum Guest
     {
         Sheet1 = -2,        // 테스트용임
