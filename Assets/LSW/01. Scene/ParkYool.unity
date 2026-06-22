@@ -3987,8 +3987,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uAC00\uAE4C\uC774 \uB2E4\uAC00\uAC04\uB2E4. \uBE48 \uCE68\uB300. \uD558\uC9C0\uB9CC
-    \uB204\uAD70\uAC00\uC758 \uC628\uAE30\uAC00 \uB0A8\uC544\uC788\uB2E4."
+  m_text: '
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0494a77ffa594734f9931f2a2d9380a4, type: 2}
   m_sharedMaterial: {fileID: -3558238057192847427, guid: 0494a77ffa594734f9931f2a2d9380a4, type: 2}
@@ -5230,6 +5231,66 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+--- !u!1 &1941217408
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1941217410}
+  - component: {fileID: 1941217409}
+  - component: {fileID: 1941217411}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1941217409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1941217408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 940a8fac3dc227149af3fd80b71e07d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlaySound
+  BGMKey: ParkBGM
+--- !u!4 &1941217410
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1941217408}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -11.19587, y: -10.89021, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1941217411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1941217408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa13a5431164a7f42bfe562f231e13af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SoundManager.runtime::csiimnida.CSILib.SoundManager.RunTime.SoundManager
+  _soundListSo: {fileID: 11400000, guid: 380dcdb0a6bd8f1429264bd58af6907b, type: 2}
+  _mixer: {fileID: 24100000, guid: 18dbd229627698846934e4865f1760c3, type: 2}
 --- !u!1 &2000586789
 GameObject:
   m_ObjectHideFlags: 0
@@ -5650,3 +5711,4 @@ SceneRoots:
   - {fileID: 871554815}
   - {fileID: 1174241037}
   - {fileID: 888220622}
+  - {fileID: 1941217410}

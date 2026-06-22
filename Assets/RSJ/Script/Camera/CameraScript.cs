@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using csiimnida.CSILib.SoundManager.RunTime;
 using DG.Tweening;
 using LSW._02._Code.Environment.InteractableObject;
 using LSW._02._Code.Environment.Takable;
@@ -142,6 +143,7 @@ namespace RSJ.Script.Camera
         {
             if (camerasFinder.GetTarget<SetCamBlur>(false) is var blur && blur && blur.BlurActive)
                 return;
+            SoundManager.Instance.PlaySound("Shutter");
             HandleActionInput(_camera.ScreenToWorldPoint(GetCurrentMousePos()));
         }
 
@@ -341,6 +343,7 @@ namespace RSJ.Script.Camera
             CheckUIInArea();
             CheckAndTakeObject(true);
 
+            SoundManager.Instance.PlaySound("Shutter");
             _img.color = new Color(1, 1, 1, 1);
             _img.DOFade(0f, 0.2f);
             DevLog.Log("찰칵");
