@@ -11594,7 +11594,7 @@ MonoBehaviour:
     - Key: 5
       Value: "\uC54C\uC218\uC5C6\uB294"
     - Key: 0
-      Value: "\uC774\uC7AC\uD6C8"
+      Value: "\uC774\uC7AC\uC724"
     - Key: 1
       Value: "\uC815\uB2E4\uC740"
     - Key: 2
@@ -11602,7 +11602,7 @@ MonoBehaviour:
     - Key: 3
       Value: "\uC724\uC11C\uC544"
     - Key: 4
-      Value: "\uCD5C\uBA85\uC900"
+      Value: "\uCD5C\uBA85\uC9C4"
 --- !u!114 &787227346
 MonoBehaviour:
   m_ObjectHideFlags: 0
