@@ -104,7 +104,7 @@ namespace LSW._02._Code.Core.Cores
         [ContextMenu("Increase Day Debug")]
         public void IncreaseDayDebug() => IncreaseDay();
         
-        public void IncreaseDay(int increaseAmount = 5)
+        public void IncreaseDay(int increaseAmount = 1)
         {
             CurrentDay = Mathf.Clamp(CurrentDay + increaseAmount, 1, MaxDay);
             DataManager.Instance.SaveData("Day", CurrentDay);
