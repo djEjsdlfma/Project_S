@@ -1,3 +1,4 @@
+using csiimnida.CSILib.SoundManager.RunTime;
 using LSW._02._Code.Entities;
 using LSW._02._Code.Player;
 using LSW._02._Code.System___Manager.StateMachine;
@@ -8,7 +9,7 @@ public class PlayerMoveState : State
     private Player _player;
     private Rigidbody2D _rigidbody;
     private Vector2 _moveInput;
-
+    private float walkTimer = 0.5f;
     public PlayerMoveState(Entity owner, EntityStat info, StateMachineCompo stateMachine) : base(owner, info,
         stateMachine)
     {
@@ -46,7 +47,6 @@ public class PlayerMoveState : State
     public override void UpdateState()
     {
         base.UpdateState();
-
         if (!Owner.IsGround && _rigidbody.linearVelocity.y < -0.001f)
         {
             StateMachine.TransitionState("PlayerFallingState");
@@ -65,12 +65,19 @@ public class PlayerMoveState : State
             return;
 
         _rigidbody.linearVelocity = new Vector2(_moveInput.x * _player.GetCurrentMoveSpeed(), _rigidbody.linearVelocity.y);
+
+        walkTimer -= Time.fixedDeltaTime;
+        if (walkTimer < 0)
+        {
+            SoundManager.Instance.PlaySound("PlayerStep");
+            walkTimer = 0.5f;
+        }
     }
 
     private void HandleMoveInput(Vector2 moveInput)
     {
         _moveInput = moveInput;
-        
+
         if (Mathf.Abs(_moveInput.x) > 0.01f)
         {
             Owner.SetFlip(_moveInput.x < 0);

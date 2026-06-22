@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using csiimnida.CSILib.SoundManager.RunTime;
 using DG.Tweening;
 using LSW._02._Code.Environment.InteractableObject;
 using LSW._02._Code.Environment.Takable;
@@ -59,6 +61,18 @@ namespace RSJ.Script.Camera
         [Header("Components")]
         [SerializeField] private CameraMove _cameraMove;
 
+        [Header("ShowOutlines")]
+        private readonly HashSet<SpriteRenderer> _highlighted = new();
+        private readonly HashSet<SpriteRenderer> _currentFrame = new();
+
+        [SerializeField] private Material _outlineMat;        // SpriteSilhouette 머티리얼
+        [SerializeField] private float _outlineScale = 1.08f; // 테두리 두께 (1 = 본체 크기, 클수록 두꺼움)
+        [SerializeField] private Color _outlineColor = Color.yellow;
+
+        private readonly Dictionary<SpriteRenderer, GameObject> _outlineCache = new();
+        private MaterialPropertyBlock _silMpb;
+        private static readonly int ColorID = Shader.PropertyToID("_Color");
+
         private RectTransform myPosition;
         private Vector3 _position;
         private UnityEngine.Camera _main;
@@ -79,6 +93,7 @@ namespace RSJ.Script.Camera
             myPosition = GetComponent<RectTransform>();
             _mouseManager = SystemManager.Instance.GetSystemManager<MouseManager>();
             _showWordUISystem = SystemManager.Instance.GetSystemManager<ShowWordUISystem>();
+            _silMpb = new MaterialPropertyBlock();
 
             input.OnCaptureAction += HandlePhotoInput;
             input.OnCopyAction += HandleCaptureInput;
@@ -98,6 +113,7 @@ namespace RSJ.Script.Camera
         private void Update()
         {
             UpdateMouseFollowerUI();
+            UpdateOutlineHighlight();
         }
 
         private void FixedUpdate()
@@ -127,6 +143,7 @@ namespace RSJ.Script.Camera
         {
             if (camerasFinder.GetTarget<SetCamBlur>(false) is var blur && blur && blur.BlurActive)
                 return;
+            SoundManager.Instance.PlaySound("Shutter");
             HandleActionInput(_camera.ScreenToWorldPoint(GetCurrentMousePos()));
         }
 
@@ -326,6 +343,7 @@ namespace RSJ.Script.Camera
             CheckUIInArea();
             CheckAndTakeObject(true);
 
+            SoundManager.Instance.PlaySound("Shutter");
             _img.color = new Color(1, 1, 1, 1);
             _img.DOFade(0f, 0.2f);
             DevLog.Log("찰칵");
@@ -424,8 +442,98 @@ namespace RSJ.Script.Camera
         }
         #endregion
 
-        #region POLYGON / CLIPPING UTILS 
-    
+        #region OBJ OUTLINE
+
+        private void UpdateOutlineHighlight()
+        {
+            _currentFrame.Clear();
+
+            Collider2D[] items = Physics2D.OverlapBoxAll(
+                checkPos.position,
+                myPosition.sizeDelta * (CHECK_BOX_SCALE * (_camera.orthographicSize * 0.2f)),
+                0,
+                coloredObject
+            );
+
+            foreach (var item in items)
+            {
+                if (item == null) continue;
+
+                // CamObject가 있으면 OK (CanCopyOrMove 값은 안 따짐 → 복사·찍기 전용 둘 다 포함)
+                if (!item.TryGetComponent(out CamObject _)) continue;
+
+                if (item.TryGetComponent(out SpriteRenderer sr) && sr.sprite != null)
+                {
+                    _currentFrame.Add(sr);
+                    if (_highlighted.Add(sr))
+                        SetOutline(sr, true);
+                }
+            }
+
+            _highlighted.RemoveWhere(sr =>
+            {
+                if (sr == null)
+                {
+                    _outlineCache.Remove(sr);   // 추가: 파괴된 대상 캐시 정리
+                    return true;
+                }
+                if (!_currentFrame.Contains(sr))
+                {
+                    SetOutline(sr, false);
+                    return true;
+                }
+                return false;
+            });
+        }
+
+        private void SetOutline(SpriteRenderer sr, bool on)
+        {
+            if (on)
+            {
+                // 대상에 OutlineSetting이 있으면 그 값을, 없으면 기본값을 사용
+                float scale = _outlineScale;
+                Color color = _outlineColor;
+                if (sr.TryGetComponent(out OutLineSetting setting))
+                {
+                    scale = setting.scale;
+                    color = setting.color;
+                }
+
+                if (!_outlineCache.TryGetValue(sr, out GameObject outline) || outline == null)
+                {
+                    outline = new GameObject("Outline");
+                    outline.transform.SetParent(sr.transform, false);
+                    outline.transform.localPosition = Vector3.zero;
+                    outline.transform.localRotation = Quaternion.identity;
+
+                    var os = outline.AddComponent<SpriteRenderer>();
+                    os.sharedMaterial = _outlineMat;
+                    os.sortingLayerID = sr.sortingLayerID;
+                    os.sortingOrder = sr.sortingOrder - 1;
+                    _outlineCache[sr] = outline;
+                }
+
+                var osr = outline.GetComponent<SpriteRenderer>();
+                osr.sprite = sr.sprite;                          // 모양 동기화
+                outline.transform.localScale = Vector3.one * scale; // 두께
+
+                // 색 적용 (머티리얼 인스턴스 안 만들고 per-renderer로)
+                osr.GetPropertyBlock(_silMpb);
+                _silMpb.SetColor(ColorID, color);
+                osr.SetPropertyBlock(_silMpb);
+
+                outline.SetActive(true);
+            }
+            else
+            {
+                if (_outlineCache.TryGetValue(sr, out GameObject outline) && outline != null)
+                    outline.SetActive(false);
+            }
+        }
+        #endregion
+
+            #region POLYGON / CLIPPING UTILS 
+
         private void ReplaceClippedCollider(GameObject originalItem, GameObject copiedObj, Vector2 checkMin, Vector2 checkMax)
         {
             float preservedRatio = 0f;

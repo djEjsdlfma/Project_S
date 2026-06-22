@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 4183797401404002026}
   - component: {fileID: 1175255043672565592}
   - component: {fileID: -8617797505314150990}
+  - component: {fileID: 966327820246714053}
+  - component: {fileID: -4642668994984712579}
   m_Layer: 6
   m_Name: Map_ChoiMyeongJin_6
   m_TagString: Untagged
@@ -108,24 +110,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LSW._02._Code.Environment.Takable.TakableObject
   wordList:
   - "\uCC45\uC0C1 \uC704 \uB0A1\uC740 \uC804\uD654\uAE30. \uC218\uD654\uAE30\uAC00
-    \uC0B4\uC9DD \uB4E4\uB824 \uC788\uB2E4 \u2014 \uB204\uAD70\uAC00 \uB9C9 \uB0B4\uB824\uB193\uC740
+    \uC0B4\uC9DD \uB4E4\uB824 \uC788\uB2E4\\n \uB204\uAD70\uAC00 \uB9C9 \uB0B4\uB824\uB193\uC740
     \uAC83\uCC98\uB7FC, \uD639\uC740 \uB9C9 \uB4E4\uB824\uB294 \uAC83\uCC98\uB7FC."
   - "\uB2E4\uC774\uC5BC\uC5D0 \uBA3C\uC9C0\uAC00 \uC313\uC5EC \uC788\uB2E4. \uD558\uC9C0\uB9CC
-    \uC218\uD654\uAE30 \uCABD\uC740 \uAE68\uB057\uD558\uB2E4. \uC190\uB54C\uAC00
-    \uBB3B\uC5B4\uC788\uB2E4 \u2014 \uB204\uAD70\uAC00 \uC624\uB798, \uC790\uC8FC
-    \uB9CC\uC84C\uB358 \uD754\uC801."
-  - "(\uCD5C\uBA85\uC9C4\uC758 \uBAA9\uC18C\uB9AC \u2014 \uC544\uC8FC \uC870\uC6A9\uD558\uAC8C)"
+    \uC218\uD654\uAE30 \uCABD\uC740 \uAE68\uB057\uD558\uB2E4. \\n\uC190\uB54C\uAC00
+    \uBB3B\uC5B4\uC788\uB2E4 \uB204\uAD70\uAC00 \uC624\uB798, \uC790\uC8FC \uB9CC\uC84C\uB358
+    \uD754\uC801."
+  - "\uC190\uB2D8\uC758 \uBAA9\uC18C\uB9AC\uAC00 \uC870\uC6A9\uD788 \uB4E4\uB9B0\uB2E4."
   - "\uCD5C\uBA85\uC9C4: ...\uADF8 \uC804\uD654\uAE30\uC785\uB2C8\uB2E4."
   - "\uAE30\uC5B5 \uC218\uC120\uC18C: \uADF8\uB0A0 \uBC24 \uC774 \uC804\uD654\uAE30\uAC00
     \uC788\uC5C8\uAD70\uC694."
   - "\uCD5C\uBA85\uC9C4: \uC0C1\uBD80\uC5D0 \uC804\uD654\uB97C \uAC78 \uC218 \uC788\uC5C8\uC5B4\uC694.
-    \uADF8 \uC21C\uAC04\uC5D0. \uC218\uD654\uAE30\uB97C \uB4E4\uACE0 \u2014 \uC774\uAC74
-    \uC544\uB2C8\uC9C0 \uC54A\uC2B5\uB2C8\uAE4C, \uB77C\uACE0."
-  - "(\uCE68\uBB35)"
+    \uADF8 \uC21C\uAC04\uC5D0. \\n\uC218\uD654\uAE30\uB97C \uB4E4\uACE0 '\uC774\uAC74
+    \uC544\uB2C8\uC9C0 \uC54A\uC2B5\uB2C8\uAE4C.' \uB77C\uACE0."
+  - ...
   - "\uB4E4\uC9C0 \uC54A\uC558\uC2B5\uB2C8\uB2E4."
   takePictureEvent:
     m_PersistentCalls:
       m_Calls: []
+  endDialogueEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  <IsAlreadyTook>k__BackingField: 0
 --- !u!61 &1175255043672565592
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -199,3 +205,32 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 5
+--- !u!114 &966327820246714053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2138762336100098604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0e198bbfcdd4147b11e37a8c3432752, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Moon._01.Script.Cameras.CamObject
+  <Name>k__BackingField: CamObject
+  <CanCopyOrMove>k__BackingField: 0
+  ratio: 1
+--- !u!114 &-4642668994984712579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2138762336100098604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5079bdf85ee223d4aab9129c648f7971, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OutLineSetting
+  scale: 1.08
+  color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
