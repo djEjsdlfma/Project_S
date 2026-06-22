@@ -110,9 +110,11 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
             SpawnMessage();
         }
 
-        if (Keyboard.current.enterKey.wasPressedThisFrame && !_isChoiceActive && !wasEndChat)
+        if (Keyboard.current.sKey.wasPressedThisFrame
+            && CanInteract && !_isChoiceActive && !wasEndChat)
         {
-            SpawnAllUntilSelection();
+            DisableInteract();
+            StartCoroutine(SpawnAllUntilSelection());
         }
     }
 
@@ -122,23 +124,15 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
         EnableInteract();
     }
 
-    private void SpawnAllUntilSelection()
+    private IEnumerator SpawnAllUntilSelection()
     {
-        if (!CanInteract || wasEndChat || _isChoiceActive) 
-            return;
-
-        if (string.IsNullOrEmpty(_currentGuestSheetName) || _currentGuest == Guest.None)
-            return;
-    
-        DisableInteract();
-        
         if (_currentLoading != null)
         {
             _allDialogueUI.Remove(_currentLoading.gameObject);
             Destroy(_currentLoading.gameObject);
             _currentLoading = null;
         }
-        
+
         while (true)
         {
             if (!_dialogueDataCore.GetDialogueDataByKey(_currentGuestSheetName, _currentKey, out DialogueEntry data))
@@ -156,46 +150,38 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
             {
                 _isChoiceActive = true;
                 _currentChoiceSeq = data.seq;
-        
                 FindChoice(data.seq);
                 PlayerChoice.AddEvent(Choose);
-                
-                StartCoroutine(UpdateUILayout());
-                break;
+            
+                yield return StartCoroutine(UpdateUILayout()); 
+
+                break; 
             }
             
             if (data.speaker == SpeakerType.NPC)
             {
-                ShowNPCText(data.content, wasChatNpc, _currentGuestSheetName, isEnding, isImmediate: true);
-                _currentKey = data.nextKey;
-        
+                ShowNPCText(data.content, wasChatNpc, _currentGuestSheetName, isEnding, isImmediate: true, triggerEvent: true);
+                
                 if (ChatProfileContainer != null)
                     ChatProfileContainer.SetCurrentProfile(data.content, false);
             }
             else
             {
-                ShowPlayerText(data.content, wasChatNpc);
-                _currentKey = data.nextKey;
-        
-                if (ChatProfileContainer != null)
-                    ChatProfileContainer.SetCurrentProfile(data.content, false);
-        
-                if (isEnding)
-                {
-                    HandleEndChat();
-                    StartCoroutine(UpdateUILayout());
-                    break;
-                }
+                ShowPlayerText(data.content, wasChatNpc, triggerEvent: true);
             }
             
-            if (isEnding)
+            _currentKey = data.nextKey;
+            
+            if (isEnding || string.IsNullOrEmpty(_currentKey) || _currentKey == "END")
             {
                 HandleEndChat();
-                StartCoroutine(UpdateUILayout());
                 break;
             }
+            
+            yield return null;
         }
         
+        yield return StartCoroutine(UpdateUILayout());
         timer = timerTreshold;
     }
 
@@ -383,7 +369,6 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
         }
 
         _currentLoading = Instantiate(NPCChatting, _container);
-        _currentLoading.SetName(chatterName);
         _currentLoading.SetProfil(chatterName);
         _allDialogueUI.Add(_currentLoading.gameObject);
         
