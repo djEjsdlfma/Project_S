@@ -485,6 +485,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Moon._01.Script.Cameras.Puzzle.Weight.WeightObj
   <Name>k__BackingField: CamObject
+  <CanCopyOrMove>k__BackingField: 1
   ratio: 1
   <Weight>k__BackingField: 1
   <MaxRatioToWeightAlive>k__BackingField: 0.9
@@ -1891,6 +1892,8 @@ GameObject:
   - component: {fileID: 474683701}
   - component: {fileID: 474683704}
   - component: {fileID: 474683703}
+  - component: {fileID: 474683705}
+  - component: {fileID: 474683706}
   m_Layer: 6
   m_Name: Map_ChoiMyeongJin_0
   m_TagString: Untagged
@@ -2032,17 +2035,49 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LSW._02._Code.Environment.Takable.TakableObject
   wordList:
   - "\uBE5B\uBC14\uB79C \uC218\uC0AC \uC11C\uB958\uB4E4. \uB9E8 \uC704\uC5D0 \uAC15\uB3D9\uC218\uC758
-    \uC774\uB984\uC774 \uBCF4\uC778\uB2E4. \uC190\uC73C\uB85C \uC4F4 \uBA54\uBAA8\uAC00
+    \uC774\uB984\uC774 \uBCF4\uC778\uB2E4. \\n\uC190\uC73C\uB85C \uC4F4 \uBA54\uBAA8\uAC00
     \uC5EC\uBC31\uC5D0 \uBE7C\uACE1\uD558\uB2E4. \uB204\uAD70\uAC00\uC758 \uD544\uCCB4
-    \u2014 \uCD5C\uBA85\uC9C4\uC758 \uAC83\uC774 \uC544\uB2C8\uB2E4."
-  - "\uAE30\uC5B5 \uC218\uC120\uC18C: \uC774\uAC8C \uADF8 \uC11C\uB958\uC778\uAC00\uC694."
-  - "(\uCD5C\uBA85\uC9C4\uC758 \uBAA9\uC18C\uB9AC\uAC00 \uC5B4\uB518\uAC00\uC5D0\uC11C
-    \uB4E4\uB9B0\uB2E4)"
-  - "\uCD5C\uBA85\uC9C4: \uB124. \uADF8\uAC8C \u2014 \uADF8\uAC81\uB2C8\uB2E4."
-  - "\uAE30\uC5B5 \uC218\uC120\uC18C: \uC5B4\uB5BB\uAC8C \uD558\uC2E4 \uAC74\uAC00\uC694."
+    \uCD5C\uBA85\uC9C4\uC758 \uAC83\uC774 \uC544\uB2C8\uB2E4."
+  - "\uAE30\uC5B5 \uC218\uC120\uC18C: \uC774\uAC8C \uADF8 \uC11C\uB958\uC778\uAC00\uC694?"
+  - "(\uC190\uB2D8\uC758 \uBAA9\uC18C\uB9AC\uAC00 \uB4E4\uB9B0\uB2E4.)"
+  - "\uCD5C\uBA85\uC9C4: \uB124. \uADF8\uAC8C \uADF8\uAC81\uB2C8\uB2E4."
+  - "\uAE30\uC5B5 \uC218\uC120\uC18C: \uC5B4\uB5BB\uAC8C \uD558\uC2E4 \uAC74\uAC00\uC694?"
   takePictureEvent:
     m_PersistentCalls:
       m_Calls: []
+  endDialogueEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  <IsAlreadyTook>k__BackingField: 0
+--- !u!114 &474683705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 474683700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0e198bbfcdd4147b11e37a8c3432752, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Moon._01.Script.Cameras.CamObject
+  <Name>k__BackingField: CamObject
+  <CanCopyOrMove>k__BackingField: 1
+  ratio: 1
+--- !u!114 &474683706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 474683700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5079bdf85ee223d4aab9129c648f7971, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OutLineSetting
+  scale: 1.08
+  color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &491445730
 GameObject:
   m_ObjectHideFlags: 0
@@ -3021,6 +3056,7 @@ GameObject:
   - component: {fileID: 610614612}
   - component: {fileID: 610614614}
   - component: {fileID: 610614613}
+  - component: {fileID: 610614615}
   m_Layer: 7
   m_Name: Piece
   m_TagString: Untagged
@@ -3204,6 +3240,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 5
+--- !u!114 &610614615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 610614608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0e198bbfcdd4147b11e37a8c3432752, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Moon._01.Script.Cameras.CamObject
+  <Name>k__BackingField: CamObject
+  <CanCopyOrMove>k__BackingField: 1
+  ratio: 1
 --- !u!1 &625306689
 GameObject:
   m_ObjectHideFlags: 0
@@ -3300,6 +3351,7 @@ GameObject:
   - component: {fileID: 685161481}
   - component: {fileID: 685161482}
   - component: {fileID: 685161483}
+  - component: {fileID: 685161484}
   m_Layer: 9
   m_Name: Law Hammer
   m_TagString: Untagged
@@ -3338,6 +3390,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Moon._01.Script.Cameras.Puzzle.Weight.WeightObj
   <Name>k__BackingField: Law
+  <CanCopyOrMove>k__BackingField: 1
   ratio: 1
   <Weight>k__BackingField: 2
   <MaxRatioToWeightAlive>k__BackingField: 0.9
@@ -3421,6 +3474,20 @@ PolygonCollider2D:
       - {x: 0.4501063, y: -0.51185775}
       - {x: 0.44519234, y: -0.3058033}
   m_UseDelaunayMesh: 1
+--- !u!114 &685161484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 685161478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5079bdf85ee223d4aab9129c648f7971, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OutLineSetting
+  scale: 1.1
+  color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &686136621
 GameObject:
   m_ObjectHideFlags: 0
@@ -3962,8 +4029,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 754996181}
     - target: {fileID: 6650893368154736002, guid: bf093e010f5396f45a21ab338a52f02b, type: 3}
+      propertyPath: _outlineMat
+      value: 
+      objectReference: {fileID: 2100000, guid: 8b27c33e4c1534843bfa35891cccfd47, type: 2}
+    - target: {fileID: 6650893368154736002, guid: bf093e010f5396f45a21ab338a52f02b, type: 3}
       propertyPath: _currentMode
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6650893368154736002, guid: bf093e010f5396f45a21ab338a52f02b, type: 3}
+      propertyPath: _outlineScale
+      value: 1.08
       objectReference: {fileID: 0}
     - target: {fileID: 6650893368154736002, guid: bf093e010f5396f45a21ab338a52f02b, type: 3}
       propertyPath: coloredObject.m_Bits
@@ -5825,6 +5900,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Moon._01.Script.Cameras.Puzzle.Weight.WeightObj
   <Name>k__BackingField: CamObject
+  <CanCopyOrMove>k__BackingField: 1
   ratio: 1
   <Weight>k__BackingField: 1
   <MaxRatioToWeightAlive>k__BackingField: 0.9
@@ -6130,6 +6206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Moon._01.Script.Cameras.Puzzle.Weight.WeightObj
   <Name>k__BackingField: CamObject
+  <CanCopyOrMove>k__BackingField: 1
   ratio: 1
   <Weight>k__BackingField: 1
   <MaxRatioToWeightAlive>k__BackingField: 0.9
@@ -6343,8 +6420,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ea9926c8f2b4e674ab8b5f091ea6e029, type: 2}
-  m_sharedMaterial: {fileID: 6524427173825193254, guid: ea9926c8f2b4e674ab8b5f091ea6e029, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0494a77ffa594734f9931f2a2d9380a4, type: 2}
+  m_sharedMaterial: {fileID: -3558238057192847427, guid: 0494a77ffa594734f9931f2a2d9380a4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -6374,7 +6451,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -6689,6 +6766,8 @@ GameObject:
   - component: {fileID: 1568049345}
   - component: {fileID: 1568049347}
   - component: {fileID: 1568049346}
+  - component: {fileID: 1568049348}
+  - component: {fileID: 1568049349}
   m_Layer: 6
   m_Name: Map_ChoiMyeongJin_20 (1)
   m_TagString: Untagged
@@ -6830,21 +6909,54 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LSW._02._Code.Environment.Takable.TakableObject
   wordList:
   - "\uB2F9\uACA8\uC838 \uC788\uB294 \uC758\uC790. \uC549\uC558\uB358 \uC628\uAE30\uAC00
-    \uB0A8\uC544\uC788\uB294 \uAC83 \uAC19\uB2E4. \uD314\uAC78\uC774\uC5D0 \uB0A1\uC740
+    \uB0A8\uC544\uC788\uB294 \uAC83 \uAC19\uB2E4. \\n\uD314\uAC78\uC774\uC5D0 \uB0A1\uC740
     \uC7AC\uD0B7\uC774 \uAC78\uCCD0 \uC788\uB2E4."
-  - "(\uCD5C\uBA85\uC9C4\uC758 \uBAA9\uC18C\uB9AC)"
-  - "\uCD5C\uBA85\uC9C4: \uADF8 \uC0AC\uB78C\uC740 \u2014 \uC624\uB798\uC804\uC5D0
-    \uC8FD\uC5C8\uC2B5\uB2C8\uB2E4. \uBCD1\uC73C\uB85C."
-  - "(\uCE68\uBB35)"
+  - "\uC190\uB2D8\uC758 \uBAA9\uC18C\uB9AC\uAC00 \uB4E4\uB9B0\uB2E4."
+  - "\uCD5C\uBA85\uC9C4: \uADF8 \uC0AC\uB78C\uC740 \uC624\uB798\uC804\uC5D0 \uC8FD\uC5C8\uC2B5\uB2C8\uB2E4.
+    \uBCD1\uC73C\uB85C."
+  - ...
   - "\uB05D\uAE4C\uC9C0 \uC544\uBB34 \uB9D0\uB3C4 \uC5C6\uC5C8\uC5B4\uC694."
   - "\uAE30\uC5B5 \uC218\uC120\uC18C: \uADF8 \uC0AC\uB78C\uD55C\uD14C \uD558\uACE0
     \uC2F6\uC740 \uB9D0\uC774 \uC788\uC5C8\uB098\uC694."
-  - "\uCD5C\uBA85\uC9C4: (\uAE34 \uCE68\uBB35)"
-  - "...\uC5C6\uC2B5\uB2C8\uB2E4. \uADF8\uAC8C \uB354 \uC774\uC0C1\uD55C \uAC74\uC9C0\uB3C4
-    \uBAA8\uB974\uACA0\uAD70\uC694."
+  - "(\uC190\uB2D8\uC740 \uC624\uB7AB\uB3D9\uC548 \uB9D0\uC774 \uC5C6\uC5C8\uB2E4.)"
+  - "\uCD5C\uBA85\uC9C4: ...\uC5C6\uC2B5\uB2C8\uB2E4. \uADF8\uAC8C \uB354 \uC774\uC0C1\uD55C
+    \uAC74\uC9C0\uB3C4 \uBAA8\uB974\uACA0\uAD70\uC694."
   takePictureEvent:
     m_PersistentCalls:
       m_Calls: []
+  endDialogueEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  <IsAlreadyTook>k__BackingField: 0
+--- !u!114 &1568049348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1568049343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0e198bbfcdd4147b11e37a8c3432752, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Moon._01.Script.Cameras.CamObject
+  <Name>k__BackingField: CamObject
+  <CanCopyOrMove>k__BackingField: 1
+  ratio: 1
+--- !u!114 &1568049349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1568049343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5079bdf85ee223d4aab9129c648f7971, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OutLineSetting
+  scale: 1.04
+  color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &1640930737
 GameObject:
   m_ObjectHideFlags: 0
@@ -6859,6 +6971,7 @@ GameObject:
   - component: {fileID: 1640930741}
   - component: {fileID: 1640930743}
   - component: {fileID: 1640930742}
+  - component: {fileID: 1640930744}
   m_Layer: 7
   m_Name: Piece
   m_TagString: Untagged
@@ -7042,6 +7155,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 5
+--- !u!114 &1640930744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1640930737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0e198bbfcdd4147b11e37a8c3432752, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Moon._01.Script.Cameras.CamObject
+  <Name>k__BackingField: CamObject
+  <CanCopyOrMove>k__BackingField: 1
+  ratio: 1
 --- !u!1 &1645964020
 GameObject:
   m_ObjectHideFlags: 0
@@ -7975,6 +8103,8 @@ GameObject:
   - component: {fileID: 1945791714}
   - component: {fileID: 1945791717}
   - component: {fileID: 1945791716}
+  - component: {fileID: 1945791718}
+  - component: {fileID: 1945791719}
   m_Layer: 6
   m_Name: Map_ChoiMyeongJin_17
   m_TagString: Untagged
@@ -8118,21 +8248,53 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LSW._02._Code.Environment.Takable.TakableObject
   wordList:
   - "\uB0A1\uC740 \uCC3D\uBB38 \uB108\uBA38\uB85C \uBCF4\uC774\uB294 \uBC24\uAC70\uB9AC.
-    \uAC00\uB85C\uB4F1, \uC9C0\uB098\uAC00\uB294 \uC0AC\uB78C\uB4E4. \uC9C0\uAE08\uACFC\uB294
-    \uB2E4\uB978 \uC11C\uC6B8. \uC775\uC219\uD558\uBA74\uC11C \uB0AF\uC120."
-  - "(\uCD5C\uBA85\uC9C4\uC758 \uBAA9\uC18C\uB9AC)"
-  - "\uCD5C\uBA85\uC9C4: \uADF8\uB0A0 \uBC24\uB3C4 \u2014 \uC800 \uBC16\uC5D0\uB294
-    \uC0AC\uB78C\uB4E4\uC774 \uC800\uB807\uAC8C \uAC78\uC5B4\uB2E4\uB2C8\uACE0 \uC788\uC5C8\uACA0\uC8E0."
-  - "(\uCE68\uBB35)"
+    \uAC00\uB85C\uB4F1, \uC9C0\uB098\uAC00\uB294 \uC0AC\uB78C\uB4E4. \\n\uC9C0\uAE08\uACFC\uB294
+    \uB2E4\uB978 \uC11C\uC6B8. \uC775\uC219\uD558\uBA74\uC11C \uB0AF\uC120 \uBAA8\uC2B5."
+  - "\uC190\uB2D8\uC758 \uBAA9\uC18C\uB9AC\uAC00 \uB4E4\uB9B0\uB2E4."
+  - "\uCD5C\uBA85\uC9C4: \uADF8\uB0A0 \uBC24\uB3C4 \uC800 \uBC16\uC5D0\uB294 \uC0AC\uB78C\uB4E4\uC774
+    \uC800\uB807\uAC8C \uAC78\uC5B4\uB2E4\uB2C8\uACE0 \uC788\uC5C8\uACA0\uC8E0."
+  - ...
   - "\uC800\uB294 \uADF8\uAC78 \uBCF4\uC9C0 \uC54A\uC558\uC2B5\uB2C8\uB2E4. \uADF8\uB0E5
     \uC11C\uB78D\uC744 \uB2EB\uACE0 \uD1F4\uADFC\uD588\uC5B4\uC694."
   - "\uAE30\uC5B5 \uC218\uC120\uC18C: \uC9C0\uAE08\uC740 \uBCF4\uC774\uB294\uAD70\uC694."
   - "\uCD5C\uBA85\uC9C4: \uB124."
-  - "(\uC9E7\uAC8C)"
-  - "\uC774\uC0C1\uD558\uAC8C \u2014 \uADF8\uAC8C \uC704\uB85C\uAC00 \uB429\uB2C8\uB2E4."
+  - "\uC774\uC0C1\uD558\uAC8C \uADF8\uAC8C \uC704\uB85C\uAC00 \uB429\uB2C8\uB2E4."
   takePictureEvent:
     m_PersistentCalls:
       m_Calls: []
+  endDialogueEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  <IsAlreadyTook>k__BackingField: 0
+--- !u!114 &1945791718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1945791713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0e198bbfcdd4147b11e37a8c3432752, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Moon._01.Script.Cameras.CamObject
+  <Name>k__BackingField: CamObject
+  <CanCopyOrMove>k__BackingField: 0
+  ratio: 1
+--- !u!114 &1945791719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1945791713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5079bdf85ee223d4aab9129c648f7971, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OutLineSetting
+  scale: 1.03
+  color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &2000586789
 GameObject:
   m_ObjectHideFlags: 0
@@ -8263,6 +8425,7 @@ GameObject:
   - component: {fileID: 2001256731}
   - component: {fileID: 2001256733}
   - component: {fileID: 2001256732}
+  - component: {fileID: 2001256734}
   m_Layer: 7
   m_Name: Piece
   m_TagString: Untagged
@@ -8446,6 +8609,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 5
+--- !u!114 &2001256734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2001256727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0e198bbfcdd4147b11e37a8c3432752, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Moon._01.Script.Cameras.CamObject
+  <Name>k__BackingField: CamObject
+  <CanCopyOrMove>k__BackingField: 1
+  ratio: 1
 --- !u!1 &2053446115
 GameObject:
   m_ObjectHideFlags: 0
@@ -8598,6 +8776,7 @@ GameObject:
   - component: {fileID: 2106394305}
   - component: {fileID: 2106394307}
   - component: {fileID: 2106394306}
+  - component: {fileID: 2106394308}
   m_Layer: 7
   m_Name: Piece
   m_TagString: Untagged
@@ -8781,6 +8960,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 5
+--- !u!114 &2106394308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2106394301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0e198bbfcdd4147b11e37a8c3432752, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Moon._01.Script.Cameras.CamObject
+  <Name>k__BackingField: CamObject
+  <CanCopyOrMove>k__BackingField: 1
+  ratio: 1
 --- !u!1 &2116653175
 GameObject:
   m_ObjectHideFlags: 0

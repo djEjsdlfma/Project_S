@@ -1442,6 +1442,8 @@ GameObject:
   - component: {fileID: 419043290}
   - component: {fileID: 419043291}
   - component: {fileID: 419043292}
+  - component: {fileID: 419043293}
+  - component: {fileID: 419043294}
   m_Layer: 6
   m_Name: Door
   m_TagString: Untagged
@@ -1569,6 +1571,35 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.59, y: 0.97}
   m_EdgeRadius: 0
+--- !u!114 &419043293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 419043289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0e198bbfcdd4147b11e37a8c3432752, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Moon._01.Script.Cameras.CamObject
+  <Name>k__BackingField: CamObject
+  <CanCopyOrMove>k__BackingField: 0
+  ratio: 1
+--- !u!114 &419043294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 419043289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5079bdf85ee223d4aab9129c648f7971, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OutLineSetting
+  scale: 1.1
+  color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &424121029
 GameObject:
   m_ObjectHideFlags: 0
@@ -1580,6 +1611,8 @@ GameObject:
   - component: {fileID: 424121030}
   - component: {fileID: 424121031}
   - component: {fileID: 424121032}
+  - component: {fileID: 424121033}
+  - component: {fileID: 424121034}
   m_Layer: 6
   m_Name: Door
   m_TagString: Untagged
@@ -1707,6 +1740,35 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.59, y: 0.97}
   m_EdgeRadius: 0
+--- !u!114 &424121033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 424121029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0e198bbfcdd4147b11e37a8c3432752, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Moon._01.Script.Cameras.CamObject
+  <Name>k__BackingField: CamObject
+  <CanCopyOrMove>k__BackingField: 0
+  ratio: 1
+--- !u!114 &424121034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 424121029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5079bdf85ee223d4aab9129c648f7971, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OutLineSetting
+  scale: 1.1
+  color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &426909894
 GameObject:
   m_ObjectHideFlags: 0
@@ -2569,6 +2631,8 @@ GameObject:
   - component: {fileID: 627061683}
   - component: {fileID: 627061685}
   - component: {fileID: 627061684}
+  - component: {fileID: 627061686}
+  - component: {fileID: 627061687}
   m_Layer: 6
   m_Name: Paper
   m_TagString: Untagged
@@ -2664,16 +2728,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LSW._02._Code.Environment.Takable.EndDialogueObject
   wordList:
   - "\uBE7D\uBE7D\uD558\uAC8C \uCC44\uC6CC\uC9C4 \uC2EC\uBB38 \uAE30\uB85D. \uC9C8\uBB38\uACFC
-    \uB2F5\uBCC0. \uB9C8\uC9C0\uB9C9 \uD398\uC774\uC9C0 \u2014 \"\uC9C4\uC220 \uAC70\uBD80\"\uB77C\uACE0
-    \uBC18\uBCF5\uD574\uC11C \uC801\uD600\uC788\uB2E4. \uADF8 \uC606\uC5D0 \uC190\uC73C\uB85C
+    \uB2F5\uBCC0. \\n\uB9C8\uC9C0\uB9C9 \uD398\uC774\uC9C0 \"\uC9C4\uC220 \uAC70\uBD80\"\uB77C\uACE0
+    \uBC18\uBCF5\uD574\uC11C \uC801\uD600\uC788\uB2E4. \\n\uADF8 \uC606\uC5D0 \uC190\uC73C\uB85C
     \uC4F4 \uBA54\uBAA8. \uC774\uC7AC\uC724\uC758 \uD544\uCCB4\uB2E4. \"\uBB34\uACE0
-    \uAC00\uB2A5\uC131 \u2014 \uC7AC\uAC80\uD1A0 \uD544\uC694.\""
+    \uAC00\uB2A5\uC131 \uC7AC\uAC80\uD1A0 \uD544\uC694.\""
   - "\uAE30\uC5B5 \uC218\uC120\uC18C: \uC774 \uBA54\uBAA8\uB294 \uBB54\uAC00\uC694."
-  - "(\uC774\uC7AC\uC724\uC758 \uBAA9\uC18C\uB9AC)"
-  - "\uC774\uC7AC\uC724: (\uCE68\uBB35)"
+  - "\uC190\uB2D8\uC758 \uBAA9\uC18C\uB9AC\uAC00 \uB4E4\uB9B0\uB2E4."
+  - "\uC774\uC7AC\uC724: ..."
   - "\uC81C\uAC00 \uC4F4 \uAC81\uB2C8\uB2E4. \uADF8\uB54C."
   - "\uAE30\uC5B5 \uC218\uC120\uC18C: \uC54C\uACE0 \uC788\uC5C8\uAD70\uC694."
-  - "\uC774\uC7AC\uC724: (\uC624\uB798 \uCE68\uBB35\uD558\uB2E4)"
+  - "\uC774\uC7AC\uC724: ....."
   - "\uC54C\uACE0 \uC788\uC5C8\uC2B5\uB2C8\uB2E4. \uCC98\uC74C\uBD80\uD130."
   takePictureEvent:
     m_PersistentCalls:
@@ -2728,6 +2792,35 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.59069407, y: 0.32}
   m_EdgeRadius: 0
+--- !u!114 &627061686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 627061681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0e198bbfcdd4147b11e37a8c3432752, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Moon._01.Script.Cameras.CamObject
+  <Name>k__BackingField: CamObject
+  <CanCopyOrMove>k__BackingField: 0
+  ratio: 1
+--- !u!114 &627061687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 627061681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5079bdf85ee223d4aab9129c648f7971, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OutLineSetting
+  scale: 1.11
+  color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &642270239
 GameObject:
   m_ObjectHideFlags: 0
@@ -3373,6 +3466,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 785855305}
     - target: {fileID: 6650893368154736002, guid: bf093e010f5396f45a21ab338a52f02b, type: 3}
+      propertyPath: _outlineMat
+      value: 
+      objectReference: {fileID: 2100000, guid: 7352e2a8891d5614793aa90939a79dee, type: 2}
+    - target: {fileID: 6650893368154736002, guid: bf093e010f5396f45a21ab338a52f02b, type: 3}
       propertyPath: _currentMode
       value: 1
       objectReference: {fileID: 0}
@@ -3818,6 +3915,8 @@ GameObject:
   - component: {fileID: 921870700}
   - component: {fileID: 921870701}
   - component: {fileID: 921870702}
+  - component: {fileID: 921870704}
+  - component: {fileID: 921870703}
   m_Layer: 6
   m_Name: Trigger Door
   m_TagString: Untagged
@@ -3963,11 +4062,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LSW._02._Code.Environment.Takable.EndDialogueObject
   wordList:
   - "\uAC00\uAE4C\uC774 \uAC08\uC218\uB85D \uC18C\uB9AC\uAC00 \uC791\uC544\uC9C4\uB2E4.
-    \uC774\uC0C1\uD55C \uC77C\uC774\uB2E4 \u2014 \uAC00\uAE4C\uC774 \uAC08\uC218\uB85D
+    \uC774\uC0C1\uD55C \uC77C\uC774\uB2E4. \\n\uAC00\uAE4C\uC774 \uAC08\uC218\uB85D
     \uCEE4\uC838\uC57C \uD558\uB294\uB370."
   - "\uBB38 \uC55E\uC5D0 \uC120\uB2E4. \uBB38 \uD2C8\uC73C\uB85C \uBE5B\uC774 \uBCF4\uC778\uB2E4.
-    \uB0AE\uACE0 \uC9C0\uCE5C \uBAA9\uC18C\uB9AC\uC640 \uCC28\uAC00\uC6B4 \uBAA9\uC18C\uB9AC.
-    \uADF8\uB9AC\uACE0 \u2014 \uC6B8\uC74C\uC18C\uB9AC."
+    \\n\uB0AE\uACE0 \uC9C0\uCE5C \uBAA9\uC18C\uB9AC\uC640 \uCC28\uAC00\uC6B4 \uBAA9\uC18C\uB9AC.
+    \uADF8\uB9AC\uACE0 \uC6B8\uC74C\uC18C\uB9AC."
   - "\uC190\uC7A1\uC774\uC5D0 \uC190\uC774 \uAC04\uB2E4."
   takePictureEvent:
     m_PersistentCalls:
@@ -4004,6 +4103,35 @@ MonoBehaviour:
   minSpeedMultiplier: 0.2
   noiseVolume: {fileID: 1297062894}
   playerFinder: {fileID: 11400000, guid: d0cd58a8765f43a478f21e9ec88d332c, type: 2}
+--- !u!114 &921870703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 921870697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0e198bbfcdd4147b11e37a8c3432752, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Moon._01.Script.Cameras.CamObject
+  <Name>k__BackingField: TriggerDoor
+  <CanCopyOrMove>k__BackingField: 1
+  ratio: 1
+--- !u!114 &921870704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 921870697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5079bdf85ee223d4aab9129c648f7971, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OutLineSetting
+  scale: 1.1
+  color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1001 &925723512
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4271,6 +4399,8 @@ GameObject:
   - component: {fileID: 1059812896}
   - component: {fileID: 1059812898}
   - component: {fileID: 1059812897}
+  - component: {fileID: 1059812899}
+  - component: {fileID: 1059812900}
   m_Layer: 6
   m_Name: Door (1)
   m_TagString: Untagged
@@ -4398,6 +4528,35 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &1059812899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1059812895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0e198bbfcdd4147b11e37a8c3432752, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Moon._01.Script.Cameras.CamObject
+  <Name>k__BackingField: CamObject
+  <CanCopyOrMove>k__BackingField: 0
+  ratio: 1
+--- !u!114 &1059812900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1059812895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5079bdf85ee223d4aab9129c648f7971, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OutLineSetting
+  scale: 1.1
+  color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &1066162830
 GameObject:
   m_ObjectHideFlags: 0
@@ -4497,6 +4656,8 @@ GameObject:
   - component: {fileID: 1083284637}
   - component: {fileID: 1083284638}
   - component: {fileID: 1083284639}
+  - component: {fileID: 1083284640}
+  - component: {fileID: 1083284641}
   m_Layer: 6
   m_Name: Door
   m_TagString: Untagged
@@ -4624,6 +4785,35 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.59, y: 0.97}
   m_EdgeRadius: 0
+--- !u!114 &1083284640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1083284636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0e198bbfcdd4147b11e37a8c3432752, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Moon._01.Script.Cameras.CamObject
+  <Name>k__BackingField: CamObject
+  <CanCopyOrMove>k__BackingField: 0
+  ratio: 1
+--- !u!114 &1083284641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1083284636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5079bdf85ee223d4aab9129c648f7971, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OutLineSetting
+  scale: 1.1
+  color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1001 &1116326206
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5325,6 +5515,8 @@ GameObject:
   - component: {fileID: 1337411578}
   - component: {fileID: 1337411579}
   - component: {fileID: 1337411580}
+  - component: {fileID: 1337411581}
+  - component: {fileID: 1337411582}
   m_Layer: 6
   m_Name: Door
   m_TagString: Untagged
@@ -5452,6 +5644,35 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.57, y: 0.98}
   m_EdgeRadius: 0
+--- !u!114 &1337411581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1337411577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0e198bbfcdd4147b11e37a8c3432752, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Moon._01.Script.Cameras.CamObject
+  <Name>k__BackingField: CamObject
+  <CanCopyOrMove>k__BackingField: 0
+  ratio: 1
+--- !u!114 &1337411582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1337411577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5079bdf85ee223d4aab9129c648f7971, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OutLineSetting
+  scale: 1.1
+  color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &1337774881
 GameObject:
   m_ObjectHideFlags: 0
@@ -5529,6 +5750,8 @@ GameObject:
   - component: {fileID: 1372261100}
   - component: {fileID: 1372261101}
   - component: {fileID: 1372261102}
+  - component: {fileID: 1372261103}
+  - component: {fileID: 1372261104}
   m_Layer: 6
   m_Name: Door
   m_TagString: Untagged
@@ -5656,6 +5879,35 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.59, y: 0.97}
   m_EdgeRadius: 0
+--- !u!114 &1372261103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1372261099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0e198bbfcdd4147b11e37a8c3432752, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Moon._01.Script.Cameras.CamObject
+  <Name>k__BackingField: CamObject
+  <CanCopyOrMove>k__BackingField: 0
+  ratio: 1
+--- !u!114 &1372261104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1372261099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5079bdf85ee223d4aab9129c648f7971, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OutLineSetting
+  scale: 1.1
+  color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &1408400133
 GameObject:
   m_ObjectHideFlags: 0
@@ -5690,7 +5942,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 50}
+  m_AnchoredPosition: {x: 0, y: 63}
   m_SizeDelta: {x: 1850, y: 100}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1408400135
@@ -5715,8 +5967,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ea9926c8f2b4e674ab8b5f091ea6e029, type: 2}
-  m_sharedMaterial: {fileID: 6524427173825193254, guid: ea9926c8f2b4e674ab8b5f091ea6e029, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0494a77ffa594734f9931f2a2d9380a4, type: 2}
+  m_sharedMaterial: {fileID: -3558238057192847427, guid: 0494a77ffa594734f9931f2a2d9380a4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5746,7 +5998,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -6253,6 +6505,7 @@ GameObject:
   - component: {fileID: 1515671689}
   - component: {fileID: 1515671688}
   - component: {fileID: 1515671690}
+  - component: {fileID: 1515671691}
   m_Layer: 6
   m_Name: Doors
   m_TagString: Untagged
@@ -6496,16 +6749,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LSW._02._Code.Environment.Takable.EndDialogueObject
   wordList:
   - "\uC190\uC7A1\uC774\uB97C \uB2F9\uAE34\uB2E4. \uAFC8\uCA4D\uD558\uC9C0 \uC54A\uB294\uB2E4.
-    \uCC28\uAC11\uB2E4. \uBA87 \uBC88\uC744 \uB2F9\uACA8\uB3C4 \uC5F4\uB9AC\uC9C0
+    \uCC28\uAC11\uB2E4. \\n\uBA87 \uBC88\uC744 \uB2F9\uACA8\uB3C4 \uC5F4\uB9AC\uC9C0
     \uC54A\uB294\uB2E4."
-  - "(\uC774\uC7AC\uC724\uC758 \uBAA9\uC18C\uB9AC)"
+  - "\uC190\uB2D8\uC758 \uBAA9\uC18C\uB9AC\uAC00 \uB4E4\uB9B0\uB2E4."
   - "\uC774\uC7AC\uC724: \uC774 \uBCF5\uB3C4\uC5D0 \uC788\uB358 \uBB38\uB4E4\uC774
-    \u2014 \uC804\uBD80 \uC774\uB807\uAC8C \uC7A0\uACA8 \uC788\uC5C8\uC2B5\uB2C8\uB2E4.
-    \uC81C\uAC00 \uB4E4\uC5B4\uC628 \uBB38\uB3C4\uC694."
+    \uC804\uBD80 \uC774\uB807\uAC8C \uC7A0\uACA8 \uC788\uC5C8\uC2B5\uB2C8\uB2E4.
+    \\n\uC81C\uAC00 \uB4E4\uC5B4\uC628 \uBB38\uB3C4\uC694."
   - "\uAE30\uC5B5 \uC218\uC120\uC18C: \uC5F4\uB824 \uC788\uB294 \uBB38\uC740 \uC800
     \uB05D\uC5D0 \uD558\uB098\uBFD0\uC774\uAD70\uC694."
   - "\uC774\uC7AC\uC724: \uB124."
-  - "(\uC9E7\uAC8C)"
   - "\uADF8 \uBB38\uC5D0\uC11C \uC18C\uB9AC\uAC00 \uB0A9\uB2C8\uB2E4."
   takePictureEvent:
     m_PersistentCalls:
@@ -6514,6 +6766,20 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   <IsAlreadyTook>k__BackingField: 0
+--- !u!114 &1515671691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1515671686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5079bdf85ee223d4aab9129c648f7971, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OutLineSetting
+  scale: 1.11
+  color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &1531993807
 GameObject:
   m_ObjectHideFlags: 0
@@ -6828,6 +7094,8 @@ GameObject:
   - component: {fileID: 1600442990}
   - component: {fileID: 1600442992}
   - component: {fileID: 1600442993}
+  - component: {fileID: 1600442994}
+  - component: {fileID: 1600442995}
   m_Layer: 6
   m_Name: Chair
   m_TagString: Untagged
@@ -6970,12 +7238,12 @@ MonoBehaviour:
   wordList:
   - "\uCC28\uAC00\uC6B4 \uC758\uC790. \uC549\uC544\uBCF8\uB2E4. \uD14C\uC774\uBE14
     \uB9DE\uC740\uD3B8\uC774 \uBCF4\uC778\uB2E4. \uC57C\uC708 \uC0AC\uB78C\uC774
-    \uC549\uC544\uC788\uB2E4. \uC774 \uAC01\uB3C4\uC5D0\uC11C \u2014 \uADF8 \uC190\uC774
+    \uC549\uC544\uC788\uB2E4. \uC774 \uAC01\uB3C4\uC5D0\uC11C  \uADF8 \uC190\uC774
     \uB354 \uC798 \uBCF4\uC778\uB2E4."
-  - "(\uC774\uC7AC\uC724\uC758 \uBAA9\uC18C\uB9AC)"
+  - "\uC190\uB2D8\uC758 \uBAA9\uC18C\uB9AC\uAC00 \uB4E4\uB9B0\uB2E4."
   - "\uC774\uC7AC\uC724: \uC774 \uC790\uB9AC\uC5D0\uC11C 72\uC2DC\uAC04\uC744 \uBD24\uC2B5\uB2C8\uB2E4.
     \uADF8 \uC0AC\uB78C\uC744."
-  - "(\uCE68\uBB35)"
+  - ...
   - "\uC774\uB807\uAC8C \uAC00\uAE4C\uC774\uC11C \uBCF4\uBA74 \u2014 \uC190\uC774
     \uB354 \uC791\uC544 \uBCF4\uC774\uB294\uAD70\uC694."
   takePictureEvent:
@@ -6985,6 +7253,35 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   <IsAlreadyTook>k__BackingField: 0
+--- !u!114 &1600442994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1600442988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0e198bbfcdd4147b11e37a8c3432752, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Moon._01.Script.Cameras.CamObject
+  <Name>k__BackingField: CamObject
+  <CanCopyOrMove>k__BackingField: 0
+  ratio: 1
+--- !u!114 &1600442995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1600442988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5079bdf85ee223d4aab9129c648f7971, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OutLineSetting
+  scale: 1.11
+  color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &1602491572
 GameObject:
   m_ObjectHideFlags: 0
@@ -7255,11 +7552,11 @@ MonoBehaviour:
     \uAE5C\uBC15\uC774\uB294 \uD615\uAD11\uB4F1. \uCF1C\uC9C0\uACE0 \uAEBC\uC9C0\uACE0
     \u2014 \uADDC\uCE59\uC801\uC774\uB2E4. \uC2EC\uBB38\uC2E4\uC5D0\uC11C \uC4F0\uB358
     \uBC29\uBC95\uC774\uC5C8\uB2E4. \uC218\uBA74\uC744 \uBC29\uD574\uD558\uAE30 \uC704\uD55C."
-  - "(\uC774\uC7AC\uC724\uC758 \uBAA9\uC18C\uB9AC)"
-  - "\uC774\uC7AC\uC724: \uC774 \uBD88\uBE5B\uB3C4 \u2014 \uBC29\uBC95 \uC911 \uD558\uB098\uC600\uC2B5\uB2C8\uB2E4.
+  - "\uC190\uB2D8\uC758 \uBAA9\uC18C\uB9AC\uAC00 \uB4E4\uB9B0\uB2E4."
+  - "\uC774\uC7AC\uC724: \uC774 \uBD88\uBE5B\uB3C4 \uBC29\uBC95 \uC911 \uD558\uB098\uC600\uC2B5\uB2C8\uB2E4.
     72\uC2DC\uAC04 \uB3D9\uC548."
-  - "(\uCE68\uBB35)"
-  - "\uC9C0\uAE08 \uC5EC\uAE30\uC11C \uBCF4\uB2C8\uAE4C \u2014 \uC794\uC778\uD558\uAD70\uC694.
+  - ...
+  - "\uC9C0\uAE08 \uC5EC\uAE30\uC11C \uBCF4\uB2C8\uAE4C \uC794\uC778\uD558\uAD70\uC694.
     \uADF8\uB54C\uB294 \uC544\uBB34 \uC0DD\uAC01\uC774 \uC5C6\uC5C8\uB294\uB370."
   - "\uAE30\uC5B5 \uC218\uC120\uC18C: \uC9C0\uAE08\uC740 \uBCF4\uC774\uB294\uAD70\uC694."
   - "\uC774\uC7AC\uC724: \uB124."
@@ -7358,6 +7655,8 @@ GameObject:
   - component: {fileID: 1669446698}
   - component: {fileID: 1669446700}
   - component: {fileID: 1669446699}
+  - component: {fileID: 1669446701}
+  - component: {fileID: 1669446702}
   m_Layer: 6
   m_Name: Door (4)
   m_TagString: Untagged
@@ -7485,6 +7784,35 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &1669446701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1669446697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0e198bbfcdd4147b11e37a8c3432752, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Moon._01.Script.Cameras.CamObject
+  <Name>k__BackingField: CamObject
+  <CanCopyOrMove>k__BackingField: 0
+  ratio: 1
+--- !u!114 &1669446702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1669446697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5079bdf85ee223d4aab9129c648f7971, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OutLineSetting
+  scale: 1.1
+  color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &1672660339
 GameObject:
   m_ObjectHideFlags: 0
@@ -8193,6 +8521,8 @@ GameObject:
   - component: {fileID: 1898825551}
   - component: {fileID: 1898825553}
   - component: {fileID: 1898825552}
+  - component: {fileID: 1898825554}
+  - component: {fileID: 1898825555}
   m_Layer: 6
   m_Name: Door (3)
   m_TagString: Untagged
@@ -8320,6 +8650,35 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &1898825554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1898825550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0e198bbfcdd4147b11e37a8c3432752, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Moon._01.Script.Cameras.CamObject
+  <Name>k__BackingField: CamObject
+  <CanCopyOrMove>k__BackingField: 0
+  ratio: 1
+--- !u!114 &1898825555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1898825550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5079bdf85ee223d4aab9129c648f7971, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OutLineSetting
+  scale: 1.1
+  color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &1922848404
 GameObject:
   m_ObjectHideFlags: 0
@@ -8363,6 +8722,8 @@ GameObject:
   - component: {fileID: 1947309280}
   - component: {fileID: 1947309281}
   - component: {fileID: 1947309282}
+  - component: {fileID: 1947309283}
+  - component: {fileID: 1947309284}
   m_Layer: 6
   m_Name: Door
   m_TagString: Untagged
@@ -8490,6 +8851,35 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.57, y: 0.98}
   m_EdgeRadius: 0
+--- !u!114 &1947309283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1947309279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0e198bbfcdd4147b11e37a8c3432752, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Moon._01.Script.Cameras.CamObject
+  <Name>k__BackingField: CamObject
+  <CanCopyOrMove>k__BackingField: 0
+  ratio: 1
+--- !u!114 &1947309284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1947309279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5079bdf85ee223d4aab9129c648f7971, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OutLineSetting
+  scale: 1.1
+  color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &2000586789
 GameObject:
   m_ObjectHideFlags: 0

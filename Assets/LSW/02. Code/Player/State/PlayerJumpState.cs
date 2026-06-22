@@ -54,12 +54,12 @@ public class PlayerJumpState : State
         if (!_hasLeftGround && (Owner.GetVerticalVelocity() > 0.01f || !Owner.IsGround))
             _hasLeftGround = true;
 
-        if (_hasLeftGround && !Owner.IsGround && Owner.GetVerticalVelocity() < -0.001f)
+/*        if (_hasLeftGround && !Owner.IsGround && Owner.GetVerticalVelocity() < -0.001f)
         {
             StateMachine.TransitionState("PlayerFallingState");
             return;
         }
-
+*/
         if (_elapsedAfterEnter < LandingCheckDelay)
             return;
 

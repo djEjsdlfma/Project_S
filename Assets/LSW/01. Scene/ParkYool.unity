@@ -131,6 +131,8 @@ GameObject:
   - component: {fileID: 31431810}
   - component: {fileID: 31431812}
   - component: {fileID: 31431813}
+  - component: {fileID: 31431814}
+  - component: {fileID: 31431815}
   m_Layer: 6
   m_Name: Map_ParkYool_26
   m_TagString: Untagged
@@ -272,16 +274,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LSW._02._Code.Environment.Takable.EndDialogueObject
   wordList:
   - "\uC9D1\uC5B4\uB4E0\uB2E4. \uB9AC\uCCA0\uBBFC. \uB9B0\uCA4C\uD558\uC624. \uC54C\uB809\uC138\uC774
-    \uBC15. \uBC15\uC728. \uAC01\uAC01 \uB2E4\uB978 \uC0AC\uC9C4. \uB2E4\uB978 \uC774\uB984.
-    \uD558\uC9C0\uB9CC \uB208\uC774 \uB2E4 \uAC19\uB2E4."
+    \uBC15. \uBC15\uC728. \uAC01\uAC01 \uB2E4\uB978 \uC0AC\uC9C4. \\n\uB2E4\uB978
+    \uC774\uB984. \uD558\uC9C0\uB9CC \uB208\uC774 \uB2E4 \uAC19\uB2E4."
   - "\uBC15\uC728: \uC804\uBD80 \uC800\uC608\uC694."
-  - "(\uCE68\uBB35)"
-  - "\uC5B4\uB290 \uAC8C \uC9C4\uC9DC\uB0D0\uACE0 \uBB3C\uC73C\uBA74 \u2014 \uB300\uB2F5\uD558\uAE30
-    \uC5B4\uB835\uC2B5\uB2C8\uB2E4. \uB2E4 \uC9C4\uC9DC\uC600\uC73C\uB2C8\uAE4C.
+  - ...
+  - "\uC5B4\uB290 \uAC8C \uC9C4\uC9DC\uB0D0\uACE0 \uBB3C\uC73C\uBA74 \uB300\uB2F5\uD558\uAE30
+    \uC5B4\uB835\uC2B5\uB2C8\uB2E4. \\n\uB2E4 \uC9C4\uC9DC\uC600\uC73C\uB2C8\uAE4C.
     \uADF8\uB54C\uADF8\uB54C."
-  - "\uAE30\uC5B5 \uC218\uC120\uC18C: \uC9C0\uAE08\uC740\uC694."
-  - "\uBC15\uC728: (\uC624\uB798 \uC0DD\uAC01\uD558\uB2E4) "
-  - "...\uB9AC\uCCA0\uBBFC\uC774 \uC9C4\uC9DC\uC778 \uAC83 \uAC19\uC544\uC694. \uCC98\uC74C\uC73C\uB85C."
+  - "\uAE30\uC5B5 \uC218\uC120\uC18C: \uC9C0\uAE08\uC740\uC694?"
+  - "(\uC190\uB2D8\uC740 \uC624\uB798 \uC0DD\uAC01\uD588\uB2E4.) "
+  - "\uBC15\uC728: ...\uB9AC\uCCA0\uBBFC\uC774 \uC9C4\uC9DC\uC778 \uAC83 \uAC19\uC544\uC694.
+    \uCC98\uC74C\uC73C\uB85C."
   takePictureEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -289,6 +292,35 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   <IsAlreadyTook>k__BackingField: 0
+--- !u!114 &31431814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 31431809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0e198bbfcdd4147b11e37a8c3432752, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Moon._01.Script.Cameras.CamObject
+  <Name>k__BackingField: CamObject
+  <CanCopyOrMove>k__BackingField: 1
+  ratio: 1
+--- !u!114 &31431815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 31431809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5079bdf85ee223d4aab9129c648f7971, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OutLineSetting
+  scale: 1.2
+  color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &60088004
 GameObject:
   m_ObjectHideFlags: 0
@@ -321,6 +353,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Moon._01.Script.Gimmick.ChangedCamObject
   <Name>k__BackingField: RiCheolMin
+  <CanCopyOrMove>k__BackingField: 1
   ratio: 1
 --- !u!114 &60088006
 MonoBehaviour:
@@ -428,6 +461,8 @@ GameObject:
   - component: {fileID: 79286004}
   - component: {fileID: 79286006}
   - component: {fileID: 79286005}
+  - component: {fileID: 79286007}
+  - component: {fileID: 79286008}
   m_Layer: 6
   m_Name: Shoose
   m_TagString: Untagged
@@ -469,13 +504,11 @@ MonoBehaviour:
     \uC2E0\uBC1C."
   - "\uBC15\uC728: \uC774\uAC78 \uC2E0\uACE0 \uB098\uC654\uC5B4\uC694. \uC18C\uB9AC
     \uC548 \uB098\uAC8C."
-  - "(\uCE68\uBB35)"
-  - "\uC62C\uAC00\uAC00 \uAE70\uAE4C\uBD10 \u2014 \uCC9C\uCC9C\uD788 \uBB38\uC744
-    \uB2EB\uC558\uC5B4\uC694."
-  - "\uAE30\uC5B5 \uC218\uC120\uC18C: \uC65C \uAE68\uBA74 \uC548 \uB410\uC5B4\uC694."
-  - "\uBC15\uC728: (\uC624\uB798 \uCE68\uBB35\uD558\uB2E4)"
-  - "\uAE68\uBA74 \u2014 \uB9D0\uD574\uC57C \uD588\uC744 \uAC83 \uAC19\uC544\uC11C\uC694."
-  - "(\uC9E7\uAC8C)"
+  - ...
+  - "\uC62C\uAC00\uAC00 \uAE70\uAE4C\uBD10 \uCC9C\uCC9C\uD788 \uBB38\uC744 \uB2EB\uC558\uC5B4\uC694."
+  - "\uAE30\uC5B5 \uC218\uC120\uC18C: \uC65C \uAE68\uBA74 \uC548 \uB410\uC5C8\uB098\uC694?"
+  - "(\uC190\uB2D8\uC740 \uC624\uB798 \uCE68\uBB35\uD558\uC600\uB2E4.)"
+  - "\uBC15\uC728: \uAE68\uBA74 \uB9D0\uD574\uC57C \uD588\uC744 \uAC83 \uAC19\uC544\uC11C\uC694."
   - "\uB9D0\uD558\uBA74 \uBABB \uAC14\uC744 \uAC83 \uAC19\uC558\uC5B4\uC694."
   takePictureEvent:
     m_PersistentCalls:
@@ -530,6 +563,35 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.3922043, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &79286007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 79286003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0e198bbfcdd4147b11e37a8c3432752, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Moon._01.Script.Cameras.CamObject
+  <Name>k__BackingField: CamObject
+  <CanCopyOrMove>k__BackingField: 0
+  ratio: 1
+--- !u!114 &79286008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 79286003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5079bdf85ee223d4aab9129c648f7971, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OutLineSetting
+  scale: 1.15
+  color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &135770479
 GameObject:
   m_ObjectHideFlags: 0
@@ -540,7 +602,8 @@ GameObject:
   m_Component:
   - component: {fileID: 135770480}
   - component: {fileID: 135770481}
-  m_Layer: 0
+  - component: {fileID: 135770482}
+  m_Layer: 6
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -621,6 +684,20 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &135770482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 135770479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5079bdf85ee223d4aab9129c648f7971, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OutLineSetting
+  scale: 1.08
+  color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &162467939
 GameObject:
   m_ObjectHideFlags: 0
@@ -1717,7 +1794,8 @@ GameObject:
   m_Component:
   - component: {fileID: 423720844}
   - component: {fileID: 423720845}
-  m_Layer: 0
+  - component: {fileID: 423720846}
+  m_Layer: 6
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1798,6 +1876,20 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &423720846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 423720843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5079bdf85ee223d4aab9129c648f7971, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OutLineSetting
+  scale: 1.08
+  color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &511426509
 GameObject:
   m_ObjectHideFlags: 0
@@ -2604,8 +2696,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 785855305}
     - target: {fileID: 6650893368154736002, guid: bf093e010f5396f45a21ab338a52f02b, type: 3}
+      propertyPath: _outlineMat
+      value: 
+      objectReference: {fileID: 2100000, guid: 7352e2a8891d5614793aa90939a79dee, type: 2}
+    - target: {fileID: 6650893368154736002, guid: bf093e010f5396f45a21ab338a52f02b, type: 3}
       propertyPath: _currentMode
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6650893368154736002, guid: bf093e010f5396f45a21ab338a52f02b, type: 3}
+      propertyPath: _outlineScale
+      value: 1.15
       objectReference: {fileID: 0}
     - target: {fileID: 6650893368154736002, guid: bf093e010f5396f45a21ab338a52f02b, type: 3}
       propertyPath: coloredObject.m_Bits
@@ -3565,6 +3665,7 @@ GameObject:
   - component: {fileID: 1254490938}
   - component: {fileID: 1254490939}
   - component: {fileID: 1254490940}
+  - component: {fileID: 1254490941}
   m_Layer: 6
   m_Name: Map_ChoiMyeongJin_0
   m_TagString: Untagged
@@ -3709,12 +3810,11 @@ MonoBehaviour:
   - "\uD0C1\uC790 \uC704\uC758 \uBA54\uBAA8\uC9C0. \uC544\uBB34\uAC83\uB3C4 \uC801\uD600
     \uC788\uC9C0 \uC54A\uB2E4. \uD39C\uC774 \uC606\uC5D0 \uB193\uC5EC \uC788\uB2E4."
   - "\uBA54\uBAA8\uC9C0\uB97C \uC9D1\uC5B4\uB4E0\uB2E4. \uD39C\uB3C4."
-  - "(\uBC15\uC728\uC758 \uBAA9\uC18C\uB9AC \u2014 \uAC70\uC758 \uB4E4\uB9B4 \uB4EF
-    \uB9D0 \uB4EF)"
+  - "(\uC190\uB2D8\uC758 \uB9D0\uC774 \uC791\uAC8C \uB4E4\uB9B0\uB2E4.)"
   - "\uBC15\uC728: ...\uC774\uAC8C \uC788\uC5C8\uAD70\uC694."
-  - "\uAE30\uC5B5 \uC218\uC120\uC18C: \uADF8\uB54C\uB3C4 \uC788\uC5C8\uC5B4\uC694?"
+  - "\uAE30\uC5B5 \uC218\uC120\uC18C: \uADF8\uB54C\uB3C4 \uC788\uC5C8\uB098\uC694?"
   - "\uBC15\uC728: \uC788\uC5C8\uC5B4\uC694. \uD0C1\uC790 \uC704\uC5D0."
-  - "(\uAE34 \uCE68\uBB35)"
+  - ...
   - "\uADF8\uB0E5 \uB098\uC654\uC5B4\uC694. \uC190\uB3C4 \uC548 \uB314\uC5B4\uC694. "
   takePictureEvent:
     m_PersistentCalls:
@@ -3735,6 +3835,21 @@ MonoBehaviour:
           m_BoolArgument: 1
         m_CallState: 2
   <IsAlreadyTook>k__BackingField: 0
+--- !u!114 &1254490941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1254490936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0e198bbfcdd4147b11e37a8c3432752, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Moon._01.Script.Cameras.CamObject
+  <Name>k__BackingField: CamObject
+  <CanCopyOrMove>k__BackingField: 0
+  ratio: 1
 --- !u!1 &1258540839
 GameObject:
   m_ObjectHideFlags: 0
@@ -3872,7 +3987,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: "\uAC00\uAE4C\uC774 \uB2E4\uAC00\uAC04\uB2E4. \uBE48 \uCE68\uB300. \uD558\uC9C0\uB9CC
+    \uB204\uAD70\uAC00\uC758 \uC628\uAE30\uAC00 \uB0A8\uC544\uC788\uB2E4."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0494a77ffa594734f9931f2a2d9380a4, type: 2}
   m_sharedMaterial: {fileID: -3558238057192847427, guid: 0494a77ffa594734f9931f2a2d9380a4, type: 2}
@@ -5333,6 +5449,8 @@ GameObject:
   - component: {fileID: 2128359790}
   - component: {fileID: 2128359792}
   - component: {fileID: 2128359793}
+  - component: {fileID: 2128359794}
+  - component: {fileID: 2128359795}
   m_Layer: 6
   m_Name: Map_ParkYool_8
   m_TagString: Untagged
@@ -5473,17 +5591,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LSW._02._Code.Environment.Takable.EndDialogueObject
   wordList:
-  - "\uC9D1\uC5B4\uB4E0\uB2E4. \uB9AC\uCCA0\uBBFC. \uB9B0\uCA4C\uD558\uC624. \uC54C\uB809\uC138\uC774
-    \uBC15. \uBC15\uC728. \uAC01\uAC01 \uB2E4\uB978 \uC0AC\uC9C4. \uB2E4\uB978 \uC774\uB984.
-    \uD558\uC9C0\uB9CC \uB208\uC774 \uB2E4 \uAC19\uB2E4."
-  - "\uBC15\uC728: \uC804\uBD80 \uC800\uC608\uC694."
-  - "(\uCE68\uBB35)"
-  - "\uC5B4\uB290 \uAC8C \uC9C4\uC9DC\uB0D0\uACE0 \uBB3C\uC73C\uBA74 \u2014 \uB300\uB2F5\uD558\uAE30
-    \uC5B4\uB835\uC2B5\uB2C8\uB2E4. \uB2E4 \uC9C4\uC9DC\uC600\uC73C\uB2C8\uAE4C.
-    \uADF8\uB54C\uADF8\uB54C."
-  - "\uAE30\uC5B5 \uC218\uC120\uC18C: \uC9C0\uAE08\uC740\uC694."
-  - "\uBC15\uC728: (\uC624\uB798 \uC0DD\uAC01\uD558\uB2E4)"
-  - "...\uB9AC\uCCA0\uBBFC\uC774 \uC9C4\uC9DC\uC778 \uAC83 \uAC19\uC544\uC694. \uCC98\uC74C\uC73C\uB85C."
+  - "\uAC00\uAE4C\uC774 \uB2E4\uAC00\uAC04\uB2E4. \uBE48 \uCE68\uB300. \uD558\uC9C0\uB9CC
+    \uB204\uAD70\uAC00\uC758 \uC628\uAE30\uAC00 \uB0A8\uC544\uC788\uB2E4."
+  - "\uC190\uB2D8\uC758 \uBAA9\uC18C\uB9AC\uAC00 \uC870\uC6A9\uD788 \uB4E4\uB9B0\uB2E4."
+  - "\uBC15\uC728: ... \uADF8\uB140\uAC00 \uC5EC\uAE30\uC11C \uC790\uACE0 \uC788\uC5C8\uC5B4\uC694."
+  - "(\uC190\uB2D8\uC740 \uC624\uB7AB\uB3D9\uC548 \uAE34 \uCE68\uBB35\uC744 \uC720\uC9C0\uD588\uB2E4.)"
+  - "\uADF8\uB54C\uB3C4 \uC774\uB7AC\uC5B4\uC694. \uD56D\uAD6C \uBD88\uBE5B\uC774
+    \uC800\uB807\uAC8C \uC788\uC5C8\uC5B4\uC694."
+  - "\uAE30\uC5B5 \uC218\uC120\uC18C: \uADF8\uB54C \uC62C\uAC00\uB97C \uBD24\uC5C8\uB098\uC694?"
+  - "(\uC190\uB2D8\uC740 \uC7A0\uC2DC \uB9D0\uC774 \uC5C6\uC5C8\uB2E4.)"
+  - "\uBC15\uC728: \uBD24\uC5B4\uC694. \uC624\uB798."
+  - "\uADF8\uB9AC\uACE0 \uB098\uC654\uC5B4\uC694."
   takePictureEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -5491,6 +5609,35 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   <IsAlreadyTook>k__BackingField: 0
+--- !u!114 &2128359794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2128359789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0e198bbfcdd4147b11e37a8c3432752, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Moon._01.Script.Cameras.CamObject
+  <Name>k__BackingField: CamObject
+  <CanCopyOrMove>k__BackingField: 0
+  ratio: 1
+--- !u!114 &2128359795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2128359789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5079bdf85ee223d4aab9129c648f7971, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OutLineSetting
+  scale: 1.05
+  color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
