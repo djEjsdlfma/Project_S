@@ -109,12 +109,94 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
             timer = timerTreshold;
             SpawnMessage();
         }
+
+        if (Keyboard.current.enterKey.wasPressedThisFrame && !_isChoiceActive && !wasEndChat)
+        {
+            SpawnAllUntilSelection();
+        }
     }
 
     private IEnumerator DelayInteract()
     {
         yield return _interactDelayCoroutine;
         EnableInteract();
+    }
+
+    private void SpawnAllUntilSelection()
+    {
+        if (!CanInteract || wasEndChat || _isChoiceActive) 
+            return;
+
+        if (string.IsNullOrEmpty(_currentGuestSheetName) || _currentGuest == Guest.None)
+            return;
+    
+        DisableInteract();
+        
+        if (_currentLoading != null)
+        {
+            _allDialogueUI.Remove(_currentLoading.gameObject);
+            Destroy(_currentLoading.gameObject);
+            _currentLoading = null;
+        }
+        
+        while (true)
+        {
+            if (!_dialogueDataCore.GetDialogueDataByKey(_currentGuestSheetName, _currentKey, out DialogueEntry data))
+            {
+                EnableInteract();
+                break;
+            }
+            
+            if (data.sincerity != 0)
+                _gameStatueCore.ChangeSincerityAmount(_currentGuestSheetName, data.sincerity);
+        
+            bool isEnding = (data.nextKey == "END");
+            
+            if (data.type == DialogueType.Select)
+            {
+                _isChoiceActive = true;
+                _currentChoiceSeq = data.seq;
+        
+                FindChoice(data.seq);
+                PlayerChoice.AddEvent(Choose);
+                
+                StartCoroutine(UpdateUILayout());
+                break;
+            }
+            
+            if (data.speaker == SpeakerType.NPC)
+            {
+                ShowNPCText(data.content, wasChatNpc, _currentGuestSheetName, isEnding, isImmediate: true);
+                _currentKey = data.nextKey;
+        
+                if (ChatProfileContainer != null)
+                    ChatProfileContainer.SetCurrentProfile(data.content, false);
+            }
+            else
+            {
+                ShowPlayerText(data.content, wasChatNpc);
+                _currentKey = data.nextKey;
+        
+                if (ChatProfileContainer != null)
+                    ChatProfileContainer.SetCurrentProfile(data.content, false);
+        
+                if (isEnding)
+                {
+                    HandleEndChat();
+                    StartCoroutine(UpdateUILayout());
+                    break;
+                }
+            }
+            
+            if (isEnding)
+            {
+                HandleEndChat();
+                StartCoroutine(UpdateUILayout());
+                break;
+            }
+        }
+        
+        timer = timerTreshold;
     }
 
     public void SpawnMessage(bool isImmediate = false)
