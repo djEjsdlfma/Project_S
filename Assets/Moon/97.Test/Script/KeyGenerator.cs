@@ -6,10 +6,11 @@ namespace Moon._01.Script.Test
 {
     public class KeyGenerator : MonoBehaviour
     {
+        [ContextMenu("Generate Key")]
         void Start()
         {
-            string realKey = "vDcS249oPqX1R0==";
-            string dummyKey = "b2WshK2D3d25oAE45n9sQ==";
+            string realKey = "Jdv4F3g7ujU8sd==";
+            string dummyKey = "U2seg1yS4x4D7h8Lnfdi8==";
 
             byte[] realBytes = Encoding.UTF8.GetBytes(realKey);
             byte[] dummyBytes = Encoding.UTF8.GetBytes(dummyKey);
