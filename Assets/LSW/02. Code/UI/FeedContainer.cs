@@ -16,8 +16,12 @@ namespace LSW._02._Code.UI
             if(_feeds == null)
                 _feeds = GetComponentsInChildren<Feed>();
             
-            Initialize();
             gameObject.SetActive(false);
+        }
+
+        private void Start()
+        {
+            Initialize();
         }
 
         private void Initialize()
@@ -27,9 +31,9 @@ namespace LSW._02._Code.UI
             if(_gameStatueCore == null || _feeds.Length <= 0)
                 return;
 
-            for (int i = 0; i < _gameStatueCore.CurrentDay - 1; i++)
+            for (int i = 0; i < Mathf.Min(_gameStatueCore.CurrentDay - 1, _feeds.Length); i++)
             {
-                _feeds[(_gameStatueCore.CurrentDay % 5) - 1].OnUploadClickImmediately();
+                _feeds[i].OnUploadClickImmediately();
             }
         }
     }

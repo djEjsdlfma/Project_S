@@ -84,7 +84,7 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
         
         if (ChatProfileContainer != null)
         {
-            ChatProfileContainer.InitializeProfiles(this, _gameStatueCore);
+            ChatProfileContainer.InitializeProfiles(this);
         }
 
         if (DataManager.Instance.CurrentData.TryGetValue("TextSpeed", out float speed))

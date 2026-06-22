@@ -8,6 +8,7 @@ namespace LSW._02._Code.UI
 {
     public class GuestProfile : MonoBehaviour
     {
+        [SerializeField] private ChattingUIManager chattingUIManager;
         [SerializeField] private Image currentStatueImage;
         [SerializeField] private Image alarmImage;
         [SerializeField] private TextMeshProUGUI lastMessageText;
@@ -19,9 +20,9 @@ namespace LSW._02._Code.UI
         
         public bool IsOpenedChat { get; private set; } = false;
 
+
         private void Awake()
         {
-            onlineOpenedText.SetText("온라인");
             if (Guest == Guest.None)
             {
                 var btn = GetComponentInChildren<GuestProfileSelectBtn>();
@@ -35,9 +36,9 @@ namespace LSW._02._Code.UI
         private void Start()
         {
             int currentDay = CoreHandler.Instance.GetCore<GameStatueCore>().CurrentDay;
-            int targetGuestIndex = currentDay % 5 == 0 ? 5 : currentDay % 5;
+            int targetGuestIndex = currentDay % 5;
             bool isDialogueDay = (targetGuestIndex == (int)Guest);
-            int lastOnlineDay = Mathf.Abs(currentDay - (((currentDay - (int)Guest) % 5 + 5) % 5));
+            int lastOnlineDay = Mathf.Abs((currentDay - targetGuestIndex) + 1);
             
             lastOnlineText.SetText(isDialogueDay ? "온라인" : $"최근 접속 {lastOnlineDay}일 전");
             currentStatueImage.color = isDialogueDay ? Color.green : Color.gray;
@@ -45,7 +46,8 @@ namespace LSW._02._Code.UI
 
         public void OpenChat(bool isOpened = true)
         {
-            IsOpenedChat = true;
+            chattingUIManager.DisableChat(Guest, isOpened);
+            IsOpenedChat = isOpened;
             lastMessageText.gameObject.SetActive(!isOpened);
             onlineOpenedText.gameObject.SetActive(isOpened);
             lastOnlineText.gameObject.SetActive(!isOpened);

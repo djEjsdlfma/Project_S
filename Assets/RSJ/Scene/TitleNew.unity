@@ -1401,8 +1401,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u200B"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ea9926c8f2b4e674ab8b5f091ea6e029, type: 2}
-  m_sharedMaterial: {fileID: 6524427173825193254, guid: ea9926c8f2b4e674ab8b5f091ea6e029, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0494a77ffa594734f9931f2a2d9380a4, type: 2}
+  m_sharedMaterial: {fileID: 6522724985343967260, guid: 965f97ffac279bb459c4e11f0d8d27bb, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1468,7 +1468,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &81407019
@@ -1861,6 +1861,10 @@ PrefabInstance:
     - target: {fileID: 7309607075576796973, guid: 72be93852fcf7dd40ab0c8f9558054d2, type: 3}
       propertyPath: m_Color.r
       value: 0.98490566
+      objectReference: {fileID: 0}
+    - target: {fileID: 7452852647469657779, guid: 72be93852fcf7dd40ab0c8f9558054d2, type: 3}
+      propertyPath: guest
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7452852647469657779, guid: 72be93852fcf7dd40ab0c8f9558054d2, type: 3}
       propertyPath: heart
@@ -3304,6 +3308,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 1591925676}
     m_Modifications:
     - target: {fileID: 1588464310779860495, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
+      propertyPath: chattingUIManager
+      value: 
+      objectReference: {fileID: 524758813}
+    - target: {fileID: 1588464310779860495, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
+      propertyPath: chatProfileContainer
+      value: 
+      objectReference: {fileID: 1591925678}
+    - target: {fileID: 1588464310779860495, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: <Guest>k__BackingField
       value: 4
       objectReference: {fileID: 0}
@@ -4595,7 +4607,7 @@ MonoBehaviour:
   m_CaretWidth: 1
   m_ReadOnly: 0
   m_RichText: 1
-  m_GlobalFontAsset: {fileID: 11400000, guid: ea9926c8f2b4e674ab8b5f091ea6e029, type: 2}
+  m_GlobalFontAsset: {fileID: 11400000, guid: 965f97ffac279bb459c4e11f0d8d27bb, type: 2}
   m_OnFocusSelectAll: 1
   m_ResetOnDeActivation: 1
   m_KeepTextSelectionVisible: 0
@@ -8618,11 +8630,17 @@ MonoBehaviour:
   _profilBound: {fileID: 2074749165}
   _chatAlarm: {fileID: 1146956530}
   _chats:
-  - {fileID: 1085202863}
-  - {fileID: 270870692}
-  - {fileID: 383512477}
-  - {fileID: 1516615475}
-  - {fileID: 1245116988}
+    _serializedList:
+    - Key: 1
+      Value: {fileID: 1085202863}
+    - Key: 2
+      Value: {fileID: 270870692}
+    - Key: 3
+      Value: {fileID: 383512477}
+    - Key: 4
+      Value: {fileID: 1516615475}
+    - Key: 5
+      Value: {fileID: 1245116988}
 --- !u!1 &530261869
 GameObject:
   m_ObjectHideFlags: 0
@@ -10498,6 +10516,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 1044943008327504942, guid: 93dffe407025ca747b22028292586ae5, type: 3}
+    - target: {fileID: 7452852647469657779, guid: 72be93852fcf7dd40ab0c8f9558054d2, type: 3}
+      propertyPath: guest
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8175817009092383801, guid: 72be93852fcf7dd40ab0c8f9558054d2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 2
@@ -13530,6 +13552,10 @@ PrefabInstance:
     - target: {fileID: 7309607075576796973, guid: 72be93852fcf7dd40ab0c8f9558054d2, type: 3}
       propertyPath: m_Color.r
       value: 0.87169814
+      objectReference: {fileID: 0}
+    - target: {fileID: 7452852647469657779, guid: 72be93852fcf7dd40ab0c8f9558054d2, type: 3}
+      propertyPath: guest
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7452852647469657779, guid: 72be93852fcf7dd40ab0c8f9558054d2, type: 3}
       propertyPath: heart
@@ -19771,6 +19797,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 1591925676}
     m_Modifications:
     - target: {fileID: 1588464310779860495, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
+      propertyPath: chattingUIManager
+      value: 
+      objectReference: {fileID: 524758813}
+    - target: {fileID: 1588464310779860495, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
+      propertyPath: chatProfileContainer
+      value: 
+      objectReference: {fileID: 1591925678}
+    - target: {fileID: 1588464310779860495, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: <Guest>k__BackingField
       value: 2
       objectReference: {fileID: 0}
@@ -20950,6 +20984,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1591925676}
     m_Modifications:
+    - target: {fileID: 1588464310779860495, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
+      propertyPath: chattingUIManager
+      value: 
+      objectReference: {fileID: 524758813}
+    - target: {fileID: 1588464310779860495, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
+      propertyPath: chatProfileContainer
+      value: 
+      objectReference: {fileID: 1591925678}
     - target: {fileID: 1588464310779860495, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: <Guest>k__BackingField
       value: 3
@@ -24584,6 +24626,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 1591925676}
     m_Modifications:
     - target: {fileID: 1588464310779860495, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
+      propertyPath: chattingUIManager
+      value: 
+      objectReference: {fileID: 524758813}
+    - target: {fileID: 1588464310779860495, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
+      propertyPath: chatProfileContainer
+      value: 
+      objectReference: {fileID: 1591925678}
+    - target: {fileID: 1588464310779860495, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: <Guest>k__BackingField
       value: 5
       objectReference: {fileID: 0}
@@ -26541,18 +26591,6 @@ MonoBehaviour:
       - m_Target: {fileID: 524758812}
         m_TargetAssemblyTypeName: BubbleManager, Assembly-CSharp
         m_MethodName: DisableInteract
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: LSW._02._Code.UI.FolderContainer, Assembly-CSharp
-        m_MethodName: CloseAllFolder
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -28740,8 +28778,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uC5EC\uAE30\uC5D0 \uC785\uB825\uD558\uC138\uC694."
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ea9926c8f2b4e674ab8b5f091ea6e029, type: 2}
-  m_sharedMaterial: {fileID: 6524427173825193254, guid: ea9926c8f2b4e674ab8b5f091ea6e029, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0494a77ffa594734f9931f2a2d9380a4, type: 2}
+  m_sharedMaterial: {fileID: 6522724985343967260, guid: 965f97ffac279bb459c4e11f0d8d27bb, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -28807,7 +28845,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &2070085790
@@ -29145,6 +29183,10 @@ PrefabInstance:
     - target: {fileID: 7309607075576796973, guid: 72be93852fcf7dd40ab0c8f9558054d2, type: 3}
       propertyPath: m_Color.r
       value: 0.96981126
+      objectReference: {fileID: 0}
+    - target: {fileID: 7452852647469657779, guid: 72be93852fcf7dd40ab0c8f9558054d2, type: 3}
+      propertyPath: guest
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7452852647469657779, guid: 72be93852fcf7dd40ab0c8f9558054d2, type: 3}
       propertyPath: heart
@@ -30475,6 +30517,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7452852647469657779, guid: 72be93852fcf7dd40ab0c8f9558054d2, type: 3}
+      propertyPath: guest
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8175817009092383801, guid: 72be93852fcf7dd40ab0c8f9558054d2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -30832,6 +30878,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1591925676}
     m_Modifications:
+    - target: {fileID: 1588464310779860495, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
+      propertyPath: chattingUIManager
+      value: 
+      objectReference: {fileID: 524758813}
+    - target: {fileID: 1588464310779860495, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
+      propertyPath: chatProfileContainer
+      value: 
+      objectReference: {fileID: 1591925678}
     - target: {fileID: 1588464310779860495, guid: 070557abe99325a43adb2bab974eacfa, type: 3}
       propertyPath: <Guest>k__BackingField
       value: 1

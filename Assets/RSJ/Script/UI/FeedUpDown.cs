@@ -17,6 +17,7 @@ public class FeedUpDown : MonoBehaviour
         UpBtn.SetActive(false);
         DownBtn.SetActive(false);
         isEnd = true;
+        ChangeFeedwithDay();
     }
 
     public void ChangeFeedwithDay()

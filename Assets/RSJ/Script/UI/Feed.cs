@@ -1,5 +1,6 @@
 using System;
 using csiimnida.CSILib.SoundManager.RunTime;
+using LSW._02._Code.Core.Cores;
 using LSW._02._Code.System___Manager;
 using TMPro;
 using UnityEngine;
@@ -8,6 +9,8 @@ using UnityEngine.UI;
 
 public class Feed : MonoBehaviour
 {
+    [SerializeField] private Guest guest;
+    
     [SerializeField] private TextMeshProUGUI btnText;
 
     [SerializeField] private TextMeshProUGUI HeartText;
@@ -34,7 +37,7 @@ public class Feed : MonoBehaviour
         
         _onUpload = () =>
         {
-            _bubbleManager.ChatProfileContainer.ChangeProfileToActivable();
+            _bubbleManager.ChatProfileContainer.ChangeProfileToActivable(guest);
         };
         _btn.onClick.AddListener(_onUpload);
     }
@@ -55,9 +58,9 @@ public class Feed : MonoBehaviour
     }
 
     public void OnUploadClickImmediately()
-    {
+    { 
         _btn.onClick.Invoke();
-        Upload();
+        // Upload();
     }
 
     public void OnEnable()

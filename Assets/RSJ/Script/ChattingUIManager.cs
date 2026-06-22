@@ -1,4 +1,6 @@
+using AYellowpaper.SerializedCollections;
 using JetBrains.Annotations;
+using LSW._02._Code.Core.Cores;
 using Moon._01.Script.Datas;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,7 +11,7 @@ public class ChattingUIManager : MonoBehaviour
     [SerializeField] private RectMask2D _profilBound;
     [SerializeField] private GameObject _chatAlarm;
 
-    [SerializeField] private GameObject[] _chats;
+    [SerializeField] private SerializedDictionary<Guest, GameObject> _chats;
 
     private void Awake()
     {
@@ -32,11 +34,20 @@ public class ChattingUIManager : MonoBehaviour
 
     public void BackToMenu()
     {
-        for(int i = 0; i < _chats.Length; i++)
+        foreach (var chat in _chats)
         {
-            _chats[i].SetActive(false);
+            chat.Value.SetActive(false);
         }
         // _profilBound.padding = (new Vector4(-1f, -600f, -1000f, -88f));
+    }
+
+    public void DisableChat(Guest guest, bool active)
+    {
+        if (guest == Guest.None)
+        {
+            return;
+        }
+        _chats[guest].SetActive(active);
     }
 
     public void ReadText()
