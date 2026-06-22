@@ -6,21 +6,21 @@ namespace Moon._01.Script.Datas
 {
     public static class RealKey
     {
-        private const string DummyKey = "b2WshK2D3d25oAE45n9sQ==";
+        private const string RKey = "U2seg1yS4x4D7h8Lnfdi8==";
 
-        private static readonly byte[] Key = 
+        private static readonly byte[] FKey = 
         {
-            20, 118, 52, 32, 90, 127, 11, 43, 99, 21, 106, 4, 61, 113, 120, 9
+            31, 86, 5, 81, 33, 2, 30, 100, 65, 18, 97, 124, 68, 12, 5, 113
         };
 
         private static byte[] GetKey()
         {
-            byte[] dummyBytes = Encoding.UTF8.GetBytes(DummyKey);
-            byte[] realKey = new byte[Key.Length];
+            byte[] dummyBytes = Encoding.UTF8.GetBytes(RKey);
+            byte[] realKey = new byte[FKey.Length];
 
-            for (int i = 0; i < Key.Length; i++)
+            for (int i = 0; i < FKey.Length; i++)
             {
-                realKey[i] = (byte)(Key[i] ^ dummyBytes[i % dummyBytes.Length]);
+                realKey[i] = (byte)(FKey[i] ^ dummyBytes[i % dummyBytes.Length]);
             }
 
             return realKey;
