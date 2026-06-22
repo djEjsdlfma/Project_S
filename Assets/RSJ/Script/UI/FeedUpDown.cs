@@ -1,4 +1,6 @@
 using DG.Tweening;
+using LSW._02._Code.Core;
+using LSW._02._Code.Core.Cores;
 using UnityEngine;
 
 public class FeedUpDown : MonoBehaviour
@@ -48,7 +50,7 @@ public class FeedUpDown : MonoBehaviour
         nowIndex++;
         isEnd = false;
 
-        if(nowIndex >= feedCount) DownBtn.SetActive(false);
+        if(nowIndex >= CoreHandler.Instance.GetCore<GameStatueCore>().CurrentDay - 1) DownBtn.SetActive(false);
         if (UpBtn.activeSelf == false) UpBtn.SetActive(true);
 
         FeedContainer.DOAnchorPosY(FeedContainer.anchoredPosition.y + 907.205f, 0.2f)
