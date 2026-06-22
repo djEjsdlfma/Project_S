@@ -144,6 +144,8 @@ namespace RSJ.Script.Camera
                     }
                     break;
             }
+
+            CheckAndTakeObject();
         }
 
         #region COPY MODE LOGIC
@@ -315,9 +317,6 @@ namespace RSJ.Script.Camera
             if(!CanCapture)
                 return;
 
-            if (CheckAndTakeObject())
-                return; 
-
             if (!camerasFinder.GetTarget<PhotoStorage>().CanPhoto())
                 return;
         
@@ -325,6 +324,7 @@ namespace RSJ.Script.Camera
             if (_cameraMove != null && _cameraMove.IsMoving) _cameraMove.DropObj();
 
             CheckUIInArea();
+            CheckAndTakeObject(true);
 
             _img.color = new Color(1, 1, 1, 1);
             _img.DOFade(0f, 0.2f);
@@ -332,7 +332,7 @@ namespace RSJ.Script.Camera
             CheckObj();
         }
 
-        private bool CheckAndTakeObject()
+        private void CheckAndTakeObject(bool isEndDialogue = false)
         {
             Collider2D[] items = Physics2D.OverlapBoxAll(
                 checkPos.position,
@@ -341,11 +341,13 @@ namespace RSJ.Script.Camera
                 coloredObject
             );
 
-            if (items == null || items.Length == 0) return false;
+            if (items == null || items.Length == 0) 
+                return;
 
             foreach (var item in items)
             {
-                if (item == null) continue;
+                if (item == null)
+                    continue;
             
                 if (item.TryGetComponent(out ITakable takable) && takable.CanBeTaken())
                 {
@@ -353,12 +355,17 @@ namespace RSJ.Script.Camera
                     {
                         _showWordUISystem.OnEndShowWord += SetCanCapture;
                     }
-                    takable.Take();
-                    return true;
+
+                    if (isEndDialogue && item.TryGetComponent(out EndDialogueObject _))
+                    {
+                        takable.Take();
+                    }
+                    else if (!isEndDialogue && item.TryGetComponent(out EndDialogueObject _) == false)
+                    {
+                        takable.Take();
+                    }
                 }
             }
-
-            return false;
         }
 
         private void CheckObj()
