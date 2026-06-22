@@ -16,7 +16,7 @@ namespace LSW._02._Code.UI
         
         private void Awake()
         {
-            _profiles = GetComponentsInChildren<GuestProfile>().ToList();
+            _profiles = GetComponentsInChildren<GuestProfile>(true).ToList();
         }
 
         public void DisableAllProfile(GuestProfile excludedProfile)
@@ -56,7 +56,7 @@ namespace LSW._02._Code.UI
         {
             _profiles.ForEach(profile =>
             {
-                // profile.gameObject.SetActive(profile.Guest == guest && profile.IsActivable);
+                profile.gameObject.SetActive(profile.Guest == guest && profile.IsActivable);
             });
             _currentProfile = null;
         }

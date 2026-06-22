@@ -1024,7 +1024,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6213212266128803390, guid: 9bc90f267caa6ea439d0c0059868c5d7, type: 3}
       propertyPath: m_text
-      value: "\uC774\n"
+      value: '
+
+'
       objectReference: {fileID: 0}
     - target: {fileID: 6213212266128803390, guid: 9bc90f267caa6ea439d0c0059868c5d7, type: 3}
       propertyPath: m_fontSize
