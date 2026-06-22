@@ -52,6 +52,14 @@ namespace LSW._02._Code.Core.Cores
             }
         }
 
+        private void Awake()
+        {
+            if (DataManager.Instance.TryGetValue("Day", out int day))
+            {
+                IncreaseDay(day - 1);
+            }
+        }
+
         public void LoadScene(SceneType sceneType)
         {
             UnsubscribeBubbleManager();
