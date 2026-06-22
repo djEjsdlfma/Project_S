@@ -28,15 +28,15 @@ public class Feed : MonoBehaviour
         DontDestroyOnLoad(HeartText);
         DontDestroyOnLoad(BookMarkText);
 
-        // _bubbleManager = SystemManager.Instance.GetSystemManager<BubbleManager>();
-        // if(_bubbleManager == null)
-        //     return;
-        // 
-        // _onUpload = () =>
-        // {
-        //     _bubbleManager.ChatProfileContainer.ChangeProfileToActivable();
-        // };
-        // _btn.onClick.AddListener(_onUpload);
+        _bubbleManager = SystemManager.Instance.GetSystemManager<BubbleManager>();
+        if(_bubbleManager == null)
+            return;
+        
+        _onUpload = () =>
+        {
+            _bubbleManager.ChatProfileContainer.ChangeProfileToActivable();
+        };
+        _btn.onClick.AddListener(_onUpload);
     }
 
     private void Start()
