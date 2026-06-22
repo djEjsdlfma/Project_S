@@ -69,29 +69,26 @@ namespace LSW._02._Code.UI
 
         private void SelectedPhoto(PhotoSelector photoSelector, bool isSelected)
         {
-            if (isSelected)
+            if (isSelected && _selectedPhotoSelector.Count < maxSelectedPhoto 
+                && !_selectedPhotoSelector.Contains(photoSelector))
             {
-                if (!_selectedPhotoSelector.Contains(photoSelector))
+                _selectedPhotoSelector.Add(photoSelector);
+                _selectedPhotos.Add(photoSelector.GetTexture());
+                if (_selectedPhotoSelector.Count == maxSelectedPhoto)
                 {
-                    _selectedPhotoSelector.Add(photoSelector);
-                    _selectedPhotos.Add(photoSelector.GetTexture());
+                    uploadPhotosButton.interactable = true;
+                    _uploadPhotosImage.color = uploadPhotosBtnEnableColor;
+                    CanChoose = false;
                 }
             }
-            else
+            else if(!isSelected && _selectedPhotoSelector.Contains(photoSelector))
             {
-                if (_selectedPhotoSelector.Contains(photoSelector))
-                {
-                    _selectedPhotoSelector.Remove(photoSelector);
-                    _selectedPhotos.Remove(photoSelector.GetTexture());
-                }
+                _selectedPhotoSelector.Remove(photoSelector);
+                _selectedPhotos.Remove(photoSelector.GetTexture());
+                uploadPhotosButton.interactable = false;
+                _uploadPhotosImage.color = uploadPhotosBtnDisableColor;
+                CanChoose = true;
             }
-            
-            bool isExactlyThree = _selectedPhotoSelector.Count == maxSelectedPhoto;
-    
-            uploadPhotosButton.interactable = isExactlyThree;
-            _uploadPhotosImage.color = isExactlyThree ? uploadPhotosBtnEnableColor : uploadPhotosBtnDisableColor;
-            
-            CanChoose = (_selectedPhotoSelector.Count < maxSelectedPhoto);
         }
 
         private void OnDestroy()

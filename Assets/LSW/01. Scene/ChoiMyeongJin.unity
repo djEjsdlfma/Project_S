@@ -485,7 +485,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Moon._01.Script.Cameras.Puzzle.Weight.WeightObj
   <Name>k__BackingField: CamObject
-  <CanCopyOrMove>k__BackingField: 1
   ratio: 1
   <Weight>k__BackingField: 1
   <MaxRatioToWeightAlive>k__BackingField: 0.9
@@ -2044,10 +2043,6 @@ MonoBehaviour:
   takePictureEvent:
     m_PersistentCalls:
       m_Calls: []
-  endDialogueEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  <IsAlreadyTook>k__BackingField: 0
 --- !u!1 &491445730
 GameObject:
   m_ObjectHideFlags: 0
@@ -3141,7 +3136,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1061587037
   m_SortingLayer: 1
-  m_SortingOrder: 2
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: -4723187401248181152, guid: 0ac9de451345ce94c847bea7f237e112, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -3343,7 +3338,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Moon._01.Script.Cameras.Puzzle.Weight.WeightObj
   <Name>k__BackingField: Law
-  <CanCopyOrMove>k__BackingField: 1
   ratio: 1
   <Weight>k__BackingField: 2
   <MaxRatioToWeightAlive>k__BackingField: 0.9
@@ -5831,7 +5825,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Moon._01.Script.Cameras.Puzzle.Weight.WeightObj
   <Name>k__BackingField: CamObject
-  <CanCopyOrMove>k__BackingField: 1
   ratio: 1
   <Weight>k__BackingField: 1
   <MaxRatioToWeightAlive>k__BackingField: 0.9
@@ -6137,7 +6130,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Moon._01.Script.Cameras.Puzzle.Weight.WeightObj
   <Name>k__BackingField: CamObject
-  <CanCopyOrMove>k__BackingField: 1
   ratio: 1
   <Weight>k__BackingField: 1
   <MaxRatioToWeightAlive>k__BackingField: 0.9
@@ -6853,10 +6845,6 @@ MonoBehaviour:
   takePictureEvent:
     m_PersistentCalls:
       m_Calls: []
-  endDialogueEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  <IsAlreadyTook>k__BackingField: 0
 --- !u!1 &1640930737
 GameObject:
   m_ObjectHideFlags: 0
@@ -6940,7 +6928,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1061587037
   m_SortingLayer: 1
-  m_SortingOrder: 2
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: -6567592620709191145, guid: 0ac9de451345ce94c847bea7f237e112, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -8100,7 +8088,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -8145,10 +8133,6 @@ MonoBehaviour:
   takePictureEvent:
     m_PersistentCalls:
       m_Calls: []
-  endDialogueEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  <IsAlreadyTook>k__BackingField: 0
 --- !u!1 &2000586789
 GameObject:
   m_ObjectHideFlags: 0
@@ -8348,7 +8332,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1061587037
   m_SortingLayer: 1
-  m_SortingOrder: 2
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: -698569648276419874, guid: 0ac9de451345ce94c847bea7f237e112, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -8683,7 +8667,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1061587037
   m_SortingLayer: 1
-  m_SortingOrder: 2
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: -2093202712374781146, guid: 0ac9de451345ce94c847bea7f237e112, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

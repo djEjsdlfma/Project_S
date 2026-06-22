@@ -29,7 +29,8 @@ namespace LSW._02._Code.UI
 
             for (int i = 0; i < _gameStatueCore.CurrentDay - 1; i++)
             {
-                _feeds[(_gameStatueCore.CurrentDay % 5) - 1].OnUploadClickImmediately();
+                _feeds[0].OnUploadClickImmediately();
+                // 이거 수정 예정(일단 이재윤만 하는 걸로)
             }
         }
     }

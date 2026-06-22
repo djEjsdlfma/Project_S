@@ -19,9 +19,13 @@ public class Chatting : MonoBehaviour
         }
     }
 
-    public void SetProfil(string guestName)
+    public void SetName(string guestName)
     {
         questName.SetText(guestName);
+    }
+
+    public void SetProfil(string guestName)
+    {
         foreach (GameObject picture in ProfilPictures.Values)
         {
             picture.SetActive(false);
