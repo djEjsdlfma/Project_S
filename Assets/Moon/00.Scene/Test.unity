@@ -1612,6 +1612,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Moon._01.Script.Cameras.CamObject
   <Name>k__BackingField: LSW
+  <CanCopyOrMove>k__BackingField: 1
   ratio: 1
 --- !u!1 &1092143772
 GameObject:
@@ -1970,6 +1971,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Moon._01.Script.Gimmick.ChangedCamObject
   <Name>k__BackingField: RiCheolMin
+  <CanCopyOrMove>k__BackingField: 1
   ratio: 1
 --- !u!1 &1324190825
 GameObject:
@@ -2835,6 +2837,50 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1056165345}
   m_SourcePrefab: {fileID: 100100000, guid: 8772c05b25fbfba4c88aa13e1392a599, type: 3}
+--- !u!1 &1968093118
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1968093120}
+  - component: {fileID: 1968093119}
+  m_Layer: 0
+  m_Name: GameObject (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1968093119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1968093118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c655797e230f449a9107cf95b93af406, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Moon._01.Script.Test.KeyGenerator
+--- !u!4 &1968093120
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1968093118}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.1488, y: -0.16262, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2000586789
 GameObject:
   m_ObjectHideFlags: 0
@@ -3312,3 +3358,4 @@ SceneRoots:
   - {fileID: 1314261520}
   - {fileID: 745926046}
   - {fileID: 544587002}
+  - {fileID: 1968093120}

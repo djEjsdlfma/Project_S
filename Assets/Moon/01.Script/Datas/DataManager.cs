@@ -177,6 +177,63 @@ namespace Moon._01.Script.Datas
         }
 
         #endregion
+        
+        #region DeleteData
+
+        public void DeleteData(int slot)
+        {
+            if (slot < 0 || slot >= MaxSaveSlot) return;
+            string dataPath = $"{_path}/save_{slot}.json";
+            string imgDataPath = $"{_path}/saveImg_{slot}.json";
+            string imgFolderPath = $"{_imgPath}/saveImgFolder_{slot}";
+
+            if (File.Exists(dataPath))
+            {
+                File.Delete(dataPath);
+            }
+
+            if (File.Exists(imgDataPath))
+            {
+                File.Delete(imgDataPath);
+            }
+
+            if (Directory.Exists(imgFolderPath))
+            {
+                Directory.Delete(imgFolderPath, true);
+            }
+
+            _slotDataExist[slot] = false;
+            _slotImgDataExist[slot] = false;
+        }
+        
+        public void AutoDeleteToCurrent() => DeleteData(CurrentSaveSlot);
+        
+        public void DeleteAutoSave()
+        {
+            string dataPath = $"{_path}/save_auto.json";
+            string imgDataPath = $"{_path}/saveImg_auto.json";
+            string imgFolderPath = $"{_imgPath}/saveImgFolder_auto";
+
+            if (File.Exists(dataPath))
+            {
+                File.Delete(dataPath);
+            }
+
+            if (File.Exists(imgDataPath))
+            {
+                File.Delete(imgDataPath);
+            }
+
+            if (Directory.Exists(imgFolderPath))
+            {
+                Directory.Delete(imgFolderPath, true);
+            }
+
+            _autoDataExist = false;
+            _autoImgDataExist = false;
+        }
+
+        #endregion
 
         #region GetValue
 
