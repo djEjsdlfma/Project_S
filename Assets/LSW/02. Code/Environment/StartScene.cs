@@ -1,20 +1,34 @@
 
+using System;
 using System.Collections;
 using LSW._02._Code.Core;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
+using LSW._02._Code.Importer;
+using LSW._02._Code.So;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace LSW._02._Code.Environment
 {
     public class StartScene : MonoBehaviour
     {
+        [SerializeField] private DialogueSheetImporter dialogueSheetImporter;
+        
         [SerializeField] private float timeToLoad = 5f;
         [SerializeField] private Image FadeImg;
         [SerializeField] private Image FadeTitle;
 
-        private IEnumerator Start()
+        private UnityAction<DialogueDatabaseSo> _onImportComplete;
+        
+        private void Start()
+        {
+            _onImportComplete = (_) => StartCoroutine(StartSceneCoroutine());
+            dialogueSheetImporter.onImportComplete.AddListener(_onImportComplete);
+        }
+
+        private IEnumerator StartSceneCoroutine()
         {
             FadeTitle.DOFade(0.3f, 1.5f).OnComplete(() =>
             {
@@ -22,6 +36,11 @@ namespace LSW._02._Code.Environment
             });
             yield return new WaitForSeconds(timeToLoad);
             SceneManager.LoadScene((int)SceneType.MainTabletScene);
+        }
+
+        private void OnDestroy()
+        {
+            dialogueSheetImporter.onImportComplete.RemoveListener(_onImportComplete);
         }
     }
 }

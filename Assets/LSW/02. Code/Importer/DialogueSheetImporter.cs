@@ -2,19 +2,24 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using LSW._02._Code.Core;
 using LSW._02._Code.Core.Cores;
 using LSW._02._Code.So;
-using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 namespace LSW._02._Code.Importer
 {
-#if UNITY_EDITOR
     public class DialogueSheetImporter : MonoBehaviour
     {
+        [SerializeField] private Slider importProgress;
+        
+        private DialogueDataCore _dialogueDataCore;
+        
         [Serializable]
         public class SheetInfo
         {
@@ -28,39 +33,74 @@ namespace LSW._02._Code.Importer
 
         [Header("Save Path")]
         public string savePath = "Assets/02.Data/DialogueDatabase.asset";
+        
+        public UnityEvent<DialogueDatabaseSo> onImportComplete;
 
-        [ContextMenu("Import Dialogue Sheets")]
-        public async void ImportDialogueSheets()
+        private async void Start()
         {
+            try
+            {
+                _dialogueDataCore = CoreHandler.Instance.GetCore<DialogueDataCore>();
+            
+                var database = await ImportDialogueSheets(); 
+                
+                importProgress.gameObject.SetActive(false);
+                _dialogueDataCore.SetDatabase(database);
+                onImportComplete?.Invoke(database);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e);
+            }
+        }
+        
+        public async Task<DialogueDatabaseSo> ImportDialogueSheets()
+        {
+            if (importProgress != null)
+            {
+                importProgress.minValue = 0;
+                importProgress.maxValue = sheets.Count;
+                importProgress.value = 0;
+            }
+
             DialogueDatabaseSo database = ScriptableObject.CreateInstance<DialogueDatabaseSo>();
 
-            foreach (var sheet in sheets)
+            for (int i = 0; i < sheets.Count; i++)
             {
+                var sheet = sheets[i];
                 using UnityWebRequest request = UnityWebRequest.Get(sheet.sheetUrl);
 
                 var operation = request.SendWebRequest();
 
                 while (!operation.isDone)
-                    await System.Threading.Tasks.Task.Yield();
+                {
+                    float progress = (i + request.downloadProgress) / sheets.Count;
+                    if (importProgress != null) importProgress.value = progress * sheets.Count;
+    
+                    await Task.Yield();
+                }
 
                 if (request.result != UnityWebRequest.Result.Success)
                 {
                     Debug.LogError($"[Dialogue Import] 실패 : {sheet.guestName}\n{request.error}");
-                    continue;
+                }
+                else
+                {
+                    string csv = request.downloadHandler.text;
+                    DialogueSheet dialogueSheet = ParseCSV(sheet.guestName, sheet.guest, csv);
+                    database.sheets.Add(dialogueSheet);
+                    Debug.Log($"[Dialogue Import] 성공 : {sheet.guestName}");
                 }
 
-                string csv = request.downloadHandler.text;
-
-                DialogueSheet dialogueSheet = ParseCSV(sheet.guestName, sheet.guest, csv);
-
-                database.sheets.Add(dialogueSheet);
-
-                Debug.Log($"[Dialogue Import] 성공 : {sheet.guestName}");
+                // 2. 슬라이더 값 갱신 (현재 진행된 시트 개수)
+                if (importProgress != null)
+                {
+                    importProgress.value = i + 1;
+                }
             }
 
             SaveDatabase(database);
-
-            Debug.Log("<color=green>Dialogue Import Complete</color>");
+            return database;
         }
 
         private DialogueSheet ParseCSV(string sheetName, Guest guestType, string csv)
@@ -173,5 +213,4 @@ namespace LSW._02._Code.Importer
             return result;
         }
     }
-#endif
 }
