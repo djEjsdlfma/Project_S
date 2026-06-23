@@ -16,6 +16,20 @@ public class Sound : MonoBehaviour
     private float latestBGMValue;
     private float latestSFXValue;
 
+    private void Awake()
+    {
+        MAS.maxValue = 6f; MAS.minValue = -50f;
+        BGM.maxValue = 6f; BGM.minValue = -50f;
+        SFX.maxValue = 6f; SFX.minValue = -50f;
+
+        if (_mixer.GetFloat("BGM", out float Bvalue))
+            BGM.value = Bvalue;
+        if (_mixer.GetFloat("SFX", out float Svalue))
+            SFX.value = Svalue;
+        if (_mixer.GetFloat("Master", out float Mvalue))
+            MAS.value = Mvalue;
+    }
+
     private void Start()
     {
         latestMasValue = MAS.value;
