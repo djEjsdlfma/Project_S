@@ -333,7 +333,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0.392}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -371,6 +371,9 @@ MonoBehaviour:
   camerasFinder: {fileID: 11400000, guid: 51fc18d6fb6fed540bea9fce565207ec, type: 2}
   input: {fileID: 11400000, guid: 115a39429ad911340b5e5aa94a8ec03f, type: 2}
   _cameraMove: {fileID: 2119439379638156772}
+  _outlineMat: {fileID: 0}
+  _outlineScale: 1.08
+  _outlineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &697971243837452932
 MonoBehaviour:
   m_ObjectHideFlags: 0
