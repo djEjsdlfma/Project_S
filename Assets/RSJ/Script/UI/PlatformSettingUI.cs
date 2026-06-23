@@ -1,6 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlatformSettingUI : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class PlatformSettingUI : MonoBehaviour
     {
         if (Keyboard.current.escapeKey.wasPressedThisFrame)
         {
+            Time.timeScale = SettingObj.activeSelf ? 1f : 0f;
             SettingObj.SetActive(!SettingObj.activeSelf);
             Cursor.visible = SettingObj.activeSelf;
         }
@@ -17,6 +19,7 @@ public class PlatformSettingUI : MonoBehaviour
 #if UNITY_EDITOR
         if (Keyboard.current.tabKey.wasPressedThisFrame)
         {
+            Time.timeScale = SettingObj.activeSelf ? 1f : 0f;
             SettingObj.SetActive(!SettingObj.activeSelf);
             Cursor.visible = SettingObj.activeSelf;
         }
@@ -29,8 +32,8 @@ public class PlatformSettingUI : MonoBehaviour
         Cursor.visible = false;
     }
 
-    public void Debuging(string message)
+    public void ResetPlatform()
     {
-        Debug.Log(message);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
