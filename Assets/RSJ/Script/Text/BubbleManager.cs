@@ -249,7 +249,7 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
         Guest recordingGuest = _currentGuest;
         bool isFirst = !wasNPC;
         
-        if (isFirst && _allDialogueUI.Count > 0)
+        if (_allDialogueUI.Count > 0)
         {
             ShowEmptySpace();
         }
@@ -303,7 +303,7 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
         Guest recordingGuest = _currentGuest;
         bool isFirst = wasNPC;
 
-        if (isFirst && _allDialogueUI.Count > 0)
+        if (_allDialogueUI.Count > 0)
         {
             ShowEmptySpace();
         }

@@ -137,12 +137,12 @@ public class BubbleText : MonoBehaviour
         
         myChatBound.sizeDelta = new Vector2(finalWidth, myChatBound.sizeDelta.y);
         _text.rectTransform.sizeDelta = new Vector2(finalWidth, _text.preferredHeight); // 높이도 preferredHeight로 설정
-        
-        // 6. 너비 변경 후 다시 업데이트하여 높이가 정확히 계산되도록 함
+
         _text.ForceMeshUpdate();
         
-        // 레이아웃 즉시 갱신 (부모가 LayoutGroup인 경우 대비)
+        Canvas.ForceUpdateCanvases();
         LayoutRebuilder.ForceRebuildLayoutImmediate(myChatBound);
+
         if (myChatBound.parent is RectTransform parentRect)
         {
             LayoutRebuilder.ForceRebuildLayoutImmediate(parentRect);
@@ -151,10 +151,11 @@ public class BubbleText : MonoBehaviour
 
     public void InitScale()
     {
-        if(myChatBound.sizeDelta.y > 45)
-        {
-            _Boundery.sizeDelta = new Vector2(_Boundery.sizeDelta.x, originHeight + (13 * (myChatBound.sizeDelta.y / 40)));
-        }
+        float padding = 15f; 
+        
+        float targetHeight = myChatBound.sizeDelta.y + padding;
+        
+        _Boundery.sizeDelta = new Vector2(_Boundery.sizeDelta.x, Mathf.Max(originHeight, targetHeight));
     }
 
 
