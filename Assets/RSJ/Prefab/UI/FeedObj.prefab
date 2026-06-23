@@ -337,7 +337,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -416,6 +416,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7ca5c96e282cfb469eaaeb7fa13667f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Feed
+  guest: 0
+  alarmImage: {fileID: 0}
+  chattingUIManager: {fileID: 0}
+  profile: {fileID: 0}
   btnText: {fileID: 3216972439117518419}
   HeartText: {fileID: 1043679313292238089}
   BookMarkText: {fileID: 6562690072094790227}
@@ -1052,7 +1056,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 0.25490198, g: 0.2392157, b: 0.3019608, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:

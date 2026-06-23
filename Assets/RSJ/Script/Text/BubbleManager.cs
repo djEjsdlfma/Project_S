@@ -220,9 +220,8 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
             
             if (ChatProfileContainer != null)
                 ChatProfileContainer.SetCurrentProfile(data.content, !isImmediate && !isEnding);
-
-            if (!isImmediate && !isEnding)
-                onAlarmStateChanged?.Invoke(_currentGuest, true);
+            
+            onAlarmStateChanged?.Invoke(_currentGuest, true);
         }
         else
         {
@@ -599,11 +598,6 @@ public class BubbleManager : MonoBehaviour, ITabletUI, ISystemManager
         EnableInteract();
 
         SpawnFirstDialogue();
-
-        if (ChatProfileContainer != null)
-        {
-            onAlarmStateChanged?.Invoke(_currentGuest, false);
-        }
 
         if (ReplayList.Count > 0)
         {

@@ -26,7 +26,7 @@ public class Chatting : MonoBehaviour
         {
             picture.SetActive(false);
         }
-
+        
         ProfilPictures[guestName].SetActive(true);
     }
 }

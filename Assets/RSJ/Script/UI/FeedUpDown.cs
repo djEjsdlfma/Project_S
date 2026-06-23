@@ -18,14 +18,21 @@ public class FeedUpDown : MonoBehaviour
     {
         UpBtn.SetActive(false);
         DownBtn.SetActive(false);
-        isEnd = true;
-        ChangeFeedwithDay();
+
+        int currentDay = CoreHandler.Instance.GetCore<GameStatueCore>().CurrentDay;
+        feedCount = Mathf.Clamp(currentDay, 1, 5); 
+
+        DownBtn.SetActive(feedCount > 1);
     }
 
     public void ChangeFeedwithDay()
     {
-        feedCount++;
-        if (4 >= feedCount)
+        if (feedCount < 5)
+        {
+            feedCount++;
+        }
+
+        if (feedCount > 1) 
             DownBtn.SetActive(true);
     }
 
@@ -47,17 +54,19 @@ public class FeedUpDown : MonoBehaviour
 
     public void DownFeed()
     {
-        if (isEnd == false) return;
+        if (!isEnd) return;
+        
+        if (nowIndex < feedCount - 1)
+        {
+            nowIndex++;
+            isEnd = false;
 
-        nowIndex++;
-        isEnd = false;
+            UpBtn.SetActive(true);
+            if (nowIndex >= feedCount - 1)
+                DownBtn.SetActive(false);
 
-        int maxIndex = CoreHandler.Instance.GetCore<GameStatueCore>().CurrentDay - 2;
-        if(nowIndex >= maxIndex) 
-            DownBtn.SetActive(false);
-        UpBtn.SetActive(true);
-
-        FeedContainer.DOAnchorPosY(FeedContainer.anchoredPosition.y + 907.205f, 0.2f)
-            .OnComplete(() => isEnd = true);
+            FeedContainer.DOAnchorPosY(FeedContainer.anchoredPosition.y + 907.205f, 0.2f)
+                .OnComplete(() => isEnd = true);
+        }
     }
 }

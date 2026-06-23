@@ -20,8 +20,9 @@ public class ChattingUIManager : MonoBehaviour
 
     private void Start()
     {
-        if (DataManager.Instance.CurrentData.TryGetValue("Day", out int day) || day >= 6)
+        if (DataManager.Instance.CurrentData.TryGetValue("Day", out int day) && day >= 6)
         {
+            Debug.Log(day);
             _chatAlarm.SetActive(true);
         }
     }
@@ -62,7 +63,7 @@ public class ChattingUIManager : MonoBehaviour
 
     public void ShowProfil(GameObject profil)
     {
-        _chatAlarm.SetActive(true);
+        //_chatAlarm.SetActive(true);
         profil.SetActive(true);
     }
 }

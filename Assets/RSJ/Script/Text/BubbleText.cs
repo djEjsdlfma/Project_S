@@ -153,7 +153,7 @@ public class BubbleText : MonoBehaviour
     {
         if(myChatBound.sizeDelta.y > 45)
         {
-            _Boundery.sizeDelta = new Vector2(_Boundery.sizeDelta.x, originHeight + (23 * (myChatBound.sizeDelta.y / 40)));
+            _Boundery.sizeDelta = new Vector2(_Boundery.sizeDelta.x, originHeight + (13 * (myChatBound.sizeDelta.y / 40)));
         }
     }
 

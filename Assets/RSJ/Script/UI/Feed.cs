@@ -2,6 +2,7 @@ using System;
 using csiimnida.CSILib.SoundManager.RunTime;
 using LSW._02._Code.Core.Cores;
 using LSW._02._Code.System___Manager;
+using LSW._02._Code.UI;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -10,6 +11,10 @@ using UnityEngine.UI;
 public class Feed : MonoBehaviour
 {
     [SerializeField] private Guest guest;
+    [SerializeField] private Image alarmImage;
+    
+    [SerializeField] private ChattingUIManager chattingUIManager;
+    [SerializeField] private GuestProfile profile;
     
     [SerializeField] private TextMeshProUGUI btnText;
 
@@ -38,6 +43,8 @@ public class Feed : MonoBehaviour
         _onUpload = () =>
         {
             _bubbleManager.ChatProfileContainer.ChangeProfileToActivable(guest);
+            ShowProfile();
+            Upload();
         };
         _btn.onClick.AddListener(_onUpload);
     }
@@ -48,19 +55,26 @@ public class Feed : MonoBehaviour
             _info.SetActive(false);
     }
 
-    public void Upload()
+    public void Upload(bool showAlarm = true)
     {
         SoundManager.Instance.PlaySound("FeedUp");
         _isUploaded = true;
         _info.SetActive(true);
         btnText.text = "게시 됨";
         _btn.interactable = false;
+        alarmImage.gameObject.SetActive(showAlarm);
+    }
+
+    private void ShowProfile()
+    {
+        chattingUIManager.ShowProfil(profile.gameObject);
     }
 
     public void OnUploadClickImmediately()
     { 
-        _btn.onClick.Invoke();
-        // Upload();
+        _bubbleManager.ChatProfileContainer.ChangeProfileToActivable(guest);
+        ShowProfile();
+        Upload(false);
     }
 
     public void OnEnable()
@@ -72,10 +86,8 @@ public class Feed : MonoBehaviour
         }
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
-        // if(_bubbleManager == null)
-        //     return;
-        // _btn.onClick.RemoveListener(_onUpload);
+        _btn.onClick.RemoveListener(_onUpload);
     }
 }
