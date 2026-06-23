@@ -36,12 +36,13 @@ namespace LSW._02._Code.UI
         private void Start()
         {
             int currentDay = CoreHandler.Instance.GetCore<GameStatueCore>().CurrentDay;
-            int targetGuestIndex = currentDay % 5;
+            int targetGuestIndex = currentDay % 5 == 0 ? 4 : currentDay % 5;
             bool isDialogueDay = (targetGuestIndex == (int)Guest);
-            int lastOnlineDay = Mathf.Abs((currentDay - targetGuestIndex) + 1);
+            int lastOnlineDay = Mathf.Abs(currentDay - (int)Guest);
             
             lastOnlineText.SetText(isDialogueDay ? "온라인" : $"최근 접속 {lastOnlineDay}일 전");
             currentStatueImage.color = isDialogueDay ? Color.green : Color.gray;
+            alarmImage.gameObject.SetActive(isDialogueDay);
         }
 
         public void OpenChat(bool isOpened = true)

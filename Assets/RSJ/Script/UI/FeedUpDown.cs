@@ -31,13 +31,15 @@ public class FeedUpDown : MonoBehaviour
 
     public void UpFeed()
     {
-        if (isEnd == false) return; 
+        if (isEnd == false) 
+            return; 
         nowIndex--;
 
         isEnd = false;
 
-        if (nowIndex <= 0) UpBtn.SetActive(false);
-        if (UpBtn.activeSelf == false) DownBtn.SetActive(true);
+        if (nowIndex <= 0) 
+            UpBtn.SetActive(false);
+        DownBtn.SetActive(true);
 
         FeedContainer.DOAnchorPosY(FeedContainer.anchoredPosition.y - 907.205f, 0.2f)
             .OnComplete(() => isEnd = true);
@@ -50,8 +52,10 @@ public class FeedUpDown : MonoBehaviour
         nowIndex++;
         isEnd = false;
 
-        if(nowIndex >= CoreHandler.Instance.GetCore<GameStatueCore>().CurrentDay - 1) DownBtn.SetActive(false);
-        if (UpBtn.activeSelf == false) UpBtn.SetActive(true);
+        int maxIndex = CoreHandler.Instance.GetCore<GameStatueCore>().CurrentDay - 2;
+        if(nowIndex >= maxIndex) 
+            DownBtn.SetActive(false);
+        UpBtn.SetActive(true);
 
         FeedContainer.DOAnchorPosY(FeedContainer.anchoredPosition.y + 907.205f, 0.2f)
             .OnComplete(() => isEnd = true);
