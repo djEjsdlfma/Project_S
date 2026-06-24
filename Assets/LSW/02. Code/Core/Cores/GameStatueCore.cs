@@ -36,8 +36,7 @@ namespace LSW._02._Code.Core.Cores
             foreach (Guest guest in Enum.GetValues(typeof(Guest)))
             {
                 if (guest == Guest.None) continue;
-
-                // Enum 이름이 아닌 실제 시트가 매핑되어 있는지 확인
+                
                 if (!_dialogueDataCore.GetSheetNameByGuest(guest, out _))
                     continue;
 
@@ -47,8 +46,6 @@ namespace LSW._02._Code.Core.Cores
                 };
 
                 GuestsData.TryAdd(guest, newGuestData);
-
-                Debug.Log($"Added Guest : {guest}");
             }
         }
 
@@ -56,7 +53,7 @@ namespace LSW._02._Code.Core.Cores
         {
             if (DataManager.Instance.TryGetValue("Day", out int day))
             {
-                IncreaseDay(day - 1);
+                IncreaseDay(day - 1, false);
             }
         }
 
@@ -104,12 +101,13 @@ namespace LSW._02._Code.Core.Cores
         [ContextMenu("Increase Day Debug")]
         public void IncreaseDayDebug() => IncreaseDay();
         
-        public void IncreaseDay(int increaseAmount = 1)
+        public void IncreaseDay(int increaseAmount = 1, bool isTransition = true)
         {
             CurrentDay = Mathf.Clamp(CurrentDay + increaseAmount, 1, MaxDay);
             DataManager.Instance.SaveData("Day", CurrentDay);
             OnDayChanged?.Invoke();
-            _transition.TransitionScene(SceneType.MainTabletScene, TransitionType.DayChange);
+            if(isTransition)
+                _transition.TransitionScene(SceneType.MainTabletScene, TransitionType.DayChange);
         }
 
         public void ChangeSincerityAmount(string guestName, int amount)

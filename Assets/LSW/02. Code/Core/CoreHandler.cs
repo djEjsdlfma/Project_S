@@ -38,7 +38,7 @@ namespace LSW._02._Code.Core
             }
             
             _coreList.ForEach(core => core.Initialize(this));
-            LoadScene(SceneManager.GetActiveScene(), LoadSceneMode.Single);
+            // LoadScene(SceneManager.GetActiveScene(), LoadSceneMode.Single);
         }
         
         private void LoadScene(Scene scene, LoadSceneMode _)

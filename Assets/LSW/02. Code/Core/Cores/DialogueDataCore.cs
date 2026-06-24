@@ -1,7 +1,6 @@
-using System;
+
 using System.Collections.Generic;
 using System.Linq;
-using CSILib.SoundManager.RunTime;
 using LSW._02._Code.So;
 using UnityEngine;
 
@@ -27,29 +26,13 @@ namespace LSW._02._Code.Core.Cores
 
                 foreach (DialogueEntry entry in sheet.dialogues)
                 {
-                    if (!map.ContainsKey(entry.key))
-                    {
-                        map.Add(entry.key, entry);
-                    }
-                    else
-                    {
-                        Debug.LogWarning(
-                            $"Duplicate Key Detected : {entry.key} " +
-                            $"(Sheet : {sheet.sheetName})"
-                        );
-                    }
+                    map.TryAdd(entry.key, entry);
                 }
 
                 _allDialogues.Add(sheet.sheetName, map);
             }
 
             _initialized = true;
-
-            Debug.Log("<color=green>Dialogue Database Initialized</color>");
-            foreach (var pair in _allDialogues)
-            {
-                Debug.Log($"Dictionary Key : [{pair.Key}]");
-            }
         }
 
         private void Start()

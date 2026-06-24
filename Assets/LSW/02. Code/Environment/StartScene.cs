@@ -1,13 +1,12 @@
 
 using System;
-using System.Collections;
+using System.Threading.Tasks;
 using LSW._02._Code.Core;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
+using LSW._02._Code.Core.Cores;
 using LSW._02._Code.Importer;
-using LSW._02._Code.So;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace LSW._02._Code.Environment
@@ -15,32 +14,47 @@ namespace LSW._02._Code.Environment
     public class StartScene : MonoBehaviour
     {
         [SerializeField] private DialogueSheetImporter dialogueSheetImporter;
-        
         [SerializeField] private float timeToLoad = 5f;
-        [SerializeField] private Image FadeImg;
-        [SerializeField] private Image FadeTitle;
+        [SerializeField] private Image fadeImg;
 
-        private UnityAction<DialogueDatabaseSo> _onImportComplete;
+        private DialogueDataCore _dialogueDataCore;
         
-        private void Start()
+        private async void Start()
         {
-            _onImportComplete = (_) => StartCoroutine(StartSceneCoroutine());
-            dialogueSheetImporter.onImportComplete.AddListener(_onImportComplete);
-        }
-
-        private IEnumerator StartSceneCoroutine()
-        {
-            FadeTitle.DOFade(0.3f, 1.5f).OnComplete(() =>
+            try
             {
-                FadeImg.DOFade(1f, (timeToLoad - 1.5f));
-            });
-            yield return new WaitForSeconds(timeToLoad);
-            SceneManager.LoadScene((int)SceneType.MainTabletScene);
-        }
+                _dialogueDataCore = CoreHandler.Instance.GetCore<DialogueDataCore>();
 
-        private void OnDestroy()
-        {
-            dialogueSheetImporter.onImportComplete.RemoveListener(_onImportComplete);
+                var minimumWaitTask = Task.Delay(TimeSpan.FromSeconds(timeToLoad));
+                var importTask = dialogueSheetImporter.ImportDialogueSheets();
+
+                var database = await importTask;
+                if (database == null || database.sheets.Count == 0)
+                {
+                    Debug.LogError("종료 : 데이터 임포트 실패");
+                    return; 
+                }
+                
+                _dialogueDataCore.SetDatabase(database);
+                
+                float remainingTime = timeToLoad - 1.5f;
+                if (remainingTime > 0)
+                {
+                    await fadeImg.DOFade(1f, remainingTime).AsyncWaitForCompletion();
+                }
+                
+                await minimumWaitTask;
+
+                AsyncOperation asyncLoad = SceneManager.LoadSceneAsync((int)SceneType.MainTabletScene);
+                while (asyncLoad is { isDone: false })
+                {
+                    await Task.Yield();
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"씬 시작 에러: {e}");
+            }
         }
     }
 }

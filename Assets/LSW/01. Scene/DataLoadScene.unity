@@ -4194,8 +4194,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LSW._02._Code.Environment.StartScene
   dialogueSheetImporter: {fileID: 1578987640}
   timeToLoad: 3
-  FadeImg: {fileID: 383181194}
-  FadeTitle: {fileID: 409563429}
+  fadeImg: {fileID: 409563429}
+  fadeTitle: {fileID: 0}
 --- !u!114 &383181194
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16188,6 +16188,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 944510405866145475, guid: e7a7e20d36b3a2c4783d1560366cb729, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2843583335443596949, guid: e7a7e20d36b3a2c4783d1560366cb729, type: 3}
       propertyPath: <Database>k__BackingField
       value: 
@@ -16195,6 +16199,10 @@ PrefabInstance:
     - target: {fileID: 6056278855888502359, guid: e7a7e20d36b3a2c4783d1560366cb729, type: 3}
       propertyPath: m_Name
       value: CoreHandler (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6056278855888502359, guid: e7a7e20d36b3a2c4783d1560366cb729, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6722142007535137454, guid: e7a7e20d36b3a2c4783d1560366cb729, type: 3}
       propertyPath: m_LocalPosition.x
@@ -19876,6 +19884,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8ac4cd9722f47a886e3f4698331af26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LSW._02._Code.Importer.DialogueSheetImporter
+  saveFileName: DialogueDatabase.bin
   importProgress: {fileID: 2091731863}
   sheets:
   - guestName: "\uC774\uC7AC\uC724"
@@ -19893,10 +19902,6 @@ MonoBehaviour:
   - guestName: "\uCD5C\uBA85\uC9C4"
     guest: 5
     sheetUrl: https://docs.google.com/spreadsheets/d/e/2PACX-1vSVCmLGiKR9IbDKjMrRwxk7GhZTY4UPNeD4kgHQ1r0hdsKIBKh8X7uQ0X--k33W0sohwsgLQTPERFul/pub?gid=1925179016&single=true&output=csv
-  savePath: Assets/LSW/05. So/DataBase/DialogueDatabase.asset
-  onImportComplete:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1001 &1579639521
 PrefabInstance:
   m_ObjectHideFlags: 0
